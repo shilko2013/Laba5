@@ -13,4 +13,12 @@ public interface Workable {
         Collections.shuffle(temp);
         addAction(temp.subList(0,count));
     }
+    default public void addSomeActions() {fillRandomActions(new String[]{"открыть глаза",
+            "почувствовать зависимость окружающих",
+            "почувствовать, что все на тебя рассчитывают",
+            "написать письмо",
+            "все проверить",
+            "все выяснить",
+            "все разъяснить",
+            "что-то организовать"},new Random().nextInt(7)+2);}
 }

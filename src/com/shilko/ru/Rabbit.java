@@ -19,6 +19,19 @@ public class Rabbit extends Animal implements Workable {
         for (Object a: act)
             actions.add((String)a);
     }
+    public void senseOfSelfReliance() {
+        if (getActions().size()>0)
+            System.out.println(getName() + " почувствовал,  что сегодня все от него зависит и все на него рассчитывают.");
+    }
+    public void makeActions() {
+        String s;
+        if (isBusyDay())
+            s = "Всё ";
+        else
+            s = "Ничего не ";
+        System.out.println(s + "предвещало, что у " + getName() + " опять будет очень занятой день.");
+        System.out.println("Ему предстояло: " + work());
+    }
     @Override
     public void clearAction() {
         actions.clear();

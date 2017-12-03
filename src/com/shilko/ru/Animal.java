@@ -42,6 +42,9 @@ public abstract class Animal implements Eating {
             throw new HomelessException();
         return home;
     }
+    public void whereLive() {
+        System.out.print("Теперь нас не удивит, что "+ getName() + " поселился в " + getHome() + " ");
+    }
     public Map<Ingestion, Set<String>> getIngestion() {
         return ingestion;
     }

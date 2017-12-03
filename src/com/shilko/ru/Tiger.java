@@ -73,7 +73,7 @@ public class Tiger extends Animal implements Workable, Sayable {
     }
     @Override
     public void say(String message) {
-        System.out.println(getName() + " сказал:\" " + message + "\"");
+        System.out.println(" сказал:\" " + message + "\"");
     }
     public void workWithTongue() {
         System.out.print("Тут Тигра " + work() + " и язык его " + workForTongue());
@@ -85,9 +85,44 @@ public class Tiger extends Animal implements Workable, Sayable {
     public void like() {
         if (lastSthOutside)
             say("Так вот что Тигры действительно любят!");
+        else
+            say("Жаль, что ничего не осталось!");
     }
     public void smile() {
-        addAction(Arrays.asList("Затем его озарила умиротворенная улыбка и "));
+        if (lastSthOutside)
+            addAction(Arrays.asList("Затем его озарила умиротворенная улыбка и"));
+        else
+            addAction(Arrays.asList("Затем он огорчился и"));
+        System.out.print(work());
+    }
+    public void getEat() {
+        Arrays.stream(Ingestion.values()).forEach(ingest->fillRandomEat(ingest,1, "Рыбий жир","Каша","Лекарство"));
+        int countOfFishFat = 0;
+        boolean porrigeIsExist = false;
+        Map<Ingestion, Set<String>> temp = getIngestion();
+        for (Ingestion ingest : temp.keySet()) {
+            if (temp.get(ingest).contains("Рыбий жир"))
+                ++countOfFishFat;
+            else if (temp.get(ingest).contains("Каша"))
+                porrigeIsExist = true;
+        }
+        String s;
+        switch(countOfFishFat) {
+            case 2:
+                s = "иногда";
+                break;
+            case 1:
+                s = "редко";
+                break;
+            case 0:
+                s = "никогда не";
+                break;
+            default:
+                s = "всегда";
+        }
+        System.out.println("и " + s + " получал рыбий жир на завтрак, обед и ужин.");
+        if (new Kangaroo("Кенга").think()&&(porrigeIsExist))
+            System.out.println("Также иногда на завтрак он получал ложку-другую каши, которой завтракал Ру.");
     }
     public void closeEyes() {
         addAction(Arrays.asList("закрыл глаза"));
