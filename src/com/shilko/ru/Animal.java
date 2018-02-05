@@ -12,6 +12,11 @@ public abstract class Animal implements Eating {
         }
     }
     private String name;
+    /*private UUID id;
+    private Coord coord;
+    class Coord {
+        public int x,y,z;
+    }*/
     private String home;
     private Map<Ingestion, Set<String>> ingestion;
     {
