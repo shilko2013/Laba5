@@ -2,7 +2,7 @@ package com.shilko.ru;
 
 import java.util.*;
 
-public abstract class Animal implements Eating {
+public abstract class Animal implements Eating, Workable, Comparable<Animal> {
     private class HomelessException extends RuntimeException {
         public HomelessException() {super("Home of " + getName() + " is epsend!!!");}
         public HomelessException(String message) {super(message);}
@@ -12,22 +12,37 @@ public abstract class Animal implements Eating {
         }
     }
     private String name;
-    /*private UUID id;
-    private Coord coord;
-    class Coord {
-        public int x,y,z;
-    }*/
+    private static long ID = 0;
+    private long myID;
+    private int x;
+    private int y;
+    private int z;
     private String home;
+    private Queue<String> actions;
     private Map<Ingestion, Set<String>> ingestion;
     {
         ingestion = new TreeMap<>();
         home = null;
+        actions = new LinkedList<>();
     }
-    public Animal(String name) {
+    public Animal (String name, String home, int x, int y, int z) {
+        this(name,x,y,z);
+        this.home = home;
+    }
+    public Animal (String name, int x, int y, int z) {
         this.name = name;
+        this.myID = ID;
+        ID++;
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
     public void setHome(String home) {
         this.home = home;
+    }
+    @Override
+    public int compareTo(Animal animal) {
+        return Long.compare(getID(),animal.getID());
     }
     @Override
     public void addEat(Ingestion ingest, String ... arg) {
@@ -65,6 +80,43 @@ public abstract class Animal implements Eating {
             s.append("\n");
         });
         return s.toString();
+    }
+    @Override
+    public Queue<String> getActions() {
+        return actions;
+    }
+    @Override
+    public void addAction(String ... act) {
+        for (String a: act)
+            actions.add(a);
+    }
+    public int getX() {
+        return x;
+    }
+    public void setX(int x) {
+        if (x >= 0)
+            this.x = x;
+    }
+    public int getY() {
+        return y;
+    }
+    public void setY(int y) {
+        if (y >= 0)
+            this.y = y;
+    }
+    public int getZ() {
+        return z;
+    }
+    public void setZ(int z) {
+        if (z >= 0)
+        this.z = z;
+    }
+    public long getID() {
+        return myID;
+    }
+    @Override
+    public void clearAction() {
+        actions.clear();
     }
     @Override
     public boolean equals(Object obj) {

@@ -18,8 +18,11 @@ public class Kangaroo extends Animal implements Mindable {
         }
         return new Mind().think();
     }
-    public Kangaroo(String name) {
-        super(name);
+    public Kangaroo(String name, String home, int x, int y, int z) {
+        super(name,home,x,y,z);
+    }
+    public Kangaroo(String name, int x, int y, int z) {
+        super(name,x,y,z);
     }
     @Override
     public boolean equals(Object obj) {
@@ -37,6 +40,10 @@ public class Kangaroo extends Animal implements Mindable {
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+    @Override
+    public String work() {
+        return getName()+super.work();
     }
     @Override
     public String toString() {

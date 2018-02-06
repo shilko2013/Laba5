@@ -2,22 +2,12 @@ package com.shilko.ru;
 
 import java.util.*;
 
-public class Rabbit extends Animal implements Workable {
-    private Queue<String> actions;
-    {
-        actions = new LinkedList<>();
+public class Rabbit extends Animal{
+    public Rabbit(String name, String home, int x, int y, int z) {
+        super(name,home,x,y,z);
     }
-    public Rabbit(String name) {
-        super(name);
-    }
-    @Override
-    public Queue<String> getActions() {
-        return actions;
-    }
-    @Override
-    public void addAction(Collection<? super String> act) {
-        for (Object a: act)
-            actions.add((String)a);
+    public Rabbit(String name, int x, int y, int z) {
+        super(name,x,y,z);
     }
     public void senseOfSelfReliance() {
         if (getActions().size()>0)
@@ -33,27 +23,8 @@ public class Rabbit extends Animal implements Workable {
         System.out.println("Ему предстояло: " + work());
     }
     @Override
-    public void clearAction() {
-        actions.clear();
-    }
-    @Override
     public boolean isBusyDay() {
-        return actions.size()>3;
-    }
-    @Override
-    public String work() {
-        try {
-            if (actions.isEmpty())
-                throw new EmptyException();
-            StringBuffer s = new StringBuffer();
-            for (String act: actions)
-                s.append(act+", ");
-            s.delete(s.length()-2,s.length());
-            return s.toString() + ".\n";
-        } catch (EmptyException e) {
-            e.printStackTrace();
-            return "";
-        }
+        return getActions().size()>3;
     }
     @Override
     public boolean equals(Object obj) {
@@ -68,6 +39,10 @@ public class Rabbit extends Animal implements Workable {
                 && getHome().equals(rabbit.getHome())
                 && getIngestion().equals(rabbit.getIngestion())
                 && getActions().equals(rabbit.getActions());
+    }
+    @Override
+    public String work() {
+        return getName()+super.work();
     }
     @Override
     public int hashCode() {
