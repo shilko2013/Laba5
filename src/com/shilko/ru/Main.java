@@ -31,5 +31,6 @@ public class Main {
         AnimalCollection collection = new AnimalCollection();
         collection.load(args[0]);
         collection.work();
+        collection.save("Save.xml");
     }
 }
