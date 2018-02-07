@@ -35,7 +35,11 @@ public class Kangaroo extends Animal implements Mindable {
         Kangaroo kangaroo = (Kangaroo) obj;
         return getName().equals(kangaroo.getName())
                 && getHome().equals(kangaroo.getHome())
-                && getIngestion().equals(kangaroo.getIngestion());
+                && getIngestion().equals(kangaroo.getIngestion())
+                && getActions().equals(kangaroo.getActions())
+                && getX()==kangaroo.getX()
+                && getY()==kangaroo.getY()
+                && getZ()==kangaroo.getZ();
     }
     @Override
     public int hashCode() {

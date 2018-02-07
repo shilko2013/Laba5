@@ -170,7 +170,10 @@ public class Tiger extends Animal implements Workable, Sayable {
                 && getHome().equals(tiger.getHome())
                 && getIngestion().equals(tiger.getIngestion())
                 && getActions().equals(tiger.getActions())
-                && tongue.equals(tiger.tongue);
+                && tongue.equals(tiger.tongue)
+                && getX()==tiger.getX()
+                && getY()==tiger.getY()
+                && getZ()==tiger.getZ();
     }
     @Override
     public String work() {

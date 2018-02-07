@@ -3,6 +3,7 @@ package com.shilko.ru;
 import javax.xml.stream.*;
 import java.io.*;
 import java.util.*;
+import com.jayway.jsonpath.*;
 
 public class AnimalCollection {
     private Map<Long,Animal> collection = new TreeMap<>();
@@ -165,5 +166,9 @@ public class AnimalCollection {
         catch (IOException | IllegalArgumentException | XMLStreamException ex) {
             ex.printStackTrace();
         }
+    }
+    public void parse(String s) {
+            String type = JsonPath.read(s, "$.type");
+            System.out.println(type);
     }
 }
