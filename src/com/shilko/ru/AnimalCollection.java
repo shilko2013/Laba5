@@ -1,9 +1,10 @@
 package com.shilko.ru;
 
 import javax.xml.stream.*;
+import javax.json.*;
 import java.io.*;
 import java.util.*;
-import com.jayway.jsonpath.*;
+import java.util.stream.Collectors;
 
 public class AnimalCollection {
     private Map<Long,Animal> collection = new TreeMap<>();
@@ -52,24 +53,7 @@ public class AnimalCollection {
                 }
                 xmlr.nextTag();
                 xmlr.nextTag();
-                switch (type) {
-                    case "tiger":
-                        Tiger tiger = new Tiger(name,home,x,y,z);
-                        tiger.addAction(actions.toArray(new String[0]));
-                        tiger.addActionForTongue(actionsForTongue.toArray(new String[0]));
-                        collection.put(tiger.getID(),tiger);
-                        break;
-                    case "rabbit":
-                        Rabbit rabbit = new Rabbit(name,home,x,y,z);
-                        rabbit.addAction(actions.toArray(new String[0]));
-                        collection.put(rabbit.getID(),rabbit);
-                        break;
-                    case "kangaroo":
-                        Kangaroo kangaroo = new Kangaroo(name,home,x,y,z);
-                        kangaroo.addAction(actions.toArray(new String[0]));
-                        collection.put(kangaroo.getID(),kangaroo);
-                        break;
-                }
+                putAnimal(type,name,home,x,y,z,actions,actionsForTongue);
             }
                 /*if(!xmlr.getLocalName().equalsIgnoreCase("ANIMAL"))
                     throw new IllegalArgumentException();*/
@@ -167,8 +151,46 @@ public class AnimalCollection {
             ex.printStackTrace();
         }
     }
-    public void parse(String s) {
-            String type = JsonPath.read(s, "$.type");
-            System.out.println(type);
+    private void putAnimal(String type, String name, String home, int x, int y, int z, List<String> actions, List<String> actionsForTongue) {
+        switch (type) {
+            case "tiger":
+                Tiger tiger = new Tiger(name,home,x,y,z);
+                tiger.addAction(actions.toArray(new String[0]));
+                tiger.addActionForTongue(actionsForTongue.toArray(new String[0]));
+                collection.put(tiger.getID(),tiger);
+                break;
+            case "rabbit":
+                Rabbit rabbit = new Rabbit(name,home,x,y,z);
+                rabbit.addAction(actions.toArray(new String[0]));
+                collection.put(rabbit.getID(),rabbit);
+                break;
+            case "kangaroo":
+                Kangaroo kangaroo = new Kangaroo(name,home,x,y,z);
+                kangaroo.addAction(actions.toArray(new String[0]));
+                collection.put(kangaroo.getID(),kangaroo);
+                break;
+        }
+    }
+    public void read() {
+        try (JsonReader rdr = Json.createReader(System.in)) {
+            JsonObject obj = rdr.readObject();
+            String type = obj.getString("type");
+            String name = obj.getString("name");
+            String home = obj.getString("home");
+            int x = obj.getJsonObject("coord").getInt("x");
+            int y = obj.getJsonObject("coord").getInt("y");
+            int z = obj.getJsonObject("coord").getInt("z");
+            List<String> actions = obj.getJsonArray("actions").getValuesAs(JsonValue::toString);
+            actions = actions.stream().map(s->s.substring(1,s.length()-2)).collect(Collectors.toList());
+            List<String> actionsForTongue = null;
+            if (type.equalsIgnoreCase("tiger")) {
+                actionsForTongue = obj.getJsonArray("actionsForTongue").getValuesAs(JsonValue::toString);
+                actionsForTongue = actionsForTongue.stream().map(s->s.substring(1,s.length()-2)).collect(Collectors.toList());
+            }
+            putAnimal(type,name,home,x,y,z,actions,actionsForTongue);
+        }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
