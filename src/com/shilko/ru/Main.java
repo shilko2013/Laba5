@@ -33,5 +33,6 @@ public class Main {
         collection.load(args[0]);
         collection.work();
         collection.read();
+        collection.work();
     }
 }

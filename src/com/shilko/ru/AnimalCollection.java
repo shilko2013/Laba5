@@ -181,11 +181,11 @@ public class AnimalCollection {
             int y = obj.getJsonObject("coord").getInt("y");
             int z = obj.getJsonObject("coord").getInt("z");
             List<String> actions = obj.getJsonArray("actions").getValuesAs(JsonValue::toString);
-            actions = actions.stream().map(s->s.substring(1,s.length()-2)).collect(Collectors.toList());
+            actions = actions.stream().map(s->s.substring(1,s.length()-1)).collect(Collectors.toList());
             List<String> actionsForTongue = null;
             if (type.equalsIgnoreCase("tiger")) {
                 actionsForTongue = obj.getJsonArray("actionsForTongue").getValuesAs(JsonValue::toString);
-                actionsForTongue = actionsForTongue.stream().map(s->s.substring(1,s.length()-2)).collect(Collectors.toList());
+                actionsForTongue = actionsForTongue.stream().map(s->s.substring(1,s.length()-1)).collect(Collectors.toList());
             }
             putAnimal(type,name,home,x,y,z,actions,actionsForTongue);
         }
