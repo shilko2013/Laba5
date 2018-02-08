@@ -35,6 +35,7 @@ public class Main {
         collection.load(args[0]);
         while (true) {
             Scanner in = new Scanner(System.in);
+            collection.work();
             String lexeme = in.next();
             switch (lexeme.toLowerCase()) {
                 case "remove_all":
@@ -55,7 +56,6 @@ public class Main {
                 case "exit":
                     System.exit(0);
             }
-            collection.work();
         }
     }
 }
