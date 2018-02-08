@@ -8,10 +8,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0feda5ad-c9bb-4a19-905a-5b31bf743e05" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Main.java" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Main.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Rabbit.java" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Rabbit.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Tiger.java" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Tiger.java" />
+      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Animal.class" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Animal.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo.class" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Main.class" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Main.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Rabbit.class" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Rabbit.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Tiger.class" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Tiger.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -100,21 +101,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+            <state relative-caret-position="327">
+              <caret line="34" column="33" lean-forward="true" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AnimalCollection.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AnimalCollection.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="71" column="5" lean-forward="true" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
+            <state relative-caret-position="295">
+              <caret line="152" column="5" lean-forward="true" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#load#0;class#AnimalCollection#0" expanded="false" />
@@ -358,7 +359,7 @@
       <workItem from="1517828232174" duration="384000" />
       <workItem from="1517828723696" duration="29458000" />
       <workItem from="1517997248015" duration="10139000" />
-      <workItem from="1518073908360" duration="4207000" />
+      <workItem from="1518073908360" duration="4561000" />
     </task>
     <task id="LOCAL-00001" summary="Laba5.Version1 with comments.">
       <created>1517939757786</created>
@@ -409,11 +410,18 @@
       <option name="project" value="LOCAL" />
       <updated>1518089072941</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Laba5.Version4 ready with AnimalCollection. Without errors">
+      <created>1518089851445</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1518089851445</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140304000" />
+    <option name="totallyTimeSpent" value="140658000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1102" extended-state="6" />
@@ -461,7 +469,8 @@
     <MESSAGE value="Laba5.Version2 with AnimalCollection + til JSON." />
     <MESSAGE value="Laba5.Version3 with AnimalCollection." />
     <MESSAGE value="Laba5.Version4 ready with AnimalCollection." />
-    <option name="LAST_COMMIT_MESSAGE" value="Laba5.Version4 ready with AnimalCollection." />
+    <MESSAGE value="Laba5.Version4 ready with AnimalCollection. Without errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="Laba5.Version4 ready with AnimalCollection. Without errors" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -900,24 +909,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="71" column="5" lean-forward="true" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#load#0;class#AnimalCollection#0" expanded="false" />
-            <element signature="method#save#0;class#AnimalCollection#0" expanded="false" />
-            <element signature="method#parseAnimal#0;class#AnimalCollection#0" expanded="false" />
-            <element signature="method#putAnimal#0;class#AnimalCollection#0" expanded="false" />
-            <element signature="method#read#0;class#AnimalCollection#0" expanded="false" />
-            <element signature="method#removeAll#0;class#AnimalCollection#0" expanded="false" />
-            <element signature="method#insert#0;class#AnimalCollection#0" expanded="false" />
-            <element signature="method#removeGreaterKey#0;class#AnimalCollection#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="uml://JAVA/com.shilko.ru.Tiger">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
@@ -994,9 +985,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+        <state relative-caret-position="327">
+          <caret line="34" column="33" lean-forward="true" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="152" column="5" lean-forward="true" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#load#0;class#AnimalCollection#0" expanded="false" />
+            <element signature="method#save#0;class#AnimalCollection#0" expanded="false" />
+            <element signature="method#parseAnimal#0;class#AnimalCollection#0" expanded="false" />
+            <element signature="method#putAnimal#0;class#AnimalCollection#0" expanded="false" />
+            <element signature="method#read#0;class#AnimalCollection#0" expanded="false" />
+            <element signature="method#removeAll#0;class#AnimalCollection#0" expanded="false" />
+            <element signature="method#insert#0;class#AnimalCollection#0" expanded="false" />
+            <element signature="method#removeGreaterKey#0;class#AnimalCollection#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
