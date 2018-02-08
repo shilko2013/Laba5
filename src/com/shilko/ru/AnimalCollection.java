@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class AnimalCollection {
-    private Map<Long,Animal> collection = new TreeMap<>();
+    private Map<Coord,Animal> collection = new TreeMap<>();
     public void load(String fileName) {
         try {
             XMLStreamReader xmlr = XMLInputFactory.newInstance().createXMLStreamReader(fileName, new BufferedReader(new FileReader(fileName)));
@@ -78,7 +78,7 @@ public class AnimalCollection {
             XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(new FileWriter(fileName));
             writer.writeStartDocument("UTF-8","1.0");
             writer.writeStartElement("DATA");
-            for ( Long e : collection.keySet()) {
+            for ( Coord e : collection.keySet()) {
                 Animal temp = collection.get(e);
                 writer.writeStartElement("ANIMAL");
                 writer.writeAttribute("type",temp.getClass().toString().replaceAll("class com.shilko.ru.","").toLowerCase());
@@ -89,9 +89,9 @@ public class AnimalCollection {
                 writer.writeAttribute("home",temp.getHome());
                 writer.writeEndElement();
                 writer.writeStartElement("COORD");
-                writer.writeAttribute("x",Integer.toString(temp.getX()));
-                writer.writeAttribute("y",Integer.toString(temp.getY()));
-                writer.writeAttribute("z",Integer.toString(temp.getZ()));
+                writer.writeAttribute("x",Integer.toString(temp.getCoord().getX()));
+                writer.writeAttribute("y",Integer.toString(temp.getCoord().getY()));
+                writer.writeAttribute("z",Integer.toString(temp.getCoord().getZ()));
                 writer.writeEndElement();
                 writer.writeStartElement("ACTIONS");
                 for (String s: temp.getActions()) {
@@ -151,28 +151,30 @@ public class AnimalCollection {
             ex.printStackTrace();
         }
     }
-    private void putAnimal(String type, String name, String home, int x, int y, int z, List<String> actions, List<String> actionsForTongue) {
+    private Animal parseAnimal(String type, String name, String home, int x, int y, int z, List<String> actions, List<String> actionsForTongue) {
         switch (type) {
             case "tiger":
-                Tiger tiger = new Tiger(name,home,x,y,z);
+                Tiger tiger = new Tiger(name, home, x, y, z);
                 tiger.addAction(actions.toArray(new String[0]));
                 tiger.addActionForTongue(actionsForTongue.toArray(new String[0]));
-                collection.put(tiger.getID(),tiger);
-                break;
+                return tiger;
             case "rabbit":
-                Rabbit rabbit = new Rabbit(name,home,x,y,z);
+                Rabbit rabbit = new Rabbit(name, home, x, y, z);
                 rabbit.addAction(actions.toArray(new String[0]));
-                collection.put(rabbit.getID(),rabbit);
-                break;
+                return rabbit;
             case "kangaroo":
-                Kangaroo kangaroo = new Kangaroo(name,home,x,y,z);
+                Kangaroo kangaroo = new Kangaroo(name, home, x, y, z);
                 kangaroo.addAction(actions.toArray(new String[0]));
-                collection.put(kangaroo.getID(),kangaroo);
-                break;
+                return kangaroo;
         }
+        return null;
     }
-    public void read() {
-        try (JsonReader rdr = Json.createReader(System.in)) {
+    private void putAnimal(String type, String name, String home, int x, int y, int z, List<String> actions, List<String> actionsForTongue) {
+        Animal temp = parseAnimal(type,name,home,x,y,z,actions,actionsForTongue);
+        collection.put(temp.getCoord(),temp);
+    }
+    private Animal read(InputStream in) {
+        try (JsonReader rdr = Json.createReader(in)) {
             JsonObject obj = rdr.readObject();
             String type = obj.getString("type");
             String name = obj.getString("name");
@@ -187,10 +189,38 @@ public class AnimalCollection {
                 actionsForTongue = obj.getJsonArray("actionsForTongue").getValuesAs(JsonValue::toString);
                 actionsForTongue = actionsForTongue.stream().map(s->s.substring(1,s.length()-1)).collect(Collectors.toList());
             }
-            putAnimal(type,name,home,x,y,z,actions,actionsForTongue);
+            return parseAnimal(type,name,home,x,y,z,actions,actionsForTongue);
         }
         catch (Exception ex) {
             ex.printStackTrace();
         }
+        return null;
+    }
+    public void removeAll(InputStream in) {
+        Animal animal = read(in);
+        List<Coord> temp = new ArrayList<>();
+        collection.forEach((k,v)->{
+            if (v.equals(animal))
+                temp.add(k);
+        });
+        temp.forEach(k->collection.remove(k));
+    }
+    public void insert(InputStream in) {
+        Coord coord = Coord.read(in);
+        Animal animal = read(in);
+        animal.setCoord(coord.getX(),coord.getY(),coord.getZ());
+        collection.put(animal.getCoord(),animal);
+    }
+    public void removeGreaterKey(InputStream in) {
+        Coord coord = Coord.read(in);
+        List<Coord> temp = new ArrayList<>();
+        collection.forEach((k,v)->{
+            if (k.compareTo(coord)<0)
+                temp.add(k);
+        });
+        temp.forEach(k->collection.remove(k));
+    }
+    public void remove(InputStream in) {
+        collection.remove(Coord.read(in));
     }
 }

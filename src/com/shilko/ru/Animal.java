@@ -14,9 +14,7 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal> {
     private String name;
     private static long ID = 0;
     private long myID;
-    private int x;
-    private int y;
-    private int z;
+    private Coord coord;
     private String home;
     private Queue<String> actions;
     private Map<Ingestion, Set<String>> ingestion;
@@ -33,9 +31,7 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal> {
         this.name = name;
         this.myID = ID;
         ID++;
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        coord = new Coord(x,y,z);
     }
     public void setHome(String home) {
         this.home = home;
@@ -90,33 +86,18 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal> {
         for (String a: act)
             actions.add(a);
     }
-    public int getX() {
-        return x;
-    }
-    public void setX(int x) {
-        if (x >= 0)
-            this.x = x;
-    }
-    public int getY() {
-        return y;
-    }
-    public void setY(int y) {
-        if (y >= 0)
-            this.y = y;
-    }
-    public int getZ() {
-        return z;
-    }
-    public void setZ(int z) {
-        if (z >= 0)
-        this.z = z;
-    }
     public long getID() {
         return myID;
     }
     @Override
     public void clearAction() {
         actions.clear();
+    }
+    public Coord getCoord() {
+        return  coord;
+    }
+    public void setCoord(int x, int y, int z) {
+        coord = new Coord(x,y,z);
     }
     @Override
     public boolean equals(Object obj) {
@@ -129,11 +110,13 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal> {
         Animal animal = (Animal) obj;
         return name.equals(animal.getName())
                 && home.equals(animal.getHome())
-                && ingestion.equals(animal.getIngestion());
+                && ingestion.equals(animal.getIngestion())
+                && actions.equals(animal.getActions())
+                && coord.equals(animal.getCoord());
     }
     @Override
     public int hashCode() {
-        return Objects.hash(name,home,ingestion);
+        return Objects.hash(name,home,ingestion,actions,coord,myID);
     }
     @Override
     public String toString() {
