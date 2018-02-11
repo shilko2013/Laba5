@@ -1,1 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?><DATA><ANIMAL type="kangaroo"><NAME name="Кенга"></NAME><HOME home="Домик Кенги"></HOME><COORD x="2" y="1" z="2"></COORD><ACTIONS><ACTION act="считала, что Тигре нужно подкрепиться"></ACTION></ACTIONS></ANIMAL><ANIMAL type="tiger"><NAME name="Тигра"></NAME><HOME home="Домик Кенги"></HOME><COORD x="2" y="2" z="2"></COORD><ACTIONS><ACTION act="посмотрел на потолок"></ACTION><ACTION act="закрыл глаза"></ACTION></ACTIONS><ACTIONSFORTONGUE><ACTION act="начал ходить кругами вокруг мордочки"></ACTION></ACTIONSFORTONGUE></ANIMAL><ANIMAL type="tiger"><NAME name="Тигра"></NAME><HOME home="Домик Кенги"></HOME><COORD x="2" y="2" z="3"></COORD><ACTIONS><ACTION act="поселился в домике у Кенги"></ACTION><ACTION act="получал рыбий жир"></ACTION><ACTION act="ел лекарство вместо каши"></ACTION></ACTIONS><ACTIONSFORTONGUE></ACTIONSFORTONGUE></ANIMAL><ANIMAL type="kangaroo"><NAME name="Пельмень"></NAME><HOME home="Австралия"></HOME><COORD x="2" y="3" z="4"></COORD><ACTIONS><ACTION act="попрыгать"></ACTION><ACTION act="поесть травы"></ACTION></ACTIONS></ANIMAL></DATA>
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA>
+	<ANIMAL type="tiger" >
+		<NAME name="Тигра" />
+		<HOME home="Домик Кенги" />
+		<COORD x="2" y="2" z="2" />
+		<ACTIONS>
+			<ACTION act="посмотрел на потолок" />
+			<ACTION act="закрыл глаза" />
+		</ACTIONS>
+		<ACTIONSFORTONGUE>
+			<ACTION act="начал ходить кругами вокруг мордочки" />
+		</ACTIONSFORTONGUE>
+	</ANIMAL>
+	<ANIMAL type="tiger" >
+		<NAME name="Тигра" />
+		<HOME home="Домик Кенги" />
+		<COORD x="2" y="2" z="3" />
+		<ACTIONS>
+			<ACTION act="поселился в домике у Кенги" />
+			<ACTION act="получал рыбий жир" />
+			<ACTION act="ел лекарство вместо каши" />
+		</ACTIONS>
+		<ACTIONSFORTONGUE>
+		</ACTIONSFORTONGUE>
+	</ANIMAL>
+	<ANIMAL type="rabbit" >
+		<NAME name="Кролик" />
+		<HOME home="Домик Кролика" />
+		<COORD x="4" y="4" z="2" />
+		<ACTIONS>
+			<ACTION act="почувствовал что все зависит от него" />
+			<ACTION act="написал письмо" />
+			<ACTION act="все проверил" />
+			<ACTION act="все выяснил" />
+			<ACTION act="все разъяснил" />
+			<ACTION act="что-то организовал" />
+		</ACTIONS>
+	</ANIMAL>
+	<ANIMAL type="kangaroo" >
+		<NAME name="Кенга" />
+		<HOME home="Домик Кенги" />
+		<COORD x="2" y="1" z="2"/>
+		<ACTIONS>
+			<ACTION act="считала, что Тигре нужно подкрепиться" />
+		</ACTIONS>
+	</ANIMAL>
+	<ANIMAL type="kangaroo" >
+		<NAME name="Ру" />
+		<HOME home="Домик Кенги" />
+		<COORD x="2" y="6" z="2" />
+		<ACTIONS>
+			<ACTION act="ел кашу" />
+			<ACTION act="отдавал лекарство Тигре" />
+		</ACTIONS>
+	</ANIMAL>
+</DATA>

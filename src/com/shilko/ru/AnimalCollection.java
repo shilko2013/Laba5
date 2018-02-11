@@ -75,7 +75,7 @@ public class AnimalCollection {
     public void save(String fileName) {
         try {
             XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(new FileWriter(fileName));
-            writer.writeStartDocument("UTF-8","1.0");
+            writer.writeStartDocument("Cp1251","1.0");
             writer.writeStartElement("DATA");
             for ( Coord e : collection.keySet()) {
                 Animal temp = collection.get(e);

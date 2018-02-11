@@ -3,6 +3,12 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Laba3_jar</output-path>
     <root id="archive" name="Laba3.jar">
       <element id="module-output" name="Laba3" />
+      <element id="file-copy" path="$PROJECT_DIR$/json-smart-2.3.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/slf4j-api-1.7.25.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/slf4j-nop-1.7.25.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/accessors-smart-1.2.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/asm-5.0.4.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/json-path-2.4.0.jar" />
     </root>
   </artifact>
 </component>
