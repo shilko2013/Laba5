@@ -9,6 +9,7 @@
       <element id="file-copy" path="$PROJECT_DIR$/accessors-smart-1.2.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/asm-5.0.4.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/json-path-2.4.0.jar" />
+      <element id="dir-copy" path="$PROJECT_DIR$/out/javadoc" />
     </root>
   </artifact>
 </component>
