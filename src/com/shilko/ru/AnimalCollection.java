@@ -1,5 +1,7 @@
 package com.shilko.ru;
 
+import org.glassfish.json.api.BufferPool;
+
 import javax.xml.stream.*;
 import javax.json.*;
 import java.io.*;
@@ -174,7 +176,8 @@ public class AnimalCollection {
         collection.put(temp.getCoord(),temp);
     }
     private Animal read(InputStream in) {
-        try (JsonReader rdr = Json.createReader(in)) {
+        try  {
+            /*JsonReader rdr = Json.createReader(in);
             JsonObject obj = rdr.readObject();
             String type = obj.getString("type");
             String name = obj.getString("name");
@@ -188,7 +191,8 @@ public class AnimalCollection {
             if (type.equalsIgnoreCase("tiger")) {
                 actionsForTongue = obj.getJsonArray("actionsForTongue").getValuesAs(JsonValue::toString);
                 actionsForTongue = actionsForTongue.stream().map(s->s.substring(1,s.length()-1)).collect(Collectors.toList());
-            }
+            }*/
+
             return parseAnimal(type,name,home,x,y,z,actions,actionsForTongue);
         }
         catch (Exception ex) {
@@ -222,5 +226,29 @@ public class AnimalCollection {
     }
     public void remove(InputStream in) {
         collection.remove(Coord.read(in));
+    }
+    public void input(Scanner in, String way) {
+        String lexeme = in.next();
+        switch (lexeme.toLowerCase()) {
+            case "remove_all":
+                removeAll(System.in);
+                break;
+            case "insert":
+                insert(System.in);
+                break;
+            case "save":
+                save(way);
+                break;
+            case "remove_greater_key":
+                removeGreaterKey(System.in);
+                break;
+            case "remove":
+                remove(System.in);
+                break;
+            case "exit":
+                System.exit(0);
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 }

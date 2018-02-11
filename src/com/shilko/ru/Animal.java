@@ -110,7 +110,6 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal> {
         Animal animal = (Animal) obj;
         return name.equals(animal.getName())
                 && home.equals(animal.getHome())
-                && ingestion.equals(animal.getIngestion())
                 && actions.equals(animal.getActions())
                 && coord.equals(animal.getCoord());
     }

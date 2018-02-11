@@ -39,7 +39,7 @@ public class Rabbit extends Animal{
                 && getHome().equals(rabbit.getHome())
                 && getIngestion().equals(rabbit.getIngestion())
                 && getActions().equals(rabbit.getActions())
-                && getCoord()==rabbit.getCoord();
+                && getCoord().equals(rabbit.getCoord());
     }
     @Override
     public String work() {

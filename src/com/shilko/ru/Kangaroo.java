@@ -37,7 +37,7 @@ public class Kangaroo extends Animal implements Mindable {
                 && getHome().equals(kangaroo.getHome())
                 && getIngestion().equals(kangaroo.getIngestion())
                 && getActions().equals(kangaroo.getActions())
-                && getCoord()==kangaroo.getCoord();
+                && getCoord().equals(kangaroo.getCoord());
     }
     @Override
     public int hashCode() {

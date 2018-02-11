@@ -33,29 +33,10 @@ public class Main {
         AnimalCollection collection = new AnimalCollection();
         Runtime.getRuntime().addShutdownHook(new Thread(()->{collection.save(args[0]);}));
         collection.load(args[0]);
+        Scanner in = new Scanner(System.in);
         while (true) {
-            Scanner in = new Scanner(System.in);
             collection.work();
-            String lexeme = in.next();
-            switch (lexeme.toLowerCase()) {
-                case "remove_all":
-                    collection.removeAll(System.in);
-                    break;
-                case "insert":
-                    collection.insert(System.in);
-                    break;
-                case "save":
-                    collection.save(args[0]);
-                    break;
-                case "remove_greater_key":
-                    collection.removeGreaterKey(System.in);
-                    break;
-                case "remove":
-                    collection.remove(System.in);
-                    break;
-                case "exit":
-                    System.exit(0);
-            }
+            collection.input(in,args[0]);
         }
     }
 }

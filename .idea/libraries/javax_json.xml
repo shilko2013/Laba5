@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="javax.json">
+    <CLASSES>
+      <root url="jar://C:/Program Files/Java/glassfish5/mq/lib/javax.json.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
