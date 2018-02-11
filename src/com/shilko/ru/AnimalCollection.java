@@ -5,8 +5,20 @@ import java.io.*;
 import java.util.*;
 import com.jayway.jsonpath.*;
 
+/**
+ * Класс, инкапсулирующий в себе управление коллекцией животных.
+ * @author Шилко Даниил
+ * @version 1.5
+ */
 public class AnimalCollection {
+    /** Поле коллекция животных */
     private Map<Coord,Animal> collection = new TreeMap<>();
+    /**
+     * Метод, предназначенный для загрузки элементов коллеции из файла
+     * и записи их в коллекцию {@link AnimalCollection#collection}.
+     * Файл должен быть в формате <i>XML</i>.
+     * @param fileName путь к файлу
+     */
     public void load(String fileName) {
         try {
             XMLStreamReader xmlr = XMLInputFactory.newInstance().createXMLStreamReader(fileName, new BufferedReader(new FileReader(fileName)));
@@ -69,9 +81,18 @@ public class AnimalCollection {
             ex.printStackTrace();
         }
     }
+    /**
+     * Метод, вызывающий метод work() у всех элементов коллекции
+     * {@link AnimalCollection#collection}.
+     */
     public void work() {
         collection.forEach((n,e)->System.out.print(e.work()));
     }
+    /**
+     * Метод, сохраняющий коллекцию {@link AnimalCollection#collection}
+     * в файл в формате <i>XML</i>..
+     * @param fileName путь к файлу
+     */
     public void save(String fileName) {
         try {
             XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(new FileWriter(fileName));
@@ -150,6 +171,24 @@ public class AnimalCollection {
             ex.printStackTrace();
         }
     }
+    /**
+     * Метод, создающий и возвращающий животное по заданному
+     * типу и характеристикам. <b>Реализован для классов Kangaroo,
+     * Tiger, Rabbit</b>
+     * @since 1.5
+     * @param type тип животного
+     * @param name имя животного
+     * @param home дом животного
+     * @param x x координата
+     * @param y y координата
+     * @param z z координата
+     * @param actions List&lt;String&gt; действий, которое может
+     *                совершать животное
+     * @param actionsForTongue List&lt;String&gt; действий, которое может
+     *                совершать тигр, <b>если животное не тигр,
+     *                не учавствует в работе метода</b>
+     * @return возращает животное, полученное по данным характеристикам
+     */
     private Animal parseAnimal(String type, String name, String home, int x, int y, int z, List<String> actions, List<String> actionsForTongue) {
         switch (type) {
             case "tiger":
@@ -168,10 +207,35 @@ public class AnimalCollection {
         }
         return null;
     }
+    /**
+     * Метод, добавляющий животное в коллекцию
+     * {@link AnimalCollection#collection}по его характеристикам.
+     * Для своей работы использует метод
+     * {@link AnimalCollection#parseAnimal(String, String, String, int, int, int, List, List)}
+     * @param type тип животного
+     * @param name имя животного
+     * @param home дом животного
+     * @param x x координата
+     * @param y y координата
+     * @param z z координата
+     * @param actions List&lt;String&gt; действий, которое может
+     *                совершать животное
+     * @param actionsForTongue List&lt;String&gt; действий, которое может
+     *                совершать тигр, <b>если животное не тигр,
+     *                не учавствует в работе метода</b>
+     * @see AnimalCollection#parseAnimal(String, String, String, int, int, int, List, List)
+     */
     private void putAnimal(String type, String name, String home, int x, int y, int z, List<String> actions, List<String> actionsForTongue) {
         Animal temp = parseAnimal(type,name,home,x,y,z,actions,actionsForTongue);
         collection.put(temp.getCoord(),temp);
     }
+    /**
+     * Метод, принимающий строку в формате <i>JSON</i> и возвращающий
+     * животное, которое в ней содержалось.
+     * Работает с библиотекой com.jayway.jsonpath
+     * @param in входная строка
+     * @return животное, содержащееся в строке
+     */
     private Animal read(String in) {
         String type = JsonPath.read(in, "$.type");
         String name = JsonPath.read(in,"$.name");
@@ -207,6 +271,14 @@ public class AnimalCollection {
         }*/
         //return null;
     }
+    /**
+     * Метод, удаляющий из коллекции {@link AnimalCollection#collection}
+     * все экземпляры, которые соответствуют входному параметру в формате <i>JSON</i>.
+     * Животное парсится методом
+     * {@link AnimalCollection#parseAnimal(String, String, String, int, int, int, List, List)}
+     * @param in входная строка
+     * @see AnimalCollection#parseAnimal(String, String, String, int, int, int, List, List)
+     */
     public void removeAll(String in) {
         Animal animal = read(in);
         List<Coord> temp = new ArrayList<>();
@@ -216,12 +288,28 @@ public class AnimalCollection {
         });
         temp.forEach(k->collection.remove(k));
     }
+    /**
+     * Метод, добавляющий в коллекцию {@link AnimalCollection#collection}
+     * животноев формате <i>JSON</i>, или заменяющее его,
+     * если животное с такими координатами уже есть
+     * @param in входная строка
+     */
     public void insert(String in) {
         Coord coord = Coord.read(in);
         Animal animal = read(in.substring(in.indexOf("{"),in.length()));
         animal.setCoord(coord.getX(),coord.getY(),coord.getZ());
         collection.put(animal.getCoord(),animal);
     }
+    /**
+     * Метод, удаляющий из коллекции {@link AnimalCollection#collection}
+     * все экземпляры, произведение кооординаты которых
+     * больше произведения координат животного,
+     * закодированного в строке в формате <i>JSON</i>.
+     * Животное парсится методом
+     * {@link AnimalCollection#parseAnimal(String, String, String, int, int, int, List, List)}
+     * @param in входная строка
+     * @see AnimalCollection#parseAnimal(String, String, String, int, int, int, List, List)
+     */
     public void removeGreaterKey(String in) {
         Coord coord = Coord.read(in);
         List<Coord> temp = new ArrayList<>();
@@ -231,9 +319,28 @@ public class AnimalCollection {
         });
         temp.forEach(k->collection.remove(k));
     }
+    /**
+     * Метод, удаляющий из коллекции {@link AnimalCollection#collection}
+     * животное, находящееся в коориднатах,
+     * заданных во входной строке.
+     * @param in входная строка
+     */
     public void remove(String in) {
         collection.remove(Coord.read(in));
     }
+    /**
+     * Метод, инкапсулирующий в себе интерактивное взаимодествие
+     * с пользователем через заранее заданные команды-методы
+     * класса {@link AnimalCollection}, организуя изменение коллекции
+     * {@link AnimalCollection#collection} и ее ввод-вывод в файл.
+     * @param in поток ввода данных
+     * @param way путь к файлу, хранящему коллекцию {@link AnimalCollection#collection}
+     * @see AnimalCollection#removeAll(String)
+     * @see AnimalCollection#insert(String)
+     * @see AnimalCollection#save(String)
+     * @see AnimalCollection#remove(String)
+     * @see AnimalCollection#removeGreaterKey(String)
+     */
     public void input(Scanner in, String way) {
         String lexeme = in.nextLine();
         switch (lexeme.contains(" ")?lexeme.toLowerCase().substring(0,lexeme.indexOf(" ")):lexeme.toLowerCase()) {
