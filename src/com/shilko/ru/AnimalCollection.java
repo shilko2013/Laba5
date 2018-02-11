@@ -1,12 +1,9 @@
 package com.shilko.ru;
 
-import org.glassfish.json.api.BufferPool;
-
 import javax.xml.stream.*;
-import javax.json.*;
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
+import com.jayway.jsonpath.*;
 
 public class AnimalCollection {
     private Map<Coord,Animal> collection = new TreeMap<>();
@@ -175,9 +172,19 @@ public class AnimalCollection {
         Animal temp = parseAnimal(type,name,home,x,y,z,actions,actionsForTongue);
         collection.put(temp.getCoord(),temp);
     }
-    private Animal read(InputStream in) {
-        try  {
-            /*JsonReader rdr = Json.createReader(in);
+    private Animal read(String in) {
+        String type = JsonPath.read(in, "$.type");
+        String name = JsonPath.read(in,"$.name");
+        String home = JsonPath.read(in,"$.home");
+        int x = JsonPath.read(in,"$.coord.x");
+        int y = JsonPath.read(in,"$.coord.y");
+        int z = JsonPath.read(in,"$.coord.z");
+        List<String> actions = JsonPath.read(in,"$.actions[*]");
+        List<String> actionsForTongue = null;
+        if (type.equalsIgnoreCase("tiger"))
+            actionsForTongue = JsonPath.read(in,"$.actionsForTongue[*]");
+        /*try  {
+            JsonReader rdr = Json.createReader(in);
             JsonObject obj = rdr.readObject();
             String type = obj.getString("type");
             String name = obj.getString("name");
@@ -191,16 +198,16 @@ public class AnimalCollection {
             if (type.equalsIgnoreCase("tiger")) {
                 actionsForTongue = obj.getJsonArray("actionsForTongue").getValuesAs(JsonValue::toString);
                 actionsForTongue = actionsForTongue.stream().map(s->s.substring(1,s.length()-1)).collect(Collectors.toList());
-            }*/
+            }
 
-            return parseAnimal(type,name,home,x,y,z,actions,actionsForTongue);
+            */return parseAnimal(type,name,home,x,y,z,actions,actionsForTongue);/*
         }
         catch (Exception ex) {
             ex.printStackTrace();
-        }
-        return null;
+        }*/
+        //return null;
     }
-    public void removeAll(InputStream in) {
+    public void removeAll(String in) {
         Animal animal = read(in);
         List<Coord> temp = new ArrayList<>();
         collection.forEach((k,v)->{
@@ -209,41 +216,41 @@ public class AnimalCollection {
         });
         temp.forEach(k->collection.remove(k));
     }
-    public void insert(InputStream in) {
+    public void insert(String in) {
         Coord coord = Coord.read(in);
-        Animal animal = read(in);
+        Animal animal = read(in.substring(in.indexOf("{"),in.length()));
         animal.setCoord(coord.getX(),coord.getY(),coord.getZ());
         collection.put(animal.getCoord(),animal);
     }
-    public void removeGreaterKey(InputStream in) {
+    public void removeGreaterKey(String in) {
         Coord coord = Coord.read(in);
         List<Coord> temp = new ArrayList<>();
         collection.forEach((k,v)->{
-            if (k.compareTo(coord)<0)
+            if (k.compareTo(coord)>0)
                 temp.add(k);
         });
         temp.forEach(k->collection.remove(k));
     }
-    public void remove(InputStream in) {
+    public void remove(String in) {
         collection.remove(Coord.read(in));
     }
     public void input(Scanner in, String way) {
-        String lexeme = in.next();
-        switch (lexeme.toLowerCase()) {
+        String lexeme = in.nextLine();
+        switch (lexeme.contains(" ")?lexeme.toLowerCase().substring(0,lexeme.indexOf(" ")):lexeme.toLowerCase()) {
             case "remove_all":
-                removeAll(System.in);
+                removeAll(lexeme.substring(lexeme.indexOf(" "),lexeme.length()).trim());
                 break;
             case "insert":
-                insert(System.in);
+                insert(lexeme.substring(lexeme.indexOf(" "),lexeme.length()).trim());
                 break;
             case "save":
                 save(way);
                 break;
             case "remove_greater_key":
-                removeGreaterKey(System.in);
+                removeGreaterKey(lexeme.substring(lexeme.indexOf(" "),lexeme.length()).trim());
                 break;
             case "remove":
-                remove(System.in);
+                remove(lexeme.substring(lexeme.indexOf(" "),lexeme.length()).trim());
                 break;
             case "exit":
                 System.exit(0);

@@ -38,6 +38,13 @@ public class Coord implements Comparable<Coord> {
         int z = ins.nextInt();
         return new Coord(x,y,z);
     }
+    public static Coord read(String s) {
+        Scanner ins = new Scanner(s);
+        int x = ins.nextInt();
+        int y = ins.nextInt();
+        int z = ins.nextInt();
+        return new Coord(x,y,z);
+    }
     @Override
     public int compareTo(Coord coord) {
         return Long.compare(amount(),coord.amount());
