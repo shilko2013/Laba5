@@ -36,7 +36,12 @@ public class Main {
         Scanner in = new Scanner(System.in);
         while (true) {
             collection.work();
-            collection.input(in,args[0]);
+            try {
+                collection.input(in,args[0]);
+            }
+            catch (Exception e) {
+                System.out.println("Неверный формат команды!!!");
+            }
         }
     }
 }

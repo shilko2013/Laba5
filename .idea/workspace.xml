@@ -11,8 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0feda5ad-c9bb-4a19-905a-5b31bf743e05" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Laba3_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/Laba3_jar.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/com/shilko/ru/RealAnimal.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/Data.xml" afterPath="$PROJECT_DIR$/Data.xml" />
+      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Main.class" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Main.class" />
+      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java" afterPath="$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Main.java" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,8 +31,8 @@
       <file leaf-file-name="Rabbit.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Rabbit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="39" column="63" lean-forward="false" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
+            <state relative-caret-position="52">
+              <caret line="4" column="35" lean-forward="true" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
               <folding>
                 <element signature="method#senseOfSelfReliance#0;class#Rabbit#0" expanded="false" />
                 <element signature="method#makeActions#0;class#Rabbit#0" expanded="false" />
@@ -64,7 +68,7 @@
       <file leaf-file-name="Kangaroo.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
+            <state relative-caret-position="375">
               <caret line="34" column="43" lean-forward="false" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
               <folding>
                 <element signature="method#think#0;class#Kangaroo#0" expanded="false" />
@@ -78,9 +82,24 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="634">
-              <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+            <state relative-caret-position="752">
+              <caret line="42" column="41" lean-forward="false" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RealAnimal.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/RealAnimal.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="26" column="13" lean-forward="true" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+              <folding>
+                <element signature="method#equals#0;class#RealAnimal#0" expanded="false" />
+                <element signature="method#toString#0;class#RealAnimal#0" expanded="false" />
+                <element signature="e#1231#1232#0" expanded="true" />
+                <element signature="e#1282#1283#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -88,8 +107,8 @@
       <file leaf-file-name="AnimalCollection.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="13" column="34" lean-forward="true" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
+            <state relative-caret-position="-1630">
+              <caret line="286" column="33" lean-forward="true" selection-start-line="286" selection-start-column="33" selection-end-line="286" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;class#AnimalCollection#0" expanded="false" />
@@ -97,24 +116,30 @@
                 <element signature="method#load#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="docComment;method#work#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="docComment;method#save#0;class#AnimalCollection#0" expanded="false" />
-                <element signature="method#save#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="docComment;method#parseAnimal#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="method#parseAnimal#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="docComment;method#putAnimal#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="method#putAnimal#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="docComment;method#read#0;class#AnimalCollection#0" expanded="false" />
-                <element signature="method#read#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="docComment;method#removeAll#0;class#AnimalCollection#0" expanded="false" />
-                <element signature="method#removeAll#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="docComment;method#insert#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="method#insert#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="docComment;method#removeGreaterKey#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="method#removeGreaterKey#0;class#AnimalCollection#0" expanded="false" />
-                <element signature="e#14067#14152#0" expanded="false" />
+                <element signature="e#14377#14462#0" expanded="false" />
                 <element signature="docComment;method#remove#0;class#AnimalCollection#0" expanded="false" />
                 <element signature="docComment;method#input#0;class#AnimalCollection#0" expanded="false" />
-                <element signature="method#input#0;class#AnimalCollection#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="System.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/System.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="109" column="36" lean-forward="false" selection-start-line="109" selection-start-column="36" selection-end-line="109" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -137,8 +162,8 @@
       <file leaf-file-name="Animal.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Animal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1000">
-              <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
               <folding>
                 <element signature="class#HomelessException#0;class#Animal#0" expanded="false" />
                 <element signature="initializer##0;class#Animal#0" expanded="false" />
@@ -149,6 +174,7 @@
                 <element signature="method#whereLive#0;class#Animal#0" expanded="false" />
                 <element signature="method#eat#0;class#Animal#0" expanded="false" />
                 <element signature="e#2155#2335#0" expanded="false" />
+                <element signature="e#2735#2736#0" expanded="true" />
                 <element signature="e#2764#2765#0" expanded="true" />
                 <element signature="method#toString#0;class#Animal#0" expanded="false" />
               </folding>
@@ -201,6 +227,7 @@
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Coord.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/shilko/ru/RealAnimal.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java" />
       </list>
     </option>
@@ -212,10 +239,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-11" />
-    <option name="y" value="-11" />
+    <option name="x" value="-10" />
     <option name="width" value="980" />
-    <option name="height" value="1080" />
+    <option name="height" value="1090" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -235,7 +261,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -248,23 +274,7 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Laba3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Laba3" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -363,7 +373,10 @@
       <workItem from="1517997248015" duration="10139000" />
       <workItem from="1518073908360" duration="6235000" />
       <workItem from="1518258882324" duration="26001000" />
-      <workItem from="1518383889616" duration="4676000" />
+      <workItem from="1518383889616" duration="4757000" />
+      <workItem from="1518862924971" duration="2651000" />
+      <workItem from="1518962516088" duration="290000" />
+      <workItem from="1519037189594" duration="7790000" />
     </task>
     <task id="LOCAL-00001" summary="Laba5.Version1 with comments.">
       <created>1517939757786</created>
@@ -456,11 +469,18 @@
       <option name="project" value="LOCAL" />
       <updated>1518388130368</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Laba5.Version5 ready. Debugged. With JavaDoc. Working. Finish.">
+      <created>1518388593816</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1518388593816</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="173009000" />
+    <option name="totallyTimeSpent" value="183821000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="1942" height="1102" extended-state="6" />
@@ -481,7 +501,6 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.134375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -493,6 +512,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,72 +533,16 @@
     <MESSAGE value="Laba5.Version5 ready. Debugged. Without javadoc." />
     <MESSAGE value="Laba5.Version5 ready. Debugged. Without javadoc. Working." />
     <MESSAGE value="Laba5.Version5 ready. Debugged. With JavaDoc. Working." />
-    <option name="LAST_COMMIT_MESSAGE" value="Laba5.Version5 ready. Debugged. With JavaDoc. Working." />
+    <MESSAGE value="Laba5.Version5 ready. Debugged. With JavaDoc. Working. Finish." />
+    <option name="LAST_COMMIT_MESSAGE" value="Laba5.Version5 ready. Debugged. With JavaDoc. Working. Finish." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/shilko/ru/Main.java</url>
-          <line>37</line>
-          <properties />
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="58" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/math/BigDecimal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="595" column="0" lean-forward="false" selection-start-line="595" selection-start-column="0" selection-end-line="595" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/com.shilko.ru.Ingestion">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>com.shilko.ru.Ingestion</OriginalElement>
-          <nodes>
-            <node x="" y="">com.shilko.ru.Ingestion</node>
-            <node x="" y="">java.lang.Enum</node>
-            <node x="" y="">java.lang.Comparable</node>
-            <node x="" y="">java.io.Serializable</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="177.0" y="121.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/com.shilko.ru.Main">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>com.shilko.ru.Main</OriginalElement>
-          <nodes>
-            <node x="0.0" y="0.0">com.shilko.ru.Main</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="-182.0" y="14.0" />
-          <SelectedNodes>
-            <node>com.shilko.ru.Main</node>
-          </SelectedNodes>
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Action.java" />
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Eat.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/function/BiConsumer.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -932,38 +896,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Animal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1000">
-          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding>
-            <element signature="class#HomelessException#0;class#Animal#0" expanded="false" />
-            <element signature="initializer##0;class#Animal#0" expanded="false" />
-            <element signature="method#Animal#0;class#Animal#0" expanded="false" />
-            <element signature="method#Animal#1;class#Animal#0" expanded="false" />
-            <element signature="method#addEat#0;class#Animal#0" expanded="false" />
-            <element signature="method#getHome#0;class#Animal#0" expanded="false" />
-            <element signature="method#whereLive#0;class#Animal#0" expanded="false" />
-            <element signature="method#eat#0;class#Animal#0" expanded="false" />
-            <element signature="e#2155#2335#0" expanded="false" />
-            <element signature="e#2764#2765#0" expanded="true" />
-            <element signature="method#toString#0;class#Animal#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="34" column="43" lean-forward="false" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
-          <folding>
-            <element signature="method#think#0;class#Kangaroo#0" expanded="false" />
-            <element signature="e#1396#1397#0" expanded="true" />
-            <element signature="e#1441#1442#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Tiger.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2075">
@@ -983,24 +915,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Rabbit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="39" column="63" lean-forward="false" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
-          <folding>
-            <element signature="method#senseOfSelfReliance#0;class#Rabbit#0" expanded="false" />
-            <element signature="method#makeActions#0;class#Rabbit#0" expanded="false" />
-            <element signature="e#1472#1473#0" expanded="true" />
-            <element signature="e#1517#1518#0" expanded="true" />
-            <element signature="method#toString#0;class#Rabbit#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jrt://C:/Program Files/Java/jdk-9!/java.base/java/lang/Runtime.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="28" column="16" lean-forward="true" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Animal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="22" lean-forward="false" selection-start-line="0" selection-start-column="22" selection-end-line="0" selection-end-column="22" />
+          <folding>
+            <element signature="class#HomelessException#0;class#Animal#0" expanded="false" />
+            <element signature="initializer##0;class#Animal#0" expanded="false" />
+            <element signature="method#Animal#0;class#Animal#0" expanded="false" />
+            <element signature="method#Animal#1;class#Animal#0" expanded="false" />
+            <element signature="method#addEat#0;class#Animal#0" expanded="false" />
+            <element signature="method#getHome#0;class#Animal#0" expanded="false" />
+            <element signature="method#whereLive#0;class#Animal#0" expanded="false" />
+            <element signature="method#eat#0;class#Animal#0" expanded="false" />
+            <element signature="e#2155#2335#0" expanded="false" />
+            <element signature="e#2735#2736#0" expanded="true" />
+            <element signature="e#2764#2765#0" expanded="true" />
+            <element signature="method#toString#0;class#Animal#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1017,18 +956,80 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/Enum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3927">
+          <caret line="54" column="22" lean-forward="false" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state relative-caret-position="752">
+          <caret line="42" column="41" lean-forward="false" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="34" column="43" lean-forward="false" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
+          <folding>
+            <element signature="method#think#0;class#Kangaroo#0" expanded="false" />
+            <element signature="e#1396#1397#0" expanded="true" />
+            <element signature="e#1441#1442#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Rabbit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="4" column="35" lean-forward="true" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+          <folding>
+            <element signature="method#senseOfSelfReliance#0;class#Rabbit#0" expanded="false" />
+            <element signature="method#makeActions#0;class#Rabbit#0" expanded="false" />
+            <element signature="e#1472#1473#0" expanded="true" />
+            <element signature="e#1517#1518#0" expanded="true" />
+            <element signature="method#toString#0;class#Rabbit#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/RealAnimal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="26" column="13" lean-forward="true" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+          <folding>
+            <element signature="method#equals#0;class#RealAnimal#0" expanded="false" />
+            <element signature="method#toString#0;class#RealAnimal#0" expanded="false" />
+            <element signature="e#1231#1232#0" expanded="true" />
+            <element signature="e#1282#1283#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/io/PrintStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2027">
+          <caret line="108" column="19" lean-forward="true" selection-start-line="108" selection-start-column="19" selection-end-line="108" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="109" column="36" lean-forward="false" selection-start-line="109" selection-start-column="36" selection-end-line="109" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="13" column="34" lean-forward="true" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
+        <state relative-caret-position="-1630">
+          <caret line="286" column="33" lean-forward="true" selection-start-line="286" selection-start-column="33" selection-end-line="286" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;class#AnimalCollection#0" expanded="false" />
@@ -1036,23 +1037,19 @@
             <element signature="method#load#0;class#AnimalCollection#0" expanded="false" />
             <element signature="docComment;method#work#0;class#AnimalCollection#0" expanded="false" />
             <element signature="docComment;method#save#0;class#AnimalCollection#0" expanded="false" />
-            <element signature="method#save#0;class#AnimalCollection#0" expanded="false" />
             <element signature="docComment;method#parseAnimal#0;class#AnimalCollection#0" expanded="false" />
             <element signature="method#parseAnimal#0;class#AnimalCollection#0" expanded="false" />
             <element signature="docComment;method#putAnimal#0;class#AnimalCollection#0" expanded="false" />
             <element signature="method#putAnimal#0;class#AnimalCollection#0" expanded="false" />
             <element signature="docComment;method#read#0;class#AnimalCollection#0" expanded="false" />
-            <element signature="method#read#0;class#AnimalCollection#0" expanded="false" />
             <element signature="docComment;method#removeAll#0;class#AnimalCollection#0" expanded="false" />
-            <element signature="method#removeAll#0;class#AnimalCollection#0" expanded="false" />
             <element signature="docComment;method#insert#0;class#AnimalCollection#0" expanded="false" />
             <element signature="method#insert#0;class#AnimalCollection#0" expanded="false" />
             <element signature="docComment;method#removeGreaterKey#0;class#AnimalCollection#0" expanded="false" />
             <element signature="method#removeGreaterKey#0;class#AnimalCollection#0" expanded="false" />
-            <element signature="e#14067#14152#0" expanded="false" />
+            <element signature="e#14377#14462#0" expanded="false" />
             <element signature="docComment;method#remove#0;class#AnimalCollection#0" expanded="false" />
             <element signature="docComment;method#input#0;class#AnimalCollection#0" expanded="false" />
-            <element signature="method#input#0;class#AnimalCollection#0" expanded="false" />
           </folding>
         </state>
       </provider>

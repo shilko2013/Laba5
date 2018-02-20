@@ -96,7 +96,7 @@ public class AnimalCollection {
     public void save(String fileName) {
         try {
             XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(new FileWriter(fileName));
-            writer.writeStartDocument("Cp1251","1.0");
+            writer.writeStartDocument("UTF-8","1.0");
             writer.writeStartElement("DATA");
             for ( Coord e : collection.keySet()) {
                 Animal temp = collection.get(e);
@@ -166,6 +166,7 @@ public class AnimalCollection {
 
                 // Закрываем тэг Book
                 writer.writeEndElement();*/
+
         }
         catch (IOException | IllegalArgumentException | XMLStreamException ex) {
             ex.printStackTrace();
@@ -204,8 +205,11 @@ public class AnimalCollection {
                 Kangaroo kangaroo = new Kangaroo(name, home, x, y, z);
                 kangaroo.addAction(actions.toArray(new String[0]));
                 return kangaroo;
+            default:
+                RealAnimal realAnimal = new RealAnimal(name,home,x,y,z);
+                realAnimal.addAction(actions.toArray(new String[0]));
+                return realAnimal;
         }
-        return null;
     }
     /**
      * Метод, добавляющий животное в коллекцию
@@ -282,6 +286,10 @@ public class AnimalCollection {
     public void removeAll(String in) {
         Animal animal = read(in);
         List<Coord> temp = new ArrayList<>();
+        Iterator<Coord> i = collection.keySet().iterator();
+        for (;i.hasNext();i.next()) {
+            i.remove();
+        }
         collection.forEach((k,v)->{
             if (v.equals(animal))
                 temp.add(k);
@@ -328,6 +336,39 @@ public class AnimalCollection {
     public void remove(String in) {
         collection.remove(Coord.read(in));
     }
+    public void list(OutputStream out) {
+        PrintStream printWriter = new PrintStream(out);
+        collection.forEach((k,v)->{
+            String type = v.getClass().toString().substring(v.getClass().toString().lastIndexOf(".")+1).toLowerCase();
+            String s = "{\t\"type\": \""
+                    +v.getClass().toString().substring(v.getClass().toString().lastIndexOf(".")+1).toLowerCase()+
+                    "\",\t\"name\": \""+
+                    v.getName()+"\",\t\"home\": \""+
+                    v.getHome()+"\",\t\"coord\": {\t\"x\": "+
+                    v.getCoord().getX()+",\t\t\"y\": "+
+                    v.getCoord().getY()+",\t\t\"z\": "+
+                    v.getCoord().getZ()+"\t}";
+            if (v.getActions().size()>0) {
+                s += ",\t\"actions\": [";
+                for (String string: v.getActions()) {
+                    s += "\t\t\"" + string + "\",";
+                }
+                s = s.substring(0,s.length()-1);
+                s += "\t]";
+            }
+            if (v.getClass().equals(Tiger.class)&&((Tiger)v).getActionsForTongue().size()>0) {
+                Tiger tiger = (Tiger)v;
+                s += ",\t\"actionsForTongue\": [";
+                for (String string: tiger.getActionsForTongue()) {
+                    s += "\t\t\"" + string + "\",";
+                }
+                s = s.substring(0,s.length()-1);
+                s += "\t]";
+            }
+            s += "}";
+            printWriter.println(s);
+        });
+    }
     /**
      * Метод, инкапсулирующий в себе интерактивное взаимодествие
      * с пользователем через заранее заданные команды-методы
@@ -359,10 +400,16 @@ public class AnimalCollection {
             case "remove":
                 remove(lexeme.substring(lexeme.indexOf(" "),lexeme.length()).trim());
                 break;
+            case "list":
+                list(System.out);
+                break;
             case "exit":
                 System.exit(0);
             default:
                 throw new IllegalArgumentException();
+                //обработка неправильного jsona
+                //default Тип животного
+                //парсер
         }
     }
 }
