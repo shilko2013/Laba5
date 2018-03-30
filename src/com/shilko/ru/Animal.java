@@ -1,8 +1,9 @@
 package com.shilko.ru;
 
+import java.io.*;
 import java.util.*;
 
-public abstract class Animal implements Eating, Workable, Comparable<Animal> {
+public abstract class Animal implements Eating, Workable, Comparable<Animal>, Serializable {
     private class HomelessException extends RuntimeException {
         public HomelessException() {super("Home of " + getName() + " is epsend!!!");}
         public HomelessException(String message) {super(message);}
@@ -18,24 +19,32 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal> {
     private String home;
     private Queue<String> actions;
     private Map<Ingestion, Set<String>> ingestion;
+    private long timeOfCreate;
+    private int weight;
     {
+        timeOfCreate = System.currentTimeMillis();
         ingestion = new TreeMap<>();
         home = null;
         actions = new LinkedList<>();
     }
-    public Animal (String name, String home, int x, int y, int z) {
-        this(name,x,y,z);
+    public Animal (String name, String home, int x, int y, int z, int weight) {
+        this(name,x,y,z,weight);
         this.home = home;
     }
-    public Animal (String name, int x, int y, int z) {
+    public Animal (String name, int x, int y, int z,int weight) {
         this.name = name;
         this.myID = ID;
         ID++;
         coord = new Coord(x,y,z);
+        this.weight = weight;
+    }
+    public long getTimeOfCreate() {
+        return timeOfCreate;
     }
     public void setHome(String home) {
         this.home = home;
     }
+    public int getWeight() {return weight;}
     @Override
     public int compareTo(Animal animal) {
         return Long.compare(getID(),animal.getID());

@@ -37,7 +37,7 @@ public class Main {
         while (true) {
             collection.work();
             try {
-                collection.input(in,args[0]);
+                collection.input(in,args[0],false);
             }
             catch (Exception e) {
                 System.out.println("Неверный формат команды!!!");

@@ -1,9 +1,10 @@
 package com.shilko.ru;
 
+import java.io.Serializable;
 import java.util.*;
 
 public class Tiger extends Animal implements Workable, Sayable {
-    private class Tongue implements Workable {
+    private class Tongue implements Workable,Serializable {
         private Queue<String> action;
         {
             action = new LinkedList<>();
@@ -65,11 +66,11 @@ public class Tiger extends Animal implements Workable, Sayable {
     {
         tongue = new Tongue();
     }
-    public Tiger(String name, String home, int x, int y, int z) {
-        super(name,home,x,y,z);
+    public Tiger(String name, String home, int x, int y, int z, int weight) {
+        super(name,home,x,y,z,weight);
     }
-    public Tiger(String name, int x, int y, int z) {
-        super(name,x,y,z);
+    public Tiger(String name, int x, int y, int z, int weight) {
+        super(name,x,y,z,weight);
     }
     @Override
     public void say(String message) {
@@ -121,7 +122,7 @@ public class Tiger extends Animal implements Workable, Sayable {
                 s = "всегда";
         }
         System.out.println("и " + s + " получал рыбий жир на завтрак, обед и ужин.");
-        if (new Kangaroo("Кенга","Доким Кенги",3,3,3).think()&&(porrigeIsExist))
+        if (new Kangaroo("Кенга","Домик Кенги",3,3,3,50).think()&&(porrigeIsExist))
             System.out.println("Также иногда на завтрак он получал ложку-другую каши, которой завтракал Ру.");
     }
     public void closeEyes() {

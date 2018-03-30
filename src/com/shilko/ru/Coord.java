@@ -1,9 +1,10 @@
 package com.shilko.ru;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.*;
 
-public class Coord implements Comparable<Coord> {
+public class Coord implements Comparable<Coord>,Serializable {
     private int x,y,z;
     public Coord(int x, int y, int z) {
         this.x = x;

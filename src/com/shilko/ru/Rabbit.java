@@ -3,11 +3,11 @@ package com.shilko.ru;
 import java.util.*;
 
 public class Rabbit extends Animal{
-    public Rabbit(String name, String home, int x, int y, int z) {
-        super(name,home,x,y,z);
+    public Rabbit(String name, String home, int x, int y, int z, int weight) {
+        super(name,home,x,y,z,weight);
     }
-    public Rabbit(String name, int x, int y, int z) {
-        super(name,x,y,z);
+    public Rabbit(String name, int x, int y, int z, int weight) {
+        super(name,x,y,z,weight);
     }
     public void senseOfSelfReliance() {
         if (getActions().size()>0)

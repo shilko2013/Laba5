@@ -4,15 +4,16 @@ import javax.xml.stream.*;
 import java.io.*;
 import java.util.*;
 import com.jayway.jsonpath.*;
+import java.util.concurrent.*;
 
 /**
  * Класс, инкапсулирующий в себе управление коллекцией животных.
  * @author Шилко Даниил
  * @version 1.5
  */
-public class AnimalCollection {
+public class AnimalCollection implements Serializable {
     /** Поле коллекция животных */
-    private Map<Coord,Animal> collection = new TreeMap<>();
+    private Map<Coord,Animal> collection = new ConcurrentSkipListMap<>();
     /**
      * Метод, предназначенный для загрузки элементов коллеции из файла
      * и записи их в коллекцию {@link AnimalCollection#collection}.
@@ -40,6 +41,9 @@ public class AnimalCollection {
                 String home = xmlr.getAttributeValue(0);
                 xmlr.nextTag();
                 xmlr.nextTag();
+                int weight = Integer.parseInt(xmlr.getAttributeValue(0));
+                xmlr.nextTag();
+                xmlr.nextTag();
                 int x = Integer.parseInt(xmlr.getAttributeValue(0));
                 int y = Integer.parseInt(xmlr.getAttributeValue(1));
                 int z = Integer.parseInt(xmlr.getAttributeValue(2));
@@ -64,7 +68,7 @@ public class AnimalCollection {
                 }
                 xmlr.nextTag();
                 xmlr.nextTag();
-                putAnimal(type,name,home,x,y,z,actions,actionsForTongue);
+                putAnimal(type,name,home,x,y,z,weight,actions,actionsForTongue);
             }
                 /*if(!xmlr.getLocalName().equalsIgnoreCase("ANIMAL"))
                     throw new IllegalArgumentException();*/
@@ -107,6 +111,9 @@ public class AnimalCollection {
                 writer.writeEndElement();
                 writer.writeStartElement("HOME");
                 writer.writeAttribute("home",temp.getHome());
+                writer.writeEndElement();
+                writer.writeStartElement("WEIGHT");
+                writer.writeAttribute("weight",temp.getWeight()+"");
                 writer.writeEndElement();
                 writer.writeStartElement("COORD");
                 writer.writeAttribute("x",Integer.toString(temp.getCoord().getX()));
@@ -190,23 +197,23 @@ public class AnimalCollection {
      *                не учавствует в работе метода</b>
      * @return возращает животное, полученное по данным характеристикам
      */
-    private Animal parseAnimal(String type, String name, String home, int x, int y, int z, List<String> actions, List<String> actionsForTongue) {
+    private Animal parseAnimal(String type, String name, String home, int x, int y, int z, int weight, List<String> actions, List<String> actionsForTongue) {
         switch (type) {
             case "tiger":
-                Tiger tiger = new Tiger(name, home, x, y, z);
+                Tiger tiger = new Tiger(name, home, x, y, z, weight);
                 tiger.addAction(actions.toArray(new String[0]));
                 tiger.addActionForTongue(actionsForTongue.toArray(new String[0]));
                 return tiger;
             case "rabbit":
-                Rabbit rabbit = new Rabbit(name, home, x, y, z);
+                Rabbit rabbit = new Rabbit(name, home, x, y, z, weight);
                 rabbit.addAction(actions.toArray(new String[0]));
                 return rabbit;
             case "kangaroo":
-                Kangaroo kangaroo = new Kangaroo(name, home, x, y, z);
+                Kangaroo kangaroo = new Kangaroo(name, home, x, y, z, weight);
                 kangaroo.addAction(actions.toArray(new String[0]));
                 return kangaroo;
             default:
-                RealAnimal realAnimal = new RealAnimal(name,home,x,y,z);
+                RealAnimal realAnimal = new RealAnimal(name,home,x,y, z, weight);
                 realAnimal.addAction(actions.toArray(new String[0]));
                 return realAnimal;
         }
@@ -229,8 +236,8 @@ public class AnimalCollection {
      *                не учавствует в работе метода</b>
      * @see AnimalCollection#parseAnimal(String, String, String, int, int, int, List, List)
      */
-    private void putAnimal(String type, String name, String home, int x, int y, int z, List<String> actions, List<String> actionsForTongue) {
-        Animal temp = parseAnimal(type,name,home,x,y,z,actions,actionsForTongue);
+    private void putAnimal(String type, String name, String home, int x, int y, int z, int weight, List<String> actions, List<String> actionsForTongue) {
+        Animal temp = parseAnimal(type,name,home,x,y,z,weight,actions,actionsForTongue);
         collection.put(temp.getCoord(),temp);
     }
     /**
@@ -244,6 +251,7 @@ public class AnimalCollection {
         String type = JsonPath.read(in, "$.type");
         String name = JsonPath.read(in,"$.name");
         String home = JsonPath.read(in,"$.home");
+        int weight = Integer.parseInt(JsonPath.read(in,"$.weight"));
         int x = JsonPath.read(in,"$.coord.x");
         int y = JsonPath.read(in,"$.coord.y");
         int z = JsonPath.read(in,"$.coord.z");
@@ -268,7 +276,7 @@ public class AnimalCollection {
                 actionsForTongue = actionsForTongue.stream().map(s->s.substring(1,s.length()-1)).collect(Collectors.toList());
             }
 
-            */return parseAnimal(type,name,home,x,y,z,actions,actionsForTongue);/*
+            */return parseAnimal(type,name,home,x,y,z,weight,actions,actionsForTongue);/*
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -285,7 +293,8 @@ public class AnimalCollection {
      */
     public void removeAll(String in) {
         Animal animal = read(in);
-        List<Coord> temp = new ArrayList<>();
+        collection.values().removeAll(Arrays.asList(animal));
+        /*List<Coord> temp = new ArrayList<>();
         Iterator<Coord> i = collection.keySet().iterator();
         for (;i.hasNext();i.next()) {
             i.remove();
@@ -294,7 +303,7 @@ public class AnimalCollection {
             if (v.equals(animal))
                 temp.add(k);
         });
-        temp.forEach(k->collection.remove(k));
+        temp.forEach(k->collection.remove(k));*/
     }
     /**
      * Метод, добавляющий в коллекцию {@link AnimalCollection#collection}
@@ -320,12 +329,13 @@ public class AnimalCollection {
      */
     public void removeGreaterKey(String in) {
         Coord coord = Coord.read(in);
-        List<Coord> temp = new ArrayList<>();
+        collection.keySet().removeIf(a->a.compareTo(coord)>0);
+        /*List<Coord> temp = new ArrayList<>();
         collection.forEach((k,v)->{
             if (k.compareTo(coord)>0)
                 temp.add(k);
         });
-        temp.forEach(k->collection.remove(k));
+        temp.forEach(k->collection.remove(k));*/
     }
     /**
      * Метод, удаляющий из коллекции {@link AnimalCollection#collection}
@@ -337,14 +347,18 @@ public class AnimalCollection {
         collection.remove(Coord.read(in));
     }
     public void list(OutputStream out) {
-        PrintStream printWriter = new PrintStream(out);
-        collection.forEach((k,v)->{
+        new PrintStream(out).println(list());
+    }
+    public String list() {
+        return collection.keySet().stream().map((t)-> {
+            Animal v = collection.get(t);
             String type = v.getClass().toString().substring(v.getClass().toString().lastIndexOf(".")+1).toLowerCase();
             String s = "{\t\"type\": \""
                     +v.getClass().toString().substring(v.getClass().toString().lastIndexOf(".")+1).toLowerCase()+
                     "\",\t\"name\": \""+
                     v.getName()+"\",\t\"home\": \""+
-                    v.getHome()+"\",\t\"coord\": {\t\"x\": "+
+                    v.getHome()+"\",\t\"weight\": \""+
+                    v.getWeight()+"\",\t\"coord\": {\t\"x\": "+
                     v.getCoord().getX()+",\t\t\"y\": "+
                     v.getCoord().getY()+",\t\t\"z\": "+
                     v.getCoord().getZ()+"\t}";
@@ -366,8 +380,39 @@ public class AnimalCollection {
                 s += "\t]";
             }
             s += "}";
-            printWriter.println(s);
-        });
+            return s;
+        }).reduce((s1,s2)->s1+s2).orElse("Коллекция пуста!");
+        /*collection.forEach((k,v)->{
+            String type = v.getClass().toString().substring(v.getClass().toString().lastIndexOf(".")+1).toLowerCase();
+            String s = "{\t\"type\": \""
+                    +v.getClass().toString().substring(v.getClass().toString().lastIndexOf(".")+1).toLowerCase()+
+                    "\",\t\"name\": \""+
+                    v.getName()+"\",\t\"home\": \""+
+                    v.getHome()+"\",\t\"weight\": \""+
+                    v.getWeight()+"\",\t\"coord\": {\t\"x\": "+
+                    v.getCoord().getX()+",\t\t\"y\": "+
+                    v.getCoord().getY()+",\t\t\"z\": "+
+                    v.getCoord().getZ()+"\t}";
+            if (v.getActions().size()>0) {
+                s += ",\t\"actions\": [";
+                for (String string: v.getActions()) {
+                    s += "\t\t\"" + string + "\",";
+                }
+                s = s.substring(0,s.length()-1);
+                s += "\t]";
+            }
+            if (v.getClass().equals(Tiger.class)&&((Tiger)v).getActionsForTongue().size()>0) {
+                Tiger tiger = (Tiger)v;
+                s += ",\t\"actionsForTongue\": [";
+                for (String string: tiger.getActionsForTongue()) {
+                    s += "\t\t\"" + string + "\",";
+                }
+                s = s.substring(0,s.length()-1);
+                s += "\t]";
+            }
+            s += "}";
+            result += s;
+        });*/
     }
     /**
      * Метод, инкапсулирующий в себе интерактивное взаимодествие
@@ -382,27 +427,34 @@ public class AnimalCollection {
      * @see AnimalCollection#remove(String)
      * @see AnimalCollection#removeGreaterKey(String)
      */
-    public void input(Scanner in, String way) {
+    public String input(Scanner in, String way, boolean output) {
         String lexeme = in.nextLine();
+        return input(lexeme,way,output);
+    }
+    public String input(String lexeme, String way, boolean output) {
         switch (lexeme.contains(" ")?lexeme.toLowerCase().substring(0,lexeme.indexOf(" ")):lexeme.toLowerCase()) {
             case "remove_all":
                 removeAll(lexeme.substring(lexeme.indexOf(" "),lexeme.length()).trim());
-                break;
+                return null;
             case "insert":
                 insert(lexeme.substring(lexeme.indexOf(" "),lexeme.length()).trim());
-                break;
+                return null;
             case "save":
                 save(way);
-                break;
+                return null;
             case "remove_greater_key":
                 removeGreaterKey(lexeme.substring(lexeme.indexOf(" "),lexeme.length()).trim());
-                break;
+                return null;
             case "remove":
                 remove(lexeme.substring(lexeme.indexOf(" "),lexeme.length()).trim());
-                break;
+                return null;
             case "list":
-                list(System.out);
-                break;
+                if (output)
+                    return list();
+                else {
+                    list(System.out);
+                    return null;
+                }
             case "exit":
                 System.exit(0);
             default:

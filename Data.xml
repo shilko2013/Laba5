@@ -1,1 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?><DATA><ANIMAL type="kangaroo"><NAME name="Кенга"></NAME><HOME home="Домик Кенги"></HOME><COORD x="2" y="1" z="2"></COORD><ACTIONS><ACTION act="считала, что Тигре нужно подкрепиться"></ACTION></ACTIONS></ANIMAL><ANIMAL type="tiger"><NAME name="Тигра"></NAME><HOME home="Домик Кенги"></HOME><COORD x="2" y="2" z="2"></COORD><ACTIONS><ACTION act="посмотрел на потолок"></ACTION><ACTION act="закрыл глаза"></ACTION></ACTIONS><ACTIONSFORTONGUE><ACTION act="начал ходить кругами вокруг мордочки"></ACTION></ACTIONSFORTONGUE></ANIMAL><ANIMAL type="tiger"><NAME name="Тигра"></NAME><HOME home="Домик Кенги"></HOME><COORD x="2" y="2" z="3"></COORD><ACTIONS><ACTION act="поселился в домике у Кенги"></ACTION><ACTION act="получал рыбий жир"></ACTION><ACTION act="ел лекарство вместо каши"></ACTION></ACTIONS><ACTIONSFORTONGUE></ACTIONSFORTONGUE></ANIMAL><ANIMAL type="kangaroo"><NAME name="Ру"></NAME><HOME home="Домик Кенги"></HOME><COORD x="2" y="6" z="2"></COORD><ACTIONS><ACTION act="ел кашу"></ACTION><ACTION act="отдавал лекарство Тигре"></ACTION></ACTIONS></ANIMAL><ANIMAL type="rabbit"><NAME name="Кролик"></NAME><HOME home="Домик Кролика"></HOME><COORD x="4" y="4" z="2"></COORD><ACTIONS><ACTION act="почувствовал что все зависит от него"></ACTION><ACTION act="написал письмо"></ACTION><ACTION act="все проверил"></ACTION><ACTION act="все выяснил"></ACTION><ACTION act="все разъяснил"></ACTION><ACTION act="что-то организовал"></ACTION></ACTIONS></ANIMAL></DATA>
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA>
+    <ANIMAL type="kangaroo">
+        <NAME name="Кенга"></NAME>
+        <HOME home="Домик Кенги"></HOME>
+        <WEIGHT weight="40"></WEIGHT>
+        <COORD x="2" y="1" z="2"></COORD>
+        <ACTIONS>
+            <ACTION act="считала, что Тигре нужно подкрепиться"></ACTION>
+        </ACTIONS>
+    </ANIMAL>
+    <ANIMAL type="tiger">
+        <NAME name="Тигра"></NAME>
+        <HOME home="Домик Кенги"></HOME>
+        <WEIGHT weight="50"></WEIGHT>
+        <COORD x="2" y="2" z="2"></COORD>
+        <ACTIONS>
+            <ACTION act="посмотрел на потолок"></ACTION>
+            <ACTION act="закрыл глаза"></ACTION>
+        </ACTIONS>
+        <ACTIONSFORTONGUE>
+            <ACTION act="начал ходить кругами вокруг мордочки"></ACTION>
+        </ACTIONSFORTONGUE>
+    </ANIMAL>
+    <ANIMAL type="tiger">
+        <NAME name="Тигра"></NAME>
+        <HOME home="Домик Кенги"></HOME>
+        <WEIGHT weight="20"></WEIGHT>
+        <COORD x="2" y="2" z="3"></COORD>
+        <ACTIONS>
+            <ACTION act="поселился в домике у Кенги"></ACTION>
+            <ACTION act="получал рыбий жир"></ACTION>
+            <ACTION act="ел лекарство вместо каши"></ACTION>
+        </ACTIONS>
+        <ACTIONSFORTONGUE></ACTIONSFORTONGUE>
+    </ANIMAL>
+    <ANIMAL type="kangaroo">
+        <NAME name="Ру"></NAME>
+        <HOME home="Домик Кенги"></HOME>
+        <WEIGHT weight="310"></WEIGHT>
+        <COORD x="2" y="6" z="2"></COORD>
+        <ACTIONS>
+            <ACTION act="ел кашу"></ACTION>
+            <ACTION act="отдавал лекарство Тигре"></ACTION>
+        </ACTIONS>
+    </ANIMAL>
+    <ANIMAL type="rabbit">
+        <NAME name="Кролик"></NAME>
+        <HOME home="Домик Кролика"></HOME>
+        <WEIGHT weight="540"></WEIGHT>
+        <COORD x="4" y="4" z="2"></COORD>
+        <ACTIONS>
+            <ACTION act="почувствовал что все зависит от него"></ACTION>
+            <ACTION act="написал письмо"></ACTION>
+            <ACTION act="все проверил"></ACTION>
+            <ACTION act="все выяснил"></ACTION>
+            <ACTION act="все разъяснил"></ACTION>
+            <ACTION act="что-то организовал"></ACTION>
+        </ACTIONS>
+    </ANIMAL>
+</DATA>
