@@ -21,10 +21,15 @@ public class Client {
                     if (command.equalsIgnoreCase("exit"))
                         System.exit(0);
                     oos.writeObject(command);
-                    collection = (AnimalCollection) ois.readObject();
-                    if (command.startsWith("list"))
-                        System.out.println((String) ois.readObject());
-                    collection.work();
+                    Object o = ois.readObject();
+                    try {
+                        collection = (AnimalCollection) o;
+                        if (command.startsWith("list"))
+                            System.out.println((String) ois.readObject());
+                        collection.work();
+                    } catch (ClassCastException e) {
+                        System.out.println((String) o);
+                    }
                 }
                 else throw new ConnectException();
             } catch (ConnectException e) {

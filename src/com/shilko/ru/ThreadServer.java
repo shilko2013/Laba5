@@ -24,12 +24,15 @@ public class ThreadServer implements Runnable {
                     out.writeObject(collection);
                     if (output != null)
                         out.writeObject(output);
+                } catch (ClassNotFoundException e) {
+                    out.writeObject("Ошибка передачи файла!!!");
+                } catch (IllegalArgumentException e) {
+                    out.writeObject("Неверный формат команды!");
+                } finally {
                     out.flush();
                     in.close();
                     out.close();
                     client.close();
-                } catch (ClassNotFoundException e) {
-                    System.out.println("Ошибка передачи файла!!!");
                 }
             }
         } catch (IOException e) {

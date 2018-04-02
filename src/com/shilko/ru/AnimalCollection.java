@@ -5,6 +5,8 @@ import java.io.*;
 import java.util.*;
 import com.jayway.jsonpath.*;
 import java.util.concurrent.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Класс, инкапсулирующий в себе управление коллекцией животных.
