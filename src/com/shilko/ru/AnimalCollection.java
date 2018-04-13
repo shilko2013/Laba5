@@ -429,11 +429,11 @@ public class AnimalCollection implements Serializable {
      * @see AnimalCollection#remove(String)
      * @see AnimalCollection#removeGreaterKey(String)
      */
-    public String input(Scanner in, String way, boolean output) {
+    public String input(Scanner in, String way, boolean output) throws IllegalArgumentException {
         String lexeme = in.nextLine();
         return input(lexeme,way,output);
     }
-    public String input(String lexeme, String way, boolean output) {
+    public String input(String lexeme, String way, boolean output) throws IllegalArgumentException {
         switch (lexeme.contains(" ")?lexeme.toLowerCase().substring(0,lexeme.indexOf(" ")):lexeme.toLowerCase()) {
             case "remove_all":
                 removeAll(lexeme.substring(lexeme.indexOf(" "),lexeme.length()).trim());

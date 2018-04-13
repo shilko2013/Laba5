@@ -20,7 +20,10 @@ public class ThreadServer implements Runnable {
             if (!client.isClosed()) {
                 try {
                     String command = (String) in.readObject();
-                    String output = collection.input(command,way,true);
+                    String output;
+                    if (command.equalsIgnoreCase("list"))
+                        output = collection.input(command,way,true);
+                    else throw new IllegalArgumentException();
                     out.writeObject(collection);
                     if (output != null)
                         out.writeObject(output);
