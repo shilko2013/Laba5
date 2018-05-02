@@ -3,11 +3,17 @@ package com.shilko.ru;
 import java.util.*;
 
 public class Rabbit extends Animal{
-    public Rabbit(String name, String home, int x, int y, int z, int weight) {
-        super(name,home,x,y,z,weight);
+    private final static int[] colour = new int[]{105,93,82};
+    @Override public int[] getColour() {
+        return colour;
     }
-    public Rabbit(String name, int x, int y, int z, int weight) {
-        super(name,x,y,z,weight);
+    private final static String colourSynonym = "Серый";
+    @Override public String getColourSynonym() {return colourSynonym;}
+    public Rabbit(String name, String home, int x, int y, int weight) {
+        super(name,home,x,y,weight);
+    }
+    public Rabbit(String name, int x, int y, int weight) {
+        super(name,x,y,weight);
     }
     public void senseOfSelfReliance() {
         if (getActions().size()>0)
@@ -39,7 +45,7 @@ public class Rabbit extends Animal{
                 && getHome().equals(rabbit.getHome())
                 && getIngestion().equals(rabbit.getIngestion())
                 && getActions().equals(rabbit.getActions())
-                && getCoord().equals(rabbit.getCoord());
+                && Arrays.equals(getColour(),rabbit.getColour());
     }
     @Override
     public String work() {

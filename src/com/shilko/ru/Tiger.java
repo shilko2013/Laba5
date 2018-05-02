@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Tiger extends Animal implements Workable, Sayable {
+    private final static int[] colour = new int[]{247,107,0};
+    @Override public int[] getColour() {
+        return colour;
+    }
+    private final static String colourSynonym = "Оранжевый";
+    @Override public String getColourSynonym() {return colourSynonym;}
     private class Tongue implements Workable,Serializable {
         private Queue<String> action;
         {
@@ -66,11 +72,11 @@ public class Tiger extends Animal implements Workable, Sayable {
     {
         tongue = new Tongue();
     }
-    public Tiger(String name, String home, int x, int y, int z, int weight) {
-        super(name,home,x,y,z,weight);
+    public Tiger(String name, String home, int x, int y, int weight) {
+        super(name,home,x,y,weight);
     }
-    public Tiger(String name, int x, int y, int z, int weight) {
-        super(name,x,y,z,weight);
+    public Tiger(String name, int x, int y, int weight) {
+        super(name,x,y,weight);
     }
     @Override
     public void say(String message) {
@@ -122,7 +128,7 @@ public class Tiger extends Animal implements Workable, Sayable {
                 s = "всегда";
         }
         System.out.println("и " + s + " получал рыбий жир на завтрак, обед и ужин.");
-        if (new Kangaroo("Кенга","Домик Кенги",3,3,3,50).think()&&(porrigeIsExist))
+        if (new Kangaroo("Кенга","Домик Кенги",3,3,50).think()&&(porrigeIsExist))
             System.out.println("Также иногда на завтрак он получал ложку-другую каши, которой завтракал Ру.");
     }
     public void closeEyes() {
@@ -172,7 +178,7 @@ public class Tiger extends Animal implements Workable, Sayable {
                 && getIngestion().equals(tiger.getIngestion())
                 && getActions().equals(tiger.getActions())
                 && tongue.equals(tiger.tongue)
-                && getCoord().equals(tiger.getCoord());
+                && Arrays.equals(getColour(),tiger.getColour());
     }
     @Override
     public String work() {

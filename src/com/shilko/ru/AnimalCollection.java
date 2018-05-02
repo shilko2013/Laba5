@@ -4,6 +4,8 @@ import javax.xml.stream.*;
 import java.io.*;
 import java.util.*;
 import com.jayway.jsonpath.*;
+import javafx.util.Pair;
+
 import java.util.concurrent.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -16,6 +18,9 @@ import java.util.stream.Collectors;
 public class AnimalCollection implements Serializable {
     /** Поле коллекция животных */
     private Map<Coord,Animal> collection = new ConcurrentSkipListMap<>();
+    public int size() {
+        return collection.size();
+    }
     /**
      * Метод, предназначенный для загрузки элементов коллеции из файла
      * и записи их в коллекцию {@link AnimalCollection#collection}.
@@ -48,7 +53,6 @@ public class AnimalCollection implements Serializable {
                 xmlr.nextTag();
                 int x = Integer.parseInt(xmlr.getAttributeValue(0));
                 int y = Integer.parseInt(xmlr.getAttributeValue(1));
-                int z = Integer.parseInt(xmlr.getAttributeValue(2));
                 xmlr.nextTag();
                 xmlr.nextTag();
                 List<String> actions = new ArrayList<>();
@@ -70,7 +74,7 @@ public class AnimalCollection implements Serializable {
                 }
                 xmlr.nextTag();
                 xmlr.nextTag();
-                putAnimal(type,name,home,x,y,z,weight,actions,actionsForTongue);
+                putAnimal(type,name,home,x,y,weight,actions,actionsForTongue);
             }
                 /*if(!xmlr.getLocalName().equalsIgnoreCase("ANIMAL"))
                     throw new IllegalArgumentException();*/
@@ -120,7 +124,6 @@ public class AnimalCollection implements Serializable {
                 writer.writeStartElement("COORD");
                 writer.writeAttribute("x",Integer.toString(temp.getCoord().getX()));
                 writer.writeAttribute("y",Integer.toString(temp.getCoord().getY()));
-                writer.writeAttribute("z",Integer.toString(temp.getCoord().getZ()));
                 writer.writeEndElement();
                 writer.writeStartElement("ACTIONS");
                 for (String s: temp.getActions()) {
@@ -191,7 +194,6 @@ public class AnimalCollection implements Serializable {
      * @param home дом животного
      * @param x x координата
      * @param y y координата
-     * @param z z координата
      * @param actions List&lt;String&gt; действий, которое может
      *                совершать животное
      * @param actionsForTongue List&lt;String&gt; действий, которое может
@@ -199,23 +201,23 @@ public class AnimalCollection implements Serializable {
      *                не учавствует в работе метода</b>
      * @return возращает животное, полученное по данным характеристикам
      */
-    private Animal parseAnimal(String type, String name, String home, int x, int y, int z, int weight, List<String> actions, List<String> actionsForTongue) {
+    private Animal parseAnimal(String type, String name, String home, int x, int y, int weight, List<String> actions, List<String> actionsForTongue) {
         switch (type) {
             case "tiger":
-                Tiger tiger = new Tiger(name, home, x, y, z, weight);
+                Tiger tiger = new Tiger(name, home, x, y, weight);
                 tiger.addAction(actions.toArray(new String[0]));
                 tiger.addActionForTongue(actionsForTongue.toArray(new String[0]));
                 return tiger;
             case "rabbit":
-                Rabbit rabbit = new Rabbit(name, home, x, y, z, weight);
+                Rabbit rabbit = new Rabbit(name, home, x, y, weight);
                 rabbit.addAction(actions.toArray(new String[0]));
                 return rabbit;
             case "kangaroo":
-                Kangaroo kangaroo = new Kangaroo(name, home, x, y, z, weight);
+                Kangaroo kangaroo = new Kangaroo(name, home, x, y, weight);
                 kangaroo.addAction(actions.toArray(new String[0]));
                 return kangaroo;
             default:
-                RealAnimal realAnimal = new RealAnimal(name,home,x,y, z, weight);
+                RealAnimal realAnimal = new RealAnimal(name,home,x,y, weight);
                 realAnimal.addAction(actions.toArray(new String[0]));
                 return realAnimal;
         }
@@ -230,7 +232,6 @@ public class AnimalCollection implements Serializable {
      * @param home дом животного
      * @param x x координата
      * @param y y координата
-     * @param z z координата
      * @param actions List&lt;String&gt; действий, которое может
      *                совершать животное
      * @param actionsForTongue List&lt;String&gt; действий, которое может
@@ -238,8 +239,8 @@ public class AnimalCollection implements Serializable {
      *                не учавствует в работе метода</b>
      * @see AnimalCollection#parseAnimal(String, String, String, int, int, int, List, List)
      */
-    private void putAnimal(String type, String name, String home, int x, int y, int z, int weight, List<String> actions, List<String> actionsForTongue) {
-        Animal temp = parseAnimal(type,name,home,x,y,z,weight,actions,actionsForTongue);
+    private void putAnimal(String type, String name, String home, int x, int y, int weight, List<String> actions, List<String> actionsForTongue) {
+        Animal temp = parseAnimal(type,name,home,x,y,weight,actions,actionsForTongue);
         collection.put(temp.getCoord(),temp);
     }
     /**
@@ -256,7 +257,6 @@ public class AnimalCollection implements Serializable {
         int weight = Integer.parseInt(JsonPath.read(in,"$.weight"));
         int x = JsonPath.read(in,"$.coord.x");
         int y = JsonPath.read(in,"$.coord.y");
-        int z = JsonPath.read(in,"$.coord.z");
         List<String> actions = JsonPath.read(in,"$.actions[*]");
         List<String> actionsForTongue = null;
         if (type.equalsIgnoreCase("tiger"))
@@ -278,7 +278,7 @@ public class AnimalCollection implements Serializable {
                 actionsForTongue = actionsForTongue.stream().map(s->s.substring(1,s.length()-1)).collect(Collectors.toList());
             }
 
-            */return parseAnimal(type,name,home,x,y,z,weight,actions,actionsForTongue);/*
+            */return parseAnimal(type,name,home,x,y,weight,actions,actionsForTongue);/*
         }
         catch (Exception ex) {
             ex.printStackTrace();
@@ -293,9 +293,15 @@ public class AnimalCollection implements Serializable {
      * @param in входная строка
      * @see AnimalCollection#parseAnimal(String, String, String, int, int, int, List, List)
      */
-    public void removeAll(String in) {
+    public List<Coord> removeAll(String in) {
         Animal animal = read(in);
+        List<Coord> list = new ArrayList<>();
+        collection.keySet().forEach((e)->{
+            if (collection.get(e).equals(animal))
+                list.add(e);
+        });
         collection.values().removeAll(Arrays.asList(animal));
+        return list;
         /*List<Coord> temp = new ArrayList<>();
         Iterator<Coord> i = collection.keySet().iterator();
         for (;i.hasNext();i.next()) {
@@ -313,11 +319,23 @@ public class AnimalCollection implements Serializable {
      * если животное с такими координатами уже есть
      * @param in входная строка
      */
-    public void insert(String in) {
+    public Object[] insert(String in) {
         Coord coord = Coord.read(in);
         Animal animal = read(in.substring(in.indexOf("{"),in.length()));
-        animal.setCoord(coord.getX(),coord.getY(),coord.getZ());
+        animal.setCoord(coord.getX(),coord.getY());
+        Object[] result = {
+                animal.getClass().toString().substring(animal.getClass().toString().lastIndexOf(".") + 1),
+                animal.getName(),
+                animal.getCoord().getX(),
+                animal.getCoord().getY(),
+                animal.getHome(),
+                animal.getWeight(),
+                animal.getColourSynonym()
+        };
+        if (collection.containsKey(animal.getCoord()))
+            result = null;
         collection.put(animal.getCoord(),animal);
+        return result;
     }
     /**
      * Метод, удаляющий из коллекции {@link AnimalCollection#collection}
@@ -329,9 +347,15 @@ public class AnimalCollection implements Serializable {
      * @param in входная строка
      * @see AnimalCollection#parseAnimal(String, String, String, int, int, int, List, List)
      */
-    public void removeGreaterKey(String in) {
+    public List<Coord> removeGreaterKey(String in) {
         Coord coord = Coord.read(in);
+        List<Coord> list = new ArrayList<>();
+        collection.keySet().forEach((e)->{
+            if (e.compareTo(coord)>0)
+                list.add(e);
+        });
         collection.keySet().removeIf(a->a.compareTo(coord)>0);
+        return list;
         /*List<Coord> temp = new ArrayList<>();
         collection.forEach((k,v)->{
             if (k.compareTo(coord)>0)
@@ -345,8 +369,20 @@ public class AnimalCollection implements Serializable {
      * заданных во входной строке.
      * @param in входная строка
      */
-    public void remove(String in) {
-        collection.remove(Coord.read(in));
+    public Pair<Boolean,Coord> remove(String in) {
+        Coord coord = Coord.read(in);
+        if (!collection.containsKey(coord))
+            return new Pair<>(false,null);
+        else {
+            collection.remove(Coord.read(in));
+            return new Pair<>(true,coord);
+        }
+    }
+    public Animal getAnimal(Coord coord) {
+        return collection.getOrDefault(coord,null);
+    }
+    public void putAnimal(Coord coord, Animal animal) {
+        collection.put(coord,animal);
     }
     public void list(OutputStream out) {
         new PrintStream(out).println(list());
@@ -362,8 +398,7 @@ public class AnimalCollection implements Serializable {
                     v.getHome()+"\",\t\"weight\": \""+
                     v.getWeight()+"\",\t\"coord\": {\t\"x\": "+
                     v.getCoord().getX()+",\t\t\"y\": "+
-                    v.getCoord().getY()+",\t\t\"z\": "+
-                    v.getCoord().getZ()+"\t}";
+                    v.getCoord().getY()+"\t}";
             if (v.getActions().size()>0) {
                 s += ",\t\"actions\": [";
                 for (String string: v.getActions()) {
@@ -466,4 +501,19 @@ public class AnimalCollection implements Serializable {
                 //парсер
         }
     }
+    public Object[][] data(int size) {
+        List<Animal> list = new ArrayList<>(collection.values());
+        Object[][] data = new Object[list.size()][size];
+        for (int i = 0; i < list.size(); ++i) {
+            data[i][0] = list.get(i).getClass().toString().substring(list.get(i).getClass().toString().lastIndexOf(".") + 1);
+            data[i][1] = list.get(i).getName();
+            data[i][2] = list.get(i).getCoord().getX();
+            data[i][3] = list.get(i).getCoord().getY();
+            data[i][4] = list.get(i).getHome();
+            data[i][5] = list.get(i).getWeight();
+            data[i][6] = list.get(i).getColourSynonym();
+        }
+        return data;
+    }
+
 }

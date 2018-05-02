@@ -30,7 +30,7 @@ public class Main {
         System.out.print(a.work());
         System.out.print(b.work());
         System.out.print(c.work());*/
-        AnimalCollection collection = new AnimalCollection();
+        /*AnimalCollection collection = new AnimalCollection();
         Runtime.getRuntime().addShutdownHook(new Thread(()->{collection.save(args[0]);}));
         collection.load(args[0]);
         Scanner in = new Scanner(System.in);
@@ -42,6 +42,6 @@ public class Main {
             catch (Exception e) {
                 System.out.println("Неверный формат команды!!!");
             }
-        }
+        }*/
     }
 }

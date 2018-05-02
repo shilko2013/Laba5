@@ -4,6 +4,12 @@ import java.util.*;
 
 public class Kangaroo extends Animal implements Mindable {
     private boolean decision;
+    private final static int[] colour = new int[]{189,106,17};
+    @Override public int[] getColour() {
+        return colour;
+    }
+    private final static String colourSynonym = "Коричневый";
+    @Override public String getColourSynonym() {return colourSynonym;}
     @Override
     public boolean think() {
         class Mind implements Mindable {
@@ -18,11 +24,11 @@ public class Kangaroo extends Animal implements Mindable {
         }
         return new Mind().think();
     }
-    public Kangaroo(String name, String home, int x, int y, int z, int weight) {
-        super(name,home,x,y,z,weight);
+    public Kangaroo(String name, String home, int x, int y, int weight) {
+        super(name,home,x,y,weight);
     }
-    public Kangaroo(String name, int x, int y, int z,int weight) {
-        super(name,x,y,z,weight);
+    public Kangaroo(String name, int x, int y, int weight) {
+        super(name,x,y,weight);
     }
     @Override
     public boolean equals(Object obj) {
@@ -37,7 +43,7 @@ public class Kangaroo extends Animal implements Mindable {
                 && getHome().equals(kangaroo.getHome())
                 && getIngestion().equals(kangaroo.getIngestion())
                 && getActions().equals(kangaroo.getActions())
-                && getCoord().equals(kangaroo.getCoord());
+                && Arrays.equals(getColour(),kangaroo.getColour());
     }
     @Override
     public int hashCode() {

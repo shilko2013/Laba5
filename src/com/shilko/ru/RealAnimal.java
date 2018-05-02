@@ -3,9 +3,15 @@ package com.shilko.ru;
 import java.util.Objects;
 
 public class RealAnimal extends Animal {
-    public RealAnimal(String name, String home, int x, int y, int z, int weight) { super(name,home,x,y,z,weight); }
-    public RealAnimal(String name, int x, int y, int z, int weight) {
-        super(name,x,y,z,weight);
+    private final static int[] colour = new int[]{0,0,0};
+    @Override public int[] getColour() {
+        return colour;
+    }
+    private final static String colourSynonym = "Черный";
+    @Override public String getColourSynonym() {return colourSynonym;}
+    public RealAnimal(String name, String home, int x, int y, int weight) { super(name,home,x,y,weight); }
+    public RealAnimal(String name, int x, int y, int weight) {
+        super(name,x,y,weight);
     }
     @Override
     public boolean equals(Object obj) {

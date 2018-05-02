@@ -3,7 +3,7 @@ package com.shilko.ru;
 import java.io.*;
 import java.net.*;
 
-public class ThreadServer implements Runnable {
+public class ThreadServer implements Runnable { //передает коллекцию данному клиенту
     private Socket client;
     private AnimalCollection collection;
     private String way;

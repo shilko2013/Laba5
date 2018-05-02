@@ -27,15 +27,15 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
         home = null;
         actions = new LinkedList<>();
     }
-    public Animal (String name, String home, int x, int y, int z, int weight) {
-        this(name,x,y,z,weight);
+    public Animal (String name, String home, int x, int y, int weight) {
+        this(name,x,y,weight);
         this.home = home;
     }
-    public Animal (String name, int x, int y, int z,int weight) {
+    public Animal (String name, int x, int y, int weight) {
         this.name = name;
         this.myID = ID;
         ID++;
-        coord = new Coord(x,y,z);
+        coord = new Coord(x,y);
         this.weight = weight;
     }
     public long getTimeOfCreate() {
@@ -47,7 +47,7 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
     public int getWeight() {return weight;}
     @Override
     public int compareTo(Animal animal) {
-        return Long.compare(getID(),animal.getID());
+        return getName().compareTo(animal.getName());
     }
     @Override
     public void addEat(Ingestion ingest, String ... arg) {
@@ -105,8 +105,8 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
     public Coord getCoord() {
         return  coord;
     }
-    public void setCoord(int x, int y, int z) {
-        coord = new Coord(x,y,z);
+    public void setCoord(int x, int y) {
+        coord = new Coord(x,y);
     }
     @Override
     public boolean equals(Object obj) {
@@ -120,7 +120,7 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
         return name.equals(animal.getName())
                 && home.equals(animal.getHome())
                 && actions.equals(animal.getActions())
-                && coord.equals(animal.getCoord());
+                && Arrays.equals(getColour(),animal.getColour());
     }
     @Override
     public int hashCode() {
@@ -133,4 +133,6 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
                 "Home: " + getHome() + "\n" +
                 "Eat: " + eat();
     }
+    abstract public int[] getColour();
+    abstract public String getColourSynonym();
 }
