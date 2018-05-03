@@ -10,29 +10,12 @@
     </artifacts-to-build>
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java" line="443" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java" line="445" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0feda5ad-c9bb-4a19-905a-5b31bf743e05" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Data.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Animal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Animal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo$1Mind.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo$1Mind.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Rabbit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Rabbit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Tiger$Tongue.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Tiger$Tongue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Tiger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Tiger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Animal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Coord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Coord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Rabbit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Rabbit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/RealAnimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/RealAnimal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/ThreadServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/ThreadServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Tiger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Tiger.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -158,8 +141,8 @@
       <file leaf-file-name="Server.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="406" column="9" lean-forward="true" selection-start-line="406" selection-start-column="9" selection-end-line="406" selection-end-column="9" />
+            <state relative-caret-position="217">
+              <caret line="291" column="30" lean-forward="true" selection-start-line="291" selection-start-column="30" selection-end-line="291" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#ServerGUI#0;class#ServerGUI#0;class#Server#0" />
@@ -169,17 +152,14 @@
                 <element signature="method#exit#0;class#ServerGUI#0;class#Server#0" />
                 <element signature="e#6521#6774#0" expanded="true" />
                 <element signature="e#6773#6774#0" expanded="true" />
-                <element signature="class#8096:9939" />
-                <element signature="method#addRow#0;class#8096:9939" />
-                <element signature="method#removeRow#0;class#8096:10075" />
-                <element signature="class#10205:11452" />
-                <element signature="e#11356#11357#0" expanded="true" />
-                <element signature="e#11437#11438#0" expanded="true" />
-                <element signature="e#12019#12964#0" />
-                <element signature="e#13326#14035#0" />
-                <element signature="e#14769#16466#0" />
-                <element signature="e#16523#17676#0" />
-                <element signature="e#18052#19380#0" />
+                <element signature="e#11632#11633#0" expanded="true" />
+                <element signature="e#11713#11714#0" expanded="true" />
+                <element signature="e#12288#13233#0" />
+                <element signature="e#13391#14659#0" />
+                <element signature="e#14809#16358#0" />
+                <element signature="e#16526#17854#0" />
+                <element signature="e#16966#17502#0" />
+                <element signature="e#18055#19397#0" />
                 <element signature="method#addMenu#0;class#ServerGUI#0;class#Server#0" />
               </folding>
             </state>
@@ -437,7 +417,7 @@
       <workItem from="1523211399779" duration="2001000" />
       <workItem from="1523475807338" duration="6000" />
       <workItem from="1523566805676" duration="562000" />
-      <workItem from="1523622548913" duration="77084000" />
+      <workItem from="1523622548913" duration="78074000" />
     </task>
     <task id="LOCAL-00001" summary="Laba5.Version1 with comments.">
       <created>1517939757786</created>
@@ -565,11 +545,18 @@
       <option name="project" value="LOCAL" />
       <updated>1523625069618</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Laba7.Version1.Сервер с FlowLayout и 1 JPanel.">
+      <created>1525305412439</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1525305412439</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="314955000" />
+    <option name="totallyTimeSpent" value="315945000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
@@ -660,7 +647,8 @@
     <MESSAGE value="Laba6.Version1" />
     <MESSAGE value="Laba6.Version2.Сдано." />
     <MESSAGE value="Laba6.Version3.Команды на стороне сервера." />
-    <option name="LAST_COMMIT_MESSAGE" value="Laba6.Version3.Команды на стороне сервера." />
+    <MESSAGE value="Laba7.Version1.Сервер с FlowLayout и 1 JPanel." />
+    <option name="LAST_COMMIT_MESSAGE" value="Laba7.Version1.Сервер с FlowLayout и 1 JPanel." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1163,8 +1151,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="406" column="9" lean-forward="true" selection-start-line="406" selection-start-column="9" selection-end-line="406" selection-end-column="9" />
+        <state relative-caret-position="217">
+          <caret line="291" column="30" lean-forward="true" selection-start-line="291" selection-start-column="30" selection-end-line="291" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#ServerGUI#0;class#ServerGUI#0;class#Server#0" />
@@ -1174,17 +1162,14 @@
             <element signature="method#exit#0;class#ServerGUI#0;class#Server#0" />
             <element signature="e#6521#6774#0" expanded="true" />
             <element signature="e#6773#6774#0" expanded="true" />
-            <element signature="class#8096:9939" />
-            <element signature="method#addRow#0;class#8096:9939" />
-            <element signature="method#removeRow#0;class#8096:10075" />
-            <element signature="class#10205:11452" />
-            <element signature="e#11356#11357#0" expanded="true" />
-            <element signature="e#11437#11438#0" expanded="true" />
-            <element signature="e#12019#12964#0" />
-            <element signature="e#13326#14035#0" />
-            <element signature="e#14769#16466#0" />
-            <element signature="e#16523#17676#0" />
-            <element signature="e#18052#19380#0" />
+            <element signature="e#11632#11633#0" expanded="true" />
+            <element signature="e#11713#11714#0" expanded="true" />
+            <element signature="e#12288#13233#0" />
+            <element signature="e#13391#14659#0" />
+            <element signature="e#14809#16358#0" />
+            <element signature="e#16526#17854#0" />
+            <element signature="e#16966#17502#0" />
+            <element signature="e#18055#19397#0" />
             <element signature="method#addMenu#0;class#ServerGUI#0;class#Server#0" />
           </folding>
         </state>

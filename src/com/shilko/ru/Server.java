@@ -270,6 +270,7 @@ public class Server {
             this.add(scrollPane1);
             addMenu();
 
+            JPanel panel = new JPanel();
             JButton insert = new JButton("Insert");
             insert.setFont(font2);
             insert.addActionListener((event)-> {
@@ -288,7 +289,7 @@ public class Server {
                         JOptionPane.showMessageDialog(this,"Неверный формат команды!","Ошибка", JOptionPane.ERROR_MESSAGE);
                     }
                 });
-            this.add(insert);
+            panel.add(insert);
 
             JButton remove = new JButton("Remove");
             remove.setFont(font2);
@@ -314,7 +315,7 @@ public class Server {
                     JOptionPane.showMessageDialog(this,"Неверный формат команды!","Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
             });
-            this.add(remove);
+            panel.add(remove);
 
             JButton edit = new JButton("Edit");
             edit.setFont(font2);
@@ -344,7 +345,7 @@ public class Server {
                     JOptionPane.showMessageDialog(this,"Неверный формат команды!","Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
             });
-            this.add(edit);
+            panel.add(edit);
 
             JButton removeAll = new JButton("RemoveAll");
             removeAll.setFont(font2);
@@ -371,7 +372,7 @@ public class Server {
                     JOptionPane.showMessageDialog(this,"Неверный формат команды!","Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
             });
-            this.add(removeAll);
+            panel.add(removeAll);
 
             JButton removeGreaterKey = new JButton("RemoveGreaterKey");
             removeGreaterKey.setFont(font2);
@@ -398,7 +399,8 @@ public class Server {
                     JOptionPane.showMessageDialog(this,"Неверный формат команды!","Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
             });
-            this.add(removeGreaterKey);
+            panel.add(removeGreaterKey);
+            this.add(panel,BorderLayout.PAGE_END);
 
             this.pack();
             this.setMinimumSize(new Dimension(700,580));
