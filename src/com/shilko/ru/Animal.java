@@ -135,4 +135,15 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
     }
     abstract public int[] getColour();
     abstract public String getColourSynonym();
+    public Object[] toRow() {
+        return new Object[] {
+                getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1),
+                getName(),
+                getCoord().getX(),
+                getCoord().getY(),
+                getHome(),
+                getWeight(),
+                getColourSynonym()
+        };
+    }
 }

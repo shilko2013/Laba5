@@ -7,8 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
-import java.util.Arrays;
-import java.util.Vector;
+import java.util.*;
 import java.util.concurrent.*;
 
 public class Server {
@@ -164,7 +163,6 @@ public class Server {
         private void init() {
             this.setFont(font);
             this.setSize(800,800);
-            this.setLocationRelativeTo(null);
             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             this.addWindowListener(new WindowAdapter()
             {
@@ -224,6 +222,7 @@ public class Server {
             Object[][] data = collection.data(columnNames.length);
             MyTable table = new MyTable(data, columnNames);
             JScrollPane scrollPane = new JScrollPane(table);
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
             scrollPane.setPreferredSize(new Dimension(673,200));
             class HintTextField extends JTextArea implements FocusListener {
 
@@ -262,13 +261,54 @@ public class Server {
             }
             HintTextField textArea = new HintTextField("Введите элемент коллекции: ") ;
             textArea.setFont(font2);
-            textArea.setLineWrap(true);
-            textArea.setWrapStyleWord(true);
+            //textArea.setLineWrap(true);
+            //textArea.setWrapStyleWord(true);
             JScrollPane scrollPane1 = new JScrollPane(textArea);
             scrollPane1.setPreferredSize(new Dimension(673, 200));
             this.add(scrollPane);
             this.add(scrollPane1);
-            addMenu();
+
+
+            Font font = new Font("Font", Font.BOLD,15);
+            JMenuBar menuBar = new JMenuBar();
+            JMenu collectionMenu = new JMenu("Collection");
+            collectionMenu.setFont(font);
+            JMenuItem loadItem = new JMenuItem("Load");
+            loadItem.addActionListener((event)->{
+                try {
+                    Map<Coord,Animal> map = collection.load(fileName);
+                    for (int i = table.getRowCount() - 1; i >= 0; --i)
+                        table.removeRow(i);
+                    map.keySet().forEach((e)-> {
+                        table.addRow(0,map.get(e).toRow());
+                    });
+                    scrollPane.revalidate();
+                    JOptionPane.showMessageDialog(this,"Записано!","Save", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this,"Загрузка не удалась!","Ошибка", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+            loadItem.setFont(font);
+            collectionMenu.add(loadItem);
+            JMenuItem saveItem = new JMenuItem("Save");
+            saveItem.addActionListener((event)->{
+                try {
+                    collection.save(fileName);
+                    JOptionPane.showMessageDialog(this,"Сохранено!","Save", JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this,"Запись не удалась!","Ошибка", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+            saveItem.setFont(font);
+            collectionMenu.add(saveItem);
+            collectionMenu.addSeparator();
+            JMenuItem exitItem = new JMenuItem("Exit");
+            exitItem.setFont(font);
+            collectionMenu.add(exitItem);
+            exitItem.addActionListener((event)->exit(this));
+            menuBar.add(collectionMenu);
+            this.setJMenuBar(menuBar);
+
 
             JPanel panel = new JPanel();
             JButton insert = new JButton("Insert");
@@ -400,33 +440,16 @@ public class Server {
                 }
             });
             panel.add(removeGreaterKey);
-            this.add(panel,BorderLayout.PAGE_END);
+            this.add(panel);
 
             this.pack();
             this.setMinimumSize(new Dimension(700,580));
             this.setSize(this.getMinimumSize());
+            this.setLocationRelativeTo(null);
+
+            this.setResizable(false); ///???????
+
             this.setVisible(true);
-        }
-        private void addMenu() {
-            Font font = new Font("Font", Font.BOLD,15);
-            JMenuBar menuBar = new JMenuBar();
-            JMenu collectionMenu = new JMenu("Collection");
-            collectionMenu.setFont(font);
-            JMenuItem loadItem = new JMenuItem("Load");
-            loadItem.addActionListener((event)->collection.load(fileName));
-            loadItem.setFont(font);
-            collectionMenu.add(loadItem);
-            JMenuItem saveItem = new JMenuItem("Save");
-            saveItem.addActionListener((event)->collection.save(fileName));
-            saveItem.setFont(font);
-            collectionMenu.add(saveItem);
-            collectionMenu.addSeparator();
-            JMenuItem exitItem = new JMenuItem("Exit");
-            exitItem.setFont(font);
-            collectionMenu.add(exitItem);
-            exitItem.addActionListener((event)->exit(this));
-            menuBar.add(collectionMenu);
-            this.setJMenuBar(menuBar);
         }
     }
 
@@ -440,8 +463,12 @@ public class Server {
     }*/
     public static void main(String ... args) {
         fileName = args[0];
-        Runtime.getRuntime().addShutdownHook(new Thread(()->{collection.save(fileName);}));
-        collection.load(fileName);
+        try {
+            Runtime.getRuntime().addShutdownHook(new Thread(()->{try {collection.save(fileName);} catch (Exception e) {e.printStackTrace();}}));
+            collection.load(fileName);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Загрузка не удалась!","Ошибка", JOptionPane.ERROR_MESSAGE);
+        }
         javax.swing.SwingUtilities.invokeLater(Server.ServerGUI::new);
         try (ServerSocket server = new ServerSocket(port)) {
             while (!server.isClosed()) {

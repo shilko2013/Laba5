@@ -27,9 +27,9 @@ public class AnimalCollection implements Serializable {
      * Файл должен быть в формате <i>XML</i>.
      * @param fileName путь к файлу
      */
-    public void load(String fileName) {
-        try {
-            XMLStreamReader xmlr = XMLInputFactory.newInstance().createXMLStreamReader(fileName, new BufferedReader(new FileReader(fileName)));
+    public Map<Coord,Animal> load(String fileName) throws Exception {
+
+        XMLStreamReader xmlr = XMLInputFactory.newInstance().createXMLStreamReader(fileName, new BufferedReader(new FileReader(fileName)));
 
             xmlr.nextTag();
             /*if(!xmlr.getLocalName().equalsIgnoreCase("DATA"))
@@ -87,9 +87,7 @@ public class AnimalCollection implements Serializable {
                     System.out.println("   " + xmlr.getText());
                 }*/
                 xmlr.close();
-        } catch (FileNotFoundException | IllegalArgumentException | XMLStreamException ex) {
-            ex.printStackTrace();
-        }
+                return collection;
     }
     /**
      * Метод, вызывающий метод work() у всех элементов коллекции
@@ -103,8 +101,7 @@ public class AnimalCollection implements Serializable {
      * в файл в формате <i>XML</i>..
      * @param fileName путь к файлу
      */
-    public void save(String fileName) {
-        try {
+    public void save(String fileName) throws Exception {
             XMLStreamWriter writer = XMLOutputFactory.newInstance().createXMLStreamWriter(new FileWriter(fileName));
             writer.writeStartDocument("UTF-8","1.0");
             writer.writeStartElement("DATA");
@@ -178,11 +175,6 @@ public class AnimalCollection implements Serializable {
 
                 // Закрываем тэг Book
                 writer.writeEndElement();*/
-
-        }
-        catch (IOException | IllegalArgumentException | XMLStreamException ex) {
-            ex.printStackTrace();
-        }
     }
     /**
      * Метод, создающий и возвращающий животное по заданному
@@ -323,15 +315,7 @@ public class AnimalCollection implements Serializable {
         Coord coord = Coord.read(in);
         Animal animal = read(in.substring(in.indexOf("{"),in.length()));
         animal.setCoord(coord.getX(),coord.getY());
-        Object[] result = {
-                animal.getClass().toString().substring(animal.getClass().toString().lastIndexOf(".") + 1),
-                animal.getName(),
-                animal.getCoord().getX(),
-                animal.getCoord().getY(),
-                animal.getHome(),
-                animal.getWeight(),
-                animal.getColourSynonym()
-        };
+        Object[] result = animal.toRow();
         if (collection.containsKey(animal.getCoord()))
             result = null;
         collection.put(animal.getCoord(),animal);
@@ -477,7 +461,7 @@ public class AnimalCollection implements Serializable {
                 insert(lexeme.substring(lexeme.indexOf(" "),lexeme.length()).trim());
                 return null;
             case "save":
-                save(way);
+                try {save(way); } catch (Exception e) {e.printStackTrace();}
                 return null;
             case "remove_greater_key":
                 removeGreaterKey(lexeme.substring(lexeme.indexOf(" "),lexeme.length()).trim());
@@ -505,13 +489,7 @@ public class AnimalCollection implements Serializable {
         List<Animal> list = new ArrayList<>(collection.values());
         Object[][] data = new Object[list.size()][size];
         for (int i = 0; i < list.size(); ++i) {
-            data[i][0] = list.get(i).getClass().toString().substring(list.get(i).getClass().toString().lastIndexOf(".") + 1);
-            data[i][1] = list.get(i).getName();
-            data[i][2] = list.get(i).getCoord().getX();
-            data[i][3] = list.get(i).getCoord().getY();
-            data[i][4] = list.get(i).getHome();
-            data[i][5] = list.get(i).getWeight();
-            data[i][6] = list.get(i).getColourSynonym();
+            data[i] = list.get(i).toRow();
         }
         return data;
     }
