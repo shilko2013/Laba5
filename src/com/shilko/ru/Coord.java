@@ -60,4 +60,8 @@ public class Coord implements Comparable<Coord>,Serializable {
     public int hashCode() {
         return Objects.hash(getX(), getY());
     }
+    @Override
+    public String toString() {
+        return x + " " + y;
+    }
 }

@@ -27,7 +27,9 @@ public class AnimalCollection implements Serializable {
      * Файл должен быть в формате <i>XML</i>.
      * @param fileName путь к файлу
      */
-    public Map<Coord,Animal> load(String fileName) throws Exception {
+    public void load(String fileName) throws Exception {
+
+        collection.clear();
 
         XMLStreamReader xmlr = XMLInputFactory.newInstance().createXMLStreamReader(fileName, new BufferedReader(new FileReader(fileName)));
 
@@ -87,7 +89,6 @@ public class AnimalCollection implements Serializable {
                     System.out.println("   " + xmlr.getText());
                 }*/
                 xmlr.close();
-                return collection;
     }
     /**
      * Метод, вызывающий метод work() у всех элементов коллекции
@@ -493,5 +494,7 @@ public class AnimalCollection implements Serializable {
         }
         return data;
     }
-
+    public Map<Coord,Animal> getLikeMap() {
+        return collection;
+    }
 }

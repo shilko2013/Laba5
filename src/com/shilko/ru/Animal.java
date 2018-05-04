@@ -131,7 +131,10 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
         return getClass() + "\n" +
                 "Name: " + getName() + "\n" +
                 "Home: " + getHome() + "\n" +
-                "Eat: " + eat();
+                "Eat: " + eat() + "\n" +
+                "Coord: "+ getCoord() + "\n" +
+                "Weight: "+ getWeight()+ "\n"+
+                "Color: "+getColourSynonym() + "\n";
     }
     abstract public int[] getColour();
     abstract public String getColourSynonym();

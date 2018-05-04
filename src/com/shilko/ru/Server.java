@@ -12,11 +12,16 @@ import java.util.concurrent.*;
 
 public class Server {
     private final static int port = 11111;
+    private static volatile boolean isLogin = false;
     private static String password = "password";
     private final static int sizeOfPool = 5;
     private static String fileName;
     private static AnimalCollection collection = new AnimalCollection();
     private static ExecutorService executor = Executors.newFixedThreadPool(sizeOfPool);
+    public static void exit(JFrame frame) { //метод, вызывающий фрейм закрытия, принимает закрывающийся фрейм
+        if (JOptionPane.showConfirmDialog(frame,"Вы действительно хотите выйти?","Закрытие программы",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE)==0)
+            System.exit(0);
+    }
     private static class ServerGUI extends JFrame {
         private Font font = new Font("TimesRoman", Font.BOLD, 20);
         private Font font2 = new Font("Font", Font.PLAIN,15);
@@ -51,6 +56,7 @@ public class Server {
                     login.dispose();
                     frame.setEnabled(true);
                     frame.setVisible(true);
+                    isLogin = true;
                     init();
                 }
                 else JOptionPane.showMessageDialog(login,"Неверно введен пароль!!!","Ошибка!", JOptionPane.ERROR_MESSAGE);
@@ -119,47 +125,6 @@ public class Server {
             login.setVisible(true);
             frame.setEnabled(false);
         }
-        private void exit(JFrame frame) { //метод, вызывающий фрейм закрытия, принимает закрывающийся фрейм
-            if (frame != null)
-                frame.setEnabled(false);
-            JFrame exit = new JFrame("Закрытие программы");
-            exit.setSize(500,200);
-            JLabel label = new JLabel("Вы действительно хотите выйти?");
-            label.setFont(font);
-            JButton okey = new JButton("OK");
-            okey.setFont(font);
-            okey.addActionListener((event)->System.exit(0));
-            JButton cancel = new JButton("Отмена");
-            cancel.addActionListener((event)->{
-                if (frame != null)
-                    frame.setEnabled(true);
-                exit.dispose();
-            });
-            cancel.setFont(font);
-            exit.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            exit.setResizable(false);
-            exit.setLocationRelativeTo(null);
-            exit.addWindowListener(new WindowAdapter()
-            {
-                @Override
-                public void windowClosing(WindowEvent e)
-                {
-                    if (frame != null)
-                        frame.setEnabled(true);
-                }
-            });
-            GroupLayout layout = new GroupLayout(exit.getContentPane());
-            exit.setLayout(new GridBagLayout());
-            GridBagConstraints textFieldConstraints = new GridBagConstraints();
-            exit.add(label, textFieldConstraints);
-            textFieldConstraints.gridy = 1;
-            textFieldConstraints.insets = new Insets(10,-90,0,0);
-            exit.add(okey, textFieldConstraints);
-            textFieldConstraints.insets = new Insets(10,-180,0,0);
-            exit.add(cancel, textFieldConstraints);
-            exit.getRootPane().setDefaultButton(okey);
-            exit.setVisible(true);
-        }
         private void init() {
             this.setFont(font);
             this.setSize(800,800);
@@ -182,20 +147,7 @@ public class Server {
                 @Override public boolean isCellEditable(int a, int b) {return false;}
                 public MyTable(Object[][] data, Object[] columnNames) {
                     super(data,columnNames);
-                    model = new DefaultTableModel(data,columnNames);
-                    //model.setColumnIdentifiers(columnNames);
-                    this.setModel(model);
-                    getColumnModel().getColumn(0).setPreferredWidth(100);
-                    getColumnModel().getColumn(2).setPreferredWidth(100);
-                    getColumnModel().getColumn(3).setPreferredWidth(100);
-                    getColumnModel().getColumn(4).setPreferredWidth(120);
-                    getColumnModel().getColumn(6).setPreferredWidth(100);
-                    setMinimumSize(getSize());
-                    getTableHeader().setFont(font2);
-                    setFont(font2);
-                    setFillsViewportHeight(true);
-                    setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                    /*setRowSorter(new TableRowSorter<>(new DefaultTableModel(data,columnNames) {
+                    model = new DefaultTableModel(data,columnNames) {
                         @Override
                         public Class getColumnClass(int column) {
                             switch (column) {
@@ -208,11 +160,26 @@ public class Server {
 
                             }
                         }
-                    }));*/
+                    };
+                    //model.setColumnIdentifiers(columnNames);
+                    this.setModel(model);
+                    getColumnModel().getColumn(0).setPreferredWidth(100);
+                    getColumnModel().getColumn(2).setPreferredWidth(100);
+                    getColumnModel().getColumn(3).setPreferredWidth(100);
+                    getColumnModel().getColumn(4).setPreferredWidth(120);
+                    getColumnModel().getColumn(6).setPreferredWidth(100);
+                    setMinimumSize(getSize());
+                    getTableHeader().setFont(font2);
+                    setFont(font2);
+                    setFillsViewportHeight(true);
+                    setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                    TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(model);
+                    rowSorter.setRowFilter(null);
+                    //setRowSorter(rowSorter);
                 }
-                public void addRow(int size, Object[] row) {
+                public void addRow(Object[] row) {
                     model.addRow(row);
-                    //model.fireTableRowsInserted(size,size);
+                    model.fireTableRowsInserted(model.getRowCount()-1,model.getRowCount()-1);
                 }
                 public void removeRow(int number) {
                     model.removeRow(number);
@@ -276,14 +243,12 @@ public class Server {
             JMenuItem loadItem = new JMenuItem("Load");
             loadItem.addActionListener((event)->{
                 try {
-                    Map<Coord,Animal> map = collection.load(fileName);
+                    collection.load(fileName);
                     for (int i = table.getRowCount() - 1; i >= 0; --i)
                         table.removeRow(i);
-                    map.keySet().forEach((e)-> {
-                        table.addRow(0,map.get(e).toRow());
-                    });
+                    Arrays.stream(collection.data(7)).forEach(table::addRow);
                     scrollPane.revalidate();
-                    JOptionPane.showMessageDialog(this,"Записано!","Save", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this,"Записано!","Load", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this,"Загрузка не удалась!","Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
@@ -318,7 +283,7 @@ public class Server {
                 try {
                     Object[] row = collection.insert(textArea.getText().trim());
                         if (row != null) {
-                            table.addRow(data.length, row);
+                            table.addRow(row);
                             scrollPane.revalidate();
                             JOptionPane.showMessageDialog(this, "Животное успешно добавлено!", "Insert", JOptionPane.INFORMATION_MESSAGE);
                         } else {
@@ -374,7 +339,7 @@ public class Server {
                                 break;
                             }
                         }
-                            table.addRow(data.length, collection.insert(textArea.getText().trim()));
+                            table.addRow(collection.insert(textArea.getText().trim()));
                             scrollPane.revalidate();
                             JOptionPane.showMessageDialog(this, "Животное успешно отредактировано!", "Edit", JOptionPane.INFORMATION_MESSAGE);
                     }
@@ -447,7 +412,7 @@ public class Server {
             this.setSize(this.getMinimumSize());
             this.setLocationRelativeTo(null);
 
-            this.setResizable(false); ///???????
+            //this.setResizable(false); ///???????
 
             this.setVisible(true);
         }
@@ -470,6 +435,7 @@ public class Server {
             JOptionPane.showMessageDialog(null,"Загрузка не удалась!","Ошибка", JOptionPane.ERROR_MESSAGE);
         }
         javax.swing.SwingUtilities.invokeLater(Server.ServerGUI::new);
+        while (!isLogin);
         try (ServerSocket server = new ServerSocket(port)) {
             while (!server.isClosed()) {
                 /*if (br.ready()) {
@@ -485,7 +451,12 @@ public class Server {
             }
             executor.shutdown();
         } catch (IOException e) {
-            System.out.println("Произошла ошибка!!!");
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Сервер уже открыт!",
+                    "Ошибка",
+                    JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
     }
 }
