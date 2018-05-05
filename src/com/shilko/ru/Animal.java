@@ -36,6 +36,8 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
         this.myID = ID;
         ID++;
         coord = new Coord(x,y);
+        if (weight>1000 || weight < 0)
+            throw new IllegalArgumentException();
         this.weight = weight;
     }
     public long getTimeOfCreate() {

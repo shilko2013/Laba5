@@ -3,7 +3,7 @@ package com.shilko.ru;
 import java.util.*;
 
 public class Rabbit extends Animal{
-    private final static int[] colour = new int[]{105,93,82};
+    private final static int[] colour = new int[]{217,216,218};
     @Override public int[] getColour() {
         return colour;
     }

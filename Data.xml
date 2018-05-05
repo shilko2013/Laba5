@@ -59,7 +59,7 @@
         <NAME name="Кролик"></NAME>
         <HOME home="Домик Кролика"></HOME>
         <WEIGHT weight="54"></WEIGHT>
-        <COORD x="400" y="900"></COORD>
+        <COORD x="400" y="500"></COORD>
         <ACTIONS>
             <ACTION act="почувствовал что все зависит от него"></ACTION>
             <ACTION act="написал письмо"></ACTION>

@@ -1,5 +1,6 @@
 package com.shilko.ru;
 import javafx.util.Pair;
+import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -12,10 +13,11 @@ import java.util.concurrent.*;
 
 public class Server {
     private final static int port = 11111;
-    private static volatile boolean isLogin = false;
     private static String password = "password";
     private final static int sizeOfPool = 5;
     private static String fileName;
+    private final static Object monitor = new Object();
+    private static boolean isLogin = false;
     private static AnimalCollection collection = new AnimalCollection();
     private static ExecutorService executor = Executors.newFixedThreadPool(sizeOfPool);
     public static void exit(JFrame frame) { //метод, вызывающий фрейм закрытия, принимает закрывающийся фрейм
@@ -56,7 +58,10 @@ public class Server {
                     login.dispose();
                     frame.setEnabled(true);
                     frame.setVisible(true);
-                    isLogin = true;
+                    synchronized (monitor) {
+                        isLogin = true;
+                        monitor.notifyAll();
+                    }
                     init();
                 }
                 else JOptionPane.showMessageDialog(login,"Неверно введен пароль!!!","Ошибка!", JOptionPane.ERROR_MESSAGE);
@@ -434,8 +439,17 @@ public class Server {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"Загрузка не удалась!","Ошибка", JOptionPane.ERROR_MESSAGE);
         }
-        javax.swing.SwingUtilities.invokeLater(Server.ServerGUI::new);
-        while (!isLogin);
+        Thread App = new Thread(Server.ServerGUI::new);
+        javax.swing.SwingUtilities.invokeLater(App);
+        synchronized (monitor) {
+            try {
+                while (!isLogin) {
+                    monitor.wait();
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Произошла ошибка!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            }
+        }
         try (ServerSocket server = new ServerSocket(port)) {
             while (!server.isClosed()) {
                 /*if (br.ready()) {

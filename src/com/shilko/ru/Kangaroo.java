@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Kangaroo extends Animal implements Mindable {
     private boolean decision;
-    private final static int[] colour = new int[]{189,106,17};
+    private final static int[] colour = new int[]{148,104,76};
     @Override public int[] getColour() {
         return colour;
     }
