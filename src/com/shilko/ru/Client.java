@@ -76,9 +76,9 @@ public class Client {
                 System.out.println(animal);
                 this.animal = animal;
                 weight = animal.getWeight();
+                setBackground(Color.WHITE);
                 setBounds(animal.getCoord().getX(), animal.getCoord().getY(), Math.round(animal.getWeight() * RATIO), animal.getWeight());
                 setForeground(new Color(animal.getColour()[0], animal.getColour()[1], animal.getColour()[2]));
-                setBackground(Color.WHITE);
                 setBorder(new RoundedBorder(animal.getWeight()));
                 setToolTipText(this.animal.getName());
                 setOpaque(false);
@@ -149,7 +149,6 @@ public class Client {
                 private Graphics2D gr;
                 private int size;
                 private boolean staticDraw;
-                private JFrame frame;
 
                 public boolean isStaticDraw() {
                     return staticDraw;
@@ -159,10 +158,9 @@ public class Client {
                     this.staticDraw = staticDraw;
                 }
 
-                private Canvas(int size, boolean staticDraw, JFrame frame) {
+                private Canvas(int size, boolean staticDraw) {
                     this.size = size;
                     this.staticDraw = staticDraw;
-                    this.frame = frame;
                 }
 
                 public void paintComponent(Graphics g) {
@@ -194,7 +192,7 @@ public class Client {
                     this.removeAll();
                     if (staticDraw)
                         initList();
-                    list.forEach(frame::add);
+                    list.forEach(this::add);
                     // Рисуем оси
                     /*
                     gr.setStroke(new BasicStroke((float) 1));
@@ -203,7 +201,7 @@ public class Client {
                 }
             }
 
-            Canvas canvas = new Canvas(50,true, this);
+            Canvas canvas = new Canvas(50,true);
             canvas.setMinimumSize(new Dimension(500, 500));
             canvas.setPreferredSize(canvas.getMinimumSize());
             //canvas.setBackground(Color.WHITE);
@@ -385,18 +383,17 @@ public class Client {
                                             (animal.getColourSynonym().trim().equalsIgnoreCase(brown.getText().trim()) &&
                                                     brown.isSelected())
                             )
-                            ) {
+                            )
                         animation.add(e);
-                    }
                 }); //проверка
                 if (animation.isEmpty()) {
                     JOptionPane.showMessageDialog(this,"Нет подходящих животных!","Ошибка",JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 animation.forEach((e)-> {
-                    e.setWeight(e.getWeight()+20);
-                    e.reBorder();
-                    e.reBounds();
+                    e.setForeground(Color.BLACK);
+                    JOptionPane.showMessageDialog(this,e.getForeground(),"Ошибка",JOptionPane.ERROR_MESSAGE);
+                    e.repaint();
                 });
                 canvas.repaint();
                 //canvas.setStaticDraw(true);
