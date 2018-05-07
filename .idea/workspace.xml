@@ -13,14 +13,13 @@
     <bookmark url="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java" line="452" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0feda5ad-c9bb-4a19-905a-5b31bf743e05" name="Default" comment="">
+    <list default="true" id="0feda5ad-c9bb-4a19-905a-5b31bf743e05" name="Default" comment="Laba7.Version4. Что-то промежуточное, анимация в процессе.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Data.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Animal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Animal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Rabbit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Rabbit.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Rabbit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Rabbit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Server.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -70,8 +69,8 @@
       <file leaf-file-name="Data.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Data.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="48" column="37" lean-forward="true" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+            <state>
+              <caret column="2352" lean-forward="true" selection-start-column="2352" selection-end-column="2352" />
             </state>
           </provider>
         </entry>
@@ -117,7 +116,7 @@
       <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1446">
+            <state relative-caret-position="136">
               <caret line="445" column="34" lean-forward="true" selection-start-line="445" selection-start-column="34" selection-end-line="445" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -138,35 +137,42 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="384" column="17" lean-forward="true" selection-start-line="384" selection-start-column="17" selection-end-line="384" selection-end-column="17" />
+            <state relative-caret-position="191">
+              <caret line="161" column="73" selection-start-line="161" selection-start-column="73" selection-end-line="161" selection-end-column="73" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#995#996#0" expanded="true" />
-                <element signature="e#1063#1064#0" expanded="true" />
-                <element signature="e#1309#1310#0" expanded="true" />
-                <element signature="e#1368#1369#0" expanded="true" />
-                <element signature="e#1708#1709#0" expanded="true" />
-                <element signature="e#1761#1762#0" expanded="true" />
-                <element signature="e#1814#1815#0" expanded="true" />
-                <element signature="e#1874#1875#0" expanded="true" />
-                <element signature="e#1877#1878#0" expanded="true" />
-                <element signature="e#1922#1923#0" expanded="true" />
-                <element signature="e#4148#4346#0" expanded="true" />
-                <element signature="e#4345#4346#0" expanded="true" />
-                <element signature="e#4722#4723#0" expanded="true" />
-                <element signature="e#4779#4780#0" expanded="true" />
-                <element signature="e#4844#4845#0" expanded="true" />
-                <element signature="e#4912#4913#0" expanded="true" />
-                <element signature="e#8959#8960#0" expanded="true" />
-                <element signature="e#9013#9014#0" expanded="true" />
-                <element signature="e#9068#9069#0" expanded="true" />
-                <element signature="e#9130#9131#0" expanded="true" />
-                <element signature="method#MySlider#0;class#8722:10402" />
-                <element signature="e#10138#10139#0" expanded="true" />
-                <element signature="e#10190#10191#0" expanded="true" />
-                <element signature="e#10335#10336#0" expanded="true" />
-                <element signature="e#10387#10388#0" expanded="true" />
+                <element signature="class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
+                <element signature="class#RoundedBorder#0;class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
+                <element signature="e#1038#1039#0" expanded="true" />
+                <element signature="e#1098#1099#0" expanded="true" />
+                <element signature="e#1334#1335#0" expanded="true" />
+                <element signature="e#1385#1386#0" expanded="true" />
+                <element signature="e#1704#1705#0" expanded="true" />
+                <element signature="e#1749#1750#0" expanded="true" />
+                <element signature="e#1799#1800#0" expanded="true" />
+                <element signature="e#1851#1852#0" expanded="true" />
+                <element signature="e#1893#1894#0" expanded="true" />
+                <element signature="e#1938#1939#0" expanded="true" />
+                <element signature="e#2680#2681#0" expanded="true" />
+                <element signature="e#2783#2784#0" expanded="true" />
+                <element signature="e#2872#2873#0" expanded="true" />
+                <element signature="e#2952#2953#0" expanded="true" />
+                <element signature="method#updateCollection#0;class#ClientGUI#0;class#Client#0" />
+                <element signature="e#4153#4351#0" expanded="true" />
+                <element signature="e#4350#4351#0" expanded="true" />
+                <element signature="e#4766#4767#0" expanded="true" />
+                <element signature="e#4823#4824#0" expanded="true" />
+                <element signature="e#4888#4889#0" expanded="true" />
+                <element signature="e#4956#4957#0" expanded="true" />
+                <element signature="e#8929#8930#0" expanded="true" />
+                <element signature="e#8983#8984#0" expanded="true" />
+                <element signature="e#9039#9040#0" expanded="true" />
+                <element signature="e#9101#9102#0" expanded="true" />
+                <element signature="e#10088#10089#0" expanded="true" />
+                <element signature="e#10140#10141#0" expanded="true" />
+                <element signature="e#10185#10186#0" expanded="true" />
+                <element signature="e#10237#10238#0" expanded="true" />
+                <element signature="e#12843#15609#0" />
                 <element signature="method#getCollection#0;class#Client#0" />
               </folding>
             </state>
@@ -242,9 +248,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-12" />
-    <option name="width" value="981" />
-    <option name="height" value="1092" />
+    <option name="x" value="954" />
+    <option name="width" value="977" />
+    <option name="height" value="1091" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -433,7 +439,7 @@
       <workItem from="1523475807338" duration="6000" />
       <workItem from="1523566805676" duration="562000" />
       <workItem from="1523622548913" duration="83304000" />
-      <workItem from="1525348726497" duration="53968000" />
+      <workItem from="1525348726497" duration="62149000" />
     </task>
     <task id="LOCAL-00001" summary="Laba5.Version1 with comments.">
       <created>1517939757786</created>
@@ -589,11 +595,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525441368036</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Laba7.Version4. Что-то промежуточное, анимация в процессе.">
+      <created>1525536599469</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1525536599469</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="375143000" />
+    <option name="totallyTimeSpent" value="383324000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
@@ -609,14 +622,14 @@
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32643312" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32643312" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18188915" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24980484" />
       <window_info anchor="right" id="Database" order="5" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3280255" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.3280255" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -688,7 +701,8 @@
     <MESSAGE value="Laba7.Version2.Сервер с FlowLayout и JPanel для кнопок, без меню." />
     <MESSAGE value="Laba7.Version3.Сервер с FlowLayout и JPanel для кнопок, c меню." />
     <MESSAGE value="Laba7.Version4. Что-то промежуточное, фильтры в процессе." />
-    <option name="LAST_COMMIT_MESSAGE" value="Laba7.Version4. Что-то промежуточное, фильтры в процессе." />
+    <MESSAGE value="Laba7.Version4. Что-то промежуточное, анимация в процессе." />
+    <option name="LAST_COMMIT_MESSAGE" value="Laba7.Version4. Что-то промежуточное, анимация в процессе." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -701,12 +715,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/shilko/ru/Client.java</url>
-          <line>90</line>
+          <line>98</line>
           <properties />
-          <option name="timeStamp" value="110" />
+          <option name="timeStamp" value="114" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="111" />
+      <option name="time" value="115" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -715,13 +729,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/io/Writer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="49" column="69" selection-start-line="49" selection-start-column="69" selection-end-line="49" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/io/Flushable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
@@ -1089,8 +1096,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Data.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="48" column="37" lean-forward="true" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
+        <state>
+          <caret column="2352" lean-forward="true" selection-start-column="2352" selection-end-column="2352" />
         </state>
       </provider>
     </entry>
@@ -1166,25 +1173,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1446">
-          <caret line="445" column="34" lean-forward="true" selection-start-line="445" selection-start-column="34" selection-end-line="445" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3081#3280#0" expanded="true" />
-            <element signature="e#3279#3280#0" expanded="true" />
-            <element signature="e#7454#7677#0" expanded="true" />
-            <element signature="e#7676#7677#0" expanded="true" />
-            <element signature="class#8386:8470" />
-            <element signature="class#10498:11745" />
-            <element signature="e#11649#11650#0" expanded="true" />
-            <element signature="e#11730#11731#0" expanded="true" />
-            <element signature="e#11883#11912#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/event/ChangeListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="236">
@@ -1214,37 +1202,70 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/border/Border.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="384" column="17" lean-forward="true" selection-start-line="384" selection-start-column="17" selection-end-line="384" selection-end-column="17" />
+        <state relative-caret-position="-124">
+          <caret line="63" column="17" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="445" column="34" lean-forward="true" selection-start-line="445" selection-start-column="34" selection-end-line="445" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#995#996#0" expanded="true" />
-            <element signature="e#1063#1064#0" expanded="true" />
-            <element signature="e#1309#1310#0" expanded="true" />
-            <element signature="e#1368#1369#0" expanded="true" />
-            <element signature="e#1708#1709#0" expanded="true" />
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#1814#1815#0" expanded="true" />
-            <element signature="e#1874#1875#0" expanded="true" />
-            <element signature="e#1877#1878#0" expanded="true" />
-            <element signature="e#1922#1923#0" expanded="true" />
-            <element signature="e#4148#4346#0" expanded="true" />
-            <element signature="e#4345#4346#0" expanded="true" />
-            <element signature="e#4722#4723#0" expanded="true" />
-            <element signature="e#4779#4780#0" expanded="true" />
-            <element signature="e#4844#4845#0" expanded="true" />
-            <element signature="e#4912#4913#0" expanded="true" />
-            <element signature="e#8959#8960#0" expanded="true" />
-            <element signature="e#9013#9014#0" expanded="true" />
-            <element signature="e#9068#9069#0" expanded="true" />
-            <element signature="e#9130#9131#0" expanded="true" />
-            <element signature="method#MySlider#0;class#8722:10402" />
-            <element signature="e#10138#10139#0" expanded="true" />
-            <element signature="e#10190#10191#0" expanded="true" />
-            <element signature="e#10335#10336#0" expanded="true" />
-            <element signature="e#10387#10388#0" expanded="true" />
+            <element signature="e#3081#3280#0" expanded="true" />
+            <element signature="e#3279#3280#0" expanded="true" />
+            <element signature="e#7454#7677#0" expanded="true" />
+            <element signature="e#7676#7677#0" expanded="true" />
+            <element signature="class#8386:8470" />
+            <element signature="class#10498:11745" />
+            <element signature="e#11649#11650#0" expanded="true" />
+            <element signature="e#11730#11731#0" expanded="true" />
+            <element signature="e#11883#11912#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="161" column="73" selection-start-line="161" selection-start-column="73" selection-end-line="161" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
+            <element signature="class#RoundedBorder#0;class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
+            <element signature="e#1038#1039#0" expanded="true" />
+            <element signature="e#1098#1099#0" expanded="true" />
+            <element signature="e#1334#1335#0" expanded="true" />
+            <element signature="e#1385#1386#0" expanded="true" />
+            <element signature="e#1704#1705#0" expanded="true" />
+            <element signature="e#1749#1750#0" expanded="true" />
+            <element signature="e#1799#1800#0" expanded="true" />
+            <element signature="e#1851#1852#0" expanded="true" />
+            <element signature="e#1893#1894#0" expanded="true" />
+            <element signature="e#1938#1939#0" expanded="true" />
+            <element signature="e#2680#2681#0" expanded="true" />
+            <element signature="e#2783#2784#0" expanded="true" />
+            <element signature="e#2872#2873#0" expanded="true" />
+            <element signature="e#2952#2953#0" expanded="true" />
+            <element signature="method#updateCollection#0;class#ClientGUI#0;class#Client#0" />
+            <element signature="e#4153#4351#0" expanded="true" />
+            <element signature="e#4350#4351#0" expanded="true" />
+            <element signature="e#4766#4767#0" expanded="true" />
+            <element signature="e#4823#4824#0" expanded="true" />
+            <element signature="e#4888#4889#0" expanded="true" />
+            <element signature="e#4956#4957#0" expanded="true" />
+            <element signature="e#8929#8930#0" expanded="true" />
+            <element signature="e#8983#8984#0" expanded="true" />
+            <element signature="e#9039#9040#0" expanded="true" />
+            <element signature="e#9101#9102#0" expanded="true" />
+            <element signature="e#10088#10089#0" expanded="true" />
+            <element signature="e#10140#10141#0" expanded="true" />
+            <element signature="e#10185#10186#0" expanded="true" />
+            <element signature="e#10237#10238#0" expanded="true" />
+            <element signature="e#12843#15609#0" />
             <element signature="method#getCollection#0;class#Client#0" />
           </folding>
         </state>

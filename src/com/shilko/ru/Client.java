@@ -85,6 +85,14 @@ public class Client {
                 setEnabled(false);
             }
 
+            private void reBounds() {
+                setBounds(this.getX(), this.getY(), Math.round(weight * RATIO), weight);
+            }
+
+            private void reBorder() {
+                setBorder(new RoundedBorder(weight));
+            }
+
             @Override
             public void paintComponent(Graphics g) {
                 //g.fillOval(this.getX()-this.getWidth()/2,this.getY()-this.getHeight()/2,this.getWidth(),this.getHeight());
@@ -141,6 +149,7 @@ public class Client {
                 private Graphics2D gr;
                 private int size;
                 private boolean staticDraw;
+                private JFrame frame;
 
                 public boolean isStaticDraw() {
                     return staticDraw;
@@ -150,9 +159,10 @@ public class Client {
                     this.staticDraw = staticDraw;
                 }
 
-                private Canvas(int size, boolean staticDraw) {
+                private Canvas(int size, boolean staticDraw, JFrame frame) {
                     this.size = size;
                     this.staticDraw = staticDraw;
+                    this.frame = frame;
                 }
 
                 public void paintComponent(Graphics g) {
@@ -184,7 +194,7 @@ public class Client {
                     this.removeAll();
                     if (staticDraw)
                         initList();
-                    list.forEach(this::add);
+                    list.forEach(frame::add);
                     // Рисуем оси
                     /*
                     gr.setStroke(new BasicStroke((float) 1));
@@ -193,7 +203,7 @@ public class Client {
                 }
             }
 
-            Canvas canvas = new Canvas(50,true);
+            Canvas canvas = new Canvas(50,true, this);
             canvas.setMinimumSize(new Dimension(500, 500));
             canvas.setPreferredSize(canvas.getMinimumSize());
             //canvas.setBackground(Color.WHITE);
@@ -383,7 +393,13 @@ public class Client {
                     JOptionPane.showMessageDialog(this,"Нет подходящих животных!","Ошибка",JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                animation.forEach((e)-> {
+                    e.setWeight(e.getWeight()+20);
+                    e.reBorder();
+                    e.reBounds();
+                });
                 canvas.repaint();
+                //canvas.setStaticDraw(true);
             });
 
             this.add(panel, BorderLayout.SOUTH);
