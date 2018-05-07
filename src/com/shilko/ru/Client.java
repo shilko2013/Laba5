@@ -1,6 +1,9 @@
 package com.shilko.ru;
 
+import javafx.util.Pair;
+
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.event.*;
 import java.awt.*;
@@ -53,6 +56,8 @@ public class Client {
 
                 public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
                     g.fillOval(x, y, Math.round(radius * RATIO), radius);
+                    g.setColor(Color.BLUE);
+                    g.drawOval(x, y, Math.round(radius * RATIO), radius);
                 }
             }
 
@@ -77,16 +82,16 @@ public class Client {
                 this.animal = animal;
                 weight = animal.getWeight();
                 setBackground(Color.WHITE);
-                setBounds(animal.getCoord().getX(), animal.getCoord().getY(), Math.round(animal.getWeight() * RATIO), animal.getWeight());
+                setBounds(animal.getCoord().getX() - Math.round(getWeight() * RATIO / 2), animal.getCoord().getY() - getWeight() / 2, Math.round(getWeight() * RATIO), getWeight());
                 setForeground(new Color(animal.getColour()[0], animal.getColour()[1], animal.getColour()[2]));
-                setBorder(new RoundedBorder(animal.getWeight()));
+                setBorder(new RoundedBorder(getWeight()));
                 setToolTipText(this.animal.getName());
                 setOpaque(false);
                 setEnabled(false);
             }
 
             private void reBounds() {
-                setBounds(this.getX(), this.getY(), Math.round(weight * RATIO), weight);
+                setBounds(animal.getCoord().getX() - Math.round(weight * RATIO / 2), animal.getCoord().getY() - weight / 2, Math.round(weight * RATIO), weight);
             }
 
             private void reBorder() {
@@ -96,7 +101,7 @@ public class Client {
             @Override
             public void paintComponent(Graphics g) {
                 //g.fillOval(this.getX()-this.getWidth()/2,this.getY()-this.getHeight()/2,this.getWidth(),this.getHeight());
-                g.fillOval(this.getX(), this.getY(), Math.round(weight * RATIO), weight);
+                g.fillOval(this.getX() - Math.round(weight * RATIO / 2), this.getY() - weight, Math.round(weight * RATIO), weight);
             }
         }
 
@@ -161,6 +166,7 @@ public class Client {
                 private Canvas(int size, boolean staticDraw) {
                     this.size = size;
                     this.staticDraw = staticDraw;
+                    this.setLayout(null);
                 }
 
                 public void paintComponent(Graphics g) {
@@ -192,6 +198,7 @@ public class Client {
                     this.removeAll();
                     if (staticDraw)
                         initList();
+                    list.sort((a, b) -> a.getWeight() - b.getWeight());
                     list.forEach(this::add);
                     // Рисуем оси
                     /*
@@ -201,7 +208,7 @@ public class Client {
                 }
             }
 
-            Canvas canvas = new Canvas(50,true);
+            Canvas canvas = new Canvas(50, true);
             canvas.setMinimumSize(new Dimension(500, 500));
             canvas.setPreferredSize(canvas.getMinimumSize());
             //canvas.setBackground(Color.WHITE);
@@ -223,10 +230,63 @@ public class Client {
             start.setFont(font);
             panel.add(start);
 
+            class DoubleTimer {
+                private Timer timer1, timer2;
+                private boolean success = false;
+
+                private void set(ActionListener actionListener1, int delay1, ActionListener actionListener2, int delay2) {
+                    timer1 = new Timer(delay1, actionListener1);
+                    timer2 = new Timer(delay2, actionListener2);
+                    success = false;
+                }
+
+                private void setSuccess(boolean success) {
+                    this.success = success;
+                }
+
+                private boolean isSuccess() {
+                    return success;
+                }
+
+                private void start1() {
+                    timer1.start();
+                }
+
+                private void start2() {
+                    timer2.start();
+                }
+
+                private void stop1() {
+                    timer1.stop();
+                }
+
+                private void stop2() {
+                    timer2.stop();
+                }
+
+                private void stop() {
+                    timer1.stop();
+                    timer2.stop();
+                }
+
+                private boolean isRunning() throws NullPointerException {
+                    return timer1.isRunning() || timer2.isRunning();
+                }
+            }
+            DoubleTimer timer = new DoubleTimer();
             JButton stop = new JButton("Stop");
             stop.setFont(font);
             stop.addActionListener((event) -> {
-
+                try {
+                    if (!timer.isRunning())
+                        throw new NullPointerException();
+                    else {
+                        timer.stop();
+                        JOptionPane.showMessageDialog(this, "Анимация остановлена!", "Stop", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } catch (NullPointerException e) {
+                    JOptionPane.showMessageDialog(this, "Анимация не запущена!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }
             });
             panel.add(stop);
 
@@ -349,9 +409,14 @@ public class Client {
             panel.add(colorPanel);
 
             start.addActionListener((event) -> {
-                List<AnimalButton> animation = new ArrayList<>();
+                try {
+                    if (timer.isRunning())
+                        JOptionPane.showMessageDialog(this, "Анимация уже запущена!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                } catch (NullPointerException e) {
+                }
+                List<Pair<AnimalButton, Integer>> animation = new ArrayList<>();
                 canvas.setStaticDraw(false);
-                list.forEach((e)-> {
+                list.forEach((e) -> {
                     Animal animal = e.getAnimal();
                     System.out.println(maxX.getMyValue());
                     if ((animal.getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1).equalsIgnoreCase(((String) types.getSelectedItem()).trim()) ||
@@ -370,7 +435,7 @@ public class Client {
                                                     australia.isSelected()) ||
                                             (animal.getHome().trim().equalsIgnoreCase(other.getText().trim()) &&
                                                     other.isSelected())
-                                    ) &&
+                            ) &&
                             animal.getWeight() > minWeight.getMyValue() &&
                             animal.getWeight() < maxWeight.getMyValue() &&
                             (
@@ -384,19 +449,51 @@ public class Client {
                                                     brown.isSelected())
                             )
                             )
-                        animation.add(e);
+                        animation.add(new Pair<>(e, e.getWeight()));
                 }); //проверка
                 if (animation.isEmpty()) {
-                    JOptionPane.showMessageDialog(this,"Нет подходящих животных!","Ошибка",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Нет подходящих животных!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                animation.forEach((e)-> {
-                    e.setForeground(Color.BLACK);
-                    JOptionPane.showMessageDialog(this,e.getForeground(),"Ошибка",JOptionPane.ERROR_MESSAGE);
-                    e.repaint();
-                });
+                timer.set((event1) -> {
+                            animation.forEach((e) -> {
+                                e.getKey().setWeight(e.getKey().getWeight() +1);
+                                if (e.getKey().getWeight() > e.getValue() * 2) {
+                                    timer.setSuccess(true);
+                                    timer.stop1();
+                                    return;
+                                }
+                                e.getKey().reBounds();
+                                e.getKey().reBorder();
+                                e.getKey().revalidate();
+                                canvas.revalidate();
+                                canvas.repaint();
+                                JOptionPane.showMessageDialog(this, "лол!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                            });
+                        }
+                        , 1, (event2) -> {
+                            animation.forEach((e) -> {
+                                e.getKey().setWeight(e.getKey().getWeight() - e.getValue() / 10);
+                                if (e.getKey().getWeight() < e.getValue()) {
+                                    timer.stop2();
+                                    return;
+                                }
+                                e.getKey().reBounds();
+                                e.getKey().reBorder();
+                                e.getKey().revalidate();
+                                canvas.revalidate();
+                                canvas.repaint();
+                                JOptionPane.showMessageDialog(this, "кек!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                            });
+                        }, 400);
+                timer.start1();
+                while (timer.isRunning() && !timer.isSuccess()) { }
+                if (timer.isSuccess())
+                    timer.start2();
+                animation.forEach(e -> e.getKey().setWeight(e.getValue()));
+                canvas.setStaticDraw(true);
+                canvas.revalidate();
                 canvas.repaint();
-                //canvas.setStaticDraw(true);
             });
 
             this.add(panel, BorderLayout.SOUTH);
