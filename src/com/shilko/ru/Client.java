@@ -62,13 +62,13 @@ public class Client {
             }
 
             private Animal animal;
-            private int weight;
+            private double weight;
 
-            private int getWeight() {
+            private double getWeight() {
                 return weight;
             }
 
-            private void setWeight(int weight) {
+            private void setWeight(double weight) {
                 this.weight = weight;
             }
 
@@ -82,26 +82,26 @@ public class Client {
                 this.animal = animal;
                 weight = animal.getWeight();
                 setBackground(Color.WHITE);
-                setBounds(animal.getCoord().getX() - Math.round(getWeight() * RATIO / 2), animal.getCoord().getY() - getWeight() / 2, Math.round(getWeight() * RATIO), getWeight());
+                setBounds((int)(animal.getCoord().getX() - Math.round(getWeight() * RATIO / 2)), animal.getCoord().getY() - (int)(getWeight() / 2), (int)Math.round(getWeight() * RATIO), (int)(getWeight()));
                 setForeground(new Color(animal.getColour()[0], animal.getColour()[1], animal.getColour()[2]));
-                setBorder(new RoundedBorder(getWeight()));
+                setBorder(new RoundedBorder((int)Math.round(getWeight())));
                 setToolTipText(this.animal.getName());
                 setOpaque(false);
                 setEnabled(false);
             }
 
             private void reBounds() {
-                setBounds(animal.getCoord().getX() - Math.round(weight * RATIO / 2), animal.getCoord().getY() - weight / 2, Math.round(weight * RATIO), weight);
+                setBounds((int)(animal.getCoord().getX() - Math.round(weight * RATIO / 2)), (int)(animal.getCoord().getY() - weight / 2), (int)(Math.round(weight * RATIO)), (int)weight);
             }
 
             private void reBorder() {
-                setBorder(new RoundedBorder(weight));
+                setBorder(new RoundedBorder((int)weight));
             }
 
             @Override
             public void paintComponent(Graphics g) {
                 //g.fillOval(this.getX()-this.getWidth()/2,this.getY()-this.getHeight()/2,this.getWidth(),this.getHeight());
-                g.fillOval(this.getX() - Math.round(weight * RATIO / 2), this.getY() - weight, Math.round(weight * RATIO), weight);
+                g.fillOval((int)(this.getX() - Math.round(weight * RATIO / 2)), (int)(this.getY() - weight), (int)(Math.round(weight * RATIO)), (int)weight);
             }
         }
 
@@ -198,7 +198,7 @@ public class Client {
                     this.removeAll();
                     if (staticDraw)
                         initList();
-                    list.sort((a, b) -> a.getWeight() - b.getWeight());
+                    list.sort((a, b) -> Double.compare(a.getWeight(),b.getWeight()));
                     list.forEach(this::add);
                     // Рисуем оси
                     /*
@@ -217,14 +217,6 @@ public class Client {
             JPanel panel = new JPanel();
             panel.setPreferredSize(new Dimension(900, 230));
             //panel.setLayout(new FlowLayout());
-            JButton update = new JButton("Update");
-            update.setFont(font);
-            update.addActionListener((event) -> {
-                updateCollection();
-                initList();
-                canvas.repaint();
-            });
-            panel.add(update);
 
             JButton start = new JButton("Start");
             start.setFont(font);
@@ -232,20 +224,10 @@ public class Client {
 
             class DoubleTimer {
                 private Timer timer1, timer2;
-                private boolean success = false;
 
                 private void set(ActionListener actionListener1, int delay1, ActionListener actionListener2, int delay2) {
                     timer1 = new Timer(delay1, actionListener1);
                     timer2 = new Timer(delay2, actionListener2);
-                    success = false;
-                }
-
-                private void setSuccess(boolean success) {
-                    this.success = success;
-                }
-
-                private boolean isSuccess() {
-                    return success;
                 }
 
                 private void start1() {
@@ -269,6 +251,10 @@ public class Client {
                     timer2.stop();
                 }
 
+                private void reset() {
+                    timer1 = timer2 = null;
+                }
+
                 private boolean isRunning() throws NullPointerException {
                     return timer1.isRunning() || timer2.isRunning();
                 }
@@ -282,6 +268,9 @@ public class Client {
                         throw new NullPointerException();
                     else {
                         timer.stop();
+                        timer.reset();
+                        canvas.setStaticDraw(true);
+                        canvas.repaint();
                         JOptionPane.showMessageDialog(this, "Анимация остановлена!", "Stop", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } catch (NullPointerException e) {
@@ -289,6 +278,17 @@ public class Client {
                 }
             });
             panel.add(stop);
+
+            JButton update = new JButton("Update");
+            update.setFont(font);
+            update.addActionListener((event) -> {
+                updateCollection();
+                initList();
+                if (!canvas.isStaticDraw())
+                    stop.doClick();
+                canvas.repaint();
+            });
+            panel.add(update);
 
             JLabel type = new JLabel("Выберите тип:");
             type.setFont(font);
@@ -412,6 +412,7 @@ public class Client {
                 try {
                     if (timer.isRunning())
                         JOptionPane.showMessageDialog(this, "Анимация уже запущена!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    return;
                 } catch (NullPointerException e) {
                 }
                 List<Pair<AnimalButton, Integer>> animation = new ArrayList<>();
@@ -449,7 +450,7 @@ public class Client {
                                                     brown.isSelected())
                             )
                             )
-                        animation.add(new Pair<>(e, e.getWeight()));
+                        animation.add(new Pair<>(e, (int)e.getWeight()));
                 }); //проверка
                 if (animation.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Нет подходящих животных!", "Ошибка", JOptionPane.ERROR_MESSAGE);
@@ -457,9 +458,8 @@ public class Client {
                 }
                 timer.set((event1) -> {
                             animation.forEach((e) -> {
-                                e.getKey().setWeight(e.getKey().getWeight() +1);
-                                if (e.getKey().getWeight() > e.getValue() * 2) {
-                                    timer.setSuccess(true);
+                                e.getKey().setWeight(e.getKey().getWeight() + e.getValue() / 20);
+                                if (Double.compare(e.getKey().getWeight(),e.getValue() * 2)>0) {
                                     timer.stop1();
                                     return;
                                 }
@@ -468,14 +468,17 @@ public class Client {
                                 e.getKey().revalidate();
                                 canvas.revalidate();
                                 canvas.repaint();
-                                JOptionPane.showMessageDialog(this, "лол!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                             });
                         }
-                        , 1, (event2) -> {
+                        , 100, (event2) -> {
                             animation.forEach((e) -> {
-                                e.getKey().setWeight(e.getKey().getWeight() - e.getValue() / 10);
-                                if (e.getKey().getWeight() < e.getValue()) {
-                                    timer.stop2();
+                                e.getKey().setWeight(e.getKey().getWeight() - e.getValue() / 20);
+                                if (Double.compare(e.getKey().getWeight(),e.getValue())<0) {
+                                    animation.forEach(l -> l.getKey().setWeight(l.getValue()));
+                                    canvas.setStaticDraw(true);
+                                    if (timer.isRunning())
+                                        timer.stop2();
+                                    timer.reset();
                                     return;
                                 }
                                 e.getKey().reBounds();
@@ -483,17 +486,10 @@ public class Client {
                                 e.getKey().revalidate();
                                 canvas.revalidate();
                                 canvas.repaint();
-                                JOptionPane.showMessageDialog(this, "кек!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                             });
-                        }, 400);
+                        }, 200);
                 timer.start1();
-                while (timer.isRunning() && !timer.isSuccess()) { }
-                if (timer.isSuccess())
-                    timer.start2();
-                animation.forEach(e -> e.getKey().setWeight(e.getValue()));
-                canvas.setStaticDraw(true);
-                canvas.revalidate();
-                canvas.repaint();
+                timer.start2();
             });
 
             this.add(panel, BorderLayout.SOUTH);
