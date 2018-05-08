@@ -454,6 +454,7 @@ public class Client {
                 }); //проверка
                 if (animation.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Нет подходящих животных!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    canvas.setStaticDraw(true);
                     return;
                 }
                 timer.set((event1) -> {

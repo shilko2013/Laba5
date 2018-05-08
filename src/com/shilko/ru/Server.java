@@ -432,7 +432,7 @@ public class Server {
         jfrm.setVisible(true);
     }*/
     public static void main(String ... args) {
-        fileName = args[0];
+        fileName = "Data.xml";
         try {
             Runtime.getRuntime().addShutdownHook(new Thread(()->{try {collection.save(fileName);} catch (Exception e) {e.printStackTrace();}}));
             collection.load(fileName);
