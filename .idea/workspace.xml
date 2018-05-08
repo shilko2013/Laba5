@@ -15,7 +15,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0feda5ad-c9bb-4a19-905a-5b31bf743e05" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Client.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -112,8 +111,8 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="480" column="54" lean-forward="true" selection-start-line="480" selection-start-column="54" selection-end-line="480" selection-end-column="54" />
+            <state relative-caret-position="321">
+              <caret line="200" column="85" selection-start-line="200" selection-start-column="85" selection-end-line="200" selection-end-column="85" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1038#1039#0" expanded="true" />
@@ -128,17 +127,12 @@
                 <element signature="e#1938#1939#0" expanded="true" />
                 <element signature="e#2872#2873#0" expanded="true" />
                 <element signature="e#2952#2953#0" expanded="true" />
-                <element signature="method#updateCollection#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="e#4721#4919#0" expanded="true" />
                 <element signature="e#4918#4919#0" expanded="true" />
                 <element signature="e#4766#4767#0" expanded="true" />
                 <element signature="e#4823#4824#0" expanded="true" />
                 <element signature="e#4888#4889#0" expanded="true" />
                 <element signature="e#4956#4957#0" expanded="true" />
-                <element signature="e#8833#8834#0" expanded="true" />
-                <element signature="e#8890#8891#0" expanded="true" />
-                <element signature="e#8973#8974#0" expanded="true" />
-                <element signature="e#9027#9028#0" expanded="true" />
                 <element signature="e#8752#8753#0" expanded="true" />
                 <element signature="e#8806#8807#0" expanded="true" />
                 <element signature="e#9022#9023#0" expanded="true" />
@@ -147,14 +141,16 @@
                 <element signature="e#9009#9010#0" expanded="true" />
                 <element signature="e#9065#9066#0" expanded="true" />
                 <element signature="e#9118#9119#0" expanded="true" />
-                <element signature="e#8929#8930#0" expanded="true" />
-                <element signature="e#8983#8984#0" expanded="true" />
-                <element signature="e#9039#9040#0" expanded="true" />
-                <element signature="e#9101#9102#0" expanded="true" />
-                <element signature="e#10088#10089#0" expanded="true" />
-                <element signature="e#10140#10141#0" expanded="true" />
-                <element signature="e#10185#10186#0" expanded="true" />
-                <element signature="e#10237#10238#0" expanded="true" />
+                <element signature="e#9269#9270#0" expanded="true" />
+                <element signature="e#9329#9330#0" expanded="true" />
+                <element signature="e#11551#11552#0" expanded="true" />
+                <element signature="e#11605#11606#0" expanded="true" />
+                <element signature="e#11661#11662#0" expanded="true" />
+                <element signature="e#11723#11724#0" expanded="true" />
+                <element signature="e#12710#12711#0" expanded="true" />
+                <element signature="e#12762#12763#0" expanded="true" />
+                <element signature="e#12807#12808#0" expanded="true" />
+                <element signature="e#12859#12860#0" expanded="true" />
                 <element signature="method#getCollection#0;class#Client#0" />
               </folding>
             </state>
@@ -192,7 +188,6 @@
       <find>SaveLoad</find>
       <find>Jpanel</find>
       <find>if</find>
-      <find>stop</find>
       <find>moni</find>
       <find>monitor</find>
       <find>thre</find>
@@ -200,6 +195,11 @@
       <find>doublet</find>
       <find>DOUBLETH</find>
       <find>timer</find>
+      <find>stop</find>
+      <find>animatio</find>
+      <find>animation</find>
+      <find>update</find>
+      <find>init</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -430,7 +430,7 @@
       <workItem from="1523475807338" duration="6000" />
       <workItem from="1523566805676" duration="562000" />
       <workItem from="1523622548913" duration="83304000" />
-      <workItem from="1525348726497" duration="80287000" />
+      <workItem from="1525348726497" duration="86537000" />
     </task>
     <task id="LOCAL-00001" summary="Laba5.Version1 with comments.">
       <created>1517939757786</created>
@@ -607,11 +607,25 @@
       <option name="project" value="LOCAL" />
       <updated>1525695460051</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Laba7.Version4. Что-то промежуточное, анимация в процессе4.">
+      <created>1525733422958</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1525733422958</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Laba7.Version4. Почти готовое, анимация в процессе5.">
+      <created>1525738988730</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1525738988730</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="401462000" />
+    <option name="totallyTimeSpent" value="407712000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
@@ -627,7 +641,7 @@
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32643312" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32643312" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -640,7 +654,7 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39808917" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39808917" />
       <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.3296875" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -709,7 +723,9 @@
     <MESSAGE value="Laba7.Version4. Что-то промежуточное, анимация в процессе." />
     <MESSAGE value="Laba7.Version4. Что-то промежуточное, анимация в процессе2." />
     <MESSAGE value="Laba7.Version4. Что-то промежуточное, анимация в процессе3." />
-    <option name="LAST_COMMIT_MESSAGE" value="Laba7.Version4. Что-то промежуточное, анимация в процессе3." />
+    <MESSAGE value="Laba7.Version4. Что-то промежуточное, анимация в процессе4." />
+    <MESSAGE value="Laba7.Version4. Почти готовое, анимация в процессе5." />
+    <option name="LAST_COMMIT_MESSAGE" value="Laba7.Version4. Почти готовое, анимация в процессе5." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -722,12 +738,30 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/shilko/ru/Client.java</url>
-          <line>460</line>
+          <line>266</line>
           <properties />
-          <option name="timeStamp" value="127" />
+          <option name="timeStamp" value="131" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/shilko/ru/Client.java</url>
+          <line>410</line>
+          <properties />
+          <option name="timeStamp" value="134" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/shilko/ru/Client.java</url>
+          <line>412</line>
+          <properties />
+          <option name="timeStamp" value="136" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/shilko/ru/Client.java</url>
+          <line>415</line>
+          <properties />
+          <option name="timeStamp" value="137" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="128" />
+      <option name="time" value="138" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1258,8 +1292,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="480" column="54" lean-forward="true" selection-start-line="480" selection-start-column="54" selection-end-line="480" selection-end-column="54" />
+        <state relative-caret-position="321">
+          <caret line="200" column="85" selection-start-line="200" selection-start-column="85" selection-end-line="200" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1038#1039#0" expanded="true" />
@@ -1274,17 +1308,12 @@
             <element signature="e#1938#1939#0" expanded="true" />
             <element signature="e#2872#2873#0" expanded="true" />
             <element signature="e#2952#2953#0" expanded="true" />
-            <element signature="method#updateCollection#0;class#ClientGUI#0;class#Client#0" />
             <element signature="e#4721#4919#0" expanded="true" />
             <element signature="e#4918#4919#0" expanded="true" />
             <element signature="e#4766#4767#0" expanded="true" />
             <element signature="e#4823#4824#0" expanded="true" />
             <element signature="e#4888#4889#0" expanded="true" />
             <element signature="e#4956#4957#0" expanded="true" />
-            <element signature="e#8833#8834#0" expanded="true" />
-            <element signature="e#8890#8891#0" expanded="true" />
-            <element signature="e#8973#8974#0" expanded="true" />
-            <element signature="e#9027#9028#0" expanded="true" />
             <element signature="e#8752#8753#0" expanded="true" />
             <element signature="e#8806#8807#0" expanded="true" />
             <element signature="e#9022#9023#0" expanded="true" />
@@ -1293,14 +1322,16 @@
             <element signature="e#9009#9010#0" expanded="true" />
             <element signature="e#9065#9066#0" expanded="true" />
             <element signature="e#9118#9119#0" expanded="true" />
-            <element signature="e#8929#8930#0" expanded="true" />
-            <element signature="e#8983#8984#0" expanded="true" />
-            <element signature="e#9039#9040#0" expanded="true" />
-            <element signature="e#9101#9102#0" expanded="true" />
-            <element signature="e#10088#10089#0" expanded="true" />
-            <element signature="e#10140#10141#0" expanded="true" />
-            <element signature="e#10185#10186#0" expanded="true" />
-            <element signature="e#10237#10238#0" expanded="true" />
+            <element signature="e#9269#9270#0" expanded="true" />
+            <element signature="e#9329#9330#0" expanded="true" />
+            <element signature="e#11551#11552#0" expanded="true" />
+            <element signature="e#11605#11606#0" expanded="true" />
+            <element signature="e#11661#11662#0" expanded="true" />
+            <element signature="e#11723#11724#0" expanded="true" />
+            <element signature="e#12710#12711#0" expanded="true" />
+            <element signature="e#12762#12763#0" expanded="true" />
+            <element signature="e#12807#12808#0" expanded="true" />
+            <element signature="e#12859#12860#0" expanded="true" />
             <element signature="method#getCollection#0;class#Client#0" />
           </folding>
         </state>
