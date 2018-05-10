@@ -10,14 +10,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.net.*;
 import java.nio.channels.*;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class Client {
     private final static int port = 11111;
@@ -36,6 +34,48 @@ public class Client {
         private static Font font = new Font("Font", Font.PLAIN, 15);
         private final static float RATIO = 1.5f;
         Map<Coord, Animal> collection;
+
+        class MySlider extends JSlider {
+            private JPanel panel;
+            private JLabel label;
+            private int myValue = 0;
+
+            private int getMyValue() {
+                return myValue;
+            }
+
+            private void setMyValue(int myValue) {
+                this.myValue = myValue;
+            }
+
+            private MySlider(String text, int min, int max, int value, int bigStep, int smallStep) {
+                super(JSlider.HORIZONTAL, min, max, value);
+                panel = new JPanel();
+                label = new JLabel(text);
+                label.setFont(new Font("Font", Font.PLAIN, 15));
+                panel.add(label);
+                this.setMajorTickSpacing(bigStep);
+                this.setMinorTickSpacing(smallStep);
+                this.setPaintTicks(true);
+                this.setPaintLabels(true);
+                panel.add(this);
+                this.addChangeListener(new ChangeListener() {
+                    @Override
+                    public void stateChanged(ChangeEvent e) {
+                        JSlider source = (JSlider) e.getSource();
+                        setMyValue(source.getValue());
+                    }
+                });
+            }
+
+            private JPanel getPanel() {
+                return panel;
+            }
+
+            private JLabel getLabel() {
+                return label;
+            }
+        }
 
         class AnimalButton extends JButton {
             class RoundedBorder implements Border {
@@ -85,27 +125,85 @@ public class Client {
                 this.animal = animal;
                 weight = animal.getWeight();
                 setBackground(Color.WHITE);
-                setBounds((int)(animal.getCoord().getX() - Math.round(getWeight() * RATIO / 2)), animal.getCoord().getY() - (int)(getWeight() / 2), (int)Math.round(getWeight() * RATIO), (int)(getWeight()));
+                setBounds((int) (animal.getCoord().getX() - Math.round(getWeight() * RATIO / 2)), animal.getCoord().getY() - (int) (getWeight() / 2), (int) Math.round(getWeight() * RATIO), (int) (getWeight()));
                 setForeground(new Color(animal.getColour()[0], animal.getColour()[1], animal.getColour()[2]));
-                setBorder(new RoundedBorder((int)Math.round(getWeight())));
+                setBorder(new RoundedBorder((int) Math.round(getWeight())));
                 setToolTipText(this.animal.getName());
                 setOpaque(false);
                 setEnabled(false);
             }
 
             private void reBounds() {
-                setBounds((int)(animal.getCoord().getX() - Math.round(weight * RATIO / 2)), (int)(animal.getCoord().getY() - weight / 2), (int)(Math.round(weight * RATIO)), (int)weight);
+                setBounds((int) (animal.getCoord().getX() - Math.round(weight * RATIO / 2)), (int) (animal.getCoord().getY() - weight / 2), (int) (Math.round(weight * RATIO)), (int) weight);
             }
 
             private void reBorder() {
-                setBorder(new RoundedBorder((int)weight));
+                setBorder(new RoundedBorder((int) weight));
             }
 
             @Override
             public void paintComponent(Graphics g) {
                 //g.fillOval(this.getX()-this.getWidth()/2,this.getY()-this.getHeight()/2,this.getWidth(),this.getHeight());
-                g.fillOval((int)(this.getX() - Math.round(weight * RATIO / 2)), (int)(this.getY() - weight), (int)(Math.round(weight * RATIO)), (int)weight);
+                g.fillOval((int) (this.getX() - Math.round(weight * RATIO / 2)), (int) (this.getY() - weight), (int) (Math.round(weight * RATIO)), (int) weight);
             }
+        }
+
+        class DoubleRunNTimes implements Runnable {
+            private Runnable runnable1;
+            private Runnable runnable2;
+            private int n1;
+            private int n2;
+
+            private DoubleRunNTimes(Runnable runnable1, Runnable runnable2, int n1, int n2) {
+                this.runnable1 = runnable1;
+                this.runnable2 = runnable2;
+                this.n1 = n1;
+                this.n2 = n2;
+            }
+
+            @Override
+            public void run() {
+                if (n1 > 0) {
+                    runnable1.run();
+                    n1--;
+                } else if (n2 > 0) {
+                    runnable2.run();
+                    n2--;
+                } else n1 = 5 / 0;
+            }
+        }
+
+        class MyExecutor {
+            private ScheduledExecutorService executor;
+            private Map<Animal, ScheduledFuture<?>> tasks;
+
+            private MyExecutor() {
+                init(50);
+            }
+
+            private void init(int sizeOfPool) {
+                executor = Executors.newScheduledThreadPool(sizeOfPool);
+                tasks = new HashMap<>();
+            }
+
+            private void addTask(Animal animal, Runnable runnable1, Runnable runnable2, int delay, int n1, int n2) {
+                if (!tasks.containsKey(animal) || (tasks.containsKey(animal) && tasks.get(animal).isDone())) {
+                    tasks.put(animal, executor.scheduleWithFixedDelay(new DoubleRunNTimes(runnable1, runnable2, n1, n2), 0, delay, TimeUnit.MILLISECONDS));
+                }
+            }
+
+            private boolean isWorked() {
+                return tasks.values().stream().anyMatch(e -> !e.isDone() && !e.isCancelled());
+            }
+
+            private void shotdown() {
+                executor.shutdownNow();
+                //backup();
+            }
+
+            /*private void backup() {
+                tasks.keySet().forEach(e -> e.setWeight(tasks.get(e).getValue()));
+            }*/
         }
 
         List<AnimalButton> list = new ArrayList<>();
@@ -138,15 +236,14 @@ public class Client {
         }
 
         private void init() {
-            ExecutorService executor = Executors.newCachedThreadPool();
-            List<Future<Void>> tasks = new ArrayList<>();
+            MyExecutor executor = new MyExecutor();
             this.setFont(font);
             this.setSize(800, 800);
             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             this.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
-                    if (JOptionPane.showConfirmDialog(e.getComponent(),"Вы действительно хотите выйти?","Закрытие программы",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE)==0) {
+                    if (JOptionPane.showConfirmDialog(e.getComponent(), "Вы действительно хотите выйти?", "Закрытие программы", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
                         System.exit(0);
                     }
                 }
@@ -162,11 +259,11 @@ public class Client {
                 private int size;
                 private boolean staticDraw;
 
-                public boolean isStaticDraw() {
+                private boolean isStaticDraw() {
                     return staticDraw;
                 }
 
-                public void setStaticDraw(boolean staticDraw) {
+                private void setStaticDraw(boolean staticDraw) {
                     this.staticDraw = staticDraw;
                 }
 
@@ -205,7 +302,7 @@ public class Client {
                     this.removeAll();
                     if (staticDraw)
                         initList();
-                    list.sort((a, b) -> Double.compare(a.getWeight(),b.getWeight()));
+                    list.sort((a, b) -> Double.compare(a.getWeight(), b.getWeight()));
                     list.forEach(this::add);
                     // Рисуем оси
                     /*
@@ -229,60 +326,19 @@ public class Client {
             start.setFont(font);
             panel.add(start);
 
-            class DoubleTimer {
-                private Timer timer1, timer2;
-
-                private void set(ActionListener actionListener1, int delay1, ActionListener actionListener2, int delay2) {
-                    timer1 = new Timer(delay1, actionListener1);
-                    timer2 = new Timer(delay2, actionListener2);
-                }
-
-                private void start1() {
-                    timer1.start();
-                }
-
-                private void start2() {
-                    timer2.start();
-                }
-
-                private void stop1() {
-                    timer1.stop();
-                }
-
-                private void stop2() {
-                    timer2.stop();
-                }
-
-                private void stop() {
-                    timer1.stop();
-                    timer2.stop();
-                }
-
-                private void reset() {
-                    timer1 = timer2 = null;
-                }
-
-                private boolean isRunning() throws NullPointerException {
-                    return timer1.isRunning() || timer2.isRunning();
-                }
-            }
-            DoubleTimer timer = new DoubleTimer();
             JButton stop = new JButton("Stop");
             stop.setFont(font);
             stop.addActionListener((event) -> {
-                try {
-                    if (!timer.isRunning())
-                        throw new NullPointerException();
-                    else {
-                        timer.stop();
-                        timer.reset();
-                        canvas.setStaticDraw(true);
-                        canvas.repaint();
-                        JOptionPane.showMessageDialog(this, "Анимация остановлена!", "Stop", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                } catch (NullPointerException e) {
+                if (executor.isWorked()) {
+                    executor.shotdown();
+                    executor.init(50);
+                    canvas.repaint();
+                    JOptionPane.showMessageDialog(this, "Анимация остановлена!", "Stop", JOptionPane.INFORMATION_MESSAGE);
+                } else {
                     JOptionPane.showMessageDialog(this, "Анимация не запущена!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
+                canvas.setStaticDraw(true);
+                canvas.repaint();
             });
             panel.add(stop);
 
@@ -317,48 +373,6 @@ public class Client {
             namePanel.add(nameLabel);
             namePanel.add(nameField);
             panel.add(namePanel);
-
-            class MySlider extends JSlider {
-                private JPanel panel;
-                private JLabel label;
-                private int myValue = 0;
-
-                private int getMyValue() {
-                    return myValue;
-                }
-
-                private void setMyValue(int myValue) {
-                    this.myValue = myValue;
-                }
-
-                private MySlider(String text, int min, int max, int value, int bigStep, int smallStep) {
-                    super(JSlider.HORIZONTAL, min, max, value);
-                    panel = new JPanel();
-                    label = new JLabel(text);
-                    label.setFont(font);
-                    panel.add(label);
-                    this.setMajorTickSpacing(bigStep);
-                    this.setMinorTickSpacing(smallStep);
-                    this.setPaintTicks(true);
-                    this.setPaintLabels(true);
-                    panel.add(this);
-                    this.addChangeListener(new ChangeListener() {
-                        @Override
-                        public void stateChanged(ChangeEvent e) {
-                            JSlider source = (JSlider) e.getSource();
-                            setMyValue(source.getValue());
-                        }
-                    });
-                }
-
-                private JPanel getPanel() {
-                    return panel;
-                }
-
-                private JLabel getLabel() {
-                    return label;
-                }
-            }
 
             JPanel minPanel = new JPanel();
             JPanel maxPanel = new JPanel();
@@ -416,61 +430,20 @@ public class Client {
             panel.add(colorPanel);
 
             start.addActionListener((event) -> {
-                try {
-                    if (timer.isRunning())
-                        JOptionPane.showMessageDialog(this, "Анимация уже запущена!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                if (executor.isWorked()) {
+                    JOptionPane.showMessageDialog(this, "Анимация уже запущена!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                     return;
-                } catch (NullPointerException e) {
                 }
-                List<Pair<AnimalButton, Integer>> animation = new ArrayList<>();
                 canvas.setStaticDraw(false);
-                list.forEach((e) -> {
-                    Animal animal = e.getAnimal();
-                    System.out.println(maxX.getMyValue());
-                    if ((animal.getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1).equalsIgnoreCase(((String) types.getSelectedItem()).trim()) ||
-                            ((String) types.getSelectedItem()).trim().equalsIgnoreCase("Любой")) &&
-                            (animal.getName().trim().equalsIgnoreCase(nameField.getText().trim()) || nameField.getText().trim().equals("")) &&
-                            animal.getCoord().getX() > minX.getMyValue() &&
-                            animal.getCoord().getX() < maxX.getMyValue() &&
-                            animal.getCoord().getY() > minY.getMyValue() &&
-                            animal.getCoord().getY() < maxY.getMyValue() &&
-                            (
-                                    (animal.getHome().trim().equalsIgnoreCase(homeOfKenga.getText().trim()) &&
-                                            homeOfKenga.isSelected()) ||
-                                            (animal.getHome().trim().equalsIgnoreCase(homeOfRabbit.getText().trim()) &&
-                                                    homeOfRabbit.isSelected()) ||
-                                            (animal.getHome().trim().equalsIgnoreCase(australia.getText().trim()) &&
-                                                    australia.isSelected()) ||
-                                            (animal.getHome().trim().equalsIgnoreCase(other.getText().trim()) &&
-                                                    other.isSelected())
-                            ) &&
-                            animal.getWeight() > minWeight.getMyValue() &&
-                            animal.getWeight() < maxWeight.getMyValue() &&
-                            (
-                                    (animal.getColourSynonym().trim().equalsIgnoreCase(orange.getText().trim()) &&
-                                            orange.isSelected()) ||
-                                            (animal.getColourSynonym().trim().equalsIgnoreCase(grey.getText().trim()) &&
-                                                    grey.isSelected()) ||
-                                            (animal.getColourSynonym().trim().equalsIgnoreCase(black.getText().trim()) &&
-                                                    black.isSelected()) ||
-                                            (animal.getColourSynonym().trim().equalsIgnoreCase(brown.getText().trim()) &&
-                                                    brown.isSelected())
-                            )
-                            )
-                        animation.add(new Pair<>(e, (int)e.getWeight()));
-                }); //проверка
-                if (animation.isEmpty()) {
+                if (!check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown, true)) {
                     JOptionPane.showMessageDialog(this, "Нет подходящих животных!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                     canvas.setStaticDraw(true);
-                    return;
                 }
-                timer.set((event1) -> {
+                /*timer.set((event1) -> {
                             animation.forEach((e) -> {
                                 e.getKey().setWeight(e.getKey().getWeight() + e.getValue() / 20);
-                                if (Double.compare(e.getKey().getWeight(),e.getValue() * 2)>0) {
-                                    timer.stop1();
-                                    return;
-                                }
                                 e.getKey().reBounds();
                                 e.getKey().reBorder();
                                 e.getKey().revalidate();
@@ -481,7 +454,7 @@ public class Client {
                         , 100, (event2) -> {
                             animation.forEach((e) -> {
                                 e.getKey().setWeight(e.getKey().getWeight() - e.getValue() / 20);
-                                if (Double.compare(e.getKey().getWeight(),e.getValue())<0) {
+                                if (Double.compare(e.getKey().getWeight(), e.getValue()) < 0) {
                                     animation.forEach(l -> l.getKey().setWeight(l.getValue()));
                                     canvas.setStaticDraw(true);
                                     if (timer.isRunning())
@@ -497,7 +470,7 @@ public class Client {
                             });
                         }, 200);
                 timer.start1();
-                timer.start2();
+                timer.start2();*/
             });
 
             this.add(panel, BorderLayout.SOUTH);
@@ -518,10 +491,206 @@ public class Client {
 
             canvas.add(button);*/
 
+            types.addActionListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            nameField.addActionListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            minX.addChangeListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            minY.addChangeListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            maxX.addChangeListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            maxY.addChangeListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            homeOfKenga.addActionListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            homeOfRabbit.addActionListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            australia.addActionListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            other.addActionListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            minWeight.addChangeListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            maxWeight.addChangeListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            orange.addActionListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            grey.addActionListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            black.addActionListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
+            brown.addActionListener((event) -> {
+                if (canvas.isStaticDraw())
+                    return;
+                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown,false);
+            });
             this.pack();
             this.setMinimumSize(new Dimension(this.getWidth() + 200, this.getHeight()));
             this.setLocationRelativeTo(null);
             this.setVisible(true);
+        }
+
+        public boolean checkFilter(Animal animal, JComboBox<String> types, JTextField nameField, MySlider
+                minX, MySlider maxX, MySlider minY, MySlider maxY,
+                                   JRadioButton homeOfKenga, JRadioButton homeOfRabbit, JRadioButton australia, JRadioButton
+                                           other, MySlider minWeight, MySlider maxWeight,
+                                   JCheckBox orange, JCheckBox grey, JCheckBox black, JCheckBox brown) {
+            return (animal.getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1).equalsIgnoreCase(((String) types.getSelectedItem()).trim()) ||
+                    ((String) types.getSelectedItem()).trim().equalsIgnoreCase("Любой")) &&
+                    (animal.getName().trim().equalsIgnoreCase(nameField.getText().trim()) || nameField.getText().trim().equals("")) &&
+                    animal.getCoord().getX() > minX.getMyValue() &&
+                    animal.getCoord().getX() < maxX.getMyValue() &&
+                    animal.getCoord().getY() > minY.getMyValue() &&
+                    animal.getCoord().getY() < maxY.getMyValue() &&
+                    (
+                            (animal.getHome().trim().equalsIgnoreCase(homeOfKenga.getText().trim()) &&
+                                    homeOfKenga.isSelected()) ||
+                                    (animal.getHome().trim().equalsIgnoreCase(homeOfRabbit.getText().trim()) &&
+                                            homeOfRabbit.isSelected()) ||
+                                    (animal.getHome().trim().equalsIgnoreCase(australia.getText().trim()) &&
+                                            australia.isSelected()) ||
+                                    (animal.getHome().trim().equalsIgnoreCase(other.getText().trim()) &&
+                                            other.isSelected())
+                    ) &&
+                    animal.getWeight() > minWeight.getMyValue() &&
+                    animal.getWeight() < maxWeight.getMyValue() &&
+                    (
+                            (animal.getColourSynonym().trim().equalsIgnoreCase(orange.getText().trim()) &&
+                                    orange.isSelected()) ||
+                                    (animal.getColourSynonym().trim().equalsIgnoreCase(grey.getText().trim()) &&
+                                            grey.isSelected()) ||
+                                    (animal.getColourSynonym().trim().equalsIgnoreCase(black.getText().trim()) &&
+                                            black.isSelected()) ||
+                                    (animal.getColourSynonym().trim().equalsIgnoreCase(brown.getText().trim()) &&
+                                            brown.isSelected())
+                    );
+
+        }
+
+        public boolean check(List<AnimalButton> list, MyExecutor executor, JComponent canvas, JComboBox<String> types, JTextField nameField, MySlider
+                minX, MySlider maxX, MySlider minY, MySlider maxY,
+                             JRadioButton homeOfKenga, JRadioButton homeOfRabbit, JRadioButton australia, JRadioButton
+                                     other, MySlider minWeight, MySlider maxWeight,
+                             JCheckBox orange, JCheckBox grey, JCheckBox black, JCheckBox brown, boolean firstIncluding) {
+            if (!firstIncluding && !executor.isWorked())
+                return false;
+            class Bool {
+                private boolean b = false;
+
+                private void setTrue() {
+                    b = true;
+                }
+
+                private boolean get() {
+                    return b;
+                }
+            }
+            Bool b = new Bool();
+            list.forEach((e) -> {
+                Animal animal = e.getAnimal();
+                int weight = animal.getWeight();
+                System.out.println(maxX.getMyValue());
+                if (checkFilter(animal, types, nameField, minX, maxX, minY, maxY,
+                        homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                        orange, grey, black, brown)) {
+                    b.setTrue();
+                    executor.addTask(animal, () -> {
+                        e.setWeight(e.getWeight() + weight / 200.);
+                        e.reBounds();
+                        e.reBorder();
+                        e.revalidate();
+                        canvas.revalidate();
+                        canvas.repaint();
+                    }, () -> {
+                        e.setWeight(e.getWeight() - weight / 400.);
+                        e.reBounds();
+                        e.reBorder();
+                        e.revalidate();
+                        canvas.revalidate();
+                        canvas.repaint();
+                    }, 10, 200, 400);
+                }
+            });
+            return b.get();
         }
     }
 
