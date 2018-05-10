@@ -198,12 +198,7 @@ public class Client {
 
             private void shotdown() {
                 executor.shutdownNow();
-                //backup();
             }
-
-            /*private void backup() {
-                tasks.keySet().forEach(e -> e.setWeight(tasks.get(e).getValue()));
-            }*/
         }
 
         List<AnimalButton> list = new ArrayList<>();

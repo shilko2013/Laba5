@@ -1,15 +1,19 @@
 package com.shilko.ru;
+
 import javafx.util.Pair;
 import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import javax.swing.table.*;
+import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 public class Server {
     private final static int port = 11111;
@@ -20,45 +24,51 @@ public class Server {
     private static boolean isLogin = false;
     private static AnimalCollection collection = new AnimalCollection();
     private static ExecutorService executor = Executors.newFixedThreadPool(sizeOfPool);
+
     public static void exit(JFrame frame) { //метод, вызывающий фрейм закрытия, принимает закрывающийся фрейм
-        if (JOptionPane.showConfirmDialog(frame,"Вы действительно хотите выйти?","Закрытие программы",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE)==0) {
-            try {collection.save(fileName); } catch (Exception w) {
-                JOptionPane.showMessageDialog(null,"Сохранение не удалось!","Ошибка!",JOptionPane.ERROR_MESSAGE);
+        if (JOptionPane.showConfirmDialog(frame, "Вы действительно хотите выйти?", "Закрытие программы", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+            try {
+                collection.save(fileName);
+            } catch (Exception w) {
+                JOptionPane.showMessageDialog(null, "Сохранение не удалось!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
             }
             System.exit(0);
         }
     }
+
     private static class ServerGUI extends JFrame {
         private Font font = new Font("TimesRoman", Font.BOLD, 20);
-        private Font font2 = new Font("Font", Font.PLAIN,15);
+        private Font font2 = new Font("Font", Font.PLAIN, 15);
+
         private ServerGUI() {
             super("Server");
             UIManager.put("OptionPane.messageFont", font);
             UIManager.put("OptionPane.buttonFont", font);
-            login(this,password);
+            login(this, password);
         }
+
         private void login(JFrame frame, String password) { //метод, отвечающий за авторизацию, принимает блокируемый фрейм и пароль
             JFrame login = new JFrame("Авторизация");
             login.setFont(font);
-            login.setSize(700,155);
+            login.setSize(700, 155);
             login.setResizable(false);
             login.setLocationRelativeTo(null);
-            login.setFont(new Font("font", Font.BOLD,50));
+            login.setFont(new Font("font", Font.BOLD, 50));
             login.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             JPasswordField passwordField = new JPasswordField();
             passwordField.setFont(font);
             passwordField.setEchoChar('*');
             JRadioButton showPassword = new JRadioButton("Показывать пароль");
             showPassword.setFont(font);
-            showPassword.addActionListener((event)->{
-                passwordField.setEchoChar(showPassword.isSelected()?0:'*');
+            showPassword.addActionListener((event) -> {
+                passwordField.setEchoChar(showPassword.isSelected() ? 0 : '*');
             });
             JLabel label = new JLabel("Введите пароль: ");
             label.setFont(font);
             JButton okey = new JButton("OK");
             okey.setFont(font);
-            okey.addActionListener((event)-> {
-                if (Arrays.equals(passwordField.getPassword(),password.toCharArray())) {
+            okey.addActionListener((event) -> {
+                if (Arrays.equals(passwordField.getPassword(), password.toCharArray())) {
                     login.dispose();
                     frame.setEnabled(true);
                     frame.setVisible(true);
@@ -67,17 +77,15 @@ public class Server {
                         monitor.notifyAll();
                     }
                     init();
-                }
-                else JOptionPane.showMessageDialog(login,"Неверно введен пароль!!!","Ошибка!", JOptionPane.ERROR_MESSAGE);
+                } else
+                    JOptionPane.showMessageDialog(login, "Неверно введен пароль!!!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
             });
             JButton cancel = new JButton("Отмена");
-            cancel.addActionListener((event)->exit(login));
+            cancel.addActionListener((event) -> exit(login));
             cancel.setFont(font);
-            login.addWindowListener(new WindowAdapter()
-            {
+            login.addWindowListener(new WindowAdapter() {
                 @Override
-                public void windowClosing(WindowEvent e)
-                {
+                public void windowClosing(WindowEvent e) {
                     exit(login);
                 }
             });
@@ -134,29 +142,33 @@ public class Server {
             login.setVisible(true);
             frame.setEnabled(false);
         }
+
         private void init() {
             this.setFont(font);
-            this.setSize(800,800);
+            this.setSize(800, 800);
             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-            this.addWindowListener(new WindowAdapter()
-            {
+            this.addWindowListener(new WindowAdapter() {
                 @Override
-                public void windowClosing(WindowEvent e)
-                {
-                    exit((JFrame)e.getComponent());
+                public void windowClosing(WindowEvent e) {
+                    exit((JFrame) e.getComponent());
                 }
             });
-            FlowLayout layout = new FlowLayout(FlowLayout.CENTER,10,10);
+            FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 10, 10);
             this.setLayout(layout);
             String[] columnNames = {
-                    "Вид","Имя", "Координата Х", "Координата У", "Дом", "Вес", "Цвет"
+                    "Вид", "Имя", "Координата Х", "Координата У", "Дом", "Вес", "Цвет"
             };
             class MyTable extends JTable {
                 private DefaultTableModel model;
-                @Override public boolean isCellEditable(int a, int b) {return false;}
+
+                @Override
+                public boolean isCellEditable(int a, int b) {
+                    return false;
+                }
+
                 public MyTable(Object[][] data, Object[] columnNames) {
-                    super(data,columnNames);
-                    model = new DefaultTableModel(data,columnNames) {
+                    super(data, columnNames);
+                    model = new DefaultTableModel(data, columnNames) {
                         @Override
                         public Class getColumnClass(int column) {
                             switch (column) {
@@ -186,20 +198,22 @@ public class Server {
                     rowSorter.setRowFilter(null);
                     //setRowSorter(rowSorter);
                 }
+
                 public void addRow(Object[] row) {
                     model.addRow(row);
-                    model.fireTableRowsInserted(model.getRowCount()-1,model.getRowCount()-1);
+                    model.fireTableRowsInserted(model.getRowCount() - 1, model.getRowCount() - 1);
                 }
+
                 public void removeRow(int number) {
                     model.removeRow(number);
-                    model.fireTableRowsDeleted(number,number);
+                    model.fireTableRowsDeleted(number, number);
                 }
             }
             Object[][] data = collection.data(columnNames.length);
             MyTable table = new MyTable(data, columnNames);
             JScrollPane scrollPane = new JScrollPane(table);
             scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-            scrollPane.setPreferredSize(new Dimension(673,200));
+            scrollPane.setPreferredSize(new Dimension(673, 200));
             class HintTextField extends JTextArea implements FocusListener {
 
                 private final String hint;
@@ -215,15 +229,16 @@ public class Server {
 
                 @Override
                 public void focusGained(FocusEvent e) {
-                    if(this.getText().isEmpty()) {
+                    if (this.getText().isEmpty()) {
                         super.setText("");
                         this.setForeground(Color.BLACK);
                         showingHint = false;
                     }
                 }
+
                 @Override
                 public void focusLost(FocusEvent e) {
-                    if(this.getText().isEmpty()) {
+                    if (this.getText().isEmpty()) {
                         super.setText(hint);
                         this.setForeground(Color.GRAY);
                         showingHint = true;
@@ -314,32 +329,32 @@ public class Server {
             );
             this.add(panel2);
 
-            Font font = new Font("Font", Font.BOLD,15);
+            Font font = new Font("Font", Font.BOLD, 15);
             JMenuBar menuBar = new JMenuBar();
             JMenu collectionMenu = new JMenu("Collection");
             collectionMenu.setFont(font);
             JMenuItem loadItem = new JMenuItem("Load");
-            loadItem.addActionListener((event)->{
+            loadItem.addActionListener((event) -> {
                 try {
                     collection.load(fileName);
                     for (int i = table.getRowCount() - 1; i >= 0; --i)
                         table.removeRow(i);
                     Arrays.stream(collection.data(7)).forEach(table::addRow);
                     scrollPane.revalidate();
-                    JOptionPane.showMessageDialog(this,"Записано!","Load", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Записано!", "Load", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this,"Загрузка не удалась!","Ошибка", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Загрузка не удалась!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
             });
             loadItem.setFont(font);
             collectionMenu.add(loadItem);
             JMenuItem saveItem = new JMenuItem("Save");
-            saveItem.addActionListener((event)->{
+            saveItem.addActionListener((event) -> {
                 try {
                     collection.save(fileName);
-                    JOptionPane.showMessageDialog(this,"Сохранено!","Save", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Сохранено!", "Save", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this,"Запись не удалась!","Ошибка", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Запись не удалась!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
             });
             saveItem.setFont(font);
@@ -348,7 +363,7 @@ public class Server {
             JMenuItem exitItem = new JMenuItem("Exit");
             exitItem.setFont(font);
             collectionMenu.add(exitItem);
-            exitItem.addActionListener((event)->exit(this));
+            exitItem.addActionListener((event) -> exit(this));
             menuBar.add(collectionMenu);
             this.setJMenuBar(menuBar);
 
@@ -356,49 +371,47 @@ public class Server {
             JPanel panel = new JPanel();
             JButton insert = new JButton("Insert");
             insert.setFont(font2);
-            insert.addActionListener((event)-> {
-                    //table.addRow(data[0].length,collection.insert(textArea.getText().trim()));
-                String type1 = (String)type.getSelectedItem();
+            insert.addActionListener((event) -> {
+                //table.addRow(data[0].length,collection.insert(textArea.getText().trim()));
+                String type1 = (String) type.getSelectedItem();
                 String name1 = name.getText().trim();
                 String x1 = x.getText().trim();
                 String y1 = y.getText().trim();
                 String home1 = home.getText().trim();
                 String weight1 = weight.getText().trim();
-                if (!checkValues(type1,name1,x1,y1,home1,weight1))
+                if (!checkValues(type1, name1, x1, y1, home1, weight1))
                     return;
                 try {
-                    Object[] row = collection.insert(type1,name1,Integer.parseInt(x1),Integer.parseInt(y1),home1,Integer.parseInt(weight1));
-                        if (row != null) {
-                            table.addRow(row);
-                            scrollPane.revalidate();
-                            JOptionPane.showMessageDialog(this, "Животное успешно добавлено!", "Insert", JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Животное с такими координатами уже существует!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-                        }
+                    Object[] row = collection.insert(type1, name1, Integer.parseInt(x1), Integer.parseInt(y1), home1, Integer.parseInt(weight1));
+                    if (row != null) {
+                        table.addRow(row);
+                        scrollPane.revalidate();
+                        JOptionPane.showMessageDialog(this, "Животное успешно добавлено!", "Insert", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Животное с такими координатами уже существует!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                     }
-                    catch (Exception e) {
-                        JOptionPane.showMessageDialog(this,"Неверный формат команды!","Ошибка", JOptionPane.ERROR_MESSAGE);
-                    }
-                });
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Неверный формат команды!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }
+            });
             panel.add(insert);
 
             JButton remove = new JButton("Remove");
             remove.setFont(font2);
-            remove.addActionListener((event)->{
+            remove.addActionListener((event) -> {
                 try {
                     String x1 = x.getText().trim();
                     String y1 = y.getText().trim();
-                    if (!checkValues(null,null,x1,y1,null,null))
+                    if (!checkValues(null, null, x1, y1, null, null))
                         return;
-                    Pair<Boolean,Coord> pair = collection.remove(new Coord(Integer.parseInt(x1),Integer.parseInt(y1)));
+                    Pair<Boolean, Coord> pair = collection.remove(new Coord(Integer.parseInt(x1), Integer.parseInt(y1)));
                     if (!pair.getKey()) {
                         JOptionPane.showMessageDialog(this, "Животного с таким ключом нет!", "Remove", JOptionPane.ERROR_MESSAGE);
-                    }
-                    else {
+                    } else {
                         Vector vector = table.model.getDataVector();
                         for (int i = 0; i < vector.size(); ++i) {
-                            if (((Vector)(vector.elementAt(i))).elementAt(2).equals(pair.getValue().getX()) &&
-                                    ((Vector)(vector.elementAt(i))).elementAt(3).equals(pair.getValue().getY()) ) {
+                            if (((Vector) (vector.elementAt(i))).elementAt(2).equals(pair.getValue().getX()) &&
+                                    ((Vector) (vector.elementAt(i))).elementAt(3).equals(pair.getValue().getY())) {
                                 table.removeRow(i);
                                 scrollPane.revalidate();
                                 JOptionPane.showMessageDialog(this, "Животное успешно удалено!", "Remove", JOptionPane.INFORMATION_MESSAGE);
@@ -407,28 +420,28 @@ public class Server {
                         }
                     }
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this,"Неверный формат команды!","Ошибка", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Неверный формат команды!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
             });
             panel.add(remove);
 
             JButton edit = new JButton("Edit");
             edit.setFont(font2);
-            edit.addActionListener((event)->{
-                String type1 = (String)type.getSelectedItem();
+            edit.addActionListener((event) -> {
+                String type1 = (String) type.getSelectedItem();
                 String name1 = name.getText().trim();
                 String x1 = x.getText().trim();
                 String y1 = y.getText().trim();
                 String home1 = home.getText().trim();
                 String weight1 = weight.getText().trim();
-                if (!checkValues(type1,name1,x1,y1,home1,weight1))
+                if (!checkValues(type1, name1, x1, y1, home1, weight1))
                     return;
                 try {
-                    Coord coord = new Coord(Integer.parseInt(x1),Integer.parseInt(y1));
+                    Coord coord = new Coord(Integer.parseInt(x1), Integer.parseInt(y1));
                     Animal animal = collection.getAnimal(coord);
                     if (animal != null) {
                         collection.remove(coord);
-                        Object[] row = collection.insert(type1,name1,Integer.parseInt(x1),Integer.parseInt(y1),home1,Integer.parseInt(weight1));
+                        Object[] row = collection.insert(type1, name1, Integer.parseInt(x1), Integer.parseInt(y1), home1, Integer.parseInt(weight1));
                         Vector vector = table.model.getDataVector();
                         for (int i = 0; i < vector.size(); ++i) {
                             if (((Vector) (vector.elementAt(i))).elementAt(2).equals(coord.getX()) &&
@@ -437,63 +450,46 @@ public class Server {
                                 break;
                             }
                         }
-                            table.addRow(row);
-                            scrollPane.revalidate();
-                            JOptionPane.showMessageDialog(this, "Животное успешно отредактировано!", "Edit", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    else {
+                        table.addRow(row);
+                        scrollPane.revalidate();
+                        JOptionPane.showMessageDialog(this, "Животное успешно отредактировано!", "Edit", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
                         JOptionPane.showMessageDialog(this, "Животное с такими координатами не существует!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this,"Неверный формат команды!","Ошибка", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Неверный формат команды!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
             });
             panel.add(edit);
 
-            JButton removeAll = new JButton("RemoveAll");
-            removeAll.setFont(font2);
-            removeAll.addActionListener((event)-> {
-                String type1 = (String)type.getSelectedItem();
-                String name1 = name.getText().trim();
-                String x1 = x.getText().trim();
-                String y1 = y.getText().trim();
-                String home1 = home.getText().trim();
-                String weight1 = weight.getText().trim();
-                if (!checkValues(type1,name1,x1,y1,home1,weight1))
+            JButton removeFromTable = new JButton("RemoveFromTable");
+            removeFromTable.setFont(font2);
+            removeFromTable.addActionListener((event) -> {
+                List<Integer> rows = Arrays.stream(table.getSelectedRows()).sorted().boxed().collect(Collectors.toList());
+                Collections.reverse(rows);
+                if (rows.size() == 0) {
+                    JOptionPane.showMessageDialog(this, "Животные не выделены!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
                     return;
-                try {
-                    java.util.List<Coord> list = collection.removeAll(type1,name1,Integer.parseInt(x1),Integer.parseInt(y1),home1,Integer.parseInt(weight1));
-                    if (list.isEmpty()) {
-                        JOptionPane.showMessageDialog(this, "Таких животных не найдено!", "RemoveAll", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        Vector vector = table.model.getDataVector();
-                        list.forEach((e) -> {
-                            for (int i = 0; i < vector.size(); ++i) {
-                                if (((Vector) (vector.elementAt(i))).elementAt(2).equals(e.getX()) &&
-                                        ((Vector) (vector.elementAt(i))).elementAt(3).equals(e.getY())) {
-                                    table.removeRow(i);
-                                    scrollPane.revalidate();
-                                    break;
-                                }
-                            }
-                        });
-                        JOptionPane.showMessageDialog(this, "Животные успешно удалены!", "RemoveAll", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this,"Неверный формат команды!","Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
+                DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+                rows.forEach(e->{
+                    Vector vector = tableModel.getDataVector();
+                    collection.remove(new Coord((int)((Vector)vector.elementAt(e)).elementAt(2),(int)((Vector)vector.elementAt(e)).elementAt(3)));
+                });
+                rows.forEach(tableModel::removeRow);
+                JOptionPane.showMessageDialog(this, "Животные успешно удалены!", "RemoveFromTable", JOptionPane.INFORMATION_MESSAGE);
             });
-            panel.add(removeAll);
+            panel.add(removeFromTable);
 
             JButton removeGreaterKey = new JButton("RemoveGreaterKey");
             removeGreaterKey.setFont(font2);
-            removeGreaterKey.addActionListener((event)-> {
+            removeGreaterKey.addActionListener((event) -> {
                 String x1 = x.getText().trim();
                 String y1 = y.getText().trim();
-                if (!checkValues(null,null,x1,y1,null,null))
+                if (!checkValues(null, null, x1, y1, null, null))
                     return;
                 try {
-                    java.util.List<Coord> list = collection.removeGreaterKey(new Coord(Integer.parseInt(x1),Integer.parseInt(y1)));
+                    List<Coord> list = collection.removeGreaterKey(new Coord(Integer.parseInt(x1), Integer.parseInt(y1)));
                     if (list.isEmpty()) {
                         JOptionPane.showMessageDialog(this, "Таких животных не найдено!", "RemoveGreaterKey", JOptionPane.ERROR_MESSAGE);
                     } else {
@@ -508,17 +504,17 @@ public class Server {
                                 }
                             }
                         });
-                        JOptionPane.showMessageDialog(this, "Животные успешно удалены!", "RemoveAll", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Животные успешно удалены!", "RemoveFromTable", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this,"Неверный формат команды!","Ошибка", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Неверный формат команды!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
             });
             panel.add(removeGreaterKey);
             this.add(panel);
 
             this.pack();
-            this.setMinimumSize(new Dimension(700,440));
+            this.setMinimumSize(new Dimension(700, 440));
             this.setSize(this.getMinimumSize());
             this.setLocationRelativeTo(null);
 
@@ -526,8 +522,10 @@ public class Server {
 
             this.setVisible(true);
         }
+
         private boolean checkValues(String type, String name, String x, String y, String home, String weight) {
             boolean result = true;
+            String message = "";
             if (type != null) {
                 switch (type.trim().toLowerCase()) {
                     case "tiger":
@@ -536,12 +534,12 @@ public class Server {
                     case "rabbit":
                         break;
                     default:
-                        JOptionPane.showMessageDialog(this, "Неверный тип!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                        message += "тип, ";
                         result = false;
                 }
             }
-            if (name != null && name.trim().length()==0) {
-                JOptionPane.showMessageDialog(this,"Неверное имя!","Ошибка",JOptionPane.ERROR_MESSAGE);
+            if (name != null && name.trim().length() == 0) {
+                message += "имя, ";
                 result = false;
             }
             if (x != null) {
@@ -549,7 +547,7 @@ public class Server {
                     if (Integer.parseInt(x) < 0)
                         throw new NumberFormatException();
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Неверная координата Х!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    message += "координата Х, ";
                     result = false;
                 }
             }
@@ -558,12 +556,12 @@ public class Server {
                     if (Integer.parseInt(y) < 0)
                         throw new NumberFormatException();
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Неверная координата Y!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    message += "координата У, ";
                     result = false;
                 }
             }
-            if (home != null && home.trim().length()==0) {
-                JOptionPane.showMessageDialog(this,"Неверный дом!","Ошибка",JOptionPane.ERROR_MESSAGE);
+            if (home != null && home.trim().length() == 0) {
+                message += "дом, ";
                 result = false;
             }
             if (weight != null) {
@@ -571,9 +569,13 @@ public class Server {
                     if (Integer.parseInt(weight) < 0)
                         throw new NumberFormatException();
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Неверный вес!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    message += "вес, ";
                     result = false;
                 }
+            }
+            if (!result) {
+                message = message.substring(0, 1).toUpperCase() + message.substring(1, message.length() - 2);
+                JOptionPane.showMessageDialog(this, message + " указаны неверно!", "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
             return result;
         }
@@ -587,13 +589,19 @@ public class Server {
         jfrm.add(jlab);
         jfrm.setVisible(true);
     }*/
-    public static void main(String ... args) {
+    public static void main(String... args) {
         fileName = args[0];
         try {
-            Runtime.getRuntime().addShutdownHook(new Thread(()->{try {collection.save(fileName);} catch (Exception e) {e.printStackTrace();}}));
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                try {
+                    collection.save(fileName);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }));
             collection.load(fileName);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Загрузка не удалась!","Ошибка", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Загрузка не удалась!", "Ошибка", JOptionPane.ERROR_MESSAGE);
         }
         Thread App = new Thread(Server.ServerGUI::new);
         javax.swing.SwingUtilities.invokeLater(App);
@@ -617,7 +625,7 @@ public class Server {
                     }
                 }*/
                 Socket client = server.accept();
-                executor.execute(new ThreadServer(client,collection,fileName));
+                executor.execute(new ThreadServer(client, collection, fileName));
             }
             executor.shutdown();
         } catch (IOException e) {
@@ -626,8 +634,10 @@ public class Server {
                     "Сервер уже открыт!",
                     "Ошибка",
                     JOptionPane.ERROR_MESSAGE);
-            try {collection.save(fileName); } catch (Exception w) {
-                JOptionPane.showMessageDialog(null,"Сохранение не удалось!","Ошибка!",JOptionPane.ERROR_MESSAGE);
+            try {
+                collection.save(fileName);
+            } catch (Exception w) {
+                JOptionPane.showMessageDialog(null, "Сохранение не удалось!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
             }
             System.exit(0);
         }
