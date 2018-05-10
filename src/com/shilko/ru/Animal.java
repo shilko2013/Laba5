@@ -121,7 +121,8 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
         Animal animal = (Animal) obj;
         return name.equals(animal.getName())
                 && home.equals(animal.getHome())
-                && actions.equals(animal.getActions())
+                && coord.equals(animal.getCoord())
+                && Integer.compare(weight,animal.getWeight())==0
                 && Arrays.equals(getColour(),animal.getColour());
     }
     @Override

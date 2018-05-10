@@ -30,7 +30,7 @@ public class Kangaroo extends Animal implements Mindable {
     public Kangaroo(String name, int x, int y, int weight) {
         super(name,x,y,weight);
     }
-    @Override
+    /*@Override
     public boolean equals(Object obj) {
         if (obj == null)
             return false;
@@ -44,7 +44,7 @@ public class Kangaroo extends Animal implements Mindable {
                 && getIngestion().equals(kangaroo.getIngestion())
                 && getActions().equals(kangaroo.getActions())
                 && Arrays.equals(getColour(),kangaroo.getColour());
-    }
+    }*/
     @Override
     public int hashCode() {
         return super.hashCode();

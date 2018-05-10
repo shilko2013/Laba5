@@ -13,7 +13,7 @@ public class RealAnimal extends Animal {
     public RealAnimal(String name, int x, int y, int weight) {
         super(name,x,y,weight);
     }
-    @Override
+    /*@Override
     public boolean equals(Object obj) {
         if (obj == null)
             return false;
@@ -27,7 +27,7 @@ public class RealAnimal extends Animal {
                 && getIngestion().equals(rabbit.getIngestion())
                 && getActions().equals(rabbit.getActions())
                 && getCoord().equals(rabbit.getCoord());
-    }
+    }*/
     @Override
     public String work() {
         return getName()+super.work();

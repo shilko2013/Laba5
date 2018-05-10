@@ -164,7 +164,7 @@ public class Tiger extends Animal implements Workable, Sayable {
         lastSthOutside = new Random().nextBoolean();
         return lastSthOutside;
     }
-    @Override
+    /*@Override
     public boolean equals(Object obj) {
         if (obj == null)
             return false;
@@ -179,7 +179,7 @@ public class Tiger extends Animal implements Workable, Sayable {
                 && getActions().equals(tiger.getActions())
                 && tongue.equals(tiger.tongue)
                 && Arrays.equals(getColour(),tiger.getColour());
-    }
+    }*/
     @Override
     public String work() {
         String s = getName() + super.work();

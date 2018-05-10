@@ -195,7 +195,7 @@ public class AnimalCollection implements Serializable {
      * @return возращает животное, полученное по данным характеристикам
      */
     private Animal parseAnimal(String type, String name, String home, int x, int y, int weight, List<String> actions, List<String> actionsForTongue) {
-        switch (type) {
+        switch (type.toLowerCase().trim()) {
             case "tiger":
                 Tiger tiger = new Tiger(name, home, x, y, weight);
                 tiger.addAction(actions.toArray(new String[0]));
@@ -214,6 +214,9 @@ public class AnimalCollection implements Serializable {
                 realAnimal.addAction(actions.toArray(new String[0]));
                 return realAnimal;
         }
+    }
+    private Animal parseAnimal(String type, String name, int x, int y, String home, int weight) {
+        return parseAnimal(type,name,home,x,y,weight,new ArrayList<>(),new ArrayList<>());
     }
     /**
      * Метод, добавляющий животное в коллекцию
@@ -288,13 +291,7 @@ public class AnimalCollection implements Serializable {
      */
     public List<Coord> removeAll(String in) {
         Animal animal = read(in);
-        List<Coord> list = new ArrayList<>();
-        collection.keySet().forEach((e)->{
-            if (collection.get(e).equals(animal))
-                list.add(e);
-        });
-        collection.values().removeAll(Arrays.asList(animal));
-        return list;
+        return removeAll(animal);
         /*List<Coord> temp = new ArrayList<>();
         Iterator<Coord> i = collection.keySet().iterator();
         for (;i.hasNext();i.next()) {
@@ -306,6 +303,18 @@ public class AnimalCollection implements Serializable {
         });
         temp.forEach(k->collection.remove(k));*/
     }
+    public List<Coord> removeAll(Animal animal) {
+        List<Coord> list = new ArrayList<>();
+        collection.keySet().forEach((e)->{
+            if (collection.get(e).equals(animal))
+                list.add(e);
+        });
+        collection.values().removeAll(Arrays.asList(animal));
+        return list;
+    }
+    public List<Coord> removeAll(String type, String name, int x, int y, String home, int weight) {
+        return  removeAll(parseAnimal(type,name,x,y,home,weight));
+    }
     /**
      * Метод, добавляющий в коллекцию {@link AnimalCollection#collection}
      * животноев формате <i>JSON</i>, или заменяющее его,
@@ -316,11 +325,17 @@ public class AnimalCollection implements Serializable {
         Coord coord = Coord.read(in);
         Animal animal = read(in.substring(in.indexOf("{"),in.length()));
         animal.setCoord(coord.getX(),coord.getY());
+        return insert(animal);
+    }
+    public  Object[] insert(Animal animal) {
         Object[] result = animal.toRow();
         if (collection.containsKey(animal.getCoord()))
             result = null;
         collection.put(animal.getCoord(),animal);
         return result;
+    }
+    public  Object[] insert(String type, String name, int x, int y, String home, int weight) {
+        return  insert(parseAnimal(type,name,x,y,home,weight));
     }
     /**
      * Метод, удаляющий из коллекции {@link AnimalCollection#collection}
@@ -334,6 +349,15 @@ public class AnimalCollection implements Serializable {
      */
     public List<Coord> removeGreaterKey(String in) {
         Coord coord = Coord.read(in);
+        return removeGreaterKey(coord);
+        /*List<Coord> temp = new ArrayList<>();
+        collection.forEach((k,v)->{
+            if (k.compareTo(coord)>0)
+                temp.add(k);
+        });
+        temp.forEach(k->collection.remove(k));*/
+    }
+    public List<Coord> removeGreaterKey(Coord coord) {
         List<Coord> list = new ArrayList<>();
         collection.keySet().forEach((e)->{
             if (e.compareTo(coord)>0)
@@ -341,12 +365,6 @@ public class AnimalCollection implements Serializable {
         });
         collection.keySet().removeIf(a->a.compareTo(coord)>0);
         return list;
-        /*List<Coord> temp = new ArrayList<>();
-        collection.forEach((k,v)->{
-            if (k.compareTo(coord)>0)
-                temp.add(k);
-        });
-        temp.forEach(k->collection.remove(k));*/
     }
     /**
      * Метод, удаляющий из коллекции {@link AnimalCollection#collection}
@@ -356,10 +374,13 @@ public class AnimalCollection implements Serializable {
      */
     public Pair<Boolean,Coord> remove(String in) {
         Coord coord = Coord.read(in);
+        return remove(coord);
+    }
+    public Pair<Boolean,Coord> remove(Coord coord) {
         if (!collection.containsKey(coord))
             return new Pair<>(false,null);
         else {
-            collection.remove(Coord.read(in));
+            collection.remove(coord);
             return new Pair<>(true,coord);
         }
     }

@@ -32,7 +32,7 @@ public class Rabbit extends Animal{
     public boolean isBusyDay() {
         return getActions().size()>3;
     }
-    @Override
+    /*@Override
     public boolean equals(Object obj) {
         if (obj == null)
             return false;
@@ -46,7 +46,7 @@ public class Rabbit extends Animal{
                 && getIngestion().equals(rabbit.getIngestion())
                 && getActions().equals(rabbit.getActions())
                 && Arrays.equals(getColour(),rabbit.getColour());
-    }
+    }*/
     @Override
     public String work() {
         return getName()+super.work();

@@ -14,6 +14,10 @@ import java.net.*;
 import java.nio.channels.*;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Client {
     private final static int port = 11111;
@@ -78,7 +82,6 @@ public class Client {
 
             private AnimalButton(Animal animal) {
                 super("");
-                System.out.println(animal);
                 this.animal = animal;
                 weight = animal.getWeight();
                 setBackground(Color.WHITE);
@@ -135,13 +138,17 @@ public class Client {
         }
 
         private void init() {
+            ExecutorService executor = Executors.newCachedThreadPool();
+            List<Future<Void>> tasks = new ArrayList<>();
             this.setFont(font);
             this.setSize(800, 800);
             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             this.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
-                    Server.exit((JFrame) e.getComponent());
+                    if (JOptionPane.showConfirmDialog(e.getComponent(),"Вы действительно хотите выйти?","Закрытие программы",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE)==0) {
+                        System.exit(0);
+                    }
                 }
             });
 
