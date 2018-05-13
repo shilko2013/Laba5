@@ -264,7 +264,7 @@ public class Server {
             JLabel typeLabel = new JLabel("Выберите тип: ");
             typeLabel.setFont(font2);
             JComboBox<String> type = new JComboBox<>(new String[]{
-                    "Tiger", "Kangaroo", "Rabbit", "RealAnimal"
+                    "Tiger", "Kangaroo", "Rabbit", "RealAnimal", "All"
             });
             type.setFont(font2);
             JLabel nameLabel = new JLabel("Введите имя: ");
@@ -332,6 +332,7 @@ public class Server {
             JMenuBar menuBar = new JMenuBar();
             JMenu collectionMenu = new JMenu("Collection");
             collectionMenu.setFont(font);
+            collectionMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             JMenuItem loadItem = new JMenuItem("Load");
             loadItem.addActionListener((event) -> {
                 try {
@@ -378,7 +379,7 @@ public class Server {
                 String y1 = y.getText().trim();
                 String home1 = home.getText().trim();
                 String weight1 = weight.getText().trim();
-                if (!checkValues(type1, name1, x1, y1, home1, weight1))
+                if (!checkValues(type1, name1, x1, y1, home1, weight1,false))
                     return;
                 try {
                     Object[] row = collection.insert(type1, name1, Integer.parseInt(x1), Integer.parseInt(y1), home1, Integer.parseInt(weight1));
@@ -401,7 +402,7 @@ public class Server {
                 try {
                     String x1 = x.getText().trim();
                     String y1 = y.getText().trim();
-                    if (!checkValues(null, null, x1, y1, null, null))
+                    if (!checkValues(null, null, x1, y1, null, null,false))
                         return;
                     Pair<Boolean, Coord> pair = collection.remove(new Coord(Integer.parseInt(x1), Integer.parseInt(y1)));
                     if (!pair.getKey()) {
@@ -433,7 +434,7 @@ public class Server {
                 String y1 = y.getText().trim().length() == 0 ? null : y.getText().trim();
                 String home1 = home.getText().trim().length() == 0 ? null : home.getText().trim();
                 String weight1 = weight.getText().trim().length() == 0 ? null : weight.getText().trim();
-                if (!checkValues(type1, name1, x1, y1, home1, weight1))
+                if (!checkValues(type1, name1, x1, y1, home1, weight1,true))
                     return;
                 List<Integer> rows = Arrays.stream(table.getSelectedRows()).sorted().boxed().collect(Collectors.toList());
                 Collections.reverse(rows);
@@ -449,15 +450,22 @@ public class Server {
                     Vector vector = ((DefaultTableModel) table.getModel()).getDataVector();
                     Animal animal = collection.getAnimal(new Coord((int) ((Vector) vector.elementAt(e)).elementAt(2), (int) ((Vector) vector.elementAt(e)).elementAt(3)));
                     //collection.remove(new Coord((int) ((Vector) vector.elementAt(e)).elementAt(2), (int) ((Vector) vector.elementAt(e)).elementAt(3)));
-                    Class animalClass = animal.getClass();
+                    //Class animalClass = animal.getClass();
                     Animal newAnimal = null;
                     try {
-                        newAnimal = (Animal)Class.forName("com.shilko.ru."+type1).getConstructor(String.class,String.class,int.class,int.class,int.class).newInstance(name1 == null ? animal.getName() : name1, home1 == null ? animal.getHome() : home1,
-                                animal.getCoord().getX(), animal.getCoord().getY(), weight1 == null ? animal.getWeight() : Integer.parseInt(weight1));
+                        String type2 = type1;
+                        if (type1.trim().toLowerCase().equals("all"))
+                            type2 = animal.getClass().toString().substring(animal.getClass().toString().lastIndexOf(".")+1,animal.getClass().toString().length());
+                        newAnimal = (Animal)Class.forName("com.shilko.ru."+type2).getConstructor(String.class,String.class,int.class,int.class,int.class).newInstance(name1 == null ? animal.getName() : name1, home1 == null ? animal.getHome() : home1,
+                                x1 == null?animal.getCoord().getX():Integer.parseInt(x1), y1 == null?animal.getCoord().getY():Integer.parseInt(y1), weight1 == null ? animal.getWeight() : Integer.parseInt(weight1));
                     } catch (Exception w) {w.printStackTrace();}
-                    collection.remove(newAnimal.getCoord());
-                    table.removeRow(e);
-                    table.addRow(collection.insert(newAnimal));
+                    if (collection.remove(newAnimal.getCoord()).getKey()) {
+                        table.removeRow(e);
+                        table.addRow(collection.insert(newAnimal));
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Животное с такими координатами уже существует!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
+                    }
                 });
                 });
                 panel.add(edit);
@@ -486,7 +494,7 @@ public class Server {
                 removeGreaterKey.addActionListener((event) -> {
                     String x1 = x.getText().trim();
                     String y1 = y.getText().trim();
-                    if (!checkValues(null, null, x1, y1, null, null))
+                    if (!checkValues(null, null, x1, y1, null, null,false))
                         return;
                     try {
                         List<Coord> list = collection.removeGreaterKey(new Coord(Integer.parseInt(x1), Integer.parseInt(y1)));
@@ -523,7 +531,7 @@ public class Server {
                 this.setVisible(true);
             }
 
-            private boolean checkValues (String type, String name, String x, String y, String home, String weight){
+            private boolean checkValues (String type, String name, String x, String y, String home, String weight, boolean isEdited){
                 boolean result = true;
                 String message = "";
                 if (type != null) {
@@ -534,8 +542,10 @@ public class Server {
                         case "rabbit":
                             break;
                         default:
-                            message += "тип, ";
-                            result = false;
+                            if (!isEdited || !type.trim().toLowerCase().equalsIgnoreCase("all")) {
+                                message += "тип, ";
+                                result = false;
+                            }
                     }
                 }
                 if (name != null && name.trim().length() == 0) {

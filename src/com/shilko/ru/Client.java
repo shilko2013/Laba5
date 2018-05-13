@@ -1,16 +1,12 @@
 package com.shilko.ru;
 
-import javafx.util.Pair;
-
 import javax.swing.*;
-import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.*;
 import java.nio.channels.*;
 import java.util.*;
