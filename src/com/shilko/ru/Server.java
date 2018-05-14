@@ -556,6 +556,8 @@ public class Server {
                     try {
                         if (Integer.parseInt(x) < 0)
                             throw new NumberFormatException();
+                        if (x.charAt(0)=='0'&&x.length()>1)
+                            throw new NumberFormatException();
                     } catch (Exception e) {
                         message += "координата Х, ";
                         result = false;
@@ -564,6 +566,8 @@ public class Server {
                 if (y != null) {
                     try {
                         if (Integer.parseInt(y) < 0)
+                            throw new NumberFormatException();
+                        if (y.charAt(0)=='0'&&y.length()>1)
                             throw new NumberFormatException();
                     } catch (Exception e) {
                         message += "координата У, ";
@@ -577,6 +581,8 @@ public class Server {
                 if (weight != null) {
                     try {
                         if (Integer.parseInt(weight) < 0)
+                            throw new NumberFormatException();
+                        if (weight.charAt(0)=='0'&&weight.length()>1)
                             throw new NumberFormatException();
                     } catch (Exception e) {
                         message += "вес, ";

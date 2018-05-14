@@ -199,16 +199,21 @@ public class Client {
 
         List<AnimalButton> list = new ArrayList<>();
 
-        private void updateCollection() {
+        private void updateCollection(JPanel panel) {
             while (true) {
                 try {
                     collection = getCollection().getLikeMap();
                     break;
                 } catch (Exception e) {
-                    if (JOptionPane.showConfirmDialog(this, "Не удается получить коллекцию!\nПовторить попытку?", "Ошибка!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == 1)
+                    if (JOptionPane.showConfirmDialog(null, "Не удается получить коллекцию!\nПовторить попытку?", "Ошибка!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == 1)
                         System.exit(0);
                 }
             }
+            collection.keySet().forEach((e) -> {
+                if ((e.getX()>panel.getWidth()-collection.get(e).getWeight()) || (e.getY()>panel.getHeight()-collection.get(e).getWeight()*1.5)) {
+                    JOptionPane.showMessageDialog(panel,"Животное с координатами х: "+e.getX()+", y: "+e.getY()+" не может быть отображено!","Ошибка",JOptionPane.ERROR_MESSAGE);
+                }
+            });
         }
 
         private void initList() {
@@ -222,7 +227,6 @@ public class Client {
             super("Client");
             UIManager.put("OptionPane.messageFont", font);
             UIManager.put("OptionPane.buttonFont", font);
-            updateCollection();
             init();
         }
 
@@ -336,7 +340,7 @@ public class Client {
             JButton update = new JButton("Update");
             update.setFont(font);
             update.addActionListener((event) -> {
-                updateCollection();
+                updateCollection(canvas);
                 initList();
                 if (!canvas.isStaticDraw())
                     stop.doClick();
@@ -594,6 +598,7 @@ public class Client {
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, grey, black, brown,false);
             });
+            updateCollection(canvas);
             this.pack();
             this.setMinimumSize(new Dimension(this.getWidth() + 200, this.getHeight()));
             this.setLocationRelativeTo(null);
