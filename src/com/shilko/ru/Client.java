@@ -1,8 +1,11 @@
 package com.shilko.ru;
 
+import javafx.util.Pair;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.*;
+import javax.imageio.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
@@ -209,11 +212,26 @@ public class Client {
                         System.exit(0);
                 }
             }
+            List<Pair<Integer,Integer>> pairs = new ArrayList<>();
             collection.keySet().forEach((e) -> {
                 if ((e.getX()>panel.getWidth()-collection.get(e).getWeight()) || (e.getY()>panel.getHeight()-collection.get(e).getWeight()*1.5)) {
-                    JOptionPane.showMessageDialog(panel,"Животное с координатами х: "+e.getX()+", y: "+e.getY()+" не может быть отображено!","Ошибка",JOptionPane.ERROR_MESSAGE);
+                    pairs.add(new Pair<>(e.getX(),e.getY()));
                 }
             });
+            StringBuilder message = new StringBuilder("Животные с координатами\n");
+            pairs.forEach(e-> {
+                message.append("x: " +e.getKey()+", y: "+e.getValue()+"\n");
+            });
+            message.append(" не могут быть отображены!");
+            JTextArea messageArea = new JTextArea(message.toString());
+            messageArea.setFont(font);
+            messageArea.setEditable(false);
+            JScrollPane messageScrollPane = new JScrollPane(messageArea);
+            messageArea.setLineWrap(true);
+            messageArea.setWrapStyleWord(true);
+            messageScrollPane.setPreferredSize( new Dimension( 250, 100 ) );
+            if (!pairs.isEmpty())
+                JOptionPane.showMessageDialog(panel,messageScrollPane,"Ошибка",JOptionPane.ERROR_MESSAGE);
         }
 
         private void initList() {
@@ -430,10 +448,11 @@ public class Client {
                     return;
                 }
                 canvas.setStaticDraw(false);
-                if (!check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                String message = check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
-                        orange, grey, black, brown, true)) {
-                    JOptionPane.showMessageDialog(this, "Нет подходящих животных!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                        orange, grey, black, brown, true);
+                if (message.length()>0) {
+                    JOptionPane.showMessageDialog(this, "Нет животных, подходящих по "+message.substring(0,message.length()-2)+".", "Ошибка", JOptionPane.ERROR_MESSAGE);
                     canvas.setStaticDraw(true);
                 }
                 /*timer.set((event1) -> {
@@ -598,38 +617,42 @@ public class Client {
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, grey, black, brown,false);
             });
-            updateCollection(canvas);
             this.pack();
             this.setMinimumSize(new Dimension(this.getWidth() + 200, this.getHeight()));
             this.setLocationRelativeTo(null);
+            updateCollection(canvas);
             this.setVisible(true);
+            //updateCollection(canvas);
         }
 
-        public boolean checkFilter(Animal animal, JComboBox<String> types, JTextField nameField, MySlider
+        public List<Boolean> checkFilter(Animal animal, JComboBox<String> types, JTextField nameField, MySlider
                 minX, MySlider maxX, MySlider minY, MySlider maxY,
                                    JRadioButton homeOfKenga, JRadioButton homeOfRabbit, JRadioButton australia, JRadioButton
                                            other, MySlider minWeight, MySlider maxWeight,
                                    JCheckBox orange, JCheckBox grey, JCheckBox black, JCheckBox brown) {
-            return (animal.getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1).equalsIgnoreCase(((String) types.getSelectedItem()).trim()) ||
-                    ((String) types.getSelectedItem()).trim().equalsIgnoreCase("Любой")) &&
-                    (animal.getName().trim().equalsIgnoreCase(nameField.getText().trim()) || nameField.getText().trim().equals("")) &&
-                    animal.getCoord().getX() > minX.getMyValue() &&
-                    animal.getCoord().getX() < maxX.getMyValue() &&
-                    animal.getCoord().getY() > minY.getMyValue() &&
-                    animal.getCoord().getY() < maxY.getMyValue() &&
-                    (
-                            (animal.getHome().trim().equalsIgnoreCase(homeOfKenga.getText().trim()) &&
-                                    homeOfKenga.isSelected()) ||
-                                    (animal.getHome().trim().equalsIgnoreCase(homeOfRabbit.getText().trim()) &&
-                                            homeOfRabbit.isSelected()) ||
-                                    (animal.getHome().trim().equalsIgnoreCase(australia.getText().trim()) &&
-                                            australia.isSelected()) ||
-                                    (animal.getHome().trim().equalsIgnoreCase(other.getText().trim()) &&
-                                            other.isSelected())
-                    ) &&
-                    animal.getWeight() > minWeight.getMyValue() &&
-                    animal.getWeight() < maxWeight.getMyValue() &&
-                    (
+            List<Boolean> booleans = new ArrayList<>();
+            booleans.add(((animal.getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1).equalsIgnoreCase(((String) types.getSelectedItem()).trim()) ||
+                    ((String) types.getSelectedItem()).trim().equalsIgnoreCase("Любой"))));
+            booleans.add((animal.getName().trim().equalsIgnoreCase(nameField.getText().trim()) || nameField.getText().trim().equals("")));
+            booleans.add((animal.getCoord().getX() > minX.getMyValue() &&
+                    animal.getCoord().getX() < maxX.getMyValue()));
+            booleans.add((animal.getCoord().getY() > minY.getMyValue() &&
+                    animal.getCoord().getY() < maxY.getMyValue()));
+            if (animal.getCoord().equals(new Coord(800,400)))
+                    System.out.println("");
+            booleans.add((
+                    (animal.getHome().trim().equalsIgnoreCase(homeOfKenga.getText().trim()) &&
+                            homeOfKenga.isSelected()) ||
+                            (animal.getHome().trim().equalsIgnoreCase(homeOfRabbit.getText().trim()) &&
+                                    homeOfRabbit.isSelected()) ||
+                            (animal.getHome().trim().equalsIgnoreCase(australia.getText().trim()) &&
+                                    australia.isSelected()) ||
+                            (animal.getHome().trim().equalsIgnoreCase(other.getText().trim()) &&
+                                    other.isSelected())
+                    ));
+            booleans.add((animal.getWeight() > minWeight.getMyValue() &&
+                    animal.getWeight() < maxWeight.getMyValue()));
+            booleans.add((
                             (animal.getColourSynonym().trim().equalsIgnoreCase(orange.getText().trim()) &&
                                     orange.isSelected()) ||
                                     (animal.getColourSynonym().trim().equalsIgnoreCase(grey.getText().trim()) &&
@@ -638,37 +661,30 @@ public class Client {
                                             black.isSelected()) ||
                                     (animal.getColourSynonym().trim().equalsIgnoreCase(brown.getText().trim()) &&
                                             brown.isSelected())
-                    );
-
+                    ));
+            if (booleans.stream().allMatch(e->e))
+                booleans = null;
+            return booleans;
         }
 
-        public boolean check(List<AnimalButton> list, MyExecutor executor, JComponent canvas, JComboBox<String> types, JTextField nameField, MySlider
+        public String check(List<AnimalButton> list, MyExecutor executor, JComponent canvas, JComboBox<String> types, JTextField nameField, MySlider
                 minX, MySlider maxX, MySlider minY, MySlider maxY,
                              JRadioButton homeOfKenga, JRadioButton homeOfRabbit, JRadioButton australia, JRadioButton
                                      other, MySlider minWeight, MySlider maxWeight,
                              JCheckBox orange, JCheckBox grey, JCheckBox black, JCheckBox brown, boolean firstIncluding) {
             if (!firstIncluding && !executor.isWorked())
-                return false;
-            class Bool {
-                private boolean b = false;
-
-                private void setTrue() {
-                    b = true;
-                }
-
-                private boolean get() {
-                    return b;
-                }
-            }
-            Bool b = new Bool();
+                return "";
+            StringBuilder message = new StringBuilder();
+            List<Boolean> booleans = new ArrayList<>(Arrays.asList(false,false,false,false,false,false,false));
+            boolean[] somebodyExist = new boolean[1];
+            somebodyExist[0] = false;
             list.forEach((e) -> {
                 Animal animal = e.getAnimal();
                 int weight = animal.getWeight();
                 System.out.println(maxX.getMyValue());
                 if (checkFilter(animal, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
-                        orange, grey, black, brown)) {
-                    b.setTrue();
+                        orange, grey, black, brown) == null) {
                     executor.addTask(animal, () -> {
                         e.setWeight(e.getWeight() + weight / 200.);
                         e.reBounds();
@@ -684,9 +700,25 @@ public class Client {
                         canvas.revalidate();
                         canvas.repaint();
                     }, 10, 200, 400);
+                    somebodyExist[0] = true;
+                }
+                else {
+                    List<Boolean> booleans1 = checkFilter(animal, types, nameField, minX, maxX, minY, maxY,
+                            homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
+                            orange, grey, black, brown);
+                    for (int i = 0; i < booleans.size(); ++i) {
+                        booleans.set(i,(booleans.get(i)||(booleans1.get(i))));
+                    }
                 }
             });
-            return b.get();
+            if (somebodyExist[0])
+                return "";
+            List<String> errors = new ArrayList<>(Arrays.asList("типу, ","имени, ","координате Х, ","координате У, ","дому, ","весу, ","цвету, "));
+            for (int i = 0; i < booleans.size(); ++i) {
+                if (!booleans.get(i))
+                    message.append(errors.get(i));
+            }
+            return message.toString();
         }
     }
 
