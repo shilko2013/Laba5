@@ -9,6 +9,8 @@ import javax.imageio.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.*;
 import java.net.*;
 import java.nio.channels.*;
@@ -33,7 +35,19 @@ public class Client {
         private static Font font = new Font("Font", Font.PLAIN, 15);
         private final static float RATIO = 1.5f;
         Map<Coord, Animal> collection;
+        List<BufferedImage> images = new ArrayList<>();
 
+        private void loadImages() {
+            try {
+                images.add(ImageIO.read(new File("tiger_with_bounds.png")));
+                images.add(ImageIO.read(new File("kangaroo_with_bounds.png")));
+                images.add(ImageIO.read(new File("rabbit_with_bounds.png")));
+                images.add(ImageIO.read(new File("question_mark_with_bounds.png")));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,"Загрузка изображений не удалась!","Ошибка",JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
+            }
+        }
         class MySlider extends JSlider {
             private JPanel panel;
             private JLabel label;
@@ -106,6 +120,9 @@ public class Client {
 
             private Animal animal;
             private double weight;
+            private int x;
+            private int y;
+            private final int iconNumber;
 
             private double getWeight() {
                 return weight;
@@ -115,35 +132,76 @@ public class Client {
                 this.weight = weight;
             }
 
+            public int getMyX() {
+                return x;
+            }
+
+            public void setMyX(int x) {
+                this.x = x;
+            }
+
+            public int getMyY() {
+                return y;
+            }
+
+            public void setMyY(int y) {
+                this.y = y;
+            }
+
             private Animal getAnimal() {
                 return animal;
             }
 
             private AnimalButton(Animal animal) {
-                super("");
+                super();
+                //super(new ImageIcon(images.get(0).getScaledInstance(animal.getWeight(), (int)(images.get(0).getHeight()/(images.get(0).getWidth()/(animal.getWeight()+0.))), Image.SCALE_SMOOTH)));
                 this.animal = animal;
                 weight = animal.getWeight();
+                x = animal.getCoord().getX();
+                y = animal.getCoord().getY();
+                switch (animal.getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1).toLowerCase()) {
+                    case "tiger":
+                        iconNumber = 0;
+                        break;
+                    case "kangaroo":
+                        iconNumber = 1;
+                        break;
+                    case "rabbit":
+                        iconNumber = 2;
+                        break;
+                    default:
+                        iconNumber = 3;
+                        break;
+                }
+                setIcon(new ImageIcon(images.get(iconNumber).getScaledInstance(animal.getWeight(), (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.))), Image.SCALE_SMOOTH)));
                 setBackground(Color.WHITE);
-                setBounds((int) (animal.getCoord().getX() - Math.round(getWeight() * RATIO / 2)), animal.getCoord().getY() - (int) (getWeight() / 2), (int) Math.round(getWeight() * RATIO), (int) (getWeight()));
-                setForeground(new Color(animal.getColour()[0], animal.getColour()[1], animal.getColour()[2]));
-                setBorder(new RoundedBorder((int) Math.round(getWeight())));
+                //ImageIcon icon = new ImageIcon(images.get(0).getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                setBounds(x-animal.getWeight()/2,y-(int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.)))/2,animal.getWeight(), (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.))));
+                //setBounds((int) (animal.getCoord().getX() - Math.round(getWeight() * RATIO / 2)), animal.getCoord().getY() - (int) (getWeight() / 2), (int) Math.round(getWeight() * RATIO), (int) (getWeight()));
+                //setForeground(new Color(animal.getColour()[0], animal.getColour()[1], animal.getColour()[2]));
+                //setBorder(new RoundedBorder((int) Math.round(getWeight())));
                 setToolTipText(this.animal.getName());
                 setOpaque(false);
-                setEnabled(false);
+                //setContentAreaFilled(false);
+                //setFocusPainted(false);
+                setBorderPainted(false);
+                //setEnabled(false);
             }
 
             private void reBounds() {
-                setBounds((int) (animal.getCoord().getX() - Math.round(weight * RATIO / 2)), (int) (animal.getCoord().getY() - weight / 2), (int) (Math.round(weight * RATIO)), (int) weight);
+                setBounds((int)(x-weight/2),y-(int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.)))/2,(int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))));
+                //setBounds((int) (animal.getCoord().getX() - Math.round(weight * RATIO / 2)), (int) (animal.getCoord().getY() - weight / 2), (int) (Math.round(weight * RATIO)), (int) weight);
             }
 
             private void reBorder() {
-                setBorder(new RoundedBorder((int) weight));
+                setIcon(new ImageIcon(images.get(iconNumber).getScaledInstance((int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.))), Image.SCALE_SMOOTH)));
             }
 
             @Override
             public void paintComponent(Graphics g) {
-                //g.fillOval(this.getX()-this.getWidth()/2,this.getY()-this.getHeight()/2,this.getWidth(),this.getHeight());
-                g.fillOval((int) (this.getX() - Math.round(weight * RATIO / 2)), (int) (this.getY() - weight), (int) (Math.round(weight * RATIO)), (int) weight);
+                super.paintComponent(g);
+                new ImageIcon(images.get(iconNumber).getScaledInstance((int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))), Image.SCALE_SMOOTH))
+                        .paintIcon(this,g,x-(int)(weight/2),y-(int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))));
             }
         }
 
@@ -249,6 +307,7 @@ public class Client {
         }
 
         private void init() {
+            loadImages();
             MyExecutor executor = new MyExecutor();
             this.setFont(font);
             this.setSize(800, 800);
@@ -638,8 +697,6 @@ public class Client {
                     animal.getCoord().getX() < maxX.getMyValue()));
             booleans.add((animal.getCoord().getY() > minY.getMyValue() &&
                     animal.getCoord().getY() < maxY.getMyValue()));
-            if (animal.getCoord().equals(new Coord(800,400)))
-                    System.out.println("");
             booleans.add((
                     (animal.getHome().trim().equalsIgnoreCase(homeOfKenga.getText().trim()) &&
                             homeOfKenga.isSelected()) ||
@@ -647,8 +704,7 @@ public class Client {
                                     homeOfRabbit.isSelected()) ||
                             (animal.getHome().trim().equalsIgnoreCase(australia.getText().trim()) &&
                                     australia.isSelected()) ||
-                            (animal.getHome().trim().equalsIgnoreCase(other.getText().trim()) &&
-                                    other.isSelected())
+                                    other.isSelected()
                     ));
             booleans.add((animal.getWeight() > minWeight.getMyValue() &&
                     animal.getWeight() < maxWeight.getMyValue()));
@@ -682,24 +738,27 @@ public class Client {
                 Animal animal = e.getAnimal();
                 int weight = animal.getWeight();
                 System.out.println(maxX.getMyValue());
+                int a = (new Random().nextInt(5)+1)*(new Random().nextInt(1)*2-1);
+                int b = (new Random().nextInt(5)+1)*(new Random().nextInt(1)*2-1);
                 if (checkFilter(animal, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, grey, black, brown) == null) {
                     executor.addTask(animal, () -> {
-                        e.setWeight(e.getWeight() + weight / 200.);
+                        e.setMyX(e.getMyX() + a*new Random().nextInt(3));
+                        e.setMyY(e.getMyY() + b*new Random().nextInt(3));
                         e.reBounds();
                         e.reBorder();
                         e.revalidate();
                         canvas.revalidate();
                         canvas.repaint();
                     }, () -> {
-                        e.setWeight(e.getWeight() - weight / 400.);
+                        /*e.setWeight(e.getWeight() - weight / 400.);
                         e.reBounds();
                         e.reBorder();
                         e.revalidate();
                         canvas.revalidate();
-                        canvas.repaint();
-                    }, 10, 200, 400);
+                        canvas.repaint();*/
+                    }, 1, 2000, 4000);
                     somebodyExist[0] = true;
                 }
                 else {
@@ -713,12 +772,18 @@ public class Client {
             });
             if (somebodyExist[0])
                 return "";
-            List<String> errors = new ArrayList<>(Arrays.asList("типу, ","имени, ","координате Х, ","координате У, ","дому, ","весу, ","цвету, "));
-            for (int i = 0; i < booleans.size(); ++i) {
-                if (!booleans.get(i))
-                    message.append(errors.get(i));
+            else {
+                if (booleans.stream().anyMatch(e->!e)) {
+                    List<String> errors = new ArrayList<>(Arrays.asList("типу, ", "имени, ", "координате Х, ", "координате У, ", "дому, ", "весу, ", "цвету, "));
+                    for (int i = 0; i < booleans.size(); ++i) {
+                        if (!booleans.get(i))
+                            message.append(errors.get(i));
+                    }
+                    return message.toString();
+                }
+                else
+                    return "всем параметрам одновременно  ";
             }
-            return message.toString();
         }
     }
 
