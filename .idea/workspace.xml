@@ -61,14 +61,22 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="749" column="18" selection-start-line="749" selection-start-column="18" selection-end-line="749" selection-end-column="18" />
+            <state relative-caret-position="231">
+              <caret line="799" column="37" lean-forward="true" selection-start-line="799" selection-start-column="37" selection-end-line="799" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#MySlider#0;class#MySlider#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="class#RoundedBorder#0;class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="e#2482#2483#0" expanded="true" />
                 <element signature="e#2542#2543#0" expanded="true" />
+                <element signature="e#4133#4134#0" expanded="true" />
+                <element signature="e#4177#4178#0" expanded="true" />
+                <element signature="e#4227#4228#0" expanded="true" />
+                <element signature="e#4277#4278#0" expanded="true" />
+                <element signature="e#4405#4406#0" expanded="true" />
+                <element signature="e#4449#4450#0" expanded="true" />
+                <element signature="e#4499#4500#0" expanded="true" />
+                <element signature="e#4549#4550#0" expanded="true" />
                 <element signature="e#4342#4343#0" expanded="true" />
                 <element signature="e#4382#4383#0" expanded="true" />
                 <element signature="e#4421#4422#0" expanded="true" />
@@ -83,8 +91,8 @@
                 <element signature="e#7008#7009#0" expanded="true" />
                 <element signature="e#7792#7793#0" expanded="true" />
                 <element signature="e#7846#7847#0" expanded="true" />
-                <element signature="e#10274#10669#0" expanded="true" />
-                <element signature="e#10668#10669#0" expanded="true" />
+                <element signature="e#13147#13542#0" expanded="true" />
+                <element signature="e#13541#13542#0" expanded="true" />
                 <element signature="e#11085#11086#0" expanded="true" />
                 <element signature="e#11142#11143#0" expanded="true" />
                 <element signature="e#11208#11209#0" expanded="true" />
@@ -160,7 +168,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>exit</find>
       <find>mysli</find>
       <find>anima</find>
       <find>exe</find>
@@ -190,6 +197,7 @@
       <find>start</find>
       <find>int a</find>
       <find>paintcom</find>
+      <find>execut</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -423,7 +431,7 @@
       <workItem from="1525348726497" duration="94462000" />
       <workItem from="1525894683168" duration="39699000" />
       <workItem from="1526143319447" duration="16344000" />
-      <workItem from="1526562942566" duration="30777000" />
+      <workItem from="1526562942566" duration="40467000" />
     </task>
     <task id="LOCAL-00001" summary="Laba5.Version1 with comments.">
       <created>1517939757786</created>
@@ -684,11 +692,18 @@
       <option name="project" value="LOCAL" />
       <updated>1526683201556</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Laba7.Version10. анимация в процессе2.">
+      <created>1526689698754</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1526689698754</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="502457000" />
+    <option name="totallyTimeSpent" value="512147000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
@@ -773,7 +788,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Laba5.Version5 ready. Debugged. With JavaDoc. Working." />
     <MESSAGE value="Laba5.Version5 ready. Debugged. With JavaDoc. Working. Finish." />
     <MESSAGE value="Laba5.Version5 ready. Сдано." />
     <MESSAGE value="Laba6.Version1" />
@@ -798,7 +812,8 @@
     <MESSAGE value="Laba7.Version9. Сделано ограничение." />
     <MESSAGE value="Laba7.Version9. Сделано ограничение2." />
     <MESSAGE value="Laba7.Version10. Сделано ограничение3, анимация в процессе1." />
-    <option name="LAST_COMMIT_MESSAGE" value="Laba7.Version10. Сделано ограничение3, анимация в процессе1." />
+    <MESSAGE value="Laba7.Version10. анимация в процессе2." />
+    <option name="LAST_COMMIT_MESSAGE" value="Laba7.Version10. анимация в процессе2." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -809,14 +824,8 @@
           <properties />
           <option name="timeStamp" value="141" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/shilko/ru/Client.java</url>
-          <line>744</line>
-          <properties />
-          <option name="timeStamp" value="163" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="164" />
+      <option name="time" value="170" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1326,14 +1335,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="749" column="18" selection-start-line="749" selection-start-column="18" selection-end-line="749" selection-end-column="18" />
+        <state relative-caret-position="231">
+          <caret line="799" column="37" lean-forward="true" selection-start-line="799" selection-start-column="37" selection-end-line="799" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#MySlider#0;class#MySlider#0;class#ClientGUI#0;class#Client#0" />
             <element signature="class#RoundedBorder#0;class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
             <element signature="e#2482#2483#0" expanded="true" />
             <element signature="e#2542#2543#0" expanded="true" />
+            <element signature="e#4133#4134#0" expanded="true" />
+            <element signature="e#4177#4178#0" expanded="true" />
+            <element signature="e#4227#4228#0" expanded="true" />
+            <element signature="e#4277#4278#0" expanded="true" />
+            <element signature="e#4405#4406#0" expanded="true" />
+            <element signature="e#4449#4450#0" expanded="true" />
+            <element signature="e#4499#4500#0" expanded="true" />
+            <element signature="e#4549#4550#0" expanded="true" />
             <element signature="e#4342#4343#0" expanded="true" />
             <element signature="e#4382#4383#0" expanded="true" />
             <element signature="e#4421#4422#0" expanded="true" />
@@ -1348,8 +1365,8 @@
             <element signature="e#7008#7009#0" expanded="true" />
             <element signature="e#7792#7793#0" expanded="true" />
             <element signature="e#7846#7847#0" expanded="true" />
-            <element signature="e#10274#10669#0" expanded="true" />
-            <element signature="e#10668#10669#0" expanded="true" />
+            <element signature="e#13147#13542#0" expanded="true" />
+            <element signature="e#13541#13542#0" expanded="true" />
             <element signature="e#11085#11086#0" expanded="true" />
             <element signature="e#11142#11143#0" expanded="true" />
             <element signature="e#11208#11209#0" expanded="true" />

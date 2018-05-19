@@ -122,7 +122,25 @@ public class Client {
             private double weight;
             private double x;
             private double y;
+            private double stepX;
+            private double stepY;
             private final int iconNumber;
+
+            public double getStepX() {
+                return stepX;
+            }
+
+            public void setStepX(double stepX) {
+                this.stepX = stepX;
+            }
+
+            public double getStepY() {
+                return stepY;
+            }
+
+            public void setStepY(double stepY) {
+                this.stepY = stepY;
+            }
 
             private double getWeight() {
                 return weight;
@@ -163,6 +181,8 @@ public class Client {
                 weight = animal.getWeight();
                 x = animal.getCoord().getX();
                 y = animal.getCoord().getY();
+                stepX = x;
+                stepY = y;
                 switch (animal.getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1).toLowerCase()) {
                     case "tiger":
                         iconNumber = 0;
@@ -198,7 +218,7 @@ public class Client {
             }
 
             private void reBorder() {
-                setIcon(new ImageIcon(images.get(iconNumber).getScaledInstance((int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.))), Image.SCALE_SMOOTH)));
+                setIcon(new ImageIcon(images.get(iconNumber).getScaledInstance((int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))), Image.SCALE_SMOOTH)));
             }
 
             @Override
@@ -747,27 +767,41 @@ public class Client {
                 int magicConstant = (int)(images.get(e.getIconNumber()).getHeight()/(images.get(e.getIconNumber()).getWidth()/(animal.getWeight()+0.)));
                 int randomHeight = new Random().nextInt(canvas.getHeight()-magicConstant)+magicConstant/2;
                 int numberOfCircles = new Random().nextInt(3)+3;
-                /*double cos = */
+                int randomAmplitude = new Random().nextInt(50)+25;
+                double cos = (randomWidth-animal.getCoord().getX())/(Math.pow(Math.pow(randomWidth-animal.getCoord().getX(),2)+Math.pow(randomHeight-animal.getCoord().getY(),2),1./2));
+                double sin = (randomHeight-animal.getCoord().getY())/(Math.pow(Math.pow(randomWidth-animal.getCoord().getX(),2)+Math.pow(randomHeight-animal.getCoord().getY(),2),1./2));
                 if (checkFilter(animal, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, grey, black, brown) == null) {
                     executor.addTask(animal, () -> {
-                        e.setMyX(e.getMyX()+(randomWidth-e.getAnimal().getCoord().getX())/200.);
-                        e.setMyY(e.getMyY()+(randomHeight-e.getAnimal().getCoord().getY())/400.);
+                        e.setStepX(e.getStepX()+(randomWidth-e.getAnimal().getCoord().getX())/200.);
+                        e.setWeight(e.getWeight()-animal.getWeight()/300.);
+                        //e.setStepY(e.getStepY()+(randomHeight-e.getAnimal().getCoord().getY())/400.);
+                        double myY = (animal.getCoord().getY()+randomAmplitude*Math.sin(Math.PI*numberOfCircles*e.getStepX()/(randomWidth-animal.getCoord().getX())));
+                        e.setMyX((e.getStepX()-animal.getCoord().getX())*cos-(myY-animal.getCoord().getY())*sin+animal.getCoord().getX());
+                        e.setMyY((e.getStepX()-animal.getCoord().getX())*sin+(myY-animal.getCoord().getY())*cos+animal.getCoord().getY());
+                        //e.setMyX(e.getStepX());
+                        //e.setMyY(myY);
                         e.reBounds();
                         e.reBorder();
                         e.revalidate();
                         canvas.revalidate();
                         canvas.repaint();
                     }, () -> {
-                        e.setMyX(e.getMyX()-(randomWidth-e.getAnimal().getCoord().getX())/400.);
-                        e.setMyY(e.getMyY()-(randomHeight-e.getAnimal().getCoord().getY())/800.);
+                        e.setStepX(e.getStepX()-(randomWidth-e.getAnimal().getCoord().getX())/400.);
+                        e.setWeight(e.getWeight()+animal.getWeight()/600.);
+                        //e.setStepY(e.getStepY()+(randomHeight-e.getAnimal().getCoord().getY())/400.);
+                        double myY = (animal.getCoord().getY()+randomAmplitude*Math.sin(Math.PI*numberOfCircles*e.getStepX()/(randomWidth-animal.getCoord().getX())));
+                        e.setMyX((e.getStepX()-animal.getCoord().getX())*cos-(myY-animal.getCoord().getY())*sin+animal.getCoord().getX());
+                        e.setMyY((e.getStepX()-animal.getCoord().getX())*sin+(myY-animal.getCoord().getY())*cos+animal.getCoord().getY());
+                        //e.setMyX(e.getStepX());
+                        //e.setMyY(myY);
                         e.reBounds();
                         e.reBorder();
                         e.revalidate();
                         canvas.revalidate();
                         canvas.repaint();
-                    }, 100, 200, 400);
+                    }, 5000, 200, 400);
                     somebodyExist[0] = true;
                 }
                 else {
