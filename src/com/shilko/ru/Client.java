@@ -120,8 +120,8 @@ public class Client {
 
             private Animal animal;
             private double weight;
-            private int x;
-            private int y;
+            private double x;
+            private double y;
             private final int iconNumber;
 
             private double getWeight() {
@@ -132,20 +132,24 @@ public class Client {
                 this.weight = weight;
             }
 
-            public int getMyX() {
+            private double getMyX() {
                 return x;
             }
 
-            public void setMyX(int x) {
+            private void setMyX(double x) {
                 this.x = x;
             }
 
-            public int getMyY() {
+            private double getMyY() {
                 return y;
             }
 
-            public void setMyY(int y) {
+            private void setMyY(double y) {
                 this.y = y;
+            }
+
+            private int getIconNumber() {
+                return iconNumber;
             }
 
             private Animal getAnimal() {
@@ -176,7 +180,7 @@ public class Client {
                 setIcon(new ImageIcon(images.get(iconNumber).getScaledInstance(animal.getWeight(), (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.))), Image.SCALE_SMOOTH)));
                 setBackground(Color.WHITE);
                 //ImageIcon icon = new ImageIcon(images.get(0).getScaledInstance(100, 100, Image.SCALE_SMOOTH));
-                setBounds(x-animal.getWeight()/2,y-(int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.)))/2,animal.getWeight(), (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.))));
+                setBounds((int)x-animal.getWeight()/2,(int)y-(int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.)))/2,animal.getWeight(), (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.))));
                 //setBounds((int) (animal.getCoord().getX() - Math.round(getWeight() * RATIO / 2)), animal.getCoord().getY() - (int) (getWeight() / 2), (int) Math.round(getWeight() * RATIO), (int) (getWeight()));
                 //setForeground(new Color(animal.getColour()[0], animal.getColour()[1], animal.getColour()[2]));
                 //setBorder(new RoundedBorder((int) Math.round(getWeight())));
@@ -189,7 +193,7 @@ public class Client {
             }
 
             private void reBounds() {
-                setBounds((int)(x-weight/2),y-(int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.)))/2,(int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))));
+                setBounds((int)(x-weight/2),(int)y-(int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.)))/2,(int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))));
                 //setBounds((int) (animal.getCoord().getX() - Math.round(weight * RATIO / 2)), (int) (animal.getCoord().getY() - weight / 2), (int) (Math.round(weight * RATIO)), (int) weight);
             }
 
@@ -201,7 +205,7 @@ public class Client {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 new ImageIcon(images.get(iconNumber).getScaledInstance((int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))), Image.SCALE_SMOOTH))
-                        .paintIcon(this,g,x-(int)(weight/2),y-(int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))));
+                        .paintIcon(this,g,(int)(x-(weight/2)),(int)(y-(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.)))));
             }
         }
 
@@ -245,7 +249,7 @@ public class Client {
 
             private void addTask(Animal animal, Runnable runnable1, Runnable runnable2, int delay, int n1, int n2) {
                 if (!tasks.containsKey(animal) || (tasks.containsKey(animal) && tasks.get(animal).isDone())) {
-                    tasks.put(animal, executor.scheduleWithFixedDelay(new DoubleRunNTimes(runnable1, runnable2, n1, n2), 0, delay, TimeUnit.MILLISECONDS));
+                    tasks.put(animal, executor.scheduleWithFixedDelay(new DoubleRunNTimes(runnable1, runnable2, n1, n2), 0, delay, TimeUnit.MICROSECONDS));
                 }
             }
 
@@ -346,6 +350,7 @@ public class Client {
                 }
 
                 public void paintComponent(Graphics g) {
+                    super.paintComponent(g);
                     gr = (Graphics2D) g;
 
                     // Делаем белый фон
@@ -738,27 +743,31 @@ public class Client {
                 Animal animal = e.getAnimal();
                 int weight = animal.getWeight();
                 System.out.println(maxX.getMyValue());
-                int a = (new Random().nextInt(5)+1)*(new Random().nextInt(1)*2-1);
-                int b = (new Random().nextInt(5)+1)*(new Random().nextInt(1)*2-1);
+                int randomWidth = new Random().nextInt(canvas.getWidth()-weight)+weight/2;
+                int magicConstant = (int)(images.get(e.getIconNumber()).getHeight()/(images.get(e.getIconNumber()).getWidth()/(animal.getWeight()+0.)));
+                int randomHeight = new Random().nextInt(canvas.getHeight()-magicConstant)+magicConstant/2;
+                int numberOfCircles = new Random().nextInt(3)+3;
+                /*double cos = */
                 if (checkFilter(animal, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, grey, black, brown) == null) {
                     executor.addTask(animal, () -> {
-                        e.setMyX(e.getMyX() + a*new Random().nextInt(3));
-                        e.setMyY(e.getMyY() + b*new Random().nextInt(3));
+                        e.setMyX(e.getMyX()+(randomWidth-e.getAnimal().getCoord().getX())/200.);
+                        e.setMyY(e.getMyY()+(randomHeight-e.getAnimal().getCoord().getY())/400.);
                         e.reBounds();
                         e.reBorder();
                         e.revalidate();
                         canvas.revalidate();
                         canvas.repaint();
                     }, () -> {
-                        /*e.setWeight(e.getWeight() - weight / 400.);
+                        e.setMyX(e.getMyX()-(randomWidth-e.getAnimal().getCoord().getX())/400.);
+                        e.setMyY(e.getMyY()-(randomHeight-e.getAnimal().getCoord().getY())/800.);
                         e.reBounds();
                         e.reBorder();
                         e.revalidate();
                         canvas.revalidate();
-                        canvas.repaint();*/
-                    }, 1, 2000, 4000);
+                        canvas.repaint();
+                    }, 100, 200, 400);
                     somebodyExist[0] = true;
                 }
                 else {
