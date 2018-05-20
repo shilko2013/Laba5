@@ -345,6 +345,50 @@ public class Client {
                 }
             });
 
+            //Font font = new Font("Font", Font.BOLD, 15);
+            JMenuBar menuBar = new JMenuBar();
+            JMenu collectionMenu = new JMenu("Menu");
+            collectionMenu.setFont(font);
+            collectionMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            JMenu language = new JMenu("Language");
+            language.setFont(font);
+            collectionMenu.add(language);
+            JMenuItem russian = new JMenuItem("Russian");
+            russian.setFont(font);
+            language.add(russian);
+            russian.addActionListener((event) -> {
+
+            });
+            JMenuItem norwegian = new JMenuItem("Norwegian");
+            norwegian.setFont(font);
+            language.add(norwegian);
+            norwegian.addActionListener((event) -> {
+
+            });
+            JMenuItem albanian = new JMenuItem("Albanian");
+            albanian.setFont(font);
+            language.add(albanian);
+            albanian.addActionListener((event) -> {
+
+            });
+            JMenuItem english = new JMenuItem("English");
+            english.setFont(font);
+            language.add(english);
+            english.addActionListener((event) -> {
+
+            });
+            collectionMenu.addSeparator();
+            JMenuItem exitItem = new JMenuItem("Exit");
+            exitItem.setFont(font);
+            collectionMenu.add(exitItem);
+            exitItem.addActionListener((event) -> {
+                if (JOptionPane.showConfirmDialog(this, "Вы действительно хотите выйти?", "Закрытие программы", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+                    System.exit(0);
+                }
+            });
+            menuBar.add(collectionMenu);
+            this.setJMenuBar(menuBar);
+
             JPanel border = new JPanel();
             border.setPreferredSize(new Dimension(800, 1));
             border.setBackground(Color.BLACK);

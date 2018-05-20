@@ -2,6 +2,7 @@ package com.shilko.ru;
 
 import java.io.*;
 import java.util.*;
+import java.time.*;
 
 public abstract class Animal implements Eating, Workable, Comparable<Animal>, Serializable {
     private class HomelessException extends RuntimeException {
@@ -19,10 +20,10 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
     private String home;
     private Queue<String> actions;
     private Map<Ingestion, Set<String>> ingestion;
-    private long timeOfCreate;
+    private OffsetDateTime timeOfCreate;
     private int weight;
     {
-        timeOfCreate = System.currentTimeMillis();
+        timeOfCreate = OffsetDateTime.now();
         ingestion = new TreeMap<>();
         home = null;
         actions = new LinkedList<>();
@@ -40,7 +41,7 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
             throw new IllegalArgumentException();
         this.weight = weight;
     }
-    public long getTimeOfCreate() {
+    public OffsetDateTime getTimeOfCreate() {
         return timeOfCreate;
     }
     public void setHome(String home) {

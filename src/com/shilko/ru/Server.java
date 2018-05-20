@@ -580,7 +580,7 @@ public class Server {
                 }
                 if (weight != null) {
                     try {
-                        if (Integer.parseInt(weight) < 0)
+                        if (Integer.parseInt(weight) < 0 || Integer.parseInt(weight) > 1000)
                             throw new NumberFormatException();
                         if (weight.charAt(0)=='0'&&weight.length()>1)
                             throw new NumberFormatException();
