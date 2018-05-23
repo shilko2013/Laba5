@@ -3,11 +3,11 @@ package com.shilko.ru;
 import java.util.*;
 
 public class Rabbit extends Animal{
-    private final static int[] colour = new int[]{217,216,218};
+    private final static int[] colour = new int[]{255,255,255};
     @Override public int[] getColour() {
         return colour;
     }
-    private final static String colourSynonym = "Серый";
+    private final static String colourSynonym = "Белый";
     @Override public String getColourSynonym() {return colourSynonym;}
     public Rabbit(String name, String home, int x, int y, int weight) {
         super(name,home,x,y,weight);

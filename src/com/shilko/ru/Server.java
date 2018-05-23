@@ -4,7 +4,13 @@ import javafx.util.Pair;
 import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.*;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -143,6 +149,38 @@ public class Server {
         }
 
         private void init() {
+            class IntegerTextField extends JTextField {
+                private IntegerTextField() {
+                    super();
+                    ((AbstractDocument)getDocument()).setDocumentFilter(new DocumentFilter() {
+                        @Override
+                        public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr)
+                                throws BadLocationException {
+                            if (string == null) return;
+                            replace(fb, offset, 0, string, attr);
+                        }
+                        @Override
+                        public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
+                            replace(fb, offset, length, "", null);
+                        }
+                        @Override
+                        public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+                                throws BadLocationException {
+                            fb.replace(offset, length, checkInput(text, offset), attrs);
+                        }
+                        private String checkInput(String proposedValue, int offset) throws BadLocationException {
+                            // Убираем все пробелы из строки для вставки
+                            StringBuilder temp = new StringBuilder(getText());
+                            temp.insert(offset,proposedValue);
+                            if (temp.length()>1 && temp.charAt(0)=='0') {
+                                Toolkit.getDefaultToolkit().beep();
+                                return "";
+                            }
+                            return proposedValue.replaceAll("(\\D)","");
+                        }
+                    });
+                }
+            }
             this.setFont(font);
             this.setSize(800, 800);
             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -165,7 +203,7 @@ public class Server {
                     return false;
                 }
 
-                public MyTable(Object[][] data, Object[] columnNames) {
+                private MyTable(Object[][] data, Object[] columnNames) {
                     super(data, columnNames);
                     model = new DefaultTableModel(data, columnNames) {
                         @Override
@@ -273,11 +311,11 @@ public class Server {
             name.setFont(font2);
             JLabel xLabel = new JLabel("Введите Х: ");
             xLabel.setFont(font2);
-            JTextField x = new JTextField();
+            IntegerTextField x = new IntegerTextField();
             x.setFont(font2);
             JLabel yLabel = new JLabel("Введите Y: ");
             yLabel.setFont(font2);
-            JTextField y = new JTextField();
+            IntegerTextField y = new IntegerTextField();
             y.setFont(font2);
             JLabel homeLabel = new JLabel("Введите дом: ");
             homeLabel.setFont(font2);
@@ -285,7 +323,7 @@ public class Server {
             home.setFont(font2);
             JLabel weightLabel = new JLabel("Введите вес: ");
             weightLabel.setFont(font2);
-            JTextField weight = new JTextField();
+            IntegerTextField weight = new IntegerTextField();
             weight.setFont(font2);
 
             groupLayout.setAutoCreateGaps(true);
