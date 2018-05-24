@@ -17,6 +17,7 @@ import java.nio.channels.*;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 public class Client {
     private final static int port = 11111;
@@ -36,6 +37,7 @@ public class Client {
         private final static float RATIO = 1.5f;
         Map<Long, Animal> collection;
         List<BufferedImage> images = new ArrayList<>();
+        MyExecutor executor = new MyExecutor();
 
         private void loadImages() {
             try {
@@ -94,7 +96,7 @@ public class Client {
 
             private Animal animal;
             private double weight;
-            private final int iconNumber;
+            private int iconNumber;
 
             private double getWeight() {
                 return weight;
@@ -127,6 +129,10 @@ public class Client {
             private AnimalButton(@NotNull Animal animal) {
                 super();
                 //super(new ImageIcon(images.get(0).getScaledInstance(animal.getWeight(), (int)(images.get(0).getHeight()/(images.get(0).getWidth()/(animal.getWeight()+0.))), Image.SCALE_SMOOTH)));
+                init(animal);
+            }
+
+            private void init(Animal animal) {
                 this.animal = animal;
                 weight = animal.getWeight();
                 switch (animal.getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1).toLowerCase()) {
@@ -152,8 +158,8 @@ public class Client {
                 //setBorder(new RoundedBorder((int) Math.round(getWeight())));
                 setToolTipText(this.animal.getName());
                 setOpaque(false);
-                //setContentAreaFilled(false);
-                //setFocusPainted(false);
+                setContentAreaFilled(false);
+                setFocusPainted(false);
                 setBorderPainted(false);
                 //setEnabled(false);
             }
@@ -171,6 +177,18 @@ public class Client {
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 getIcon().paintIcon(this,g,(int)(animal.getCoord().getX()-(weight/2)),(int)(animal.getCoord().getY()-(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.)))));
+            }
+
+            @Override
+            public boolean equals(Object obj) {
+                if (obj == null)
+                    return false;
+                if (this == obj)
+                    return true;
+                if (this.getClass() != obj.getClass())
+                    return false;
+                AnimalButton animalButton = (AnimalButton) obj;
+                return animal.getID()==animalButton.animal.getID();
             }
         }
 
@@ -230,15 +248,31 @@ public class Client {
             private void shutdown() {
                 executor.shutdownNow();
             }
+
+            private List<Long> working() {
+                List<Long> list = new ArrayList<>();
+                tasks.keySet().forEach((e)-> {
+                    if (!tasks.get(e).isDone())
+                        list.add(e);
+                });
+                return list;
+            }
         }
 
-        List<AnimalButton> list = new ArrayList<>();
+        Set<AnimalButton> set = new TreeSet<>((a, b) -> Double.compare(a.getWeight(), b.getWeight()));
 
         private void updateCollection(JPanel panel) {
             while (true) {
                 try {
-                    collection = new ConcurrentHashMap<>();
-                    getCollection().getLikeMap().forEach((a,b)->collection.put(b.getID(),b));
+                    Map<Long,Animal> newCollection = new ConcurrentHashMap<>();
+                    List<Long> working = executor.working();
+                    getCollection().getLikeMap().forEach((a,b)->{
+                        newCollection.put(b.getID(),b);
+                        if (working.contains(b.getID())) {
+                            b.setCoord(collection.get(b.getID()).getCoord());
+                        }
+                    });
+                    collection = newCollection;
                     break;
                 } catch (Exception e) {
                     if (JOptionPane.showConfirmDialog(null, "Не удается получить коллекцию!\nПовторить попытку?", "Ошибка!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == 1)
@@ -269,9 +303,16 @@ public class Client {
         }
 
         private void initList() {
-            list.clear();
+            //list.clear();
             collection.keySet().forEach((e) -> {
-                list.add(new AnimalButton(collection.get(e)));
+                set.forEach((e1)->{
+                    if (e1.animal.getID()==e)
+                        e1.init(collection.get(e));
+                });
+                if (set.stream().noneMatch((e1)->e1.animal.getID()==e))
+                    set.add(new AnimalButton(collection.get(e)));
+                set = set.stream().filter((e1)->collection.containsKey(e1.animal.getID())).collect(Collectors.toSet());
+                System.out.println();
             });
         }
 
@@ -284,7 +325,6 @@ public class Client {
 
         private void init() {
             loadImages();
-            MyExecutor executor = new MyExecutor();
             this.setFont(font);
             this.setSize(800, 800);
             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -401,8 +441,8 @@ public class Client {
                     this.removeAll();
                     if (staticDraw)
                         initList();
-                    list.sort((a, b) -> Double.compare(a.getWeight(), b.getWeight()));
-                    list.forEach(this::add);
+                    //set.sort((a, b) -> Double.compare(a.getWeight(), b.getWeight()));
+                    set.forEach(this::add);
                     // Рисуем оси
                     /*
                     gr.setStroke(new BasicStroke((float) 1));
@@ -549,7 +589,7 @@ public class Client {
                     return;
                 }
                 canvas.setStaticDraw(false);
-                String message = check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                String message = check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown, true);
                 if (message.length()>0) {
@@ -609,112 +649,112 @@ public class Client {
             types.addActionListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             nameField.addActionListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             minX.addChangeListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             minY.addChangeListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             maxX.addChangeListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             maxY.addChangeListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             homeOfKenga.addActionListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             homeOfRabbit.addActionListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             australia.addActionListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             other.addActionListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             minWeight.addChangeListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             maxWeight.addChangeListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             orange.addActionListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             white.addActionListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             black.addActionListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
             brown.addActionListener((event) -> {
                 if (canvas.isStaticDraw())
                     return;
-                check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
+                check(set, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, white, black, brown,false);
             });
@@ -764,7 +804,7 @@ public class Client {
             return booleans;
         }
 
-        private String check(List<AnimalButton> list, MyExecutor executor, JComponent canvas, JComboBox<String> types, JTextField nameField, MySlider
+        private String check(Collection<AnimalButton> list, MyExecutor executor, JComponent canvas, JComboBox<String> types, JTextField nameField, MySlider
                 minX, MySlider maxX, MySlider minY, MySlider maxY,
                              JRadioButton homeOfKenga, JRadioButton homeOfRabbit, JRadioButton australia, JRadioButton
                                      other, MySlider minWeight, MySlider maxWeight,

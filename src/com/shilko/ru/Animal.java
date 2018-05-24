@@ -117,6 +117,9 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
     public void setCoord(int x, int y) {
         coord = new Coord(x,y);
     }
+    public void setCoord(Coord coord) {
+        this.coord = coord;
+    }
     @Override
     public boolean equals(Object obj) {
         if (obj == null)

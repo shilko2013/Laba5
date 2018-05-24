@@ -13,12 +13,11 @@
     <bookmark url="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java" line="672" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0feda5ad-c9bb-4a19-905a-5b31bf743e05" name="Default" comment="Laba8.Version2. Вечная анимация.">
-      <change beforePath="$PROJECT_DIR$/data_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/data_ru.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Rabbit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Rabbit.class" afterDir="false" />
+    <list default="true" id="0feda5ad-c9bb-4a19-905a-5b31bf743e05" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Animal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Animal.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Animal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Server.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,8 +40,8 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="838" column="75" selection-start-line="838" selection-start-column="75" selection-end-line="838" selection-end-column="75" />
+            <state relative-caret-position="95">
+              <caret line="307" column="35" lean-forward="true" selection-start-line="307" selection-start-column="35" selection-end-line="307" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#MySlider#0;class#MySlider#0;class#ClientGUI#0;class#Client#0" />
@@ -53,16 +52,20 @@
                 <element signature="e#5019#5020#0" expanded="true" />
                 <element signature="e#5061#5062#0" expanded="true" />
                 <element signature="class#DoubleRunNTimes#0;class#ClientGUI#0;class#Client#0" />
-                <element signature="e#13027#13422#0" expanded="true" />
-                <element signature="e#13421#13422#0" expanded="true" />
+                <element signature="e#9829#9830#0" expanded="true" />
+                <element signature="e#9869#9870#0" expanded="true" />
+                <element signature="e#10653#10654#0" expanded="true" />
+                <element signature="e#10707#10708#0" expanded="true" />
+                <element signature="e#13686#14081#0" expanded="true" />
+                <element signature="e#14080#14081#0" expanded="true" />
                 <element signature="e#15950#15951#0" expanded="true" />
                 <element signature="e#16007#16008#0" expanded="true" />
                 <element signature="e#16073#16074#0" expanded="true" />
                 <element signature="e#16141#16142#0" expanded="true" />
-                <element signature="e#39661#39662#0" expanded="true" />
-                <element signature="e#39779#39780#0" expanded="true" />
-                <element signature="e#39821#39822#0" expanded="true" />
-                <element signature="e#39939#39940#0" expanded="true" />
+                <element signature="e#39849#39850#0" expanded="true" />
+                <element signature="e#39949#39950#0" expanded="true" />
+                <element signature="e#39991#39992#0" expanded="true" />
+                <element signature="e#40091#40092#0" expanded="true" />
                 <element signature="method#getCollection#0;class#Client#0" />
               </folding>
             </state>
@@ -72,11 +75,16 @@
       <file leaf-file-name="Animal.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Animal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="44" column="32" lean-forward="true" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
+            <state relative-caret-position="157">
+              <caret line="130" column="37" lean-forward="true" selection-start-line="124" selection-start-column="7" selection-end-line="130" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1406#1407#0" expanded="true" />
                 <element signature="e#1436#1437#0" expanded="true" />
+                <element signature="e#3287#3288#0" expanded="true" />
+                <element signature="e#3325#3326#0" expanded="true" />
+                <element signature="e#3425#3426#0" expanded="true" />
+                <element signature="e#3454#3455#0" expanded="true" />
                 <element signature="e#3956#3957#0" expanded="true" />
                 <element signature="e#4031#4032#0" expanded="true" />
               </folding>
@@ -162,13 +170,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>animalbutton</find>
-      <find />
-      <find>paintcom</find>
-      <find>execut</find>
-      <find>вес</find>
-      <find>exit</find>
-      <find>вы</find>
       <find>exitI</find>
       <find>ото</find>
       <find>menu</find>
@@ -181,17 +182,24 @@
       <find>setmy</find>
       <find>manager</find>
       <find>все</find>
-      <find />
+      <find>животные с</find>
       <find>manag</find>
       <find>anim</find>
       <find>conta</find>
       <find>milli</find>
       <find>update</find>
-      <find>println</find>
       <find>ID</find>
       <find>animal</find>
       <find>edit</find>
+      <find>updatec</find>
       <find>animalb</find>
+      <find>initli</find>
+      <find>sort</find>
+      <find>set&lt;</find>
+      <find>step</find>
+      <find>println</find>
+      <find>staticdra</find>
+      <find>animal =</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -223,8 +231,8 @@
         <option value="$PROJECT_DIR$/data_sq.properties" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Coord.java" />
         <option value="$PROJECT_DIR$/data_ru.properties" />
-        <option value="$PROJECT_DIR$/src/com/shilko/ru/Animal.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Server.java" />
+        <option value="$PROJECT_DIR$/src/com/shilko/ru/Animal.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Client.java" />
       </list>
     </option>
@@ -440,7 +448,7 @@
       <workItem from="1526729322446" duration="164000" />
       <workItem from="1526764133214" duration="707000" />
       <workItem from="1526817056797" duration="1194000" />
-      <workItem from="1526828284860" duration="45485000" />
+      <workItem from="1526828284860" duration="51966000" />
     </task>
     <task id="LOCAL-00001" summary="Laba5.Version1 with comments.">
       <created>1517939757786</created>
@@ -729,11 +737,18 @@
       <option name="project" value="LOCAL" />
       <updated>1527115419609</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Laba8.Version2. Вечная анимация2.">
+      <created>1527160405391</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1527160405391</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="559779000" />
+    <option name="totallyTimeSpent" value="566260000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
@@ -745,11 +760,11 @@
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5003903" side_tool="true" weight="0.32961783" />
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32961783" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32961783" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49960968" visible="true" weight="0.32961783" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -818,7 +833,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Laba6.Version2.Сдано." />
     <MESSAGE value="Laba6.Version3.Команды на стороне сервера." />
     <MESSAGE value="Laba7.Version1.Сервер с FlowLayout и 1 JPanel." />
     <MESSAGE value="Laba7.Version2.Сервер с FlowLayout и JPanel для кнопок, без меню." />
@@ -843,7 +857,8 @@
     <MESSAGE value="Laba7.Version10. анимация в процессе3 готово" />
     <MESSAGE value="Laba8.Version1. Меню с языками пустая, offsetdata add." />
     <MESSAGE value="Laba8.Version2. Вечная анимация." />
-    <option name="LAST_COMMIT_MESSAGE" value="Laba8.Version2. Вечная анимация." />
+    <MESSAGE value="Laba8.Version2. Вечная анимация2." />
+    <option name="LAST_COMMIT_MESSAGE" value="Laba8.Version2. Вечная анимация2." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -856,12 +871,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/shilko/ru/Client.java</url>
-          <line>830</line>
+          <line>314</line>
           <properties />
-          <option name="timeStamp" value="187" />
+          <option name="timeStamp" value="195" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="194" />
+      <option name="time" value="196" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1311,19 +1326,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Animal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="44" column="32" lean-forward="true" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1436#1437#0" expanded="true" />
-            <element signature="e#3956#3957#0" expanded="true" />
-            <element signature="e#4031#4032#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4763">
@@ -1335,10 +1337,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Animal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="130" column="37" lean-forward="true" selection-start-line="124" selection-start-column="7" selection-end-line="130" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1406#1407#0" expanded="true" />
+            <element signature="e#1436#1437#0" expanded="true" />
+            <element signature="e#3287#3288#0" expanded="true" />
+            <element signature="e#3325#3326#0" expanded="true" />
+            <element signature="e#3425#3426#0" expanded="true" />
+            <element signature="e#3454#3455#0" expanded="true" />
+            <element signature="e#3956#3957#0" expanded="true" />
+            <element signature="e#4031#4032#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="838" column="75" selection-start-line="838" selection-start-column="75" selection-end-line="838" selection-end-column="75" />
+        <state relative-caret-position="95">
+          <caret line="307" column="35" lean-forward="true" selection-start-line="307" selection-start-column="35" selection-end-line="307" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#MySlider#0;class#MySlider#0;class#ClientGUI#0;class#Client#0" />
@@ -1349,16 +1369,20 @@
             <element signature="e#5019#5020#0" expanded="true" />
             <element signature="e#5061#5062#0" expanded="true" />
             <element signature="class#DoubleRunNTimes#0;class#ClientGUI#0;class#Client#0" />
-            <element signature="e#13027#13422#0" expanded="true" />
-            <element signature="e#13421#13422#0" expanded="true" />
+            <element signature="e#9829#9830#0" expanded="true" />
+            <element signature="e#9869#9870#0" expanded="true" />
+            <element signature="e#10653#10654#0" expanded="true" />
+            <element signature="e#10707#10708#0" expanded="true" />
+            <element signature="e#13686#14081#0" expanded="true" />
+            <element signature="e#14080#14081#0" expanded="true" />
             <element signature="e#15950#15951#0" expanded="true" />
             <element signature="e#16007#16008#0" expanded="true" />
             <element signature="e#16073#16074#0" expanded="true" />
             <element signature="e#16141#16142#0" expanded="true" />
-            <element signature="e#39661#39662#0" expanded="true" />
-            <element signature="e#39779#39780#0" expanded="true" />
-            <element signature="e#39821#39822#0" expanded="true" />
-            <element signature="e#39939#39940#0" expanded="true" />
+            <element signature="e#39849#39850#0" expanded="true" />
+            <element signature="e#39949#39950#0" expanded="true" />
+            <element signature="e#39991#39992#0" expanded="true" />
+            <element signature="e#40091#40092#0" expanded="true" />
             <element signature="method#getCollection#0;class#Client#0" />
           </folding>
         </state>
