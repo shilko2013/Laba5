@@ -1,5 +1,6 @@
 package com.shilko.ru;
 
+import com.sun.istack.internal.NotNull;
 import javafx.util.Pair;
 
 import javax.swing.*;
@@ -10,7 +11,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.*;
 import java.net.*;
 import java.nio.channels.*;
@@ -34,7 +34,7 @@ public class Client {
     public static class ClientGUI extends JFrame {
         private static Font font = new Font("Font", Font.PLAIN, 15);
         private final static float RATIO = 1.5f;
-        Map<Coord, Animal> collection;
+        Map<Long, Animal> collection;
         List<BufferedImage> images = new ArrayList<>();
 
         private void loadImages() {
@@ -91,79 +91,29 @@ public class Client {
         }
 
         class AnimalButton extends JButton {
-            class RoundedBorder implements Border {
-
-                private int radius;
-
-
-                private RoundedBorder(int radius) {
-                    this.radius = radius;
-                }
-
-
-                public Insets getBorderInsets(Component c) {
-                    return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
-                }
-
-
-                public boolean isBorderOpaque() {
-                    return true;
-                }
-
-
-                public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-                    g.fillOval(x, y, Math.round(radius * RATIO), radius);
-                    g.setColor(Color.BLUE);
-                    g.drawOval(x, y, Math.round(radius * RATIO), radius);
-                }
-            }
 
             private Animal animal;
             private double weight;
-            private double x;
-            private double y;
-            private double stepX;
-            private double stepY;
             private final int iconNumber;
-
-            public double getStepX() {
-                return stepX;
-            }
-
-            public void setStepX(double stepX) {
-                this.stepX = stepX;
-            }
-
-            public double getStepY() {
-                return stepY;
-            }
-
-            public void setStepY(double stepY) {
-                this.stepY = stepY;
-            }
 
             private double getWeight() {
                 return weight;
             }
 
-            private void setWeight(double weight) {
-                this.weight = weight;
-            }
-
             private double getMyX() {
-                return x;
+                return animal.getCoord().getX();
             }
 
             private void setMyX(double x) {
-                this.x = x;
+                animal.getCoord().setX((int)x);
             }
 
             private double getMyY() {
-                return y;
+                return animal.getCoord().getY();
             }
 
             private void setMyY(double y) {
-                this.y = y;
+                animal.getCoord().setY((int)y);
             }
 
             private int getIconNumber() {
@@ -174,15 +124,11 @@ public class Client {
                 return animal;
             }
 
-            private AnimalButton(Animal animal) {
+            private AnimalButton(@NotNull Animal animal) {
                 super();
                 //super(new ImageIcon(images.get(0).getScaledInstance(animal.getWeight(), (int)(images.get(0).getHeight()/(images.get(0).getWidth()/(animal.getWeight()+0.))), Image.SCALE_SMOOTH)));
                 this.animal = animal;
                 weight = animal.getWeight();
-                x = animal.getCoord().getX();
-                y = animal.getCoord().getY();
-                stepX = x;
-                stepY = y;
                 switch (animal.getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1).toLowerCase()) {
                     case "tiger":
                         iconNumber = 0;
@@ -200,7 +146,7 @@ public class Client {
                 setIcon(new ImageIcon(images.get(iconNumber).getScaledInstance(animal.getWeight(), (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.))), Image.SCALE_SMOOTH)));
                 setBackground(Color.WHITE);
                 //ImageIcon icon = new ImageIcon(images.get(0).getScaledInstance(100, 100, Image.SCALE_SMOOTH));
-                setBounds((int)x-animal.getWeight()/2,(int)y-(int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.)))/2,animal.getWeight(), (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.))));
+                setBounds(animal.getCoord().getX()-animal.getWeight()/2,animal.getCoord().getY()-(int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.)))/2,animal.getWeight(), (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(animal.getWeight()+0.))));
                 //setBounds((int) (animal.getCoord().getX() - Math.round(getWeight() * RATIO / 2)), animal.getCoord().getY() - (int) (getWeight() / 2), (int) Math.round(getWeight() * RATIO), (int) (getWeight()));
                 //setForeground(new Color(animal.getColour()[0], animal.getColour()[1], animal.getColour()[2]));
                 //setBorder(new RoundedBorder((int) Math.round(getWeight())));
@@ -213,19 +159,18 @@ public class Client {
             }
 
             private void reBounds() {
-                setBounds((int)(x-weight/2),(int)y-(int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.)))/2,(int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))));
+                setBounds((int)(animal.getCoord().getX()-weight/2),animal.getCoord().getY()-(int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.)))/2,(int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))));
                 //setBounds((int) (animal.getCoord().getX() - Math.round(weight * RATIO / 2)), (int) (animal.getCoord().getY() - weight / 2), (int) (Math.round(weight * RATIO)), (int) weight);
             }
 
             private void reBorder() {
-                setIcon(new ImageIcon(images.get(iconNumber).getScaledInstance((int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))), Image.SCALE_SMOOTH)));
+                //setIcon(new ImageIcon(images.get(iconNumber).getScaledInstance((int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))), Image.SCALE_SMOOTH)));
             }
 
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                new ImageIcon(images.get(iconNumber).getScaledInstance((int)weight, (int)(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.))), Image.SCALE_SMOOTH))
-                        .paintIcon(this,g,(int)(x-(weight/2)),(int)(y-(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.)))));
+                getIcon().paintIcon(this,g,(int)(animal.getCoord().getX()-(weight/2)),(int)(animal.getCoord().getY()-(images.get(iconNumber).getHeight()/(images.get(iconNumber).getWidth()/(weight+0.)))));
             }
         }
 
@@ -256,7 +201,7 @@ public class Client {
 
         class MyExecutor {
             private ScheduledExecutorService executor;
-            private Map<Animal, Future<?>> tasks;
+            private Map<Long, Future<?>> tasks;
 
             private MyExecutor() {
                 init(50);
@@ -267,22 +212,22 @@ public class Client {
                 tasks = new HashMap<>();
             }
 
-            private void addTask(Animal animal, Runnable runnable1, Runnable runnable2, int delay, int n1, int n2) {
-                if (!tasks.containsKey(animal) || (tasks.containsKey(animal) && tasks.get(animal).isDone())) {
-                    tasks.put(animal, executor.scheduleWithFixedDelay(new DoubleRunNTimes(runnable1, runnable2, n1, n2), 0, delay, TimeUnit.MICROSECONDS));
+            private void addTask(Long ID, Runnable runnable1, Runnable runnable2, int delay, int n1, int n2) {
+                if (!tasks.containsKey(ID) || (tasks.containsKey(ID) && tasks.get(ID).isDone())) {
+                    tasks.put(ID, executor.scheduleWithFixedDelay(new DoubleRunNTimes(runnable1, runnable2, n1, n2), 0, delay, TimeUnit.MICROSECONDS));
                 }
             }
 
-            private void addTask(Animal animal, Runnable runnable) {
-                if (!tasks.containsKey(animal) || (tasks.containsKey(animal) && tasks.get(animal).isDone()))
-                    tasks.put(animal,executor.scheduleWithFixedDelay(runnable,0,1,TimeUnit.NANOSECONDS));
+            private void addTask(Long ID, Runnable runnable) {
+                if (!tasks.containsKey(ID) || (tasks.containsKey(ID) && tasks.get(ID).isDone()))
+                    tasks.put(ID,executor.scheduleWithFixedDelay(runnable,0,10,TimeUnit.MILLISECONDS));
             }
 
             private boolean isWorked() {
                 return tasks.values().stream().anyMatch(e -> !e.isDone() && !e.isCancelled());
             }
 
-            private void shotdown() {
+            private void shutdown() {
                 executor.shutdownNow();
             }
         }
@@ -292,7 +237,8 @@ public class Client {
         private void updateCollection(JPanel panel) {
             while (true) {
                 try {
-                    collection = getCollection().getLikeMap();
+                    collection = new ConcurrentHashMap<>();
+                    getCollection().getLikeMap().forEach((a,b)->collection.put(b.getID(),b));
                     break;
                 } catch (Exception e) {
                     if (JOptionPane.showConfirmDialog(null, "Не удается получить коллекцию!\nПовторить попытку?", "Ошибка!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == 1)
@@ -300,12 +246,13 @@ public class Client {
                 }
             }
             List<Pair<Integer,Integer>> pairs = new ArrayList<>();
-            collection.keySet().forEach((e) -> {
-                if ((e.getX()>panel.getWidth()-collection.get(e).getWeight()) || (e.getY()>panel.getHeight()-collection.get(e).getWeight()*1.5)) {
-                    pairs.add(new Pair<>(e.getX(),e.getY()));
+            collection.values().forEach((e) -> {
+                if ((e.getCoord().getX()>panel.getWidth()-(e).getWeight()/2) || (e.getCoord().getY()>panel.getHeight()-new AnimalButton(e).getHeight()/2)) {
+                    pairs.add(new Pair<>(e.getCoord().getX(),e.getCoord().getY()));
+                    collection.values().remove(e);
                 }
             });
-            StringBuilder message = new StringBuilder("Животные с координатами\n");
+            StringBuilder message = new StringBuilder("Животные со следующими координатами не могут быть отображены:\n");
             pairs.forEach(e-> {
                 message.append("x: " +e.getKey()+", y: "+e.getValue()+"\n");
             });
@@ -495,14 +442,13 @@ public class Client {
             stop.setFont(font);
             stop.addActionListener((event) -> {
                 if (executor.isWorked()) {
-                    executor.shotdown();
+                    executor.shutdown();
                     executor.init(50);
                     canvas.repaint();
                     JOptionPane.showMessageDialog(this, "Анимация остановлена!", "Stop", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(this, "Анимация не запущена!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
-                this.setResizable(true);
                 canvas.setStaticDraw(true);
                 canvas.repaint();
             });
@@ -514,8 +460,8 @@ public class Client {
             update.addActionListener((event) -> {
                 updateCollection(canvas);
                 initList();
-                if (!canvas.isStaticDraw())
-                    stop.doClick();
+                /*if (!canvas.isStaticDraw())
+                    stop.doClick();*/
                 canvas.repaint();
             });
             buttonPanel.add(update,c);
@@ -602,7 +548,6 @@ public class Client {
                     JOptionPane.showMessageDialog(this, "Анимация уже запущена!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                this.setResizable(false);
                 canvas.setStaticDraw(false);
                 String message = check(list, executor, canvas, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
@@ -843,23 +788,26 @@ public class Client {
                     private double sin;
                     private int step;
                     private double x;
+                    private int savedX, savedY;
                     private int count;
                     private double myY;
                     private Coord coord;
                     private ManagerMoving(int step, Coord coord) {
                         this.step = step;
                         this.coord = coord;
-                        this.x = coord.getX();
                         reRandom();
                     }
                     private void reRandom() {
+                        reCoord();
+                        savedX = (int)x;
+                        savedY = coord.getY();
                         numberOfCircles = new Random().nextInt(3)+3;
                         randomAmplitude = new Random().nextInt(50)+25;
                         int magicConstant = (int)(images.get(e.getIconNumber()).getHeight()/(images.get(e.getIconNumber()).getWidth()/(animal.getWeight()+0.)));
                         randomWidth = new Random().nextInt(canvas.getWidth()-weight)+weight/2;
                         randomHeight = new Random().nextInt(canvas.getHeight()-magicConstant)+magicConstant/2;
-                        cos = (randomWidth-coord.getX())/(Math.pow(Math.pow(randomWidth-coord.getX(),2)+Math.pow(randomHeight-coord.getY(),2),1./2));
-                        sin = (randomHeight-coord.getY())/(Math.pow(Math.pow(randomWidth-coord.getX(),2)+Math.pow(randomHeight-coord.getY(),2),1./2));
+                        cos = (randomWidth-savedX)/(Math.pow(Math.pow(randomWidth-savedX,2)+Math.pow(randomHeight-savedY,2),1./2));
+                        sin = (randomHeight-savedY)/(Math.pow(Math.pow(randomWidth-savedX,2)+Math.pow(randomHeight-savedY,2),1./2));
                         count = 0;
                     }
                     private void nextStep() {
@@ -869,28 +817,28 @@ public class Client {
                             reRandom();
                             nextStep();
                         }
-                        if (randomWidth>coord.getX())
-                            x += (randomWidth-coord.getX())/(double)step;
+                        if (randomWidth>savedX)
+                            x += (randomWidth-savedX)/(double)step;
                         else
-                            x -= (randomWidth-coord.getX())/(double)step;
-                        myY = (coord.getY()+randomAmplitude*Math.sin(Math.PI*numberOfCircles*x/(randomWidth-coord.getX())));
+                            x -= (randomWidth-savedX)/(double)step;
+                        myY = (savedY+randomAmplitude*Math.sin(Math.PI*numberOfCircles*x/(randomWidth-savedX)));
                     }
                     private void reCoord() {
-                        coord = new Coord((int)e.getMyX(),(int)e.getMyY());
+                        //coord = new Coord((int)e.getMyX(),(int)e.getMyY());
                         x = coord.getX();
                     }
                     private int nextX() {
-                        return (int)((x-coord.getX())*cos-(myY-coord.getY())*sin+coord.getX());
+                        return (int)((x-savedX)*cos-(myY-savedY)*sin+savedX);
                     }
                     private int nextY() {
-                        return (int)((x-coord.getX())*sin+(myY-coord.getY())*cos+coord.getY());
+                        return (int)((x-savedX)*sin+(myY-savedY)*cos+savedY);
                     }
                 }
                 ManagerMoving managerMoving = new ManagerMoving(400,animal.getCoord());
                 if (checkFilter(animal, types, nameField, minX, maxX, minY, maxY,
                         homeOfKenga, homeOfRabbit, australia, other, minWeight, maxWeight,
                         orange, grey, black, brown) == null) {
-                    executor.addTask(animal, () -> {
+                    executor.addTask(animal.getID(), () -> {
                         managerMoving.nextStep();
                         e.setMyX(managerMoving.nextX());
                         e.setMyY(managerMoving.nextY());

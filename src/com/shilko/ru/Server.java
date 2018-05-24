@@ -487,6 +487,7 @@ public class Server {
                 rows.forEach(e -> {
                     Vector vector = ((DefaultTableModel) table.getModel()).getDataVector();
                     Animal animal = collection.getAnimal(new Coord((int) ((Vector) vector.elementAt(e)).elementAt(2), (int) ((Vector) vector.elementAt(e)).elementAt(3)));
+                    long tempID = animal.getID();
                     //collection.remove(new Coord((int) ((Vector) vector.elementAt(e)).elementAt(2), (int) ((Vector) vector.elementAt(e)).elementAt(3)));
                     //Class animalClass = animal.getClass();
                     Animal newAnimal = null;
@@ -496,6 +497,7 @@ public class Server {
                             type2 = animal.getClass().toString().substring(animal.getClass().toString().lastIndexOf(".")+1,animal.getClass().toString().length());
                         newAnimal = (Animal)Class.forName("com.shilko.ru."+type2).getConstructor(String.class,String.class,int.class,int.class,int.class).newInstance(name1 == null ? animal.getName() : name1, home1 == null ? animal.getHome() : home1,
                                 x1 == null?animal.getCoord().getX():Integer.parseInt(x1), y1 == null?animal.getCoord().getY():Integer.parseInt(y1), weight1 == null ? animal.getWeight() : Integer.parseInt(weight1));
+                        newAnimal.setID(tempID);
                     } catch (Exception w) {w.printStackTrace();}
                     if (collection.remove(newAnimal.getCoord()).getKey()) {
                         table.removeRow(e);
