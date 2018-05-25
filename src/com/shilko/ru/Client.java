@@ -389,7 +389,7 @@ public class Client {
             JPanel border = new JPanel();
             border.setPreferredSize(new Dimension(800, 1));
             border.setBackground(Color.BLACK);
-            this.add(border, BorderLayout.PAGE_START);
+            this.add(border,BorderLayout.NORTH);
 
             class Canvas extends JPanel {
                 private Graphics2D gr;
@@ -454,9 +454,10 @@ public class Client {
             canvas.setMinimumSize(new Dimension(500, 500));
             canvas.setPreferredSize(canvas.getMinimumSize());
             //canvas.setBackground(Color.WHITE);
-            this.add(canvas, BorderLayout.CENTER);
-
+            this.add(canvas,BorderLayout.CENTER);
             JPanel panel = new JPanel();
+            GroupLayout panelLayout = new GroupLayout(panel);
+            panel.setLayout(panelLayout);
             panel.setPreferredSize(new Dimension(900, 230));
             //panel.setLayout(new FlowLayout());
 
@@ -470,12 +471,13 @@ public class Client {
             JLabel buttonLabel = new JLabel("Панель управления");
             buttonLabel.setFont(font);
             buttonPanel.add(buttonLabel,c);
-            c.gridy = 1; c.gridwidth = 1;
+            c.gridy = 1;
 
             JButton start = new JButton("Start");
             start.setFont(font);
+            start.setPreferredSize(new Dimension(120,50));
             buttonPanel.add(start,c);
-            c.gridx = 1;
+            c.gridy = 2;
 
             JButton stop = new JButton("Stop");
             stop.setFont(font);
@@ -491,8 +493,9 @@ public class Client {
                 canvas.setStaticDraw(true);
                 canvas.repaint();
             });
+            stop.setPreferredSize(new Dimension(120,50));
             buttonPanel.add(stop,c);
-            c.gridx = 2;
+            c.gridy = 3;
 
             JButton update = new JButton("Update");
             update.setFont(font);
@@ -503,43 +506,33 @@ public class Client {
                     stop.doClick();*/
                 canvas.repaint();
             });
+            update.setPreferredSize(new Dimension(120,50));
             buttonPanel.add(update,c);
-            panel.add(buttonPanel);
 
-            JLabel type = new JLabel("Выберите тип:");
+            JPanel toolKitPanel1 = new JPanel();
+            //toolKitPanel1.setPreferredSize(new Dimension(300,500));
+
+            JLabel type = new JLabel("Тип животного:");
             type.setFont(font);
             JPanel typePanel = new JPanel();
             JComboBox<String> types = new JComboBox<>(new String[]{
                     "Tiger", "Kangaroo", "Rabbit", "RealAnimal", "Любой"
             });
             types.setFont(font);
-            typePanel.add(type, BorderLayout.NORTH);
-            typePanel.add(types, BorderLayout.SOUTH);
-            panel.add(typePanel);
+            typePanel.add(type);
+            typePanel.add(types);
 
             JPanel namePanel = new JPanel();
-            JLabel nameLabel = new JLabel("Введите имя: ");
+            JLabel nameLabel = new JLabel("Имя животного: ");
             nameLabel.setFont(font);
             JTextField nameField = new JTextField();
             nameField.setPreferredSize(new Dimension(100, 20));
             nameField.setFont(font);
             namePanel.add(nameLabel);
             namePanel.add(nameField);
-            panel.add(namePanel);
 
-            JPanel minPanel = new JPanel();
-            JPanel maxPanel = new JPanel();
-            MySlider minX = new MySlider("Min X: ", 0, 1800, 0, 400, 100);
-            minPanel.add(minX.getPanel());
-            MySlider minY = new MySlider("Min Y: ", 0, 800, 0, 200, 50);
-            minPanel.add(minY.getPanel());
-            MySlider maxX = new MySlider("Max X: ", 0, 1800, 0, 400, 100);
-            maxPanel.add(maxX.getPanel());
-            MySlider maxY = new MySlider("Max Y: ", 0, 800, 0, 200, 50);
-            maxPanel.add(maxY.getPanel());
-            panel.add(minPanel);
-            panel.add(maxPanel);
-
+            JLabel homeLabel = new JLabel("Дом животного: ");
+            homeLabel.setFont(font);
             JRadioButton homeOfKenga = new JRadioButton("Домик Кенги");
             homeOfKenga.setFont(font);
             JRadioButton homeOfRabbit = new JRadioButton("Домик Кролика");
@@ -558,16 +551,10 @@ public class Client {
             homePanel.add(homeOfRabbit);
             homePanel.add(australia);
             homePanel.add(other);
-            panel.add(homePanel);
 
-            JPanel weightPanel = new JPanel();
-            MySlider minWeight = new MySlider("Min Weight: ", 0, 500, 0, 100, 10);
-            weightPanel.add(minWeight.getPanel());
-            MySlider maxWeight = new MySlider("Max Weight: ", 0, 500, 0, 100, 10);
-            weightPanel.add(maxWeight.getPanel());
-            panel.add(weightPanel);
-
-            JPanel colorPanel = new JPanel();
+            JLabel colourLabel = new JLabel("Цвет животного: ");
+            colourLabel.setFont(font);
+            JPanel colourPanel = new JPanel();
             JCheckBox orange = new JCheckBox("Оранжевый");
             orange.setFont(font);
             JCheckBox brown = new JCheckBox("Коричневый");
@@ -576,11 +563,89 @@ public class Client {
             white.setFont(font);
             JCheckBox black = new JCheckBox("Черный");
             black.setFont(font);
-            colorPanel.add(orange);
-            colorPanel.add(brown);
-            colorPanel.add(white);
-            colorPanel.add(black);
-            panel.add(colorPanel);
+            colourPanel.add(orange);
+            colourPanel.add(brown);
+            colourPanel.add(white);
+            colourPanel.add(black);
+
+            GridBagLayout gridBagLayoutToolkit1 = new GridBagLayout();
+            toolKitPanel1.setLayout(gridBagLayoutToolkit1);
+            GridBagConstraints gridBagConstraintsToolkit1 = new GridBagConstraints();
+            gridBagConstraintsToolkit1.gridx = 0; gridBagConstraintsToolkit1.gridy = 0;
+            gridBagConstraintsToolkit1.insets = new Insets(0,5,0,0);
+            JPanel typeNamePanel = new JPanel();
+            typeNamePanel.add(typePanel);
+            typeNamePanel.add(namePanel);
+            toolKitPanel1.add(typeNamePanel,gridBagConstraintsToolkit1);
+            gridBagConstraintsToolkit1.gridx = 0;
+            gridBagConstraintsToolkit1.gridy = 1;
+            gridBagConstraintsToolkit1.gridwidth = 2;
+            toolKitPanel1.add(homeLabel,gridBagConstraintsToolkit1);
+            gridBagConstraintsToolkit1.gridy = 2;
+            toolKitPanel1.add(homePanel,gridBagConstraintsToolkit1);
+            gridBagConstraintsToolkit1.gridy = 3;
+            toolKitPanel1.add(colourLabel,gridBagConstraintsToolkit1);
+            gridBagConstraintsToolkit1.gridy = 4;
+            toolKitPanel1.add(colourPanel,gridBagConstraintsToolkit1);
+            toolKitPanel1.setPreferredSize(new Dimension(300,300));
+
+            JPanel toolKitPanel2 = new JPanel();
+            GridBagLayout gridBagLayoutToolkit2 = new GridBagLayout();
+            toolKitPanel2.setLayout(gridBagLayoutToolkit2);
+            GridBagConstraints gridBagConstraintsToolkit2 = new GridBagConstraints();
+
+            JLabel coordLabel = new JLabel("Координаты животного: ");
+            coordLabel.setFont(font);
+            MySlider minX = new MySlider("Min X: ", 0, 1800, 0, 400, 100);
+            MySlider minY = new MySlider("Min Y: ", 0, 800, 0, 200, 50);
+            MySlider maxX = new MySlider("Max X: ", 0, 1800, 0, 400, 100);
+            MySlider maxY = new MySlider("Max Y: ", 0, 800, 0, 200, 50);
+
+            JLabel weightLabel = new JLabel("Вес животного: ");
+            weightLabel.setFont(font);
+            MySlider minWeight = new MySlider("Min Weight: ", 0, 500, 0, 100, 10);
+            MySlider maxWeight = new MySlider("Max Weight: ", 0, 500, 0, 100, 10);
+
+            gridBagConstraintsToolkit2.gridy = 0;
+            gridBagConstraintsToolkit2.gridx = 0;
+            gridBagConstraintsToolkit2.gridwidth = 2;
+            toolKitPanel2.add(coordLabel,gridBagConstraintsToolkit2);
+            gridBagConstraintsToolkit2.gridwidth = 1;
+            gridBagConstraintsToolkit2.gridy = 1;
+            toolKitPanel2.add(minX,gridBagConstraintsToolkit2);
+            gridBagConstraintsToolkit2.gridx = 1;
+            toolKitPanel2.add(maxX,gridBagConstraintsToolkit2);
+            gridBagConstraintsToolkit2.gridx = 0;
+            gridBagConstraintsToolkit2.gridy = 2;
+            toolKitPanel2.add(minY,gridBagConstraintsToolkit2);
+            gridBagConstraintsToolkit2.gridx = 1;
+            toolKitPanel2.add(maxY,gridBagConstraintsToolkit2);
+            gridBagConstraintsToolkit2.gridy = 3;
+            gridBagConstraintsToolkit2.gridx = 0;
+            gridBagConstraintsToolkit2.gridwidth = 2;
+            toolKitPanel2.add(weightLabel,gridBagConstraintsToolkit2);
+            gridBagConstraintsToolkit2.gridwidth = 1;
+            gridBagConstraintsToolkit2.gridy = 4;
+            toolKitPanel2.add(minWeight,gridBagConstraintsToolkit2);
+            gridBagConstraintsToolkit2.gridx = 1;
+            toolKitPanel2.add(maxWeight,gridBagConstraintsToolkit2);
+
+            panelLayout.setAutoCreateGaps(true);
+            panelLayout.setAutoCreateContainerGaps(true);
+            panelLayout.setHorizontalGroup(panelLayout.createSequentialGroup()
+                    .addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonPanel))
+                    .addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(toolKitPanel1))
+                    .addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(toolKitPanel2))
+            );
+            panelLayout.setVerticalGroup(panelLayout.createSequentialGroup()
+                    .addGroup(panelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonPanel)
+                            .addComponent(toolKitPanel1)
+                            .addComponent(toolKitPanel2))
+            );
 
             start.addActionListener((event) -> {
                 if (executor.isWorked()) {
@@ -627,7 +692,7 @@ public class Client {
                 timer.start2();*/
             });
 
-            this.add(panel, BorderLayout.SOUTH);
+            this.add(panel,BorderLayout.SOUTH);
             panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
             //panel.setPreferredSize(new Dimension(800,200));
 
