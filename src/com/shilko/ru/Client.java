@@ -311,9 +311,8 @@ public class Client {
                 });
                 if (set.stream().noneMatch((e1)->e1.animal.getID()==e))
                     set.add(new AnimalButton(collection.get(e)));
-                set = set.stream().filter((e1)->collection.containsKey(e1.animal.getID())).collect(Collectors.toSet());
-                System.out.println();
             });
+            set = set.stream().filter((e1)->collection.containsKey(e1.animal.getID())).collect(Collectors.toSet());
         }
 
         private ClientGUI() {

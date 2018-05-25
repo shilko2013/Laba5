@@ -212,13 +212,21 @@ public class Server {
                                 case 2:
                                 case 3:
                                 case 5:
-                                    return Double.class;
+                                    return int.class;
                                 default:
                                     return String.class;
 
                             }
                         }
                     };
+                    this.setDefaultRenderer(int.class,new DefaultTableCellRenderer() {
+                        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                        boolean hasFocus, int row, int column) {
+                            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                            setHorizontalAlignment(SwingConstants.LEFT);
+                            return this;
+                        }
+                    });
                     //model.setColumnIdentifiers(columnNames);
                     this.setModel(model);
                     getColumnModel().getColumn(0).setPreferredWidth(100);
