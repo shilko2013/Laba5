@@ -35,7 +35,7 @@ public class Client {
     public static class ClientGUI extends JFrame {
         private static Font font = new Font("Font", Font.PLAIN, 15);
         private final static float RATIO = 1.5f;
-        Map<Long, Animal> collection;
+        Map<Long, Animal> collection = new ConcurrentHashMap<>();
         List<BufferedImage> images = new ArrayList<>();
         MyExecutor executor = new MyExecutor();
 
@@ -68,12 +68,12 @@ public class Client {
                 panel = new JPanel();
                 label = new JLabel(text);
                 label.setFont(new Font("Font", Font.PLAIN, 15));
-                panel.add(label);
+                panel.add(label,BorderLayout.EAST);
                 this.setMajorTickSpacing(bigStep);
                 this.setMinorTickSpacing(smallStep);
                 this.setPaintTicks(true);
                 this.setPaintLabels(true);
-                panel.add(this);
+                panel.add(this,BorderLayout.WEST);
                 this.addChangeListener(new ChangeListener() {
                     @Override
                     public void stateChanged(ChangeEvent e) {
@@ -384,7 +384,7 @@ public class Client {
                 }
             });
             menuBar.add(collectionMenu);
-            this.setJMenuBar(menuBar);
+            //this.setJMenuBar(menuBar); для 8 лабы!!!!!!!!
 
             JPanel border = new JPanel();
             border.setPreferredSize(new Dimension(800, 1));
@@ -572,7 +572,7 @@ public class Client {
             toolKitPanel1.setLayout(gridBagLayoutToolkit1);
             GridBagConstraints gridBagConstraintsToolkit1 = new GridBagConstraints();
             gridBagConstraintsToolkit1.gridx = 0; gridBagConstraintsToolkit1.gridy = 0;
-            gridBagConstraintsToolkit1.insets = new Insets(0,5,0,0);
+            //gridBagConstraintsToolkit1.insets = new Insets(0,5,0,0);
             JPanel typeNamePanel = new JPanel();
             typeNamePanel.add(typePanel);
             typeNamePanel.add(namePanel);
@@ -603,32 +603,36 @@ public class Client {
 
             JLabel weightLabel = new JLabel("Вес животного: ");
             weightLabel.setFont(font);
-            MySlider minWeight = new MySlider("Min Weight: ", 0, 500, 0, 100, 10);
-            MySlider maxWeight = new MySlider("Max Weight: ", 0, 500, 0, 100, 10);
+            MySlider minWeight = new MySlider("Min: ", 0, 500, 0, 100, 10);
+            MySlider maxWeight = new MySlider("Max: ", 0, 500, 0, 100, 10);
 
             gridBagConstraintsToolkit2.gridy = 0;
             gridBagConstraintsToolkit2.gridx = 0;
             gridBagConstraintsToolkit2.gridwidth = 2;
+            int savedIpadX = gridBagConstraintsToolkit2.ipadx;
             toolKitPanel2.add(coordLabel,gridBagConstraintsToolkit2);
             gridBagConstraintsToolkit2.gridwidth = 1;
             gridBagConstraintsToolkit2.gridy = 1;
-            toolKitPanel2.add(minX,gridBagConstraintsToolkit2);
+            gridBagConstraintsToolkit2.ipadx = 180;
+            toolKitPanel2.add(minX.getPanel(),gridBagConstraintsToolkit2);
             gridBagConstraintsToolkit2.gridx = 1;
-            toolKitPanel2.add(maxX,gridBagConstraintsToolkit2);
+            toolKitPanel2.add(maxX.getPanel(),gridBagConstraintsToolkit2);
             gridBagConstraintsToolkit2.gridx = 0;
             gridBagConstraintsToolkit2.gridy = 2;
-            toolKitPanel2.add(minY,gridBagConstraintsToolkit2);
+            toolKitPanel2.add(minY.getPanel(),gridBagConstraintsToolkit2);
             gridBagConstraintsToolkit2.gridx = 1;
-            toolKitPanel2.add(maxY,gridBagConstraintsToolkit2);
+            toolKitPanel2.add(maxY.getPanel(),gridBagConstraintsToolkit2);
             gridBagConstraintsToolkit2.gridy = 3;
             gridBagConstraintsToolkit2.gridx = 0;
             gridBagConstraintsToolkit2.gridwidth = 2;
+            gridBagConstraintsToolkit2.ipadx = savedIpadX;
             toolKitPanel2.add(weightLabel,gridBagConstraintsToolkit2);
+            gridBagConstraintsToolkit2.ipadx = 180;
             gridBagConstraintsToolkit2.gridwidth = 1;
             gridBagConstraintsToolkit2.gridy = 4;
-            toolKitPanel2.add(minWeight,gridBagConstraintsToolkit2);
+            toolKitPanel2.add(minWeight.getPanel(),gridBagConstraintsToolkit2);
             gridBagConstraintsToolkit2.gridx = 1;
-            toolKitPanel2.add(maxWeight,gridBagConstraintsToolkit2);
+            toolKitPanel2.add(maxWeight.getPanel(),gridBagConstraintsToolkit2);
 
             panelLayout.setAutoCreateGaps(true);
             panelLayout.setAutoCreateContainerGaps(true);
@@ -823,10 +827,12 @@ public class Client {
                         orange, white, black, brown,false);
             });
             this.pack();
-            this.setMinimumSize(new Dimension(this.getWidth() + 200, this.getHeight()));
+            this.setMinimumSize(new Dimension(this.getWidth() + 350, this.getHeight()));
             this.setLocationRelativeTo(null);
             this.setVisible(true);
             updateCollection(canvas);
+            initList();
+            this.repaint();
         }
 
         private List<Boolean> checkFilter(Animal animal, JComboBox<String> types, JTextField nameField, MySlider
