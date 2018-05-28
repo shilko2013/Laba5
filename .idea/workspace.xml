@@ -10,12 +10,12 @@
     </artifacts-to-build>
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java" line="680" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java" line="619" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0feda5ad-c9bb-4a19-905a-5b31bf743e05" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Server.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +38,8 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="28" column="41" lean-forward="true" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
+            <state relative-caret-position="220">
+              <caret line="856" column="51" lean-forward="true" selection-start-line="856" selection-start-column="51" selection-end-line="856" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#555#556#0" expanded="true" />
@@ -90,11 +90,16 @@
       <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2812">
-              <caret line="678" column="17" lean-forward="true" selection-start-line="678" selection-start-column="17" selection-end-line="678" selection-end-column="17" />
+            <state relative-caret-position="-6869">
+              <caret line="229" column="25" lean-forward="true" selection-start-line="229" selection-start-column="25" selection-end-line="229" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#exit#0;class#Server#0" />
+                <element signature="class#IntegerTextField#0;class#ServerGUI#0;class#Server#0" />
+                <element signature="class#Login#0;class#ServerGUI#0;class#Server#0" />
+                <element signature="class#MyTable#0;class#ServerGUI#0;class#Server#0" />
+                <element signature="method#ServerGUI#0;class#ServerGUI#0;class#Server#0" />
+                <element signature="e#10546#10547#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -113,7 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>set&lt;</find>
       <find>step</find>
       <find>println</find>
       <find>staticdra</find>
@@ -138,11 +142,12 @@
       <find>this.add</find>
       <find>port</find>
       <find>JMen</find>
-      <find>class</find>
       <find>reBo</find>
       <find>reBord</find>
       <find>//</find>
       <find>/*</find>
+      <find>class</find>
+      <find>App</find>
     </findStrings>
     <replaceStrings>
       <replace>check(false);</replace>
@@ -178,8 +183,8 @@
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Coord.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Animal.java" />
         <option value="$PROJECT_DIR$/data_ru.properties" />
-        <option value="$PROJECT_DIR$/src/com/shilko/ru/Server.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Client.java" />
+        <option value="$PROJECT_DIR$/src/com/shilko/ru/Server.java" />
       </list>
     </option>
   </component>
@@ -190,8 +195,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="423" />
-    <option name="width" value="975" />
+    <option name="x" value="966" />
+    <option name="width" value="963" />
     <option name="height" value="1092" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -269,7 +274,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.shilko.ru.Client" />
       <module name="Laba3" />
@@ -324,8 +329,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Client" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.Client" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -395,7 +400,7 @@
       <workItem from="1526764133214" duration="707000" />
       <workItem from="1526817056797" duration="1194000" />
       <workItem from="1526828284860" duration="58317000" />
-      <workItem from="1527274431238" duration="14000000" />
+      <workItem from="1527274431238" duration="15755000" />
     </task>
     <task id="LOCAL-00001" summary="Laba5.Version1 with comments.">
       <created>1517939757786</created>
@@ -719,11 +724,18 @@
       <option name="project" value="LOCAL" />
       <updated>1527333641820</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Laba8.Version5. Client clear.">
+      <created>1527336305278</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1527336305278</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="586611000" />
+    <option name="totallyTimeSpent" value="588366000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
@@ -808,7 +820,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Laba7.Version4. Что-то промежуточное, анимация в процессе." />
     <MESSAGE value="Laba7.Version4. Что-то промежуточное, анимация в процессе2." />
     <MESSAGE value="Laba7.Version4. Что-то промежуточное, анимация в процессе3." />
     <MESSAGE value="Laba7.Version4. Что-то промежуточное, анимация в процессе4." />
@@ -833,18 +844,11 @@
     <MESSAGE value="Laba8.Version3. Left alignment in JTable." />
     <MESSAGE value="Laba8.Version4. Почти готовый интерфейс." />
     <MESSAGE value="Laba8.Version4. Все готово." />
-    <option name="LAST_COMMIT_MESSAGE" value="Laba8.Version4. Все готово." />
+    <MESSAGE value="Laba8.Version5. Client clear." />
+    <option name="LAST_COMMIT_MESSAGE" value="Laba8.Version5. Client clear." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/shilko/ru/Server.java</url>
-          <line>500</line>
-          <properties />
-          <option name="timeStamp" value="141" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="198" />
     </breakpoint-manager>
     <watches-manager>
@@ -1204,17 +1208,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2812">
-          <caret line="678" column="17" lean-forward="true" selection-start-line="678" selection-start-column="17" selection-end-line="678" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#exit#0;class#Server#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/AbstractButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
@@ -1271,10 +1264,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6869">
+          <caret line="229" column="25" lean-forward="true" selection-start-line="229" selection-start-column="25" selection-end-line="229" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#exit#0;class#Server#0" />
+            <element signature="class#IntegerTextField#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="class#Login#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="class#MyTable#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="method#ServerGUI#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="e#10546#10547#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="28" column="41" lean-forward="true" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
+        <state relative-caret-position="220">
+          <caret line="856" column="51" lean-forward="true" selection-start-line="856" selection-start-column="51" selection-end-line="856" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#555#556#0" expanded="true" />

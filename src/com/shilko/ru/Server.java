@@ -45,142 +45,184 @@ public class Server {
         private Font font = new Font("TimesRoman", Font.BOLD, 20);
         private Font font2 = new Font("Font", Font.PLAIN, 15);
 
+        class IntegerTextField extends JTextField {
+            private IntegerTextField() {
+                super();
+                ((AbstractDocument)getDocument()).setDocumentFilter(new DocumentFilter() {
+                    @Override
+                    public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr)
+                            throws BadLocationException {
+                        if (string == null) return;
+                        replace(fb, offset, 0, string, attr);
+                    }
+                    @Override
+                    public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
+                        replace(fb, offset, length, "", null);
+                    }
+                    @Override
+                    public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+                            throws BadLocationException {
+                        fb.replace(offset, length, checkInput(text, offset), attrs);
+                    }
+                    private String checkInput(String proposedValue, int offset) throws BadLocationException {
+                        // Убираем все пробелы из строки для вставки
+                        StringBuilder temp = new StringBuilder(getText());
+                        temp.insert(offset,proposedValue);
+                        if (temp.length()>1 && temp.charAt(0)=='0') {
+                            Toolkit.getDefaultToolkit().beep();
+                            return "";
+                        }
+                        return proposedValue.replaceAll("(\\D)","");
+                    }
+                });
+            }
+        }
+
+        class Login extends JFrame {
+            JPasswordField passwordField;
+            JRadioButton showPassword;
+            JLabel label;
+            JButton okey;
+            Login(JFrame frame, String password) {
+                super("Авторизация");
+                setFont(font);
+                setSize(700, 155);
+                setResizable(false);
+                setLocationRelativeTo(null);
+                setFont(new Font("font", Font.BOLD, 50));
+                setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                passwordField = new JPasswordField();
+                passwordField.setFont(font);
+                passwordField.setEchoChar('*');
+                showPassword = new JRadioButton("Показывать пароль");
+                showPassword.setFont(font);
+                showPassword.addActionListener((event) -> {
+                    passwordField.setEchoChar(showPassword.isSelected() ? 0 : '*');
+                });
+                label = new JLabel("Введите пароль: ");
+                label.setFont(font);
+                okey = new JButton("OK");
+                okey.setFont(font);
+                okey.addActionListener((event) -> {
+                    if (Arrays.equals(passwordField.getPassword(), password.toCharArray())) {
+                        dispose();
+                        frame.setEnabled(true);
+                        frame.setVisible(true);
+                        synchronized (monitor) {
+                            isLogin = true;
+                            monitor.notifyAll();
+                        }
+                        init();
+                    } else
+                        JOptionPane.showMessageDialog(this, "Неверно введен пароль!!!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
+                });
+                JButton cancel = new JButton("Отмена");
+                cancel.addActionListener((event) -> exit(this));
+                cancel.setFont(font);
+                JFrame login = this;
+                this.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        exit(login);
+                    }
+                });
+
+                GroupLayout layout = new GroupLayout(login.getContentPane());
+                login.getContentPane().setLayout(layout);
+                layout.setAutoCreateGaps(true);
+                layout.setAutoCreateContainerGaps(true);
+                layout.setHorizontalGroup(layout.createSequentialGroup()
+                        .addComponent(label)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(passwordField)
+                                .addComponent(showPassword))
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(okey)
+                                .addComponent(cancel))
+                );
+                layout.setVerticalGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(label)
+                                .addComponent(passwordField)
+                                .addComponent(okey))
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addComponent(showPassword)
+                                .addComponent(cancel))
+                );
+                login.getRootPane().setDefaultButton(okey);
+                login.setVisible(true);
+                frame.setEnabled(false);
+            }
+        }
+
+        class MyTable extends JTable {
+            private DefaultTableModel model;
+
+            @Override
+            public boolean isCellEditable(int a, int b) {
+                return false;
+            }
+
+            private MyTable(Object[][] data, Object[] columnNames) {
+                super(data, columnNames);
+                model = new DefaultTableModel(data, columnNames) {
+                    @Override
+                    public Class getColumnClass(int column) {
+                        switch (column) {
+                            case 2:
+                            case 3:
+                            case 5:
+                                return int.class;
+                            default:
+                                return String.class;
+
+                        }
+                    }
+                };
+                this.setDefaultRenderer(int.class,new DefaultTableCellRenderer() {
+                    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                                                                   boolean hasFocus, int row, int column) {
+                        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                        setHorizontalAlignment(SwingConstants.LEFT);
+                        return this;
+                    }
+                });
+                //model.setColumnIdentifiers(columnNames);
+                this.setModel(model);
+                getColumnModel().getColumn(0).setPreferredWidth(100);
+                getColumnModel().getColumn(2).setPreferredWidth(100);
+                getColumnModel().getColumn(3).setPreferredWidth(100);
+                getColumnModel().getColumn(4).setPreferredWidth(120);
+                getColumnModel().getColumn(6).setPreferredWidth(100);
+                setMinimumSize(getSize());
+                getTableHeader().setFont(font2);
+                setFont(font2);
+                setFillsViewportHeight(true);
+                setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(model);
+                rowSorter.setRowFilter(null);
+                //setRowSorter(rowSorter);
+            }
+
+            public void addRow(Object[] row) {
+                model.addRow(row);
+                model.fireTableRowsInserted(model.getRowCount() - 1, model.getRowCount() - 1);
+            }
+
+            public void removeRow(int number) {
+                model.removeRow(number);
+                model.fireTableRowsDeleted(number, number);
+            }
+        }
+
         private ServerGUI() {
             super("Server");
             UIManager.put("OptionPane.messageFont", font);
             UIManager.put("OptionPane.buttonFont", font);
-            login(this, password);
-        }
-
-        private void login(JFrame frame, String password) { //метод, отвечающий за авторизацию, принимает блокируемый фрейм и пароль
-            JFrame login = new JFrame("Авторизация");
-            login.setFont(font);
-            login.setSize(700, 155);
-            login.setResizable(false);
-            login.setLocationRelativeTo(null);
-            login.setFont(new Font("font", Font.BOLD, 50));
-            login.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-            JPasswordField passwordField = new JPasswordField();
-            passwordField.setFont(font);
-            passwordField.setEchoChar('*');
-            JRadioButton showPassword = new JRadioButton("Показывать пароль");
-            showPassword.setFont(font);
-            showPassword.addActionListener((event) -> {
-                passwordField.setEchoChar(showPassword.isSelected() ? 0 : '*');
-            });
-            JLabel label = new JLabel("Введите пароль: ");
-            label.setFont(font);
-            JButton okey = new JButton("OK");
-            okey.setFont(font);
-            okey.addActionListener((event) -> {
-                if (Arrays.equals(passwordField.getPassword(), password.toCharArray())) {
-                    login.dispose();
-                    frame.setEnabled(true);
-                    frame.setVisible(true);
-                    synchronized (monitor) {
-                        isLogin = true;
-                        monitor.notifyAll();
-                    }
-                    init();
-                } else
-                    JOptionPane.showMessageDialog(login, "Неверно введен пароль!!!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
-            });
-            JButton cancel = new JButton("Отмена");
-            cancel.addActionListener((event) -> exit(login));
-            cancel.setFont(font);
-            login.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosing(WindowEvent e) {
-                    exit(login);
-                }
-            });
-            /*login.add(label);
-            login.add(passwordField);
-            login.add(okey);
-            login.add(cancel);*/
-
-            /*login.setLayout(new GridBagLayout());
-            GridBagConstraints textFieldConstraints = new GridBagConstraints();
-            textFieldConstraints.fill = GridBagConstraints.HORIZONTAL;
-            textFieldConstraints.ipady = 5;
-            textFieldConstraints.gridwidth = 2;
-            textFieldConstraints.gridx = 0;
-            textFieldConstraints.gridy = 0;
-            login.add(label, textFieldConstraints);
-            textFieldConstraints.weightx = 0.5;
-            textFieldConstraints.gridx = 1;
-            login.add(passwordField, textFieldConstraints);
-            textFieldConstraints.weightx = 0.4;
-            textFieldConstraints.gridwidth = 1;
-            textFieldConstraints.gridx = 0;
-            textFieldConstraints.gridy = 1;
-            textFieldConstraints.insets = new Insets(10,100,0,0);
-            login.add(okey, textFieldConstraints);
-            textFieldConstraints.gridx = 1;
-            textFieldConstraints.gridy = 1;
-            textFieldConstraints.insets = new Insets(10,10,0,0);
-            login.add(cancel, textFieldConstraints);*/
-
-            GroupLayout layout = new GroupLayout(login.getContentPane());
-            login.getContentPane().setLayout(layout);
-            layout.setAutoCreateGaps(true);
-            layout.setAutoCreateContainerGaps(true);
-            layout.setHorizontalGroup(layout.createSequentialGroup()
-                    .addComponent(label)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordField)
-                            .addComponent(showPassword))
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(okey)
-                            .addComponent(cancel))
-            );
-            layout.setVerticalGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(label)
-                            .addComponent(passwordField)
-                            .addComponent(okey))
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addComponent(showPassword)
-                            .addComponent(cancel))
-            );
-            login.getRootPane().setDefaultButton(okey);
-            login.setVisible(true);
-            frame.setEnabled(false);
+            new Login(this, password);
         }
 
         private void init() {
-            class IntegerTextField extends JTextField {
-                private IntegerTextField() {
-                    super();
-                    ((AbstractDocument)getDocument()).setDocumentFilter(new DocumentFilter() {
-                        @Override
-                        public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr)
-                                throws BadLocationException {
-                            if (string == null) return;
-                            replace(fb, offset, 0, string, attr);
-                        }
-                        @Override
-                        public void remove(DocumentFilter.FilterBypass fb, int offset, int length) throws BadLocationException {
-                            replace(fb, offset, length, "", null);
-                        }
-                        @Override
-                        public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
-                                throws BadLocationException {
-                            fb.replace(offset, length, checkInput(text, offset), attrs);
-                        }
-                        private String checkInput(String proposedValue, int offset) throws BadLocationException {
-                            // Убираем все пробелы из строки для вставки
-                            StringBuilder temp = new StringBuilder(getText());
-                            temp.insert(offset,proposedValue);
-                            if (temp.length()>1 && temp.charAt(0)=='0') {
-                                Toolkit.getDefaultToolkit().beep();
-                                return "";
-                            }
-                            return proposedValue.replaceAll("(\\D)","");
-                        }
-                    });
-                }
-            }
             this.setFont(font);
             this.setSize(800, 800);
             this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -195,113 +237,11 @@ public class Server {
             String[] columnNames = {
                     "Вид", "Имя", "Координата Х", "Координата У", "Дом", "Вес", "Цвет"
             };
-            class MyTable extends JTable {
-                private DefaultTableModel model;
-
-                @Override
-                public boolean isCellEditable(int a, int b) {
-                    return false;
-                }
-
-                private MyTable(Object[][] data, Object[] columnNames) {
-                    super(data, columnNames);
-                    model = new DefaultTableModel(data, columnNames) {
-                        @Override
-                        public Class getColumnClass(int column) {
-                            switch (column) {
-                                case 2:
-                                case 3:
-                                case 5:
-                                    return int.class;
-                                default:
-                                    return String.class;
-
-                            }
-                        }
-                    };
-                    this.setDefaultRenderer(int.class,new DefaultTableCellRenderer() {
-                        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-                        boolean hasFocus, int row, int column) {
-                            super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                            setHorizontalAlignment(SwingConstants.LEFT);
-                            return this;
-                        }
-                    });
-                    //model.setColumnIdentifiers(columnNames);
-                    this.setModel(model);
-                    getColumnModel().getColumn(0).setPreferredWidth(100);
-                    getColumnModel().getColumn(2).setPreferredWidth(100);
-                    getColumnModel().getColumn(3).setPreferredWidth(100);
-                    getColumnModel().getColumn(4).setPreferredWidth(120);
-                    getColumnModel().getColumn(6).setPreferredWidth(100);
-                    setMinimumSize(getSize());
-                    getTableHeader().setFont(font2);
-                    setFont(font2);
-                    setFillsViewportHeight(true);
-                    setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-                    TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>(model);
-                    rowSorter.setRowFilter(null);
-                    //setRowSorter(rowSorter);
-                }
-
-                public void addRow(Object[] row) {
-                    model.addRow(row);
-                    model.fireTableRowsInserted(model.getRowCount() - 1, model.getRowCount() - 1);
-                }
-
-                public void removeRow(int number) {
-                    model.removeRow(number);
-                    model.fireTableRowsDeleted(number, number);
-                }
-            }
             Object[][] data = collection.data(columnNames.length);
             MyTable table = new MyTable(data, columnNames);
             JScrollPane scrollPane = new JScrollPane(table);
             scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
             scrollPane.setPreferredSize(new Dimension(673, 200));
-            class HintTextField extends JTextArea implements FocusListener {
-
-                private final String hint;
-                private boolean showingHint;
-
-                public HintTextField(final String hint) {
-                    super(hint);
-                    this.hint = hint;
-                    this.showingHint = true;
-                    this.setForeground(Color.GRAY);
-                    super.addFocusListener(this);
-                }
-
-                @Override
-                public void focusGained(FocusEvent e) {
-                    if (this.getText().isEmpty()) {
-                        super.setText("");
-                        this.setForeground(Color.BLACK);
-                        showingHint = false;
-                    }
-                }
-
-                @Override
-                public void focusLost(FocusEvent e) {
-                    if (this.getText().isEmpty()) {
-                        super.setText(hint);
-                        this.setForeground(Color.GRAY);
-                        showingHint = true;
-                    }
-                }
-
-                @Override
-                public String getText() {
-                    return showingHint ? "" : super.getText();
-                }
-            }
-            //HintTextField textArea = new HintTextField("Введите элемент коллекции: ") ;
-            //textArea.setFont(font2);
-            //textArea.setLineWrap(true);
-            //textArea.setWrapStyleWord(true);
-            //JScrollPane scrollPane1 = new JScrollPane(textArea);
-            //scrollPane1.setPreferredSize(new Dimension(673, 200));
-            //this.add(scrollPane1);
             this.add(scrollPane);
 
             JPanel panel2 = new JPanel();
@@ -667,8 +607,7 @@ public class Server {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Загрузка не удалась!", "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
-            Thread App = new Thread(Server.ServerGUI::new);
-            javax.swing.SwingUtilities.invokeLater(App);
+            javax.swing.SwingUtilities.invokeLater(Server.ServerGUI::new);
             synchronized (monitor) {
                 try {
                     while (!isLogin) {
