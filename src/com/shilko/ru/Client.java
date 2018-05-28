@@ -16,11 +16,27 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
+import java.util.logging.*;
 
 public class Client {
-    private final static int port = 11111;
+    private final static int port;
+    private static final Logger logger;
+    static {
+        port = 11111;
+        logger = Logger.getLogger(Client.class.getName());
+        FileHandler fileHandler = null;
+        try {
+            fileHandler = new FileHandler("log.txt");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null,"Логирование в файл не будет произведено!","Ошибка",JOptionPane.ERROR_MESSAGE);
+        }
+        if (fileHandler != null) {
+            logger.addHandler(fileHandler);
+        }
+    }
 
     public static void main(String... args) {
+        logger.info("Program has been started");
         SwingUtilities.invokeLater(ClientGUI::new);
     }
 
@@ -45,7 +61,7 @@ public class Client {
         private JLabel nameLabel;
         private JTextField nameField;
         private JLabel homeLabel;
-        private JRadioButton homeOfKenga,homeOfRabbit,australia,other;
+        private JRadioButton homeOfKanga,homeOfRabbit,australia,other;
         private JLabel colourLabel;
         private JCheckBox orange,brown,white,black;
         private JPanel toolKitPanel2;
@@ -311,8 +327,11 @@ public class Client {
                 images.add(ImageIO.read(new File("kangaroo_with_bounds.png")));
                 images.add(ImageIO.read(new File("rabbit_with_bounds1.png")));
                 images.add(ImageIO.read(new File("question_mark_with_bounds.png")));
+                logger.info("Loading images has been loaded successfully");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this,"Загрузка изображений не удалась!","Ошибка",JOptionPane.ERROR_MESSAGE);
+                logger.severe("Loading images hasn't been done successfully");
+                logger.severe("Program is closed");
                 System.exit(0);
             }
         }
@@ -324,15 +343,20 @@ public class Client {
                     List<Long> working = executor.working();
                     getCollection().getLikeMap().forEach((a,b)->{
                         newCollection.put(b.getID(),b);
+                        logger.info("Animal "+b+" has been added in collection");
                         if (working.contains(b.getID())) {
                             b.setCoord(collection.get(b.getID()).getCoord());
                         }
                     });
                     collection = newCollection;
+                    logger.info("Collection has been updated");
                     break;
                 } catch (Exception e) {
-                    if (JOptionPane.showConfirmDialog(null, "Не удается получить коллекцию!\nПовторить попытку?", "Ошибка!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == 1)
+                    logger.severe("Updating of collection hasn't been done");
+                    if (JOptionPane.showConfirmDialog(null, "Не удается получить коллекцию!\nПовторить попытку?", "Ошибка!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == 1) {
+                        logger.severe("Program is closed");
                         System.exit(0);
+                    }
                 }
             }
             List<Pair<Integer,Integer>> pairs = new ArrayList<>();
@@ -353,30 +377,39 @@ public class Client {
             messageArea.setLineWrap(true);
             messageArea.setWrapStyleWord(true);
             messageScrollPane.setPreferredSize( new Dimension( 250, 100 ) );
-            if (!pairs.isEmpty())
-                JOptionPane.showMessageDialog(panel,messageScrollPane,"Ошибка",JOptionPane.ERROR_MESSAGE);
+            if (!pairs.isEmpty()) {
+                logger.info("Message about error of unsuitable coordinates has been showed");
+                JOptionPane.showMessageDialog(panel, messageScrollPane, "Ошибка", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
         private void initList() {
             collection.keySet().forEach((e) -> {
                 set.forEach((e1)->{
-                    if (e1.animal.getID()==e)
+                    if (e1.animal.getID()==e) {
+                        logger.info("Animal "+collection.get(e)+" has been updated in buttons");
                         e1.init(collection.get(e));
+                    }
                 });
-                if (set.stream().noneMatch((e1)->e1.animal.getID()==e))
+                if (set.stream().noneMatch((e1)->e1.animal.getID()==e)) {
                     set.add(new AnimalButton(collection.get(e)));
+                    logger.info("Animal "+collection.get(e)+" has been added in buttons");
+                }
             });
             set = set.stream().filter((e1)->collection.containsKey(e1.animal.getID())).collect(Collectors.toSet());
+            logger.info("Animals for mapping has been updated");
         }
 
         private ClientGUI() {
             super("Client");
+            logger.info("Initialization of GUI has been started");
             UIManager.put("OptionPane.messageFont", font);
             UIManager.put("OptionPane.buttonFont", font);
             init();
         }
 
         private void addMenu() {
+            logger.info("Initialization menu bar has been started");
             menuBar = new JMenuBar();
             JMenu collectionMenu = new JMenu("Menu");
             collectionMenu.setFont(font);
@@ -385,6 +418,7 @@ public class Client {
             language.setFont(font);
             collectionMenu.add(language);
             JRadioButtonMenuItem russian = new JRadioButtonMenuItem("Russian");
+            logger.fine("Russian button has been added");
             russian.setFont(font);
             language.add(russian);
             russian.addActionListener((event) -> {
@@ -392,18 +426,21 @@ public class Client {
             });
             russian.setSelected(true);
             JRadioButtonMenuItem norwegian = new JRadioButtonMenuItem("Norwegian");
+            logger.fine("Norwegian button has been added");
             norwegian.setFont(font);
             language.add(norwegian);
             norwegian.addActionListener((event) -> {
 
             });
             JRadioButtonMenuItem albanian = new JRadioButtonMenuItem("Albanian");
+            logger.fine("Albanian button has been added");
             albanian.setFont(font);
             language.add(albanian);
             albanian.addActionListener((event) -> {
 
             });
             JRadioButtonMenuItem english = new JRadioButtonMenuItem("English");
+            logger.fine("English button has been added");
             english.setFont(font);
             language.add(english);
             english.addActionListener((event) -> {
@@ -416,15 +453,19 @@ public class Client {
             buttonGroup.add(english);
             collectionMenu.addSeparator();
             JMenuItem exitItem = new JMenuItem("Exit");
+            logger.fine("Exit button has been added");
             exitItem.setFont(font);
             collectionMenu.add(exitItem);
             exitItem.addActionListener((event) -> {
+                logger.info("Frame with exit option has been opened");
                 if (JOptionPane.showConfirmDialog(this, "Вы действительно хотите выйти?", "Закрытие программы", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+                    logger.severe("Program has been closed");
                     System.exit(0);
                 }
             });
             menuBar.add(collectionMenu);
             this.setJMenuBar(menuBar); //для 8 лабы!!!!!!!!
+            logger.info("Menu bar was added");
         }
 
         private void addBorder() {
@@ -432,6 +473,7 @@ public class Client {
             border.setPreferredSize(new Dimension(800, 1));
             border.setBackground(Color.BLACK);
             this.add(border,BorderLayout.NORTH);
+            logger.info("High border has been added");
         }
 
         private void addCanvas() {
@@ -439,9 +481,11 @@ public class Client {
             canvas.setMinimumSize(new Dimension(500, 500));
             canvas.setPreferredSize(canvas.getMinimumSize());
             this.add(canvas,BorderLayout.CENTER);
+            logger.info("Canvas with coordinates has been added");
         }
 
         private void initButtonPanel() {
+            logger.info("Initialization of button panel has been started");
             buttonPanel = new JPanel();
             buttonPanel.setLayout(new GridBagLayout());
             GridBagConstraints c = new GridBagConstraints();
@@ -457,16 +501,20 @@ public class Client {
             start.setFont(font);
             start.setPreferredSize(new Dimension(120,50));
             buttonPanel.add(start,c);
+            logger.fine("Start button has been added");
             c.gridy = 2;
 
             start.addActionListener((event) -> {
+                logger.info("Start button has been pressed");
                 if (executor.isWorked()) {
+                    logger.warning("Trying of starting animation, which is working, has been failed");
                     JOptionPane.showMessageDialog(this, "Анимация уже запущена!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 canvas.setStaticDraw(false);
                 String message = check(true);
                 if (message.length()>0) {
+                    logger.warning("Trying of starting animation with unsuitable filters has been failed");
                     JOptionPane.showMessageDialog(this, "Нет животных, подходящих по "+message.substring(0,message.length()-2)+".", "Ошибка", JOptionPane.ERROR_MESSAGE);
                     canvas.setStaticDraw(true);
                 }
@@ -475,12 +523,15 @@ public class Client {
             stop = new JButton("Stop");
             stop.setFont(font);
             stop.addActionListener((event) -> {
+                logger.info("Stop button has been pressed");
                 if (executor.isWorked()) {
+                    logger.info("Animation has been stopped successfully");
                     executor.shutdown();
                     executor.init(50);
                     canvas.repaint();
                     JOptionPane.showMessageDialog(this, "Анимация остановлена!", "Stop", JOptionPane.INFORMATION_MESSAGE);
                 } else {
+                    logger.warning("Trying of stopping non-working animation has been failed");
                     JOptionPane.showMessageDialog(this, "Анимация не запущена!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
                 canvas.setStaticDraw(true);
@@ -488,17 +539,20 @@ public class Client {
             });
             stop.setPreferredSize(new Dimension(120,50));
             buttonPanel.add(stop,c);
+            logger.fine("Stop button has been added");
             c.gridy = 3;
 
             update = new JButton("Update");
             update.setFont(font);
             update.addActionListener((event) -> {
+                logger.info("Update button has been pressed");
                 updateCollection(canvas);
                 initList();
                 canvas.repaint();
             });
             update.setPreferredSize(new Dimension(120,50));
             buttonPanel.add(update,c);
+            logger.fine("Update button has been added");
         }
 
         private void initToolkitPanel1() {
@@ -513,6 +567,7 @@ public class Client {
             types.setFont(font);
             typePanel.add(typeLabel);
             typePanel.add(types);
+            logger.fine("Type panel has been added in first toolkit panel");
 
             JPanel namePanel = new JPanel();
             nameLabel = new JLabel("Имя животного: ");
@@ -522,11 +577,13 @@ public class Client {
             nameField.setFont(font);
             namePanel.add(nameLabel);
             namePanel.add(nameField);
+            logger.fine("Name panel has been added in first toolkit panel");
+
 
             homeLabel = new JLabel("Дом животного: ");
             homeLabel.setFont(font);
-            homeOfKenga = new JRadioButton("Домик Кенги");
-            homeOfKenga.setFont(font);
+            homeOfKanga = new JRadioButton("Домик Кенги");
+            homeOfKanga.setFont(font);
             homeOfRabbit = new JRadioButton("Домик Кролика");
             homeOfRabbit.setFont(font);
             australia = new JRadioButton("Австралия");
@@ -534,15 +591,17 @@ public class Client {
             other = new JRadioButton("Другой дом");
             other.setFont(font);
             ButtonGroup home = new ButtonGroup();
-            home.add(homeOfKenga);
+            home.add(homeOfKanga);
             home.add(homeOfRabbit);
             home.add(australia);
             home.add(other);
             JPanel homePanel = new JPanel();
-            homePanel.add(homeOfKenga);
+            homePanel.add(homeOfKanga);
             homePanel.add(homeOfRabbit);
             homePanel.add(australia);
             homePanel.add(other);
+            logger.fine("Home panel has been added in first toolkit panel");
+
 
             colourLabel = new JLabel("Цвет животного: ");
             colourLabel.setFont(font);
@@ -559,6 +618,8 @@ public class Client {
             colourPanel.add(brown);
             colourPanel.add(white);
             colourPanel.add(black);
+            logger.fine("Colour panel has been added in first toolkit panel");
+
 
             GridBagLayout gridBagLayoutToolkit1 = new GridBagLayout();
             toolKitPanel1.setLayout(gridBagLayoutToolkit1);
@@ -635,10 +696,14 @@ public class Client {
             panel.setPreferredSize(new Dimension(900, 230));
 
             initButtonPanel();
+            logger.info("Button panel has been initialized");
 
             initToolkitPanel1();
+            logger.info("First toolkit panel has been initialized");
 
             initToolkitPanel2();
+            logger.info("Second toolkit panel has been initialized");
+
 
             panelLayout.setAutoCreateGaps(true);
             panelLayout.setAutoCreateContainerGaps(true);
@@ -659,35 +724,107 @@ public class Client {
 
             panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
             this.add(panel,BorderLayout.SOUTH);
+            logger.info("Toolkit panel has been added on general frame");
         }
 
         private void listenChanges() {
-            ChangeListener changeListener = (event) -> {
+            types.addActionListener((event) -> {
+                logger.info("Type has been changed on "+types.getSelectedItem());
                 if (canvas.isStaticDraw())
                     return;
                 check(false);
-            };
-            ActionListener actionListener = (event) -> {
+            });
+            nameField.addActionListener((event) -> {
+                logger.info("Name has been changed on "+nameField.getText());
                 if (canvas.isStaticDraw())
                     return;
                 check(false);
-            };
-            types.addActionListener(actionListener);
-            nameField.addActionListener(actionListener);
-            minX.addChangeListener(changeListener);
-            minY.addChangeListener(changeListener);
-            maxX.addChangeListener(changeListener);
-            maxY.addChangeListener(changeListener);
-            homeOfKenga.addActionListener(actionListener);
-            homeOfRabbit.addActionListener(actionListener);
-            australia.addActionListener(actionListener);
-            other.addActionListener(actionListener);
-            minWeight.addChangeListener(changeListener);
-            maxWeight.addChangeListener(changeListener);
-            orange.addActionListener(actionListener);
-            white.addActionListener(actionListener);
-            black.addActionListener(actionListener);
-            brown.addActionListener(actionListener);
+            });
+            minX.addChangeListener((event) -> {
+                logger.info("Min X has been changed on "+minX.getMyValue());
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            minY.addChangeListener((event) -> {
+                logger.info("Min Y has been changed on "+minY.getMyValue());
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            maxX.addChangeListener((event) -> {
+                logger.info("Max X has been changed on "+maxX.getMyValue());
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            maxY.addChangeListener((event) -> {
+                logger.info("Max Y has been changed on "+maxY.getMyValue());
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            homeOfKanga.addActionListener((event) -> {
+                logger.info("Home has been changed on home of Kanga");
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            homeOfRabbit.addActionListener((event) -> {
+                logger.info("Home has been changed on home of Rabbit");
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            australia.addActionListener((event) -> {
+                logger.info("Home has been changed on home of Australia");
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            other.addActionListener((event) -> {
+                logger.info("Home has been changed on other");
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            minWeight.addChangeListener((event) -> {
+                logger.info("Min weight has been changed on "+minWeight.getMyValue());
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            maxWeight.addChangeListener((event) -> {
+                logger.info("Max weight has been changed on "+maxWeight.getMyValue());
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            orange.addActionListener((event) -> {
+                logger.info("Orange button has been changed");
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            white.addActionListener((event) -> {
+                logger.info("White button has been changed");
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            black.addActionListener((event) -> {
+                logger.info("Black button has been changed");
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            brown.addActionListener((event) -> {
+                logger.info("Brown button has been changed");
+                if (canvas.isStaticDraw())
+                    return;
+                check(false);
+            });
+            logger.fine("Listening of changes for animation has been done");
         }
 
         private void init() {
@@ -703,7 +840,7 @@ public class Client {
                     }
                 }
             });
-            addMenu();
+            //addMenu();
             addBorder();
             addCanvas();
             addPanel();
@@ -712,6 +849,7 @@ public class Client {
             this.setMinimumSize(new Dimension(this.getWidth() + 350, this.getHeight()));
             this.setLocationRelativeTo(null);
             this.setVisible(true);
+            logger.info("General frame has been showed");
             updateCollection(canvas);
             initList();
             this.repaint();
@@ -727,8 +865,8 @@ public class Client {
             booleans.add((animal.getCoord().getY() > minY.getMyValue() &&
                     animal.getCoord().getY() < maxY.getMyValue()));
             booleans.add((
-                    (animal.getHome().trim().equalsIgnoreCase(homeOfKenga.getText().trim()) &&
-                            homeOfKenga.isSelected()) ||
+                    (animal.getHome().trim().equalsIgnoreCase(homeOfKanga.getText().trim()) &&
+                            homeOfKanga.isSelected()) ||
                             (animal.getHome().trim().equalsIgnoreCase(homeOfRabbit.getText().trim()) &&
                                     homeOfRabbit.isSelected()) ||
                             (animal.getHome().trim().equalsIgnoreCase(australia.getText().trim()) &&
@@ -749,12 +887,15 @@ public class Client {
                     ));
             if (booleans.stream().allMatch(e->e))
                 booleans = null;
+            logger.info("Filter has been checked");
             return booleans;
         }
 
         private String check(boolean firstIncluding) {
-            if (!firstIncluding && !executor.isWorked())
+            if (!firstIncluding && !executor.isWorked()) {
+                logger.info("Checking hasn't been done because animation isn't working");
                 return "";
+            }
             StringBuilder message = new StringBuilder();
             List<Boolean> booleans = new ArrayList<>(Arrays.asList(false,false,false,false,false,false,false));
             boolean[] somebodyExist = new boolean[1];
@@ -762,7 +903,6 @@ public class Client {
             set.forEach((e) -> {
                 Animal animal = e.getAnimal();
                 int weight = animal.getWeight();
-                System.out.println(maxX.getMyValue());
                 class ManagerMoving {
                     private int randomWidth;
                     private int randomHeight;
@@ -827,6 +967,7 @@ public class Client {
                         e.revalidate();
                         canvas.revalidate();
                         canvas.repaint();
+                        logger.finer("Animal "+e.animal+" has been moving");
                     });
                     somebodyExist[0] = true;
                 }
@@ -837,8 +978,9 @@ public class Client {
                     }
                 }
             });
-            if (somebodyExist[0])
+            if (somebodyExist[0]) {
                 return "";
+            }
             else {
                 if (booleans.stream().anyMatch(e->!e)) {
                     List<String> errors = new ArrayList<>(Arrays.asList("типу, ", "имени, ", "координате Х, ", "координате У, ", "дому, ", "весу, ", "цвету, "));
@@ -858,14 +1000,20 @@ public class Client {
         SocketChannel sChannel = SocketChannel.open();
         sChannel.configureBlocking(true);
         if (sChannel.connect(new InetSocketAddress("localhost", port))) {
+            logger.info("Connection with server has been connected");
             ObjectInputStream ois = new ObjectInputStream(sChannel.socket().getInputStream());
             ObjectOutputStream oos = new ObjectOutputStream(sChannel.socket().getOutputStream());
             oos.writeObject("list");
             Object o = ois.readObject();
             if (o instanceof AnimalCollection)
                 return (AnimalCollection) o;
-            else
+            else {
+                logger.severe("Data from server isn't valid");
                 throw new ClassCastException();
-        } else throw new ConnectException();
+            }
+        } else  {
+            logger.severe("Connection with server doesn't exist");
+            throw new ConnectException();
+        }
     }
 }

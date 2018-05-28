@@ -53,9 +53,9 @@ public class Kangaroo extends Animal implements Mindable {
     public String work() {
         return getName()+super.work();
     }
-    @Override
+    /*@Override
     public String toString() {
         return super.toString() +
                 "LastDecision: " + decision;
-    }
+    }*/
 }

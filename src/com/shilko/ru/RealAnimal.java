@@ -36,9 +36,9 @@ public class RealAnimal extends Animal {
     public int hashCode() {
         return Objects.hash(super.hashCode(),getActions());
     }
-    @Override
+    /*@Override
     public String toString() {
         return super.toString() +
                 "Actions: " + work();
-    }
+    }*/
 }

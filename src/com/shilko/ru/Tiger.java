@@ -191,10 +191,10 @@ public class Tiger extends Animal implements Workable, Sayable {
     public int hashCode() {
         return Objects.hash(super.hashCode(),getActions(),tongue.hashCode());
     }
-    @Override
+    /*@Override
     public String toString() {
         return super.toString() +
                 "Actions: " + work()
                 + tongue.toString();
-    }
+    }*/
 }
