@@ -28,7 +28,7 @@ public class Client {
             fileHandler = new FileHandler("log.txt");
         } catch (IOException e) {
             logger.severe("Logging in file is failed");
-            JOptionPane.showMessageDialog(null,"Логирование в файл не будет произведено!","Ошибка",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,new Resource("resources.data","ru_RU").getString("logging.error.message"),new Resource("resources.data","ru_RU").getString("error"),JOptionPane.ERROR_MESSAGE);
         }
         if (fileHandler != null) {
             logger.addHandler(fileHandler);
@@ -46,7 +46,7 @@ public class Client {
         private List<BufferedImage> images;
         private MyExecutor executor;
         private Set<AnimalButton> set;
-        private ResourceBundle resources;
+        private Resource resources;
 
         {
             font = new Font("Font", Font.PLAIN, 15);
@@ -54,7 +54,7 @@ public class Client {
             images = new ArrayList<>();
             executor = new MyExecutor();
             set = new TreeSet<>((a, b) -> Double.compare(a.getWeight(), b.getWeight()));
-            resources = ResourceBundle.getBundle("resources.data",Locale.forLanguageTag("ru_RU"));
+            resources = new Resource("resources.data","ru_RU");
         }
 
         private JMenuBar menuBar;
@@ -339,7 +339,7 @@ public class Client {
                 images.add(ImageIO.read(new File("question_mark_with_bounds.png")));
                 logger.info("Loading images has been loaded successfully");
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this,"Загрузка изображений не удалась!","Ошибка",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,resources.getString("image.failed"),resources.getString("error"),JOptionPane.ERROR_MESSAGE);
                 logger.severe("Loading images hasn't been done successfully");
                 logger.severe("Program is closed");
                 System.exit(0);
@@ -363,7 +363,7 @@ public class Client {
                     break;
                 } catch (Exception e) {
                     logger.severe("Updating of collection hasn't been done");
-                    if (JOptionPane.showConfirmDialog(null, "Не удается получить коллекцию!\nПовторить попытку?", "Ошибка!", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == 1) {
+                    if (JOptionPane.showConfirmDialog(null, resources.getString("collection.failed"), resources.getString("error"), JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == 1) {
                         logger.severe("Program is closed");
                         System.exit(0);
                     }
@@ -376,7 +376,7 @@ public class Client {
                     collection.values().remove(e);
                 }
             });
-            StringBuilder message = new StringBuilder("Животные со следующими координатами не могут быть отображены:\n");
+            StringBuilder message = new StringBuilder(resources.getString("coord.failed.start"));
             pairs.forEach(e-> {
                 message.append("x: " +e.getKey()+", y: "+e.getValue()+"\n");
             });
@@ -389,7 +389,7 @@ public class Client {
             messageScrollPane.setPreferredSize( new Dimension( 250, 100 ) );
             if (!pairs.isEmpty()) {
                 logger.info("Message about error of unsuitable coordinates has been showed");
-                JOptionPane.showMessageDialog(panel, messageScrollPane, "Ошибка", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(panel, messageScrollPane, resources.getString("error"), JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -411,7 +411,7 @@ public class Client {
         }
 
         private ClientGUI() {
-            super("Client");
+            super(new Resource("resources.data","ru_RU").getString("main.frame.title"));
             logger.info("Initialization of GUI has been started");
             UIManager.put("OptionPane.messageFont", font);
             UIManager.put("OptionPane.buttonFont", font);
@@ -421,13 +421,13 @@ public class Client {
         private void addMenu() {
             logger.info("Initialization menu bar has been started");
             menuBar = new JMenuBar();
-            JMenu collectionMenu = new JMenu("Menu");
+            JMenu collectionMenu = new JMenu(resources.getString("menu.title"));
             collectionMenu.setFont(font);
             collectionMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            JMenu language = new JMenu("Language");
+            JMenu language = new JMenu(resources.getString("menu.language"));
             language.setFont(font);
             collectionMenu.add(language);
-            JRadioButtonMenuItem russian = new JRadioButtonMenuItem("Russian");
+            JRadioButtonMenuItem russian = new JRadioButtonMenuItem(resources.getString("menu.language.russian"));
             logger.fine("Russian button has been added");
             russian.setFont(font);
             language.add(russian);
@@ -435,21 +435,21 @@ public class Client {
 
             });
             russian.setSelected(true);
-            JRadioButtonMenuItem norwegian = new JRadioButtonMenuItem("Norwegian");
+            JRadioButtonMenuItem norwegian = new JRadioButtonMenuItem(resources.getString("menu.language.norwegian"));
             logger.fine("Norwegian button has been added");
             norwegian.setFont(font);
             language.add(norwegian);
             norwegian.addActionListener((event) -> {
 
             });
-            JRadioButtonMenuItem albanian = new JRadioButtonMenuItem("Albanian");
+            JRadioButtonMenuItem albanian = new JRadioButtonMenuItem(resources.getString("menu.language.albanian"));
             logger.fine("Albanian button has been added");
             albanian.setFont(font);
             language.add(albanian);
             albanian.addActionListener((event) -> {
 
             });
-            JRadioButtonMenuItem english = new JRadioButtonMenuItem("English");
+            JRadioButtonMenuItem english = new JRadioButtonMenuItem(resources.getString("menu.language.english"));
             logger.fine("English button has been added");
             english.setFont(font);
             language.add(english);
@@ -462,13 +462,13 @@ public class Client {
             buttonGroup.add(albanian);
             buttonGroup.add(english);
             collectionMenu.addSeparator();
-            JMenuItem exitItem = new JMenuItem("Exit");
+            JMenuItem exitItem = new JMenuItem(resources.getString("exitItem"));
             logger.fine("Exit button has been added");
             exitItem.setFont(font);
             collectionMenu.add(exitItem);
             exitItem.addActionListener((event) -> {
                 logger.info("Frame with exit option has been opened");
-                if (JOptionPane.showConfirmDialog(this, "Вы действительно хотите выйти?", "Закрытие программы", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+                if (JOptionPane.showConfirmDialog(this, resources.getString("exit.confirmation"), resources.getString("exit.title"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
                     logger.severe("Program has been closed");
                     System.exit(0);
                 }
@@ -502,12 +502,12 @@ public class Client {
             c.insets = new Insets(0,2,2,2);
             c.gridx = 0; c.gridy = 0; c.gridwidth = 3;
 
-            buttonLabel = new JLabel("Панель управления");
+            buttonLabel = new JLabel(resources.getString("button.label.title"));
             buttonLabel.setFont(font);
             buttonPanel.add(buttonLabel,c);
             c.gridy = 1;
 
-            start = new JButton("Start");
+            start = new JButton(resources.getString("button.start.title"));
             start.setFont(font);
             start.setPreferredSize(new Dimension(120,50));
             buttonPanel.add(start,c);
@@ -518,19 +518,19 @@ public class Client {
                 logger.info("Start button has been pressed");
                 if (executor.isWorked()) {
                     logger.warning("Trying of starting animation, which is working, has been failed");
-                    JOptionPane.showMessageDialog(this, "Анимация уже запущена!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, resources.getString("start.failure"), resources.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 canvas.setStaticDraw(false);
                 String message = check(true);
                 if (message.length()>0) {
                     logger.warning("Trying of starting animation with unsuitable filters has been failed");
-                    JOptionPane.showMessageDialog(this, "Нет животных, подходящих по "+message.substring(0,message.length()-2)+".", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, resources.getString("start.failed.start")+" "+message.substring(0,message.length()-2)+".", resources.getString("error"), JOptionPane.ERROR_MESSAGE);
                     canvas.setStaticDraw(true);
                 }
             });
 
-            stop = new JButton("Stop");
+            stop = new JButton(resources.getString("button.stop.title"));
             stop.setFont(font);
             stop.addActionListener((event) -> {
                 logger.info("Stop button has been pressed");
@@ -539,10 +539,10 @@ public class Client {
                     executor.shutdown();
                     executor.init(50);
                     canvas.repaint();
-                    JOptionPane.showMessageDialog(this, "Анимация остановлена!", "Stop", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, resources.getString("stop.success"), resources.getString("button.stop.title"), JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     logger.warning("Trying of stopping non-working animation has been failed");
-                    JOptionPane.showMessageDialog(this, "Анимация не запущена!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, resources.getString("stop.failure"), resources.getString("error"), JOptionPane.ERROR_MESSAGE);
                 }
                 canvas.setStaticDraw(true);
                 canvas.repaint();
@@ -552,7 +552,7 @@ public class Client {
             logger.fine("Stop button has been added");
             c.gridy = 3;
 
-            update = new JButton("Update");
+            update = new JButton(resources.getString("button.update.title"));
             update.setFont(font);
             update.addActionListener((event) -> {
                 logger.info("Update button has been pressed");
@@ -568,19 +568,24 @@ public class Client {
         private void initToolkitPanel1() {
             toolKitPanel1 = new JPanel();
 
-            typeLabel = new JLabel("Тип животного:");
+            typeLabel = new JLabel(resources.getString("type.text"));
             typeLabel.setFont(font);
             JPanel typePanel = new JPanel();
             types = new JComboBox<>(new String[]{
-                    "Tiger", "Kangaroo", "Rabbit", "RealAnimal", "Любой"
+                    resources.getString("tiger.name"),
+                    resources.getString("kangaroo.name"),
+                    resources.getString("rabbit.name"),
+                    "<html>"+resources.getString("realanimal.name").replaceAll(" ","<br>"),
+                    resources.getString("anyanimal.name")
             });
             types.setFont(font);
+            types.setPreferredSize(new Dimension(130,40));
             typePanel.add(typeLabel);
             typePanel.add(types);
             logger.fine("Type panel has been added in first toolkit panel");
 
             JPanel namePanel = new JPanel();
-            nameLabel = new JLabel("Имя животного: ");
+            nameLabel = new JLabel(resources.getString("name.text"));
             nameLabel.setFont(font);
             nameField = new JTextField();
             nameField.setPreferredSize(new Dimension(100, 20));
@@ -590,15 +595,15 @@ public class Client {
             logger.fine("Name panel has been added in first toolkit panel");
 
 
-            homeLabel = new JLabel("Дом животного: ");
+            homeLabel = new JLabel(resources.getString("home.label.title"));
             homeLabel.setFont(font);
-            homeOfKanga = new JRadioButton("Домик Кенги");
+            homeOfKanga = new JRadioButton(resources.getString("home.kanga"));
             homeOfKanga.setFont(font);
-            homeOfRabbit = new JRadioButton("Домик Кролика");
+            homeOfRabbit = new JRadioButton(resources.getString("home.rabbit"));
             homeOfRabbit.setFont(font);
-            australia = new JRadioButton("Австралия");
+            australia = new JRadioButton(resources.getString("home.australia"));
             australia.setFont(font);
-            other = new JRadioButton("Другой дом");
+            other = new JRadioButton(resources.getString("home.other"));
             other.setFont(font);
             ButtonGroup home = new ButtonGroup();
             home.add(homeOfKanga);
@@ -613,16 +618,16 @@ public class Client {
             logger.fine("Home panel has been added in first toolkit panel");
 
 
-            colourLabel = new JLabel("Цвет животного: ");
+            colourLabel = new JLabel(resources.getString("colour.label.title"));
             colourLabel.setFont(font);
             JPanel colourPanel = new JPanel();
-            orange = new JCheckBox("Оранжевый");
+            orange = new JCheckBox(resources.getString("colour.orange"));
             orange.setFont(font);
-            brown = new JCheckBox("Коричневый");
+            brown = new JCheckBox(resources.getString("colour.brown"));
             brown.setFont(font);
-            white = new JCheckBox("Белый");
+            white = new JCheckBox(resources.getString("colour.white"));
             white.setFont(font);
-            black = new JCheckBox("Черный");
+            black = new JCheckBox(resources.getString("colour.black"));
             black.setFont(font);
             colourPanel.add(orange);
             colourPanel.add(brown);
@@ -633,6 +638,7 @@ public class Client {
 
             GridBagLayout gridBagLayoutToolkit1 = new GridBagLayout();
             toolKitPanel1.setLayout(gridBagLayoutToolkit1);
+            toolKitPanel1.setMinimumSize(new Dimension(500,200));
             GridBagConstraints gridBagConstraintsToolkit1 = new GridBagConstraints();
             gridBagConstraintsToolkit1.gridx = 0; gridBagConstraintsToolkit1.gridy = 0;
             JPanel typeNamePanel = new JPanel();
@@ -658,17 +664,17 @@ public class Client {
             toolKitPanel2.setLayout(gridBagLayoutToolkit2);
             GridBagConstraints gridBagConstraintsToolkit2 = new GridBagConstraints();
 
-            coordLabel = new JLabel("Координаты животного: ");
+            coordLabel = new JLabel(resources.getString("coord.label.title"));
             coordLabel.setFont(font);
-            minX = new MySlider("Min X: ", 0, 1800, 0, 400, 100);
-            minY = new MySlider("Min Y: ", 0, 800, 0, 200, 50);
-            maxX = new MySlider("Max X: ", 0, 1800, 0, 400, 100);
-            maxY = new MySlider("Max Y: ", 0, 800, 0, 200, 50);
+            minX = new MySlider(resources.getString("min") + " X: ", 0, 1800, 0, 400, 100);
+            minY = new MySlider(resources.getString("min") + " Y: ", 0, 800, 0, 200, 50);
+            maxX = new MySlider(resources.getString("max") + " X: ", 0, 1800, 0, 400, 100);
+            maxY = new MySlider(resources.getString("max") + " Y: ", 0, 800, 0, 200, 50);
 
             weightLabel = new JLabel("Вес животного: ");
             weightLabel.setFont(font);
-            minWeight = new MySlider("Min: ", 0, 500, 0, 100, 10);
-            maxWeight = new MySlider("Max: ", 0, 500, 0, 100, 10);
+            minWeight = new MySlider(resources.getString("min")+": ", 0, 500, 0, 100, 10);
+            maxWeight = new MySlider(resources.getString("max")+": ", 0, 500, 0, 100, 10);
 
             gridBagConstraintsToolkit2.gridy = 0;
             gridBagConstraintsToolkit2.gridx = 0;
@@ -845,7 +851,8 @@ public class Client {
             this.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent e) {
-                    if (JOptionPane.showConfirmDialog(e.getComponent(), "Вы действительно хотите выйти?", "Закрытие программы", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+                    if (JOptionPane.showConfirmDialog(e.getComponent(), resources.getString("exit.confirmation"), resources.getString("exit.title"), JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+                        logger.severe("Program has been closed");
                         System.exit(0);
                     }
                 }
@@ -993,7 +1000,15 @@ public class Client {
             }
             else {
                 if (booleans.stream().anyMatch(e->!e)) {
-                    List<String> errors = new ArrayList<>(Arrays.asList("типу, ", "имени, ", "координате Х, ", "координате У, ", "дому, ", "весу, ", "цвету, "));
+                    List<String> errors = new ArrayList<>(Arrays.asList(
+                            resources.getString("start.failed.type"),
+                            resources.getString("start.failed.name"),
+                            resources.getString("start.failed.x"),
+                            resources.getString("start.failed.y"),
+                            resources.getString("start.failed.home"),
+                            resources.getString("start.failed.weight"),
+                            resources.getString("start.failed.colour")
+                            ));
                     for (int i = 0; i < booleans.size(); ++i) {
                         if (!booleans.get(i))
                             message.append(errors.get(i));
@@ -1001,7 +1016,7 @@ public class Client {
                     return message.toString();
                 }
                 else
-                    return "всем параметрам одновременно  ";
+                    return resources.getString("start.failed.all");
             }
         }
     }
