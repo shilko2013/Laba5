@@ -1,12 +1,14 @@
 package com.shilko.ru;
 
 import java.io.*;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.*;
 import java.time.*;
 
 public abstract class Animal implements Eating, Workable, Comparable<Animal>, Serializable {
     private class HomelessException extends RuntimeException {
-        public HomelessException() {super("Home of " + getName() + " is epsend!!!");}
+        private HomelessException() {super("Home of " + getName() + " is epsend!!!");}
         public HomelessException(String message) {super(message);}
         @Override
         public String toString() {

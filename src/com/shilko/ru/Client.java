@@ -1,6 +1,5 @@
 package com.shilko.ru;
 
-import com.sun.istack.internal.NotNull;
 import javafx.util.Pair;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -28,6 +27,7 @@ public class Client {
         try {
             fileHandler = new FileHandler("log.txt");
         } catch (IOException e) {
+            logger.severe("Logging in file is failed");
             JOptionPane.showMessageDialog(null,"Логирование в файл не будет произведено!","Ошибка",JOptionPane.ERROR_MESSAGE);
         }
         if (fileHandler != null) {
@@ -146,7 +146,7 @@ public class Client {
                 return animal;
             }
 
-            private AnimalButton(@NotNull Animal animal) {
+            private AnimalButton(Animal animal) {
                 super();
                 init(animal);
             }
