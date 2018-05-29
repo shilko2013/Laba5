@@ -41,12 +41,21 @@ public class Client {
     }
 
     public static class ClientGUI extends JFrame {
-        private Font font = new Font("Font", Font.PLAIN, 15);
-        private final float RATIO = 1.5f;
-        private Map<Long, Animal> collection = new ConcurrentHashMap<>();
-        private List<BufferedImage> images = new ArrayList<>();
-        private MyExecutor executor = new MyExecutor();
-        private Set<AnimalButton> set = new TreeSet<>((a, b) -> Double.compare(a.getWeight(), b.getWeight()));
+        private Font font;
+        private Map<Long, Animal> collection;
+        private List<BufferedImage> images;
+        private MyExecutor executor;
+        private Set<AnimalButton> set;
+        private ResourceBundle resources;
+
+        {
+            font = new Font("Font", Font.PLAIN, 15);
+            collection = new ConcurrentHashMap<>();
+            images = new ArrayList<>();
+            executor = new MyExecutor();
+            set = new TreeSet<>((a, b) -> Double.compare(a.getWeight(), b.getWeight()));
+            resources = ResourceBundle.getBundle("resources.data",Locale.forLanguageTag("ru_RU"));
+        }
 
         private JMenuBar menuBar;
         private JPanel border;
@@ -87,7 +96,7 @@ public class Client {
                 super(JSlider.HORIZONTAL, min, max, value);
                 panel = new JPanel();
                 label = new JLabel(text);
-                label.setFont(new Font("Font", Font.PLAIN, 15));
+                label.setFont(font);
                 panel.add(label,BorderLayout.EAST);
                 this.setMajorTickSpacing(bigStep);
                 this.setMinorTickSpacing(smallStep);
@@ -272,6 +281,7 @@ public class Client {
             private Graphics2D gr;
             private int size;
             private boolean staticDraw;
+            private final float RATIO = 1.5f;
 
             private boolean isStaticDraw() {
                 return staticDraw;
@@ -840,7 +850,7 @@ public class Client {
                     }
                 }
             });
-            //addMenu();
+            addMenu();
             addBorder();
             addCanvas();
             addPanel();
