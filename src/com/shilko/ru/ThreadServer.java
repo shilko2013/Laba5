@@ -6,11 +6,9 @@ import java.net.*;
 public class ThreadServer implements Runnable { //передает коллекцию данному клиенту
     private Socket client;
     private AnimalCollection collection;
-    private String way;
-    public ThreadServer(Socket client, AnimalCollection collection, String way) {
+    public ThreadServer(Socket client, AnimalCollection collection) {
         this.client = client;
         this.collection = collection;
-        this.way = way;
     }
     @Override
     public void run() {
@@ -22,7 +20,7 @@ public class ThreadServer implements Runnable { //передает коллек�
                     String command = (String) in.readObject();
                     String output;
                     if (command.equalsIgnoreCase("list"))
-                        output = collection.input(command,way,true);
+                        output = collection.input(command,null,true);
                     else throw new IllegalArgumentException();
                     out.writeObject(collection);
                     if (output != null)

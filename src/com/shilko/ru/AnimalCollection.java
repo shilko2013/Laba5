@@ -1,14 +1,13 @@
 package com.shilko.ru;
 
+import javax.swing.*;
 import javax.xml.stream.*;
 import java.io.*;
 import java.util.*;
 import com.jayway.jsonpath.*;
 import javafx.util.Pair;
-
 import java.util.concurrent.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.sql.*;
 
 /**
  * Класс, инкапсулирующий в себе управление коллекцией животных.
@@ -17,7 +16,69 @@ import java.util.stream.Collectors;
  */
 public class AnimalCollection implements Serializable {
     /** Поле коллекция животных */
-    private Map<Coord,Animal> collection = new ConcurrentSkipListMap<>();
+    private Map<Coord,Animal> collection;
+    private final String dataBaseURL;
+    private final String user;
+    private final String password;
+    static {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null,"Не удалось подключиться к БД!","Ошибка",JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
+    }
+    public AnimalCollection(String dataBaseURL, String user, String password) {
+        collection = new ConcurrentSkipListMap<>();
+        this.dataBaseURL = dataBaseURL;
+        this.user = user;
+        this.password = password;
+    }
+    public void load() throws Exception {
+        collection.clear();
+        Connection connection = DriverManager.getConnection(dataBaseURL,user,password);
+        if (connection == null)
+            throw new SQLException();
+        connection.setAutoCommit(false);
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery( "SELECT * FROM ANIMALS;" );
+        while (resultSet.next()) {
+            putAnimal(resultSet.getString("type"),
+                    resultSet.getString("name"),
+                    resultSet.getString("home"),
+                    resultSet.getInt("coord_x"),
+                    resultSet.getInt("coord_y"),
+                    resultSet.getInt("weight"),
+                    new ArrayList<>(), new ArrayList<>());
+        }
+        resultSet.close();
+        statement.close();
+        connection.close();
+    }
+    public void save() throws Exception {
+        Connection connection = DriverManager.getConnection(dataBaseURL,user,password);
+        if (connection == null)
+            throw new SQLException();
+        connection.setAutoCommit(false);
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("TRUNCATE ANIMALS;");
+        collection.forEach((key,animal)->{
+            try {
+                statement.executeUpdate("INSERT INTO ANIMALS(type,name,coord_x,coord_y,home,weight) VALUES " +
+                        "('" + animal.getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1).toLowerCase() +
+                        "','"+animal.getName()+
+                        "',"+animal.getCoord().getX()+
+                        ","+animal.getCoord().getY()+
+                        ",'"+animal.getHome()+
+                        "',"+animal.getWeight()+");");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+        statement.close();
+        connection.commit();
+        connection.close();
+    }
     public int size() {
         return collection.size();
     }

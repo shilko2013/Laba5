@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Class-Path: json-path-2.4.0.jar json-smart-2.3.jar slf4j-api-1.7.25.ja
  r slf4j-nop-1.7.25.jar accessors-smart-1.2.jar asm-5.0.4.jarjson-path
- -2.4.0.jar
+ -2.4.0.jar postgresql-42.2.2.jar
 Main-Class: com.shilko.ru.Server
 

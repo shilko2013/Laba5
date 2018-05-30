@@ -21,29 +21,40 @@ import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 public class Server {
-    private final static int port = 11111;
-    private static String password = "password";
-    private final static int sizeOfPool = 5;
-    private static String fileName;
-    private final static Object monitor = new Object();
-    private static boolean isLogin = false;
-    private static AnimalCollection collection = new AnimalCollection();
-    private static ExecutorService executor = Executors.newFixedThreadPool(sizeOfPool);
+    private final static int port;
+    private static String password;
+    private final static int sizeOfPool;
+    private final static Object monitor;
+    private static boolean isLogin;
+    private static AnimalCollection collection;
+    private static ExecutorService executor;
+    private static final String DB_URL;
+    private static final String USER;
+    private static final String PASS;
 
-    public static void exit(JFrame frame) { //метод, вызывающий фрейм закрытия, принимает закрывающийся фрейм
-        if (JOptionPane.showConfirmDialog(frame, "Вы действительно хотите выйти?", "Закрытие программы", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
-            try {
-                collection.save(fileName);
-            } catch (Exception w) {
-                JOptionPane.showMessageDialog(null, "Сохранение не удалось!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
-            }
-            System.exit(0);
-        }
+    static {
+        port = 11111;
+        password = "password";
+        sizeOfPool = 5;
+        monitor = new Object();
+        isLogin = false;
+        DB_URL = "jdbc:postgresql://127.0.0.1:2222/postgres";
+        USER = "postgres";
+        PASS = "iaq150";
+        executor = Executors.newFixedThreadPool(sizeOfPool);
+        collection = new AnimalCollection(DB_URL,USER,PASS);
     }
+
 
     private static class ServerGUI extends JFrame {
         private Font font = new Font("TimesRoman", Font.BOLD, 20);
         private Font font2 = new Font("Font", Font.PLAIN, 15);
+
+        private MyTable table;
+        private JScrollPane scrollPane;
+        private JComboBox<String> type;
+        private JTextField name,home;
+        private IntegerTextField x,y,weight;
 
         class IntegerTextField extends JTextField {
             private IntegerTextField() {
@@ -215,6 +226,17 @@ public class Server {
             }
         }
 
+        private void exit(JFrame frame) { //метод, вызывающий фрейм закрытия, принимает закрывающийся фрейм
+            if (JOptionPane.showConfirmDialog(frame, "Вы действительно хотите выйти?", "Закрытие программы", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE) == 0) {
+                try {
+                    collection.save();
+                } catch (Exception w) {
+                    JOptionPane.showMessageDialog(null, "Сохранение не удалось!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
+                }
+                System.exit(0);
+            }
+        }
+
         private ServerGUI() {
             super("Server");
             UIManager.put("OptionPane.messageFont", font);
@@ -222,56 +244,47 @@ public class Server {
             new Login(this, password);
         }
 
-        private void init() {
-            this.setFont(font);
-            this.setSize(800, 800);
-            this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-            this.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosing(WindowEvent e) {
-                    exit((JFrame) e.getComponent());
-                }
-            });
-            FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 10, 10);
-            this.setLayout(layout);
+        private void addMyTable() {
             String[] columnNames = {
                     "Вид", "Имя", "Координата Х", "Координата У", "Дом", "Вес", "Цвет"
             };
             Object[][] data = collection.data(columnNames.length);
-            MyTable table = new MyTable(data, columnNames);
-            JScrollPane scrollPane = new JScrollPane(table);
+            table = new MyTable(data, columnNames);
+            scrollPane = new JScrollPane(table);
             scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
             scrollPane.setPreferredSize(new Dimension(673, 200));
             this.add(scrollPane);
+        }
 
+        private void addToolKit1() {
             JPanel panel2 = new JPanel();
             GroupLayout groupLayout = new GroupLayout(panel2);
             panel2.setLayout(groupLayout);
             JLabel typeLabel = new JLabel("Выберите тип: ");
             typeLabel.setFont(font2);
-            JComboBox<String> type = new JComboBox<>(new String[]{
+            type = new JComboBox<>(new String[]{
                     "Tiger", "Kangaroo", "Rabbit", "RealAnimal", "All"
             });
             type.setFont(font2);
             JLabel nameLabel = new JLabel("Введите имя: ");
             nameLabel.setFont(font2);
-            JTextField name = new JTextField();
+            name = new JTextField();
             name.setFont(font2);
             JLabel xLabel = new JLabel("Введите Х: ");
             xLabel.setFont(font2);
-            IntegerTextField x = new IntegerTextField();
+            x = new IntegerTextField();
             x.setFont(font2);
             JLabel yLabel = new JLabel("Введите Y: ");
             yLabel.setFont(font2);
-            IntegerTextField y = new IntegerTextField();
+            y = new IntegerTextField();
             y.setFont(font2);
             JLabel homeLabel = new JLabel("Введите дом: ");
             homeLabel.setFont(font2);
-            JTextField home = new JTextField();
+            home = new JTextField();
             home.setFont(font2);
             JLabel weightLabel = new JLabel("Введите вес: ");
             weightLabel.setFont(font2);
-            IntegerTextField weight = new IntegerTextField();
+            weight = new IntegerTextField();
             weight.setFont(font2);
 
             groupLayout.setAutoCreateGaps(true);
@@ -313,16 +326,17 @@ public class Server {
                             .addComponent(weight))
             );
             this.add(panel2);
+        }
 
-            Font font = new Font("Font", Font.BOLD, 15);
+        private void addMenu() {
             JMenuBar menuBar = new JMenuBar();
             JMenu collectionMenu = new JMenu("Collection");
-            collectionMenu.setFont(font);
+            collectionMenu.setFont(font2);
             collectionMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             JMenuItem loadItem = new JMenuItem("Load");
             loadItem.addActionListener((event) -> {
                 try {
-                    collection.load(fileName);
+                    collection.load();
                     for (int i = table.getRowCount() - 1; i >= 0; --i)
                         table.removeRow(i);
                     Arrays.stream(collection.data(7)).forEach(table::addRow);
@@ -332,28 +346,29 @@ public class Server {
                     JOptionPane.showMessageDialog(this, "Загрузка не удалась!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
             });
-            loadItem.setFont(font);
+            loadItem.setFont(font2);
             collectionMenu.add(loadItem);
             JMenuItem saveItem = new JMenuItem("Save");
             saveItem.addActionListener((event) -> {
                 try {
-                    collection.save(fileName);
+                    collection.save();
                     JOptionPane.showMessageDialog(this, "Сохранено!", "Save", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Запись не удалась!", "Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
             });
-            saveItem.setFont(font);
+            saveItem.setFont(font2);
             collectionMenu.add(saveItem);
             collectionMenu.addSeparator();
             JMenuItem exitItem = new JMenuItem("Exit");
-            exitItem.setFont(font);
+            exitItem.setFont(font2);
             collectionMenu.add(exitItem);
             exitItem.addActionListener((event) -> exit(this));
             menuBar.add(collectionMenu);
             this.setJMenuBar(menuBar);
+        }
 
-
+        private void addButtonPanel() {
             JPanel panel = new JPanel();
             JButton insert = new JButton("Insert");
             insert.setFont(font2);
@@ -455,194 +470,187 @@ public class Server {
                         JOptionPane.showMessageDialog(this, "Животное с такими координатами уже существует!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
                     }
                 });
+            });
+            panel.add(edit);
+
+            JButton removeFromTable = new JButton("RemoveFromTable");
+            removeFromTable.setFont(font2);
+            removeFromTable.addActionListener((event) -> {
+                List<Integer> rows = Arrays.stream(table.getSelectedRows()).sorted().boxed().collect(Collectors.toList());
+                Collections.reverse(rows);
+                if (rows.size() == 0) {
+                    JOptionPane.showMessageDialog(this, "Животные не выделены!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+                rows.forEach(e -> {
+                    Vector vector = tableModel.getDataVector();
+                    collection.remove(new Coord((int) ((Vector) vector.elementAt(e)).elementAt(2), (int) ((Vector) vector.elementAt(e)).elementAt(3)));
                 });
-                panel.add(edit);
+                rows.forEach(tableModel::removeRow);
+                JOptionPane.showMessageDialog(this, "Животные успешно удалены!", "RemoveFromTable", JOptionPane.INFORMATION_MESSAGE);
+            });
+            panel.add(removeFromTable);
 
-                JButton removeFromTable = new JButton("RemoveFromTable");
-                removeFromTable.setFont(font2);
-                removeFromTable.addActionListener((event) -> {
-                    List<Integer> rows = Arrays.stream(table.getSelectedRows()).sorted().boxed().collect(Collectors.toList());
-                    Collections.reverse(rows);
-                    if (rows.size() == 0) {
-                        JOptionPane.showMessageDialog(this, "Животные не выделены!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-                    DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-                    rows.forEach(e -> {
-                        Vector vector = tableModel.getDataVector();
-                        collection.remove(new Coord((int) ((Vector) vector.elementAt(e)).elementAt(2), (int) ((Vector) vector.elementAt(e)).elementAt(3)));
-                    });
-                    rows.forEach(tableModel::removeRow);
-                    JOptionPane.showMessageDialog(this, "Животные успешно удалены!", "RemoveFromTable", JOptionPane.INFORMATION_MESSAGE);
-                });
-                panel.add(removeFromTable);
-
-                JButton removeGreaterKey = new JButton("RemoveGreaterKey");
-                removeGreaterKey.setFont(font2);
-                removeGreaterKey.addActionListener((event) -> {
-                    String x1 = x.getText().trim();
-                    String y1 = y.getText().trim();
-                    if (!checkValues(null, null, x1, y1, null, null,false))
-                        return;
-                    try {
-                        List<Coord> list = collection.removeGreaterKey(new Coord(Integer.parseInt(x1), Integer.parseInt(y1)));
-                        if (list.isEmpty()) {
-                            JOptionPane.showMessageDialog(this, "Таких животных не найдено!", "RemoveGreaterKey", JOptionPane.ERROR_MESSAGE);
-                        } else {
-                            Vector vector = table.model.getDataVector();
-                            list.forEach((e) -> {
-                                for (int i = 0; i < vector.size(); ++i) {
-                                    if (((Vector) (vector.elementAt(i))).elementAt(2).equals(e.getX()) &&
-                                            ((Vector) (vector.elementAt(i))).elementAt(3).equals(e.getY())) {
-                                        table.removeRow(i);
-                                        scrollPane.revalidate();
-                                        break;
-                                    }
-                                }
-                            });
-                            JOptionPane.showMessageDialog(this, "Животные успешно удалены!", "RemoveFromTable", JOptionPane.INFORMATION_MESSAGE);
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this, "Неверный формат команды!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-                    }
-                });
-                panel.add(removeGreaterKey);
-                this.add(panel);
-
-                this.pack();
-                this.setMinimumSize(new Dimension(700, 440));
-                this.setSize(this.getMinimumSize());
-                this.setLocationRelativeTo(null);
-
-                //this.setResizable(false); ///???????
-
-                this.setVisible(true);
-            }
-
-            private boolean checkValues (String type, String name, String x, String y, String home, String weight, boolean isEdited){
-                boolean result = true;
-                String message = "";
-                if (type != null) {
-                    switch (type.trim().toLowerCase()) {
-                        case "tiger":
-                        case "kangaroo":
-                        case "realanimal":
-                        case "rabbit":
-                            break;
-                        default:
-                            if (!isEdited || !type.trim().toLowerCase().equalsIgnoreCase("all")) {
-                                message += "тип, ";
-                                result = false;
-                            }
-                    }
-                }
-                if (name != null && name.trim().length() == 0) {
-                    message += "имя, ";
-                    result = false;
-                }
-                if (x != null) {
-                    try {
-                        if (Integer.parseInt(x) < 0)
-                            throw new NumberFormatException();
-                        if (x.charAt(0)=='0'&&x.length()>1)
-                            throw new NumberFormatException();
-                    } catch (Exception e) {
-                        message += "координата Х, ";
-                        result = false;
-                    }
-                }
-                if (y != null) {
-                    try {
-                        if (Integer.parseInt(y) < 0)
-                            throw new NumberFormatException();
-                        if (y.charAt(0)=='0'&&y.length()>1)
-                            throw new NumberFormatException();
-                    } catch (Exception e) {
-                        message += "координата У, ";
-                        result = false;
-                    }
-                }
-                if (home != null && home.trim().length() == 0) {
-                    message += "дом, ";
-                    result = false;
-                }
-                if (weight != null) {
-                    try {
-                        if (Integer.parseInt(weight) < 0 || Integer.parseInt(weight) > 1000)
-                            throw new NumberFormatException();
-                        if (weight.charAt(0)=='0'&&weight.length()>1)
-                            throw new NumberFormatException();
-                    } catch (Exception e) {
-                        message += "вес, ";
-                        result = false;
-                    }
-                }
-                if (!result) {
-                    message = message.substring(0, 1).toUpperCase() + message.substring(1, message.length() - 2);
-                    JOptionPane.showMessageDialog(this, message + " указаны неверно!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-                }
-                return result;
-            }
-        }
-
-        /*private static void createGUI() {
-            JFrame jfrm = new JFrame("Server");
-            jfrm.setSize(275,100);
-            jfrm.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            JLabel jlab = new JLabel ("lolikek" );
-            jfrm.add(jlab);
-            jfrm.setVisible(true);
-        }*/
-        public static void main(String... args) {
-            fileName = args[0];
-            try {
-                Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                    try {
-                        collection.save(fileName);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }));
-                collection.load(fileName);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Загрузка не удалась!", "Ошибка", JOptionPane.ERROR_MESSAGE);
-            }
-            javax.swing.SwingUtilities.invokeLater(Server.ServerGUI::new);
-            synchronized (monitor) {
+            JButton removeGreaterKey = new JButton("RemoveGreaterKey");
+            removeGreaterKey.setFont(font2);
+            removeGreaterKey.addActionListener((event) -> {
+                String x1 = x.getText().trim();
+                String y1 = y.getText().trim();
+                if (!checkValues(null, null, x1, y1, null, null,false))
+                    return;
                 try {
-                    while (!isLogin) {
-                        monitor.wait();
+                    List<Coord> list = collection.removeGreaterKey(new Coord(Integer.parseInt(x1), Integer.parseInt(y1)));
+                    if (list.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "Таких животных не найдено!", "RemoveGreaterKey", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        Vector vector = table.model.getDataVector();
+                        list.forEach((e) -> {
+                            for (int i = 0; i < vector.size(); ++i) {
+                                if (((Vector) (vector.elementAt(i))).elementAt(2).equals(e.getX()) &&
+                                        ((Vector) (vector.elementAt(i))).elementAt(3).equals(e.getY())) {
+                                    table.removeRow(i);
+                                    scrollPane.revalidate();
+                                    break;
+                                }
+                            }
+                        });
+                        JOptionPane.showMessageDialog(this, "Животные успешно удалены!", "RemoveFromTable", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Произошла ошибка!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Неверный формат команды!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                }
+            });
+            panel.add(removeGreaterKey);
+            this.add(panel);
+        }
+
+        private void init() {
+            this.setFont(font);
+            this.setSize(800, 800);
+            this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+            this.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    exit((JFrame) e.getComponent());
+                }
+            });
+            FlowLayout layout = new FlowLayout(FlowLayout.CENTER, 10, 10);
+            this.setLayout(layout);
+            addMyTable();
+            addToolKit1();
+            addMenu();
+            addButtonPanel();
+            this.pack();
+            this.setMinimumSize(new Dimension(700, 440));
+            this.setSize(this.getMinimumSize());
+            this.setLocationRelativeTo(null);
+            this.setVisible(true);
+        }
+
+        private boolean checkValues(String type, String name, String x, String y, String home, String weight, boolean isEdited) {
+            boolean result = true;
+            String message = "";
+            if (type != null) {
+                switch (type.trim().toLowerCase()) {
+                    case "tiger":
+                    case "kangaroo":
+                    case "realanimal":
+                    case "rabbit":
+                        break;
+                    default:
+                        if (!isEdited || !type.trim().toLowerCase().equalsIgnoreCase("all")) {
+                            message += "тип, ";
+                            result = false;
+                        }
                 }
             }
-            try (ServerSocket server = new ServerSocket(port)) {
-                while (!server.isClosed()) {
-                /*if (br.ready()) {
-                    try {
-                        String output = collection.input(new Scanner(br), args[0], false);
-                    }
-                    catch (IllegalArgumentException e) {
-                        System.out.println("Неверный формат команды!!!");
-                    }
-                }*/
-                    Socket client = server.accept();
-                    executor.execute(new ThreadServer(client, collection, fileName));
-                }
-                executor.shutdown();
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(
-                        null,
-                        "Сервер уже открыт!",
-                        "Ошибка",
-                        JOptionPane.ERROR_MESSAGE);
+            if (name != null && name.trim().length() == 0) {
+                message += "имя, ";
+                result = false;
+            }
+            if (x != null) {
                 try {
-                    collection.save(fileName);
-                } catch (Exception w) {
-                    JOptionPane.showMessageDialog(null, "Сохранение не удалось!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
+                    if (Integer.parseInt(x) < 0)
+                        throw new NumberFormatException();
+                    if (x.charAt(0) == '0' && x.length() > 1)
+                        throw new NumberFormatException();
+                } catch (Exception e) {
+                    message += "координата Х, ";
+                    result = false;
                 }
-                System.exit(0);
             }
+            if (y != null) {
+                try {
+                    if (Integer.parseInt(y) < 0)
+                        throw new NumberFormatException();
+                    if (y.charAt(0) == '0' && y.length() > 1)
+                        throw new NumberFormatException();
+                } catch (Exception e) {
+                    message += "координата У, ";
+                    result = false;
+                }
+            }
+            if (home != null && home.trim().length() == 0) {
+                message += "дом, ";
+                result = false;
+            }
+            if (weight != null) {
+                try {
+                    if (Integer.parseInt(weight) < 0 || Integer.parseInt(weight) > 1000)
+                        throw new NumberFormatException();
+                    if (weight.charAt(0) == '0' && weight.length() > 1)
+                        throw new NumberFormatException();
+                } catch (Exception e) {
+                    message += "вес, ";
+                    result = false;
+                }
+            }
+            if (!result) {
+                message = message.substring(0, 1).toUpperCase() + message.substring(1, message.length() - 2);
+                JOptionPane.showMessageDialog(this, message + " указаны неверно!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            }
+            return result;
         }
     }
+
+    public static void main(String... args) {
+        try {
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                try {
+                    collection.save();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }));
+            collection.load();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Загрузка не удалась!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+        }
+        javax.swing.SwingUtilities.invokeLater(Server.ServerGUI::new);
+        synchronized (monitor) {
+            try {
+                while (!isLogin) {
+                    monitor.wait();
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Произошла ошибка!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        try (ServerSocket server = new ServerSocket(port)) {
+            while (!server.isClosed()) {
+                Socket client = server.accept();
+                executor.execute(new ThreadServer(client, collection));
+            }
+            executor.shutdown();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Сервер уже открыт!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            try {
+                collection.save();
+            } catch (Exception w) {
+                JOptionPane.showMessageDialog(null, "Сохранение не удалось!", "Ошибка!", JOptionPane.ERROR_MESSAGE);
+            }
+            System.exit(0);
+        }
+    }
+}
