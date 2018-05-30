@@ -14,15 +14,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0feda5ad-c9bb-4a19-905a-5b31bf743e05" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/shilko/ru/Resource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_en.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_no.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_ru.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_sq.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/data.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/data.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/data_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/data_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/data_no.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/data_no.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/data_sq.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/data_sq.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,23 +38,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="640" column="62" selection-start-line="640" selection-start-column="62" selection-end-line="640" selection-end-column="62" />
+            <state relative-caret-position="-1129">
+              <caret line="414" column="9" lean-forward="true" selection-start-line="414" selection-start-column="9" selection-end-line="414" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#MySlider#0;class#MySlider#0;class#ClientGUI#0;class#Client#0" />
+                <element signature="initializer##0;class#ClientGUI#0;class#Client#0" />
+                <element signature="e#2766#2812#0" />
                 <element signature="e#3010#3011#0" expanded="true" />
                 <element signature="e#3054#3055#0" expanded="true" />
+                <element signature="e#5738#5739#0" expanded="true" />
+                <element signature="e#5792#5793#0" expanded="true" />
+                <element signature="class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="method#init#0;class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="class#DoubleRunNTimes#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="class#MyExecutor#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="class#Canvas#0;class#ClientGUI#0;class#Client#0" />
+                <element signature="e#13481#13603#0" />
                 <element signature="method#loadImages#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="e#12711#15129#0" />
                 <element signature="method#initList#0;class#ClientGUI#0;class#Client#0" />
+                <element signature="e#16456#16858#0" />
                 <element signature="method#addMenu#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="method#addBorder#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="method#addCanvas#0;class#ClientGUI#0;class#Client#0" />
@@ -66,13 +68,16 @@
                 <element signature="e#19799#22233#0" />
                 <element signature="e#19228#19778#0" />
                 <element signature="e#20025#20239#0" />
-                <element signature="e#24401#26966#0" />
+                <element signature="method#initToolkitPanel1#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="method#addPanel#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="e#30895#30984#0" />
+                <element signature="e#35403#36576#0" />
                 <element signature="method#checkFilter#0;class#ClientGUI#0;class#Client#0" />
+                <element signature="method#check#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="class#37894:40741" />
                 <element signature="e#36682#36683#0" expanded="true" />
                 <element signature="e#36746#36747#0" expanded="true" />
+                <element signature="method#getCollection#0;class#Client#0" />
               </folding>
             </state>
           </provider>
@@ -81,8 +86,48 @@
       <file leaf-file-name="data.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/resources/data.properties">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+            </state>
+          </provider>
+          <provider editor-type-id="ResourceBundle" />
+        </entry>
+      </file>
+      <file leaf-file-name="data_ru.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/resources/data_ru.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+            </state>
+          </provider>
+          <provider editor-type-id="ResourceBundle" />
+        </entry>
+      </file>
+      <file leaf-file-name="data_en.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/resources/data_en.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="81" selection-start-line="4" selection-start-column="81" selection-end-line="4" selection-end-column="81" />
+            </state>
+          </provider>
+          <provider editor-type-id="ResourceBundle" />
+        </entry>
+      </file>
+      <file leaf-file-name="data_no.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/resources/data_no.properties">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="25" column="38" lean-forward="true" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+              <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+            </state>
+          </provider>
+          <provider editor-type-id="ResourceBundle" />
+        </entry>
+      </file>
+      <file leaf-file-name="data_sq.properties" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/resources/data_sq.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="27" column="27" lean-forward="true" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
             </state>
           </provider>
           <provider editor-type-id="ResourceBundle" />
@@ -91,8 +136,8 @@
       <file leaf-file-name="Resource.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Resource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="18" column="20" lean-forward="true" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+            <state relative-caret-position="115">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -109,46 +154,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Animal.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Animal.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1156">
-              <caret line="91" column="35" selection-start-line="91" selection-start-column="35" selection-end-line="91" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1399#1400#0" expanded="true" />
-                <element signature="e#1424#1425#0" expanded="true" />
-                <element signature="e#1471#1472#0" expanded="true" />
-                <element signature="e#1506#1507#0" expanded="true" />
-                <element signature="e#1545#1546#0" expanded="true" />
-                <element signature="e#1577#1578#0" expanded="true" />
-                <element signature="e#1739#1740#0" expanded="true" />
-                <element signature="e#1799#1800#0" expanded="true" />
-                <element signature="e#2080#2081#0" expanded="true" />
-                <element signature="e#2113#2114#0" expanded="true" />
-                <element signature="e#2143#2144#0" expanded="true" />
-                <element signature="e#2170#2171#0" expanded="true" />
-                <element signature="e#2491#2492#0" expanded="true" />
-                <element signature="e#2523#2524#0" expanded="true" />
-                <element signature="e#2967#2968#0" expanded="true" />
-                <element signature="e#2997#2998#0" expanded="true" />
-                <element signature="e#3143#3144#0" expanded="true" />
-                <element signature="e#3170#3171#0" expanded="true" />
-                <element signature="e#3216#3217#0" expanded="true" />
-                <element signature="e#3247#3248#0" expanded="true" />
-                <element signature="e#3277#3278#0" expanded="true" />
-                <element signature="e#3306#3307#0" expanded="true" />
-                <element signature="e#3347#3348#0" expanded="true" />
-                <element signature="e#3385#3386#0" expanded="true" />
-                <element signature="e#3425#3426#0" expanded="true" />
-                <element signature="e#3459#3460#0" expanded="true" />
-                <element signature="e#4090#4091#0" expanded="true" />
-                <element signature="e#4165#4166#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Coord.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Coord.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -157,24 +162,6 @@
               <folding>
                 <element signature="e#425#426#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmptyException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/EmptyException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ingestion.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Ingestion.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -211,15 +198,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>port</find>
-      <find>JMen</find>
-      <find>reBo</find>
-      <find>reBord</find>
-      <find>//</find>
-      <find>/*</find>
-      <find>class</find>
-      <find>App</find>
-      <find>suit</find>
       <find>SEVER</find>
       <find>WAR</find>
       <find>Level</find>
@@ -241,6 +219,15 @@
       <find>&quot;[^\&quot;]{0,}&quot;</find>
       <find>types</find>
       <find>toolkitp</find>
+      <find>check</find>
+      <find>failed.s</find>
+      <find>failed.x</find>
+      <find>вес</find>
+      <find>ru</find>
+      <find>ru_</find>
+      <find>buttonp</find>
+      <find>langu</find>
+      <find>type.text</find>
     </findStrings>
     <replaceStrings>
       <replace>check(false);</replace>
@@ -278,8 +265,12 @@
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Animal.java" />
         <option value="$PROJECT_DIR$/data.properties" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Resource.java" />
+        <option value="$PROJECT_DIR$/src/resources/data_ru.properties" />
         <option value="$PROJECT_DIR$/src/resources/data.properties" />
+        <option value="$PROJECT_DIR$/src/resources/data_en.properties" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Client.java" />
+        <option value="$PROJECT_DIR$/src/resources/data_no.properties" />
+        <option value="$PROJECT_DIR$/src/resources/data_sq.properties" />
       </list>
     </option>
   </component>
@@ -339,7 +330,7 @@
               <item name="Laba3" type="b2602c69:ProjectViewProjectNode" />
               <item name="Laba3" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ru" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -495,14 +486,7 @@
       <workItem from="1526764133214" duration="707000" />
       <workItem from="1526817056797" duration="1194000" />
       <workItem from="1526828284860" duration="58317000" />
-      <workItem from="1527274431238" duration="36810000" />
-    </task>
-    <task id="LOCAL-00003" summary="Laba5.Version2 with AnimalCollection + save.">
-      <created>1517948187214</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1517948187214</updated>
+      <workItem from="1527274431238" duration="49452000" />
     </task>
     <task id="LOCAL-00004" summary="Laba5.Version2 with AnimalCollection + til JSON.">
       <created>1518014358687</created>
@@ -840,11 +824,18 @@
       <option name="project" value="LOCAL" />
       <updated>1527623645360</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="8.7.1 data.properties without checkFilter().">
+      <created>1527629197595</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1527629197595</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="609421000" />
+    <option name="totallyTimeSpent" value="622063000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
@@ -864,7 +855,7 @@
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.32874495" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.3286495" />
       <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32561985" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -872,7 +863,7 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39490446" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39338842" />
       <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.32943013" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24980484" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -929,7 +920,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Laba7.Version5. Вроде готово." />
     <MESSAGE value="Laba7.Version5. Вроде готово, bug с update fixed." />
     <MESSAGE value="Laba7.Version6. Сервер с окошками, клиент с timer." />
     <MESSAGE value="Laba7.Version7.Клиент с executor готов. Сервер нет." />
@@ -954,14 +944,15 @@
     <MESSAGE value="Laba8.Version6. Logging." />
     <MESSAGE value="8.7 data.properties ready." />
     <MESSAGE value="8.7.0.1 properties in resource folder." />
-    <option name="LAST_COMMIT_MESSAGE" value="8.7.0.1 properties in resource folder." />
+    <MESSAGE value="8.7.1 data.properties without checkFilter()." />
+    <option name="LAST_COMMIT_MESSAGE" value="8.7.1 data.properties without checkFilter()." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/shilko/ru/Client.java</url>
-          <line>334</line>
+          <line>417</line>
           <properties />
           <option name="timeStamp" value="198" />
         </line-breakpoint>
@@ -975,34 +966,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/table/TableModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="133" column="47" lean-forward="true" selection-start-line="133" selection-start-column="47" selection-end-line="133" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Dialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="1083" selection-start-line="1083" selection-end-line="1083" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/WaitDispatchSupport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="183" selection-start-line="183" selection-end-line="183" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/RepaintManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="813" selection-start-line="813" selection-end-line="813" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/JOptionPane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
@@ -1415,38 +1378,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Resource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" column="20" lean-forward="true" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+        <state relative-caret-position="115">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/data_ru.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/data.properties">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/data_no.properties">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="25" column="38" lean-forward="true" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+          <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/data_en.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="81" selection-start-line="4" selection-start-column="81" selection-end-line="4" selection-end-column="81" />
         </state>
       </provider>
       <provider editor-type-id="ResourceBundle" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="640" column="62" selection-start-line="640" selection-start-column="62" selection-end-line="640" selection-end-column="62" />
+        <state relative-caret-position="-1129">
+          <caret line="414" column="9" lean-forward="true" selection-start-line="414" selection-start-column="9" selection-end-line="414" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#MySlider#0;class#MySlider#0;class#ClientGUI#0;class#Client#0" />
+            <element signature="initializer##0;class#ClientGUI#0;class#Client#0" />
+            <element signature="e#2766#2812#0" />
             <element signature="e#3010#3011#0" expanded="true" />
             <element signature="e#3054#3055#0" expanded="true" />
+            <element signature="e#5738#5739#0" expanded="true" />
+            <element signature="e#5792#5793#0" expanded="true" />
+            <element signature="class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
             <element signature="method#init#0;class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
             <element signature="class#DoubleRunNTimes#0;class#ClientGUI#0;class#Client#0" />
             <element signature="class#MyExecutor#0;class#ClientGUI#0;class#Client#0" />
             <element signature="class#Canvas#0;class#ClientGUI#0;class#Client#0" />
+            <element signature="e#13481#13603#0" />
             <element signature="method#loadImages#0;class#ClientGUI#0;class#Client#0" />
             <element signature="e#12711#15129#0" />
             <element signature="method#initList#0;class#ClientGUI#0;class#Client#0" />
+            <element signature="e#16456#16858#0" />
             <element signature="method#addMenu#0;class#ClientGUI#0;class#Client#0" />
             <element signature="method#addBorder#0;class#ClientGUI#0;class#Client#0" />
             <element signature="method#addCanvas#0;class#ClientGUI#0;class#Client#0" />
@@ -1454,16 +1447,27 @@
             <element signature="e#19799#22233#0" />
             <element signature="e#19228#19778#0" />
             <element signature="e#20025#20239#0" />
-            <element signature="e#24401#26966#0" />
+            <element signature="method#initToolkitPanel1#0;class#ClientGUI#0;class#Client#0" />
             <element signature="method#addPanel#0;class#ClientGUI#0;class#Client#0" />
             <element signature="e#30895#30984#0" />
+            <element signature="e#35403#36576#0" />
             <element signature="method#checkFilter#0;class#ClientGUI#0;class#Client#0" />
+            <element signature="method#check#0;class#ClientGUI#0;class#Client#0" />
             <element signature="class#37894:40741" />
             <element signature="e#36682#36683#0" expanded="true" />
             <element signature="e#36746#36747#0" expanded="true" />
+            <element signature="method#getCollection#0;class#Client#0" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/data_sq.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="27" column="27" lean-forward="true" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="27" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle" />
     </entry>
   </component>
   <component name="masterDetails">

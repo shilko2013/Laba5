@@ -28,7 +28,7 @@ public class Client {
             fileHandler = new FileHandler("log.txt");
         } catch (IOException e) {
             logger.severe("Logging in file is failed");
-            JOptionPane.showMessageDialog(null,new Resource("resources.data","ru_RU").getString("logging.error.message"),new Resource("resources.data","ru_RU").getString("error"),JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,new Resource("resources.data","ru").getString("logging.error.message"),new Resource("resources.data","ru").getString("error"),JOptionPane.ERROR_MESSAGE);
         }
         if (fileHandler != null) {
             logger.addHandler(fileHandler);
@@ -54,10 +54,17 @@ public class Client {
             images = new ArrayList<>();
             executor = new MyExecutor();
             set = new TreeSet<>((a, b) -> Double.compare(a.getWeight(), b.getWeight()));
-            resources = new Resource("resources.data","ru_RU");
+            resources = new Resource("resources.data","ru");
+            comparingValues = new ComparingValues();
         }
 
-        private JMenuBar menuBar;
+        private JMenu collectionMenu;
+        private JRadioButtonMenuItem russian;
+        private JRadioButtonMenuItem norwegian;
+        private JRadioButtonMenuItem albanian;
+        private JRadioButtonMenuItem english;
+        private JMenu language;
+        private JMenuItem exitItem;
         private JPanel border;
         private Canvas canvas;
         private JPanel panel;
@@ -78,6 +85,37 @@ public class Client {
         private MySlider minX,maxX,minY,maxY;
         private JLabel weightLabel;
         private MySlider minWeight,maxWeight;
+        private ComparingValues comparingValues;
+
+        class ComparingValues {
+            private String[] types;
+            private String homeOfKanga;
+            private String homeOfRabbit;
+            private String australia;
+            private String orange;
+            private String white;
+            private String black;
+            private String brown;
+
+            {
+                Resource resources = new Resource("resources.data","en");
+                types = new String[]{
+                        resources.getString("tiger.name"),
+                        resources.getString("kangaroo.name"),
+                        resources.getString("rabbit.name"),
+                        "realanimal",
+                        resources.getString("anyanimal.name")
+                };
+                resources.reLocale("ru");
+                homeOfKanga = resources.getString("home.kanga");
+                homeOfRabbit = resources.getString("home.rabbit");
+                australia = resources.getString("home.australia");
+                orange = resources.getString("colour.orange");
+                black = resources.getString("colour.black");
+                white = resources.getString("colour.white");
+                brown = resources.getString("colour.brown");
+            }
+        }
 
         class MySlider extends JSlider {
             private JPanel panel;
@@ -114,6 +152,10 @@ public class Client {
 
             private JPanel getPanel() {
                 return panel;
+            }
+
+            private void setText(String text) {
+                ((JLabel)panel.getComponent(0)).setText(text);
             }
 
             private JLabel getLabel() {
@@ -331,6 +373,47 @@ public class Client {
             }
         }
 
+        private void changeLanguage() {
+            this.setTitle(resources.getString("main.frame.title"));
+            collectionMenu.setText(resources.getString("menu.title"));
+            russian.setText(resources.getString("menu.language.russian"));
+            norwegian.setText(resources.getString("menu.language.norwegian"));
+            albanian.setText(resources.getString("menu.language.albanian"));
+            english.setText(resources.getString("menu.language.english"));
+            language.setText(resources.getString("menu.language"));
+            exitItem.setText(resources.getString("exitItem"));
+            buttonLabel.setText(resources.getString("button.label.title"));
+            start.setText(resources.getString("button.start.title"));
+            stop.setText(resources.getString("button.stop.title"));
+            update.setText(resources.getString("button.update.title"));
+            typeLabel.setText(resources.getString("type.text"));
+            types.removeAllItems();
+            types.addItem(resources.getString("tiger.name"));
+            types.addItem(resources.getString("kangaroo.name"));
+            types.addItem(resources.getString("rabbit.name"));
+            types.addItem("<html>"+resources.getString("realanimal.name").replaceAll(" ","<br>"));
+            types.addItem(resources.getString("anyanimal.name"));
+            nameLabel.setText(resources.getString("name.text"));
+            homeLabel.setText(resources.getString("home.label.title"));
+            homeOfKanga.setText(resources.getString("home.kanga"));
+            homeOfRabbit.setText(resources.getString("home.rabbit"));
+            australia.setText(resources.getString("home.australia"));
+            other.setText(resources.getString("home.other"));
+            colourLabel.setText(resources.getString("colour.label.title"));
+            orange.setText(resources.getString("colour.orange"));
+            brown.setText(resources.getString("colour.brown"));
+            black.setText(resources.getString("colour.black"));
+            white.setText(resources.getString("colour.white"));
+            coordLabel.setText(resources.getString("coord.label.title"));
+            minX.setText(resources.getString("min") + " X: ");
+            maxX.setText(resources.getString("max") + " X: ");
+            minY.setText(resources.getString("min") + " Y: ");
+            maxY.setText(resources.getString("max") + " Y: ");
+            weightLabel.setText(resources.getString("weight.label.title"));
+            minWeight.setText(resources.getString("min")+": ");
+            maxWeight.setText(resources.getString("max")+": ");
+        }
+
         private void loadImages() {
             try {
                 images.add(ImageIO.read(new File("tiger_with_bounds.png")));
@@ -376,7 +459,7 @@ public class Client {
                     collection.values().remove(e);
                 }
             });
-            StringBuilder message = new StringBuilder(resources.getString("coord.failed.start"));
+            StringBuilder message = new StringBuilder(resources.getString("coord.failed.start")+"\n");
             pairs.forEach(e-> {
                 message.append("x: " +e.getKey()+", y: "+e.getValue()+"\n");
             });
@@ -411,7 +494,7 @@ public class Client {
         }
 
         private ClientGUI() {
-            super(new Resource("resources.data","ru_RU").getString("main.frame.title"));
+            super(new Resource("resources.data","ru").getString("main.frame.title"));
             logger.info("Initialization of GUI has been started");
             UIManager.put("OptionPane.messageFont", font);
             UIManager.put("OptionPane.buttonFont", font);
@@ -420,41 +503,45 @@ public class Client {
 
         private void addMenu() {
             logger.info("Initialization menu bar has been started");
-            menuBar = new JMenuBar();
-            JMenu collectionMenu = new JMenu(resources.getString("menu.title"));
+            JMenuBar menuBar = new JMenuBar();
+            collectionMenu = new JMenu(resources.getString("menu.title"));
             collectionMenu.setFont(font);
             collectionMenu.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            JMenu language = new JMenu(resources.getString("menu.language"));
+            language = new JMenu(resources.getString("menu.language"));
             language.setFont(font);
             collectionMenu.add(language);
-            JRadioButtonMenuItem russian = new JRadioButtonMenuItem(resources.getString("menu.language.russian"));
+            russian = new JRadioButtonMenuItem(resources.getString("menu.language.russian"));
             logger.fine("Russian button has been added");
             russian.setFont(font);
             language.add(russian);
             russian.addActionListener((event) -> {
-
+                resources.reLocale("ru");
+                changeLanguage();
             });
             russian.setSelected(true);
-            JRadioButtonMenuItem norwegian = new JRadioButtonMenuItem(resources.getString("menu.language.norwegian"));
+            norwegian = new JRadioButtonMenuItem(resources.getString("menu.language.norwegian"));
             logger.fine("Norwegian button has been added");
             norwegian.setFont(font);
             language.add(norwegian);
             norwegian.addActionListener((event) -> {
-
+                resources.reLocale("no");
+                changeLanguage();
             });
-            JRadioButtonMenuItem albanian = new JRadioButtonMenuItem(resources.getString("menu.language.albanian"));
+            albanian = new JRadioButtonMenuItem(resources.getString("menu.language.albanian"));
             logger.fine("Albanian button has been added");
             albanian.setFont(font);
             language.add(albanian);
             albanian.addActionListener((event) -> {
-
+                resources.reLocale("sq");
+                changeLanguage();
             });
-            JRadioButtonMenuItem english = new JRadioButtonMenuItem(resources.getString("menu.language.english"));
+            english = new JRadioButtonMenuItem(resources.getString("menu.language.english"));
             logger.fine("English button has been added");
             english.setFont(font);
             language.add(english);
             english.addActionListener((event) -> {
-
+                resources.reLocale("en");
+                changeLanguage();
             });
             ButtonGroup buttonGroup = new ButtonGroup();
             buttonGroup.add(russian);
@@ -462,7 +549,7 @@ public class Client {
             buttonGroup.add(albanian);
             buttonGroup.add(english);
             collectionMenu.addSeparator();
-            JMenuItem exitItem = new JMenuItem(resources.getString("exitItem"));
+            exitItem = new JMenuItem(resources.getString("exitItem"));
             logger.fine("Exit button has been added");
             exitItem.setFont(font);
             collectionMenu.add(exitItem);
@@ -497,6 +584,7 @@ public class Client {
         private void initButtonPanel() {
             logger.info("Initialization of button panel has been started");
             buttonPanel = new JPanel();
+            buttonPanel.setMinimumSize(new Dimension(150,120));
             buttonPanel.setLayout(new GridBagLayout());
             GridBagConstraints c = new GridBagConstraints();
             c.insets = new Insets(0,2,2,2);
@@ -671,7 +759,7 @@ public class Client {
             maxX = new MySlider(resources.getString("max") + " X: ", 0, 1800, 0, 400, 100);
             maxY = new MySlider(resources.getString("max") + " Y: ", 0, 800, 0, 200, 50);
 
-            weightLabel = new JLabel("Вес животного: ");
+            weightLabel = new JLabel(resources.getString("weight.label.title"));
             weightLabel.setFont(font);
             minWeight = new MySlider(resources.getString("min")+": ", 0, 500, 0, 100, 10);
             maxWeight = new MySlider(resources.getString("max")+": ", 0, 500, 0, 100, 10);
@@ -874,32 +962,32 @@ public class Client {
 
         private List<Boolean> checkFilter(Animal animal) {
             List<Boolean> booleans = new ArrayList<>();
-            booleans.add(((animal.getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1).equalsIgnoreCase(((String) types.getSelectedItem()).trim()) ||
-                    ((String) types.getSelectedItem()).trim().equalsIgnoreCase("Любой"))));
+            booleans.add(animal.getClass().toString().substring(getClass().toString().lastIndexOf(".") + 1).equalsIgnoreCase(comparingValues.types[types.getSelectedIndex()].trim()) ||
+                    types.getSelectedIndex()==comparingValues.types.length-1);
             booleans.add((animal.getName().trim().equalsIgnoreCase(nameField.getText().trim()) || nameField.getText().trim().equals("")));
             booleans.add((animal.getCoord().getX() > minX.getMyValue() &&
                     animal.getCoord().getX() < maxX.getMyValue()));
             booleans.add((animal.getCoord().getY() > minY.getMyValue() &&
                     animal.getCoord().getY() < maxY.getMyValue()));
             booleans.add((
-                    (animal.getHome().trim().equalsIgnoreCase(homeOfKanga.getText().trim()) &&
+                    (animal.getHome().trim().equalsIgnoreCase(comparingValues.homeOfKanga) &&
                             homeOfKanga.isSelected()) ||
-                            (animal.getHome().trim().equalsIgnoreCase(homeOfRabbit.getText().trim()) &&
+                            (animal.getHome().trim().equalsIgnoreCase(comparingValues.homeOfRabbit) &&
                                     homeOfRabbit.isSelected()) ||
-                            (animal.getHome().trim().equalsIgnoreCase(australia.getText().trim()) &&
+                            (animal.getHome().trim().equalsIgnoreCase(comparingValues.australia) &&
                                     australia.isSelected()) ||
                                     other.isSelected()
                     ));
             booleans.add((animal.getWeight() > minWeight.getMyValue() &&
                     animal.getWeight() < maxWeight.getMyValue()));
             booleans.add((
-                            (animal.getColourSynonym().trim().equalsIgnoreCase(orange.getText().trim()) &&
+                            (animal.getColourSynonym().trim().equalsIgnoreCase(comparingValues.orange) &&
                                     orange.isSelected()) ||
-                                    (animal.getColourSynonym().trim().equalsIgnoreCase(white.getText().trim()) &&
+                                    (animal.getColourSynonym().trim().equalsIgnoreCase(comparingValues.white) &&
                                             white.isSelected()) ||
-                                    (animal.getColourSynonym().trim().equalsIgnoreCase(black.getText().trim()) &&
+                                    (animal.getColourSynonym().trim().equalsIgnoreCase(comparingValues.black) &&
                                             black.isSelected()) ||
-                                    (animal.getColourSynonym().trim().equalsIgnoreCase(brown.getText().trim()) &&
+                                    (animal.getColourSynonym().trim().equalsIgnoreCase(comparingValues.brown) &&
                                             brown.isSelected())
                     ));
             if (booleans.stream().allMatch(e->e))
@@ -1001,13 +1089,13 @@ public class Client {
             else {
                 if (booleans.stream().anyMatch(e->!e)) {
                     List<String> errors = new ArrayList<>(Arrays.asList(
-                            resources.getString("start.failed.type"),
-                            resources.getString("start.failed.name"),
-                            resources.getString("start.failed.x"),
-                            resources.getString("start.failed.y"),
-                            resources.getString("start.failed.home"),
-                            resources.getString("start.failed.weight"),
-                            resources.getString("start.failed.colour")
+                            resources.getString("start.failed.type")+" ",
+                            resources.getString("start.failed.name")+" ",
+                            resources.getString("start.failed.x")+" ",
+                            resources.getString("start.failed.y")+" ",
+                            resources.getString("start.failed.home")+" ",
+                            resources.getString("start.failed.weight")+" ",
+                            resources.getString("start.failed.colour")+" "
                             ));
                     for (int i = 0; i < booleans.size(); ++i) {
                         if (!booleans.get(i))
