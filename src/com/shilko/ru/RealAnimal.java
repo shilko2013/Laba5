@@ -3,12 +3,6 @@ package com.shilko.ru;
 import java.util.Objects;
 import java.lang.annotation.*;
 
-@Inherited
-@Target(value = ElementType.TYPE)
-@Retention(value = RetentionPolicy.RUNTIME)
-@interface Unknown { }
-
-@Unknown
 public class RealAnimal extends Animal {
     private final static int[] colour = new int[]{0,0,0};
     @Override public int[] getColour() {

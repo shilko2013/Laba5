@@ -2,7 +2,7 @@ package com.shilko.ru;
 
 import java.util.*;
 
-@Jumping(maxHeight = 100)
+@Jumping(maxHeight = 50)
 public class Rabbit extends Animal{
     private final static int[] colour = new int[]{255,255,255};
     @Override public int[] getColour() {

@@ -9,6 +9,7 @@ import java.awt.event.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.lang.annotation.Annotation;
 import java.net.*;
 import java.nio.channels.*;
 import java.util.*;
@@ -1007,62 +1008,12 @@ public class Client {
             somebodyExist[0] = false;
             set.forEach((e) -> {
                 Animal animal = e.getAnimal();
-                int weight = animal.getWeight();
-                class ManagerMoving {
-                    private int randomWidth;
-                    private int randomHeight;
-                    private int numberOfCircles;
-                    private int randomAmplitude;
-                    private double cos;
-                    private double sin;
-                    private int step;
-                    private double x;
-                    private int savedX, savedY;
-                    private int count;
-                    private double myY;
-                    private Coord coord;
-                    private ManagerMoving(int step, Coord coord) {
-                        this.step = step;
-                        this.coord = coord;
-                        reRandom();
-                    }
-                    private void reRandom() {
-                        reCoord();
-                        savedX = (int)x;
-                        savedY = coord.getY();
-                        numberOfCircles = new Random().nextInt(3)+3;
-                        randomAmplitude = new Random().nextInt(50)+25;
-                        int magicConstant = (int)(images.get(e.getIconNumber()).getHeight()/(images.get(e.getIconNumber()).getWidth()/(animal.getWeight()+0.)));
-                        randomWidth = new Random().nextInt(canvas.getWidth()-weight)+weight/2;
-                        randomHeight = new Random().nextInt(canvas.getHeight()-magicConstant)+magicConstant/2;
-                        cos = (randomWidth-savedX)/(Math.pow(Math.pow(randomWidth-savedX,2)+Math.pow(randomHeight-savedY,2),1./2));
-                        sin = (randomHeight-savedY)/(Math.pow(Math.pow(randomWidth-savedX,2)+Math.pow(randomHeight-savedY,2),1./2));
-                        count = 0;
-                    }
-                    private void nextStep() {
-                        count++;
-                        if (count==step) {
-                            reCoord();
-                            reRandom();
-                            nextStep();
-                        }
-                        if (randomWidth>savedX)
-                            x += (randomWidth-savedX)/(double)step;
-                        else
-                            x -= (randomWidth-savedX)/(double)step;
-                        myY = (savedY+randomAmplitude*Math.sin(Math.PI*numberOfCircles*x/(randomWidth-savedX)));
-                    }
-                    private void reCoord() {
-                        x = coord.getX();
-                    }
-                    private int nextX() {
-                        return (int)((x-savedX)*cos-(myY-savedY)*sin+savedX);
-                    }
-                    private int nextY() {
-                        return (int)((x-savedX)*sin+(myY-savedY)*cos+savedY);
-                    }
-                }
-                ManagerMoving managerMoving = new ManagerMoving(400,animal.getCoord());
+                ManagerMoving managerMoving = new ManagerMoving(
+                        animal,
+                        400,
+                        images.get(e.getIconNumber()).getHeight(),
+                        images.get(e.getIconNumber()).getWidth(),
+                        canvas);
                 if (checkFilter(animal) == null) {
                     executor.addTask(animal.getID(), () -> {
                         managerMoving.nextStep();
