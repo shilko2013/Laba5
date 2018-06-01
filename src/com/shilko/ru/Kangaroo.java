@@ -2,6 +2,7 @@ package com.shilko.ru;
 
 import java.util.*;
 
+@Jumping(maxHeight = 300)
 public class Kangaroo extends Animal implements Mindable {
     private boolean decision;
     private final static int[] colour = new int[]{148,104,76};

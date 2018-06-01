@@ -2,7 +2,14 @@ package com.shilko.ru;
 
 import java.io.Serializable;
 import java.util.*;
+import java.lang.annotation.*;
 
+@Inherited
+@Target(value = ElementType.TYPE)
+@Retention(value = RetentionPolicy.RUNTIME)
+@interface Running { }
+
+@Running
 public class Tiger extends Animal implements Workable, Sayable {
     private final static int[] colour = new int[]{247,107,0};
     @Override public int[] getColour() {
