@@ -9,7 +9,6 @@ import java.awt.event.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.lang.annotation.Annotation;
 import java.net.*;
 import java.nio.channels.*;
 import java.util.*;
@@ -20,13 +19,16 @@ import java.util.logging.*;
 
 public class Client {
     private final static int port;
-    private static final Logger logger;
+    private final static Logger logger;
+    private final static String logFile;
     static {
         port = 11111;
+        logFile = "log.txt";
         logger = Logger.getLogger(Client.class.getName());
         FileHandler fileHandler = null;
         try {
-            fileHandler = new FileHandler("log.txt");
+            fileHandler = new FileHandler(logFile);
+            fileHandler.setLevel(Level.INFO);
         } catch (IOException e) {
             logger.severe("Logging in file is failed");
             JOptionPane.showMessageDialog(null,new Resource("resources.data","ru").getString("logging.error.message"),new Resource("resources.data","ru").getString("error"),JOptionPane.ERROR_MESSAGE);
@@ -34,6 +36,16 @@ public class Client {
         if (fileHandler != null) {
             logger.addHandler(fileHandler);
         }
+    }
+
+    public static int getPort() {
+        return port;
+    }
+    public static Logger getLogger() {
+        return logger;
+    }
+    public static String getLogFile() {
+        return logFile;
     }
 
     public static void main(String... args) {
@@ -48,7 +60,6 @@ public class Client {
         private MyExecutor executor;
         private Set<AnimalButton> set;
         private Resource resources;
-
         {
             font = new Font("Font", Font.PLAIN, 15);
             collection = new ConcurrentHashMap<>();
@@ -494,7 +505,7 @@ public class Client {
             logger.info("Animals for mapping has been updated");
         }
 
-        private ClientGUI() {
+        private ClientGUI() { //replace on private after testing
             super(new Resource("resources.data","ru").getString("main.frame.title"));
             logger.info("Initialization of GUI has been started");
             UIManager.put("OptionPane.messageFont", font);
@@ -1058,6 +1069,7 @@ public class Client {
                     return resources.getString("start.failed.all");
             }
         }
+
     }
 
     private static AnimalCollection getCollection() throws ClassCastException, ClassNotFoundException, IOException {
