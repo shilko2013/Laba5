@@ -108,7 +108,6 @@ public class Client {
             private String white;
             private String black;
             private String brown;
-
             {
                 Resource resources = new Resource("resources.data","en");
                 types = new String[]{
@@ -133,21 +132,28 @@ public class Client {
             private JPanel panel;
             private JLabel label;
             private int myValue = 0;
+            private int min,max;
 
             private int getMyValue() {
                 return myValue;
             }
 
             private void setMyValue(int myValue) {
+                if (myValue > max || myValue < min)
+                    throw new IllegalArgumentException();
                 this.myValue = myValue;
             }
 
             private MySlider(String text, int min, int max, int value, int bigStep, int smallStep) {
                 super(JSlider.HORIZONTAL, min, max, value);
+                this.max = max;
+                this.min = min;
                 panel = new JPanel();
                 label = new JLabel(text);
                 label.setFont(font);
                 panel.add(label,BorderLayout.EAST);
+                if (bigStep <= 0 || smallStep <= 0)
+                    throw new IllegalArgumentException();
                 this.setMajorTickSpacing(bigStep);
                 this.setMinorTickSpacing(smallStep);
                 this.setPaintTicks(true);
@@ -167,11 +173,9 @@ public class Client {
             }
 
             private void setText(String text) {
+                if (text == null)
+                    throw new IllegalArgumentException();
                 ((JLabel)panel.getComponent(0)).setText(text);
-            }
-
-            private JLabel getLabel() {
-                return label;
             }
         }
 

@@ -10,20 +10,15 @@
     </artifacts-to-build>
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java" line="639" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java" line="632" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0feda5ad-c9bb-4a19-905a-5b31bf743e05" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/shilko/ru/ClientGUITest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/shilko/ru/ClientTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/ComparingValuesTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/MySliderTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Laba3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Laba3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo$1Mind.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo$1Mind.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Rabbit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Rabbit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Tiger$Tongue.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Tiger$Tongue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Tiger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Tiger.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Server.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,15 +41,14 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="101" column="26" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
+            <state relative-caret-position="34">
+              <caret line="954" column="12" lean-forward="true" selection-start-line="954" selection-start-column="12" selection-end-line="962" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2766#2812#0" />
                 <element signature="class#MySlider#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="e#3010#3011#0" expanded="true" />
                 <element signature="e#3054#3055#0" expanded="true" />
-                <element signature="e#5738#5739#0" expanded="true" />
-                <element signature="e#5792#5793#0" expanded="true" />
                 <element signature="class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="method#init#0;class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="class#DoubleRunNTimes#0;class#ClientGUI#0;class#Client#0" />
@@ -75,34 +69,196 @@
                 <element signature="e#24401#26966#0" />
                 <element signature="method#addPanel#0;class#ClientGUI#0;class#Client#0" />
                 <element signature="e#30895#30984#0" />
-                <element signature="e#35403#36576#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ClientTest.java">
+      <file leaf-file-name="ComparingValuesTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/ComparingValuesTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="21" column="42" lean-forward="true" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="90" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MySliderTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/MySliderTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-299">
+              <caret line="78" column="36" lean-forward="true" selection-start-line="78" selection-start-column="36" selection-end-line="78" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2765#2766#0" expanded="true" />
+                <element signature="e#2797#2798#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+              <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="class#IntegerTextField#0;class#ServerGUI#0;class#Server#0" />
+                <element signature="class#Login#0;class#ServerGUI#0;class#Server#0" />
+                <element signature="class#MyTable#0;class#ServerGUI#0;class#Server#0" />
+                <element signature="method#ServerGUI#0;class#ServerGUI#0;class#Server#0" />
+                <element signature="method#addMyTable#0;class#ServerGUI#0;class#Server#0" />
+                <element signature="method#init#0;class#ServerGUI#0;class#Server#0" />
+                <element signature="method#checkValues#0;class#ServerGUI#0;class#Server#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientGUITest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ClientGUITest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#293#294#0" expanded="true" />
-                <element signature="e#325#326#0" expanded="true" />
-              </folding>
+      <file leaf-file-name="JAVA/com.shilko.ru" pinned="false" current-in-tab="true">
+        <entry file="uml://JAVA/com.shilko.ru">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement>com.shilko.ru</OriginalElement>
+              <nodes>
+                <node x="355.1458333333333" y="0.0">com.shilko.ru.Workable</node>
+                <node x="428.5625" y="170.0">com.shilko.ru.Tiger</node>
+                <node x="273.6458333333333" y="170.0">com.shilko.ru.RealAnimal</node>
+                <node x="171.64583333333331" y="170.0">com.shilko.ru.Rabbit</node>
+                <node x="0.0" y="555.0">com.shilko.ru.Ingestion</node>
+                <node x="551.1458333333333" y="80.0">com.shilko.ru.Sayable</node>
+                <node x="330.5" y="245.0">com.shilko.ru.Movable</node>
+                <node x="249.74999999999997" y="0.0">com.shilko.ru.Eating</node>
+                <node x="519.0" y="480.0">com.shilko.ru.ServerGUI</node>
+                <node x="142.0" y="555.0">com.shilko.ru.Resource</node>
+                <node x="399.0" y="405.0">com.shilko.ru.ManagerUnknownMoving</node>
+                <node x="358.0" y="480.0">com.shilko.ru.ThreadServer</node>
+                <node x="0.0" y="630.0">com.shilko.ru.Main</node>
+                <node x="45.020833333333314" y="170.0">com.shilko.ru.Kangaroo</node>
+                <node x="534.0" y="555.0">com.shilko.ru.Client</node>
+                <node x="199.5" y="325.0">com.shilko.ru.AbstractManagerMoving</node>
+                <node x="439.1458333333333" y="80.0">com.shilko.ru.Running</node>
+                <node x="283.0" y="555.0">com.shilko.ru.Coord</node>
+                <node x="268.75" y="80.0">com.shilko.ru.Animal</node>
+                <node x="0.0" y="480.0">com.shilko.ru.AnimalCollection</node>
+                <node x="181.0" y="480.0">com.shilko.ru.EmptyException</node>
+                <node x="199.0" y="405.0">com.shilko.ru.ManagerJumpingMoving</node>
+                <node x="409.0" y="555.0">com.shilko.ru.Server</node>
+                <node x="0.0" y="405.0">com.shilko.ru.ManagerRunningMoving</node>
+                <node x="398.5" y="325.0">com.shilko.ru.ManagerMoving</node>
+                <node x="0.0" y="80.0">com.shilko.ru.Mindable</node>
+                <node x="116.99999999999997" y="80.0">com.shilko.ru.Jumping</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="com.shilko.ru.Kangaroo" target="com.shilko.ru.Jumping">
+                  <point x="0.0" y="-15.0" />
+                  <point x="94.52083333333331" y="130.0" />
+                  <point x="140.24999999999997" y="130.0" />
+                  <point x="-23.25" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.Kangaroo" target="com.shilko.ru.Mindable">
+                  <point x="-33.0" y="-15.0" />
+                  <point x="61.520833333333314" y="150.0" />
+                  <point x="48.5" y="150.0" />
+                  <point x="0.0" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.Rabbit" target="com.shilko.ru.Animal">
+                  <point x="20.5" y="-15.0" />
+                  <point x="233.14583333333331" y="150.0" />
+                  <point x="300.25" y="150.0" />
+                  <point x="-10.5" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.Animal" target="com.shilko.ru.Workable">
+                  <point x="21.0" y="-15.0" />
+                  <point x="331.75" y="55.0" />
+                  <point x="379.6458333333333" y="55.0" />
+                  <point x="-24.5" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.ManagerJumpingMoving" target="com.shilko.ru.AbstractManagerMoving">
+                  <point x="0.0" y="-15.0" />
+                  <point x="0.0" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.Tiger" target="com.shilko.ru.Animal">
+                  <point x="-27.75" y="-15.0" />
+                  <point x="437.8125" y="150.0" />
+                  <point x="342.25" y="150.0" />
+                  <point x="31.5" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.ManagerRunningMoving" target="com.shilko.ru.AbstractManagerMoving">
+                  <point x="0.0" y="-15.0" />
+                  <point x="89.5" y="380.0" />
+                  <point x="229.33333333333334" y="380.0" />
+                  <point x="-59.66666666666666" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.AbstractManagerMoving" target="com.shilko.ru.Movable">
+                  <point x="0.0" y="-15.0" />
+                  <point x="289.0" y="300.0" />
+                  <point x="354.0" y="300.0" />
+                  <point x="-23.5" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.ManagerUnknownMoving" target="com.shilko.ru.AbstractManagerMoving">
+                  <point x="0.0" y="-15.0" />
+                  <point x="491.5" y="380.0" />
+                  <point x="348.66666666666663" y="380.0" />
+                  <point x="59.66666666666663" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.RealAnimal" target="com.shilko.ru.Animal">
+                  <point x="0.0" y="-15.0" />
+                  <point x="326.6458333333333" y="150.0" />
+                  <point x="321.25" y="150.0" />
+                  <point x="10.5" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.Animal" target="com.shilko.ru.Eating">
+                  <point x="-21.0" y="-15.0" />
+                  <point x="0.0" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.Kangaroo" target="com.shilko.ru.Animal">
+                  <point x="33.0" y="-15.0" />
+                  <point x="127.52083333333331" y="140.0" />
+                  <point x="279.25" y="140.0" />
+                  <point x="-31.5" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.ManagerMoving" target="com.shilko.ru.Movable">
+                  <point x="0.0" y="-15.0" />
+                  <point x="466.0" y="300.0" />
+                  <point x="401.0" y="300.0" />
+                  <point x="23.5" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.Tiger" target="com.shilko.ru.Workable">
+                  <point x="-9.25" y="-15.0" />
+                  <point x="456.3125" y="140.0" />
+                  <point x="428.6458333333333" y="140.0" />
+                  <point x="24.5" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.Rabbit" target="com.shilko.ru.Jumping">
+                  <point x="-20.5" y="-15.0" />
+                  <point x="192.14583333333331" y="130.0" />
+                  <point x="186.74999999999997" y="130.0" />
+                  <point x="23.25" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.Tiger" target="com.shilko.ru.Running">
+                  <point x="9.25" y="-15.0" />
+                  <point x="474.8125" y="150.0" />
+                  <point x="485.1458333333333" y="150.0" />
+                  <point x="0.0" y="15.0" />
+                </edge>
+                <edge source="com.shilko.ru.Tiger" target="com.shilko.ru.Sayable">
+                  <point x="27.75" y="-15.0" />
+                  <point x="493.3125" y="150.0" />
+                  <point x="595.1458333333333" y="150.0" />
+                  <point x="0.0" y="15.0" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="0.8029411764705883" x="360.77340683203875" y="167.96703296703296" />
+              <SelectedNodes />
+              <Categories />
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>private</VISIBILITY>
             </state>
           </provider>
         </entry>
@@ -112,24 +268,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-51">
               <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Kangaroo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Rabbit.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Rabbit.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -233,7 +371,6 @@
         <option value="$PROJECT_DIR$/src/resources/data_sq.properties" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/ThreadServer.java" />
         <option value="$PROJECT_DIR$/Data.xml" />
-        <option value="$PROJECT_DIR$/src/com/shilko/ru/Server.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Jumping.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Tiger.java" />
@@ -249,8 +386,13 @@
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Rabbit.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/ManagerJumpingMoving.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/ClientTest.java" />
-        <option value="$PROJECT_DIR$/src/com/shilko/ru/Client.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/ClientGUITest.java" />
+        <option value="$PROJECT_DIR$/src/test/ClientTest.java" />
+        <option value="$PROJECT_DIR$/src/test/ClientGUITest.java" />
+        <option value="$PROJECT_DIR$/src/test/ComparingValuesTest.java" />
+        <option value="$PROJECT_DIR$/src/com/shilko/ru/Client.java" />
+        <option value="$PROJECT_DIR$/src/test/MySliderTest.java" />
+        <option value="$PROJECT_DIR$/src/com/shilko/ru/Server.java" />
       </list>
     </option>
   </component>
@@ -357,53 +499,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Client">
-    <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.shilko.ru.Client" />
-      <module name="Laba3" />
-      <option name="PROGRAM_PARAMETERS" value="Data.xml" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shilko.ru.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="com.shilko.ru.Main" />
-      <module name="Laba3" />
-      <option name="PROGRAM_PARAMETERS" value="Data.xml" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-    </configuration>
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.shilko.ru.Server" />
-      <module name="Laba3" />
-      <option name="PROGRAM_PARAMETERS" value="Data.xml" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shilko.ru.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-    </configuration>
-    <configuration name="ClientGUITest.main" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.MySliderTest">
+    <configuration name="ClientGUITest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Laba3" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shilko.ru.*" />
+          <option name="PATTERN" value="test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.shilko.ru" />
-      <option name="MAIN_CLASS_NAME" value="com.shilko.ru.ClientGUITest" />
-      <option name="METHOD_NAME" value="main" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.ClientGUITest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -417,16 +527,85 @@
       <module name="Laba3" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shilko.ru.*" />
+          <option name="PATTERN" value="test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.shilko.ru" />
-      <option name="MAIN_CLASS_NAME" value="com.shilko.ru.ClientTest" />
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.ClientTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="ComparingValuesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Laba3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.ComparingValuesTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="MySliderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Laba3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.MySliderTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="MySliderTest.getPanelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Laba3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.MySliderTest" />
+      <option name="METHOD_NAME" value="getPanelTest" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -452,19 +631,19 @@
       <method />
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
-      <item itemvalue="Application.Server" />
-      <item itemvalue="Application.Client" />
+      <item itemvalue="JUnit.ClientGUITest" />
       <item itemvalue="JUnit.ClientTest" />
-      <item itemvalue="JUnit.ClientGUITest.main" />
+      <item itemvalue="JUnit.ComparingValuesTest" />
+      <item itemvalue="JUnit.MySliderTest" />
+      <item itemvalue="JUnit.MySliderTest.getPanelTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Client" />
-        <item itemvalue="JUnit.ClientGUITest.main" />
+        <item itemvalue="JUnit.MySliderTest" />
+        <item itemvalue="JUnit.MySliderTest.getPanelTest" />
+        <item itemvalue="JUnit.ComparingValuesTest" />
         <item itemvalue="JUnit.ClientTest" />
-        <item itemvalue="Application.Server" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.ClientGUITest" />
       </list>
     </recent_temporary>
   </component>
@@ -533,14 +712,7 @@
       <workItem from="1526764133214" duration="707000" />
       <workItem from="1526817056797" duration="1194000" />
       <workItem from="1526828284860" duration="58317000" />
-      <workItem from="1527274431238" duration="82499000" />
-    </task>
-    <task id="LOCAL-00008" summary="Laba5.Version4 ready with AnimalCollection. Without errors">
-      <created>1518089851445</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1518089851445</updated>
+      <workItem from="1527274431238" duration="96536000" />
     </task>
     <task id="LOCAL-00009" summary="Laba5.Version4 ready with AnimalCollection. Without errors">
       <created>1518090201066</created>
@@ -878,43 +1050,50 @@
       <option name="project" value="LOCAL" />
       <updated>1527884373600</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="8.7.6 Tests of client.">
+      <created>1527937668800</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1527937668800</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ClientGUITest_main - 2018.06.02 at 13h 34m 49s.xml">
-      <configuration name="ClientGUITest.main" configurationId="JUnit" />
+    <history-entry file="MySliderTest - 2018.06.03 at 13h 52m 05s.xml">
+      <configuration name="MySliderTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ClientGUITest_main - 2018.06.02 at 13h 36m 25s.xml">
-      <configuration name="ClientGUITest.main" configurationId="JUnit" />
+    <history-entry file="MySliderTest - 2018.06.03 at 13h 52m 34s.xml">
+      <configuration name="MySliderTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ClientGUITest_main - 2018.06.02 at 13h 51m 40s.xml">
-      <configuration name="ClientGUITest.main" configurationId="JUnit" />
+    <history-entry file="MySliderTest - 2018.06.03 at 14h 04m 17s.xml">
+      <configuration name="MySliderTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ClientGUITest_main - 2018.06.02 at 13h 52m 27s.xml">
-      <configuration name="ClientGUITest.main" configurationId="JUnit" />
+    <history-entry file="MySliderTest - 2018.06.03 at 14h 04m 51s.xml">
+      <configuration name="MySliderTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ClientGUITest_main - 2018.06.02 at 13h 52m 37s.xml">
-      <configuration name="ClientGUITest.main" configurationId="JUnit" />
+    <history-entry file="MySliderTest_getPanelTest - 2018.06.03 at 14h 05m 29s.xml">
+      <configuration name="MySliderTest.getPanelTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ClientGUITest_main - 2018.06.02 at 13h 53m 19s.xml">
-      <configuration name="ClientGUITest.main" configurationId="JUnit" />
+    <history-entry file="MySliderTest_getPanelTest - 2018.06.03 at 14h 07m 14s.xml">
+      <configuration name="MySliderTest.getPanelTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ClientGUITest_main - 2018.06.02 at 13h 54m 43s.xml">
-      <configuration name="ClientGUITest.main" configurationId="JUnit" />
+    <history-entry file="MySliderTest_getPanelTest - 2018.06.03 at 14h 07m 39s.xml">
+      <configuration name="MySliderTest.getPanelTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ClientGUITest_main - 2018.06.02 at 13h 55m 27s.xml">
-      <configuration name="ClientGUITest.main" configurationId="JUnit" />
+    <history-entry file="MySliderTest_getPanelTest - 2018.06.03 at 14h 08m 18s.xml">
+      <configuration name="MySliderTest.getPanelTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ClientGUITest_main - 2018.06.02 at 13h 56m 39s.xml">
-      <configuration name="ClientGUITest.main" configurationId="JUnit" />
+    <history-entry file="MySliderTest_getPanelTest - 2018.06.03 at 14h 08m 57s.xml">
+      <configuration name="MySliderTest.getPanelTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ClientGUITest_main - 2018.06.02 at 13h 56m 54s.xml">
-      <configuration name="ClientGUITest.main" configurationId="JUnit" />
+    <history-entry file="MySliderTest - 2018.06.03 at 14h 09m 42s.xml">
+      <configuration name="MySliderTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="655110000" />
+    <option name="totallyTimeSpent" value="669147000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
@@ -930,11 +1109,11 @@
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32961783" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49960968" visible="true" weight="0.34214875" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960968" visible="true" weight="0.34214875" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.3286495" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3286495" />
       <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32561985" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -999,7 +1178,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Laba7.Version7.Edit без координат." />
     <MESSAGE value="Laba7.Version8.Edit без координат, все исправлено." />
     <MESSAGE value="Laba7.Version9. Сделано ограничение." />
     <MESSAGE value="Laba7.Version9. Сделано ограничение2." />
@@ -1024,19 +1202,20 @@
     <MESSAGE value="8.7.3 BD ready." />
     <MESSAGE value="8.7.4 Annotation write." />
     <MESSAGE value="8.7.5 Animation depends on annotations." />
-    <option name="LAST_COMMIT_MESSAGE" value="8.7.5 Animation depends on annotations." />
+    <MESSAGE value="8.7.6 Tests of client." />
+    <option name="LAST_COMMIT_MESSAGE" value="8.7.6 Tests of client." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/shilko/ru/Client.java</url>
-          <line>429</line>
+          <line>433</line>
           <properties />
           <option name="timeStamp" value="198" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="207" />
+      <option name="time" value="209" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1045,67 +1224,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/JComponent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="183" column="46" lean-forward="true" selection-start-line="183" selection-start-column="46" selection-end-line="183" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Container.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="91" column="38" lean-forward="true" selection-start-line="91" selection-start-column="38" selection-end-line="91" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Component.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12">
-          <caret line="176" column="77" lean-forward="true" selection-start-line="176" selection-start-column="77" selection-end-line="176" selection-end-column="77" />
-          <folding>
-            <element signature="e#114480#114481#0" expanded="true" />
-            <element signature="e#114527#114528#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/table/DefaultTableCellRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-583">
-          <caret line="108" column="11" selection-start-line="108" selection-start-column="11" selection-end-line="108" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/GroupLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="623" column="25" selection-start-line="623" selection-start-column="25" selection-end-line="623" selection-end-column="25" />
-          <folding>
-            <element signature="e#23828#23829#0" expanded="true" />
-            <element signature="e#23887#23888#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/GridBagConstraints.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7902">
-          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/JPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="115" column="11" selection-start-line="115" selection-start-column="11" selection-end-line="115" selection-end-column="11" />
-          <folding>
-            <element signature="e#3040#3041#0" expanded="true" />
-            <element signature="e#3066#3067#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/AbstractButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
@@ -1199,17 +1317,6 @@
             <element signature="e#3459#3460#0" expanded="true" />
             <element signature="e#4090#4091#0" expanded="true" />
             <element signature="e#4165#4166#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/JSlider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="149" column="33" lean-forward="true" selection-start-line="149" selection-start-column="33" selection-end-line="149" selection-end-column="33" />
-          <folding>
-            <element signature="e#11382#11383#0" expanded="true" />
-            <element signature="e#11439#11440#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1460,36 +1567,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="627" selection-start-line="627" selection-end-line="627" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#IntegerTextField#0;class#ServerGUI#0;class#Server#0" />
-            <element signature="class#Login#0;class#ServerGUI#0;class#Server#0" />
-            <element signature="class#MyTable#0;class#ServerGUI#0;class#Server#0" />
-            <element signature="method#ServerGUI#0;class#ServerGUI#0;class#Server#0" />
-            <element signature="method#addMyTable#0;class#ServerGUI#0;class#Server#0" />
-            <element signature="method#init#0;class#ServerGUI#0;class#Server#0" />
-            <element signature="e#26414#26605#0" expanded="true" />
-            <element signature="e#26604#26605#0" expanded="true" />
-            <element signature="method#checkValues#0;class#ServerGUI#0;class#Server#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/AbstractManagerMoving.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ManagerUnknownMoving.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1528,17 +1609,110 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ClientGUITest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="101" column="26" selection-start-line="101" selection-start-column="26" selection-end-line="101" selection-end-column="26" />
+        <state relative-caret-position="425">
+          <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#293#294#0" expanded="true" />
+            <element signature="e#325#326#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ClientTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/ClientTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" column="25" lean-forward="true" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/ClientGUITest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="17" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/JSlider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="1112" column="16" selection-start-line="1112" selection-start-column="16" selection-end-line="1112" selection-end-column="16" />
+          <folding>
+            <element signature="e#11382#11383#0" expanded="true" />
+            <element signature="e#11439#11440#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/Integer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="848" column="11" selection-start-line="848" selection-start-column="11" selection-end-line="848" selection-end-column="11" />
+          <folding>
+            <element signature="e#32532#32533#0" expanded="true" />
+            <element signature="e#32566#32567#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ManagerUnknownMoving.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/reflect/Method.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="483" column="18" selection-start-line="483" selection-start-column="18" selection-end-line="483" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/ComparingValuesTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="21" column="42" lean-forward="true" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="90" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/MySliderTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-299">
+          <caret line="78" column="36" lean-forward="true" selection-start-line="78" selection-start-column="36" selection-end-line="78" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2765#2766#0" expanded="true" />
+            <element signature="e#2797#2798#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="954" column="12" lean-forward="true" selection-start-line="954" selection-start-column="12" selection-end-line="962" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2766#2812#0" />
             <element signature="class#MySlider#0;class#ClientGUI#0;class#Client#0" />
             <element signature="e#3010#3011#0" expanded="true" />
             <element signature="e#3054#3055#0" expanded="true" />
-            <element signature="e#5738#5739#0" expanded="true" />
-            <element signature="e#5792#5793#0" expanded="true" />
             <element signature="class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
             <element signature="method#init#0;class#AnimalButton#0;class#ClientGUI#0;class#Client#0" />
             <element signature="class#DoubleRunNTimes#0;class#ClientGUI#0;class#Client#0" />
@@ -1559,30 +1733,166 @@
             <element signature="e#24401#26966#0" />
             <element signature="method#addPanel#0;class#ClientGUI#0;class#Client#0" />
             <element signature="e#30895#30984#0" />
-            <element signature="e#35403#36576#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ClientGUITest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="34" column="5" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#293#294#0" expanded="true" />
-            <element signature="e#325#326#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ClientTest.java">
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="16" lean-forward="true" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="class#IntegerTextField#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="class#Login#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="class#MyTable#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="method#ServerGUI#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="method#addMyTable#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="method#init#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="method#checkValues#0;class#ServerGUI#0;class#Server#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/com.shilko.ru">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>com.shilko.ru</OriginalElement>
+          <nodes>
+            <node x="355.1458333333333" y="0.0">com.shilko.ru.Workable</node>
+            <node x="428.5625" y="170.0">com.shilko.ru.Tiger</node>
+            <node x="273.6458333333333" y="170.0">com.shilko.ru.RealAnimal</node>
+            <node x="171.64583333333331" y="170.0">com.shilko.ru.Rabbit</node>
+            <node x="0.0" y="555.0">com.shilko.ru.Ingestion</node>
+            <node x="551.1458333333333" y="80.0">com.shilko.ru.Sayable</node>
+            <node x="330.5" y="245.0">com.shilko.ru.Movable</node>
+            <node x="249.74999999999997" y="0.0">com.shilko.ru.Eating</node>
+            <node x="519.0" y="480.0">com.shilko.ru.ServerGUI</node>
+            <node x="142.0" y="555.0">com.shilko.ru.Resource</node>
+            <node x="399.0" y="405.0">com.shilko.ru.ManagerUnknownMoving</node>
+            <node x="358.0" y="480.0">com.shilko.ru.ThreadServer</node>
+            <node x="0.0" y="630.0">com.shilko.ru.Main</node>
+            <node x="45.020833333333314" y="170.0">com.shilko.ru.Kangaroo</node>
+            <node x="534.0" y="555.0">com.shilko.ru.Client</node>
+            <node x="199.5" y="325.0">com.shilko.ru.AbstractManagerMoving</node>
+            <node x="439.1458333333333" y="80.0">com.shilko.ru.Running</node>
+            <node x="283.0" y="555.0">com.shilko.ru.Coord</node>
+            <node x="268.75" y="80.0">com.shilko.ru.Animal</node>
+            <node x="0.0" y="480.0">com.shilko.ru.AnimalCollection</node>
+            <node x="181.0" y="480.0">com.shilko.ru.EmptyException</node>
+            <node x="199.0" y="405.0">com.shilko.ru.ManagerJumpingMoving</node>
+            <node x="409.0" y="555.0">com.shilko.ru.Server</node>
+            <node x="0.0" y="405.0">com.shilko.ru.ManagerRunningMoving</node>
+            <node x="398.5" y="325.0">com.shilko.ru.ManagerMoving</node>
+            <node x="0.0" y="80.0">com.shilko.ru.Mindable</node>
+            <node x="116.99999999999997" y="80.0">com.shilko.ru.Jumping</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="com.shilko.ru.Kangaroo" target="com.shilko.ru.Jumping">
+              <point x="0.0" y="-15.0" />
+              <point x="94.52083333333331" y="130.0" />
+              <point x="140.24999999999997" y="130.0" />
+              <point x="-23.25" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.Kangaroo" target="com.shilko.ru.Mindable">
+              <point x="-33.0" y="-15.0" />
+              <point x="61.520833333333314" y="150.0" />
+              <point x="48.5" y="150.0" />
+              <point x="0.0" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.Rabbit" target="com.shilko.ru.Animal">
+              <point x="20.5" y="-15.0" />
+              <point x="233.14583333333331" y="150.0" />
+              <point x="300.25" y="150.0" />
+              <point x="-10.5" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.Animal" target="com.shilko.ru.Workable">
+              <point x="21.0" y="-15.0" />
+              <point x="331.75" y="55.0" />
+              <point x="379.6458333333333" y="55.0" />
+              <point x="-24.5" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.ManagerJumpingMoving" target="com.shilko.ru.AbstractManagerMoving">
+              <point x="0.0" y="-15.0" />
+              <point x="0.0" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.Tiger" target="com.shilko.ru.Animal">
+              <point x="-27.75" y="-15.0" />
+              <point x="437.8125" y="150.0" />
+              <point x="342.25" y="150.0" />
+              <point x="31.5" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.ManagerRunningMoving" target="com.shilko.ru.AbstractManagerMoving">
+              <point x="0.0" y="-15.0" />
+              <point x="89.5" y="380.0" />
+              <point x="229.33333333333334" y="380.0" />
+              <point x="-59.66666666666666" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.AbstractManagerMoving" target="com.shilko.ru.Movable">
+              <point x="0.0" y="-15.0" />
+              <point x="289.0" y="300.0" />
+              <point x="354.0" y="300.0" />
+              <point x="-23.5" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.ManagerUnknownMoving" target="com.shilko.ru.AbstractManagerMoving">
+              <point x="0.0" y="-15.0" />
+              <point x="491.5" y="380.0" />
+              <point x="348.66666666666663" y="380.0" />
+              <point x="59.66666666666663" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.RealAnimal" target="com.shilko.ru.Animal">
+              <point x="0.0" y="-15.0" />
+              <point x="326.6458333333333" y="150.0" />
+              <point x="321.25" y="150.0" />
+              <point x="10.5" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.Animal" target="com.shilko.ru.Eating">
+              <point x="-21.0" y="-15.0" />
+              <point x="0.0" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.Kangaroo" target="com.shilko.ru.Animal">
+              <point x="33.0" y="-15.0" />
+              <point x="127.52083333333331" y="140.0" />
+              <point x="279.25" y="140.0" />
+              <point x="-31.5" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.ManagerMoving" target="com.shilko.ru.Movable">
+              <point x="0.0" y="-15.0" />
+              <point x="466.0" y="300.0" />
+              <point x="401.0" y="300.0" />
+              <point x="23.5" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.Tiger" target="com.shilko.ru.Workable">
+              <point x="-9.25" y="-15.0" />
+              <point x="456.3125" y="140.0" />
+              <point x="428.6458333333333" y="140.0" />
+              <point x="24.5" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.Rabbit" target="com.shilko.ru.Jumping">
+              <point x="-20.5" y="-15.0" />
+              <point x="192.14583333333331" y="130.0" />
+              <point x="186.74999999999997" y="130.0" />
+              <point x="23.25" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.Tiger" target="com.shilko.ru.Running">
+              <point x="9.25" y="-15.0" />
+              <point x="474.8125" y="150.0" />
+              <point x="485.1458333333333" y="150.0" />
+              <point x="0.0" y="15.0" />
+            </edge>
+            <edge source="com.shilko.ru.Tiger" target="com.shilko.ru.Sayable">
+              <point x="27.75" y="-15.0" />
+              <point x="493.3125" y="150.0" />
+              <point x="595.1458333333333" y="150.0" />
+              <point x="0.0" y="15.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.8029411764705883" x="360.77340683203875" y="167.96703296703296" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
         </state>
       </provider>
     </entry>
