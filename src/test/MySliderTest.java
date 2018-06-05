@@ -22,17 +22,18 @@ public class MySliderTest {
         constructor.setAccessible(true);
         ClientGUI superClass = (Client.ClientGUI)constructor.newInstance();
         Arrays.stream(superClass.getClass().getDeclaredClasses()).forEach(e -> {
-            try {
                 if (e.toString().contains("com.shilko.ru.Client$ClientGUI$MySlider")) {
                     mySliderClass = e;
-                    Constructor constructor1 = e.getDeclaredConstructor(superClass.getClass(),String.class,int.class,int.class,int.class,int.class,int.class);
+                    Constructor constructor1 = null;
+                    try {
+                        constructor1 = e.getDeclaredConstructor(superClass.getClass(),String.class,int.class,int.class,int.class,int.class,int.class);
+                    } catch (NoSuchMethodException e1) {
+                        e1.printStackTrace();
+                    }
                     constructor1.setAccessible(true);
                     clientGUI = superClass;
                     setConstructor(constructor1);
                 }
-            } catch (Exception exception) {
-                throw new RuntimeException(exception);
-            }
         });
     }
 
@@ -48,19 +49,19 @@ public class MySliderTest {
         try {
             mySlider = (constructor.newInstance(clientGUI, null, null, null, null, null, null));
             throw new Exception();
-        } catch (ReflectiveOperationException | IllegalArgumentException e) { }
+        } catch (ReflectiveOperationException | IllegalArgumentException ignored) { }
         try {
             mySlider = (constructor.newInstance(clientGUI,"2",1,2,3,5,5));
             throw new Exception();
-        } catch (ReflectiveOperationException | IllegalArgumentException e) { }
+        } catch (ReflectiveOperationException | IllegalArgumentException ignored) { }
         try {
             mySlider = (constructor.newInstance(clientGUI,"2",2,1,2,4,4));
             throw new Exception();
-        } catch (ReflectiveOperationException | IllegalArgumentException e) { }
+        } catch (ReflectiveOperationException | IllegalArgumentException ignored) { }
         try {
             mySlider = (constructor.newInstance(clientGUI,"wcffca",2,2,2,-1,-2));
             throw new Exception();
-        } catch (ReflectiveOperationException | IllegalArgumentException e) { }
+        } catch (ReflectiveOperationException | IllegalArgumentException ignored) { }
     }
 
     @AfterClass
@@ -83,17 +84,17 @@ public class MySliderTest {
         try {
             setMyValue.invoke(mySlider,max+1);
             throw new Exception();
-        } catch (ReflectiveOperationException | IllegalArgumentException e) { }
+        } catch (ReflectiveOperationException | IllegalArgumentException ignored) { }
         assertEquals(max,getMyValue.invoke(mySlider));
         try {
             setMyValue.invoke(mySlider,min-1);
             throw new Exception();
-        } catch (ReflectiveOperationException | IllegalArgumentException e) { }
+        } catch (ReflectiveOperationException | IllegalArgumentException ignored) { }
         assertEquals(max,getMyValue.invoke(mySlider));
         try {
-            setMyValue.invoke(mySlider,null);
+            setMyValue.invoke(mySlider,new Object[]{null});
             throw new Exception();
-        } catch (ReflectiveOperationException | IllegalArgumentException e) { }
+        } catch (ReflectiveOperationException | IllegalArgumentException ignored) { }
         assertEquals(max,getMyValue.invoke(mySlider));
     }
 
@@ -109,6 +110,6 @@ public class MySliderTest {
         try {
             setText.invoke(mySlider, new Object[]{null});
             throw new Exception();
-        } catch (ReflectiveOperationException | IllegalArgumentException e) { }
+        } catch (ReflectiveOperationException | IllegalArgumentException ignored) { }
     }
 }

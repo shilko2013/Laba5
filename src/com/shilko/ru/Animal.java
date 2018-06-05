@@ -1,5 +1,6 @@
 package com.shilko.ru;
 
+import javax.jws.WebMethod;
 import java.io.*;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -15,14 +16,31 @@ public abstract class Animal implements Eating, Workable, Comparable<Animal>, Se
             return "Перехвачено: " + super.toString();
         }
     }
+    @DataBase
+    public String getType() {
+        return getClass().toString().substring(getClass().toString().lastIndexOf(".")+1).toLowerCase();
+    }
+    @DataBase
+    @PrimaryKey
+    public int getCoordX() {
+        return getCoord().getX();
+    }
+    @DataBase
+    @PrimaryKey
+    public int getCoordY() {
+        return getCoord().getY();
+    }
+    @DataBase
     private String name;
     private static long ID = 0;
     private long myID;
     private Coord coord;
+    @DataBase
     private String home;
     private Queue<String> actions;
     private Map<Ingestion, Set<String>> ingestion;
     private OffsetDateTime timeOfCreate;
+    @DataBase
     private int weight;
     {
         timeOfCreate = OffsetDateTime.now();

@@ -26,7 +26,7 @@ public class ComparingValuesTest {
                     comparingValues = constructor1.newInstance(clientGUI);
                 }
             } catch (Exception exception) {
-                throw new RuntimeException(exception);
+                exception.printStackTrace();
             }
         });
     }
@@ -37,13 +37,13 @@ public class ComparingValuesTest {
     }
 
     @Test(timeout = 1000)
-    public void main() {
+    public void notNullFieldsTest() {
         Arrays.stream(comparingValues.getClass().getDeclaredFields()).forEach(e->{
             try {
                 e.setAccessible(true);
                 assertNotNull(e.get(comparingValues));
             } catch (Exception exception) {
-                throw new RuntimeException(exception);
+                exception.printStackTrace();
             }
         });
     }

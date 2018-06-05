@@ -1,10 +1,11 @@
 package com.shilko.ru;
 
 import java.lang.annotation.Annotation;
+import com.shilko.ru.Client.ClientGUI.Canvas;
 
 public class ManagerMoving implements Movable {
     private Movable movable;
-    public ManagerMoving(Animal animal, int step, int imageHeight, int imageWidth, Client.ClientGUI.Canvas canvas) {
+    public ManagerMoving(Animal animal, int step, int imageHeight, int imageWidth, Canvas canvas) {
         Annotation[] annotations = animal.getClass().getAnnotations();
         for (Annotation annotation: annotations) {
             if (annotation instanceof Running) {

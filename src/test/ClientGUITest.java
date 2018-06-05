@@ -30,7 +30,7 @@ public class ClientGUITest {
                 e.setAccessible(true);
                 assertNotNull(e.get(clientGUI));
             } catch (Exception exception) {
-                throw new RuntimeException(exception);
+                exception.printStackTrace();
             }
         });
     }
