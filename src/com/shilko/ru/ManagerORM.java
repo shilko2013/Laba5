@@ -29,6 +29,8 @@ interface ORMInterface<T> {
 
     int delete(T object);
 
+    ResultSet executeQuery(String query);
+
     void removeTable();
 }
 
@@ -56,6 +58,7 @@ abstract class AbstractManagerORM<T> implements ORMInterface<T> {
 
     public AbstractManagerORM(Class classObject, String dataBaseURL, String user, String password, boolean autoCommit) {
         this.classObject = classObject;
+
         setNameOfTable(classObject.toString().substring(classObject.toString().lastIndexOf(".") + 1).toUpperCase());
         try {
             setConnection(DriverManager.getConnection(dataBaseURL, user, password));
@@ -215,12 +218,23 @@ public class ManagerORM<T> extends AbstractManagerORM<T> {
         result.delete(result.length() - 4, result.length());
         result.append(";");
         try {
-            return getConnection().createStatement().executeUpdate(result.toString());
+            return getConnection().createStatement().executeUpdate(result.toString().toLowerCase());
         } catch (Exception e) {
             e.printStackTrace();
         }
         return -1;
     }
+
+    @Override
+    public ResultSet executeQuery(String query) {
+        try {
+            return getConnection().createStatement().executeQuery(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
     public void removeTable() {

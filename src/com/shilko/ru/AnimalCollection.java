@@ -17,9 +17,8 @@ import java.sql.*;
 public class AnimalCollection implements Serializable {
     /** Поле коллекция животных */
     private Map<Coord,Animal> collection;
-    private final String dataBaseURL;
-    private final String user;
-    private final String password;
+    private ManagerORM<Animal> managerORM;
+    private final String dataBaseURL, user, password;
     static {
         try {
             Class.forName("org.postgresql.Driver");
@@ -30,33 +29,28 @@ public class AnimalCollection implements Serializable {
     }
     public AnimalCollection(String dataBaseURL, String user, String password) {
         collection = new ConcurrentSkipListMap<>();
+        managerORM = new ManagerORM<>(Animal.class,dataBaseURL,user,password,false);
         this.dataBaseURL = dataBaseURL;
         this.user = user;
         this.password = password;
     }
     public void load() throws Exception {
         collection.clear();
-        Connection connection = DriverManager.getConnection(dataBaseURL,user,password);
-        if (connection == null)
-            throw new SQLException();
-        connection.setAutoCommit(false);
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery( "SELECT * FROM ANIMALS;" );
+        ResultSet resultSet = DriverManager.getConnection(dataBaseURL,user,password).createStatement().executeQuery( "SELECT * FROM ANIMAL;" );
+        managerORM = new ManagerORM<>(Animal.class,dataBaseURL,user,password,false);
         while (resultSet.next()) {
             putAnimal(resultSet.getString("type"),
                     resultSet.getString("name"),
                     resultSet.getString("home"),
-                    resultSet.getInt("coord_x"),
-                    resultSet.getInt("coord_y"),
+                    resultSet.getInt("coordX"),
+                    resultSet.getInt("coordY"),
                     resultSet.getInt("weight"),
                     new ArrayList<>(), new ArrayList<>());
         }
         resultSet.close();
-        statement.close();
-        connection.close();
     }
     public void save() throws Exception {
-        Connection connection = DriverManager.getConnection(dataBaseURL,user,password);
+        /*Connection connection = DriverManager.getConnection(dataBaseURL,user,password);
         if (connection == null)
             throw new SQLException();
         connection.setAutoCommit(false);
@@ -77,7 +71,8 @@ public class AnimalCollection implements Serializable {
         });
         statement.close();
         connection.commit();
-        connection.close();
+        connection.close();*/
+        managerORM.commit();
     }
     public int size() {
         return collection.size();
@@ -393,6 +388,7 @@ public class AnimalCollection implements Serializable {
         if (collection.containsKey(animal.getCoord()))
             result = null;
         collection.put(animal.getCoord(),animal);
+        managerORM.insert(animal);
         return result;
     }
     public  Object[] insert(String type, String name, int x, int y, String home, int weight) {
@@ -421,8 +417,10 @@ public class AnimalCollection implements Serializable {
     public List<Coord> removeGreaterKey(Coord coord) {
         List<Coord> list = new ArrayList<>();
         collection.keySet().forEach((e)->{
-            if (e.compareTo(coord)>0)
+            if (e.compareTo(coord)>0) {
                 list.add(e);
+                managerORM.delete(collection.get(e));
+            }
         });
         collection.keySet().removeIf(a->a.compareTo(coord)>0);
         return list;
@@ -441,6 +439,7 @@ public class AnimalCollection implements Serializable {
         if (!collection.containsKey(coord))
             return new Pair<>(false,null);
         else {
+            managerORM.delete(collection.get(coord));
             collection.remove(coord);
             return new Pair<>(true,coord);
         }

@@ -25,11 +25,11 @@ public class Kangaroo extends Animal implements Mindable {
         }
         return new Mind().think();
     }
-    public Kangaroo(String name, String home, int x, int y, int weight) {
-        super(name,home,x,y,weight);
+    public Kangaroo(String name, String home, int coordX, int coordY, int weight) {
+        super(name,home,coordX,coordY,weight);
     }
-    public Kangaroo(String name, int x, int y, int weight) {
-        super(name,x,y,weight);
+    public Kangaroo(String name, int coordX, int coordY, int weight) {
+        super(name,coordX,coordY,weight);
     }
     /*@Override
     public boolean equals(Object obj) {
