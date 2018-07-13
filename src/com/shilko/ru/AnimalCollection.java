@@ -17,7 +17,7 @@ import java.sql.*;
 public class AnimalCollection implements Serializable {
     /** Поле коллекция животных */
     private Map<Coord,Animal> collection;
-    private ManagerORM<Animal> managerORM;
+    private transient ManagerORM<Animal> managerORM;
     private final String dataBaseURL, user, password;
     static {
         try {

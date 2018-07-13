@@ -15,12 +15,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0feda5ad-c9bb-4a19-905a-5b31bf743e05" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Animal$HomelessException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Animal$HomelessException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Animal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Animal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Kangaroo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Laba3/com/shilko/ru/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/shilko/ru/ManagerORM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/shilko/ru/ManagerORM.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -58,15 +53,8 @@
       <file leaf-file-name="Animal.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Animal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#821#822#0" expanded="true" />
-                <element signature="e#861#862#0" expanded="true" />
-                <element signature="e#899#900#0" expanded="true" />
-                <element signature="e#939#940#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="153">
+              <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -74,36 +62,42 @@
       <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="332" selection-start-line="332" selection-end-line="332" />
+            <state relative-caret-position="101">
+              <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="class#ServerGUI#0;class#Server#0" />
                 <element signature="class#IntegerTextField#0;class#ServerGUI#0;class#Server#0" />
                 <element signature="class#Login#0;class#ServerGUI#0;class#Server#0" />
-                <element signature="class#MyTable#0;class#ServerGUI#0;class#Server#0" />
+                <element signature="e#5302#5493#0" expanded="true" />
+                <element signature="e#5492#5493#0" expanded="true" />
+                <element signature="e#7898#8409#0" expanded="true" />
+                <element signature="e#8408#8409#0" expanded="true" />
                 <element signature="method#ServerGUI#0;class#ServerGUI#0;class#Server#0" />
                 <element signature="method#addMyTable#0;class#ServerGUI#0;class#Server#0" />
                 <element signature="method#init#0;class#ServerGUI#0;class#Server#0" />
+                <element signature="e#26437#26628#0" expanded="true" />
+                <element signature="e#26627#26628#0" expanded="true" />
                 <element signature="method#checkValues#0;class#ServerGUI#0;class#Server#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Workable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Workable.java">
+      <file leaf-file-name="ThreadServer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ThreadServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+            <state relative-caret-position="507">
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ManagerORM.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ManagerORM.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ManagerORM.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="10" lean-forward="true" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+            <state relative-caret-position="150">
+              <caret line="37" column="63" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#create#0;class#ManagerORM#0" />
@@ -119,8 +113,8 @@
       <file leaf-file-name="Kangaroo.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="28" column="46" lean-forward="true" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
+            <state relative-caret-position="408">
+              <caret line="28" column="46" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -128,34 +122,69 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+            <state relative-caret-position="221">
+              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Jumping.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Jumping.java">
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="9" selection-end-column="1" />
+            <state relative-caret-position="135">
+              <caret line="1086" selection-start-line="1086" selection-end-line="1086" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4685#6546#0" />
+                <element signature="e#6556#10145#0" />
+                <element signature="e#7517#9018#0" />
+                <element signature="e#10155#10898#0" />
+                <element signature="e#10908#12502#0" />
+                <element signature="e#12512#14492#0" />
+                <element signature="e#17142#17951#0" />
+                <element signature="e#20552#21357#0" />
+                <element signature="e#21733#24812#0" />
+                <element signature="e#24822#25104#0" />
+                <element signature="e#25114#25432#0" />
+                <element signature="e#25442#29025#0" />
+                <element signature="e#29035#33433#0" />
+                <element signature="e#36135#37880#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AnimalCollection.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ManagerMoving.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ManagerMoving.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ManagerUnknownMoving.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ManagerUnknownMoving.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnimalCollection.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-756">
-              <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+            <state relative-caret-position="169">
+              <caret line="20" column="53" lean-forward="true" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;class#AnimalCollection#0" />
-                <element signature="e#3058#3059#0" expanded="true" />
-                <element signature="e#3098#3099#0" expanded="true" />
+                <element signature="initializer##0;class#AnimalCollection#0" />
                 <element signature="docComment;method#work#0;class#AnimalCollection#0" />
-                <element signature="e#6301#6302#0" expanded="true" />
-                <element signature="e#6370#6371#0" expanded="true" />
                 <element signature="docComment;method#parseAnimal#0;class#AnimalCollection#0" />
                 <element signature="docComment;method#putAnimal#0;class#AnimalCollection#0" />
                 <element signature="docComment;method#read#0;class#AnimalCollection#0" />
@@ -163,16 +192,8 @@
                 <element signature="docComment;method#removeAll#0;class#AnimalCollection#0" />
                 <element signature="docComment;method#insert#0;class#AnimalCollection#0" />
                 <element signature="docComment;method#remove#0;class#AnimalCollection#0" />
-                <element signature="e#19058#19059#0" expanded="true" />
-                <element signature="e#19116#19117#0" expanded="true" />
-                <element signature="e#19172#19173#0" expanded="true" />
-                <element signature="e#19216#19217#0" expanded="true" />
-                <element signature="e#19257#19258#0" expanded="true" />
-                <element signature="e#19309#19310#0" expanded="true" />
                 <element signature="method#list#1;class#AnimalCollection#0" />
                 <element signature="docComment;method#input#0;class#AnimalCollection#0" />
-                <element signature="e#24866#24867#0" expanded="true" />
-                <element signature="e#24899#24900#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -194,8 +215,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getClas</find>
-      <find>getClass</find>
       <find>notN</find>
       <find>Manager</find>
       <find>&quot;</find>
@@ -224,6 +243,8 @@
       <find>getN</find>
       <find>Object</find>
       <find>getPrimaryKeys().</find>
+      <find>port =</find>
+      <find>Updating of collection hasn't been done</find>
     </findStrings>
     <replaceStrings>
       <replace>check(false);</replace>
@@ -269,7 +290,6 @@
         <option value="$PROJECT_DIR$/src/com/shilko/ru/ClientTest.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/ClientGUITest.java" />
         <option value="$PROJECT_DIR$/src/test/ClientTest.java" />
-        <option value="$PROJECT_DIR$/src/com/shilko/ru/Client.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Server.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/ManagerUnknownMoving.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/ManagerMoving.java" />
@@ -281,9 +301,10 @@
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Animal.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Main.java" />
         <option value="$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java" />
-        <option value="$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java" />
-        <option value="$PROJECT_DIR$/src/com/shilko/ru/ManagerORM.java" />
         <option value="$PROJECT_DIR$/src/pom.xml.tld" />
+        <option value="$PROJECT_DIR$/src/com/shilko/ru/Client.java" />
+        <option value="$PROJECT_DIR$/src/com/shilko/ru/ManagerORM.java" />
+        <option value="$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java" />
       </list>
     </option>
   </component>
@@ -307,10 +328,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="145" />
-    <option name="y" value="-36" />
-    <option name="width" value="963" />
-    <option name="height" value="1091" />
+    <option name="x" value="513" />
+    <option name="y" value="-24" />
+    <option name="width" value="981" />
+    <option name="height" value="1092" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -336,6 +357,7 @@
     <panes>
       <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -382,7 +404,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -417,7 +438,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Server">
+  <component name="RunManager" selected="Application.Client">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.shilko.ru.Client" />
       <module name="Laba3" />
@@ -518,10 +539,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Client" />
         <item itemvalue="Application.Server" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.ClientGUITest" />
-        <item itemvalue="Application.Client" />
         <item itemvalue="JUnit.MySliderTest" />
       </list>
     </recent_temporary>
@@ -592,6 +613,7 @@
       <workItem from="1526817056797" duration="1194000" />
       <workItem from="1526828284860" duration="58317000" />
       <workItem from="1527274431238" duration="132920000" />
+      <workItem from="1531478358414" duration="1027000" />
     </task>
     <task id="LOCAL-00011" summary="Laba5.Version5 ready. Debugged. Without javadoc.">
       <created>1518352939321</created>
@@ -972,7 +994,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="705531000" />
+    <option name="totallyTimeSpent" value="707503000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
@@ -985,16 +1007,15 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5003903" side_tool="true" weight="0.32961783" />
-      <window_info anchor="right" id="Maven Projects" order="4" visible="true" weight="0.32955465" />
+      <window_info anchor="right" id="Maven Projects" order="4" weight="0.32955465" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3289256" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960968" visible="true" weight="0.31786942" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49960968" visible="true" weight="0.31786942" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32793522" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.33360323" />
       <window_info anchor="right" id="Database" order="5" weight="0.32955465" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32561985" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -1007,30 +1028,31 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32561985" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3290735" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32643312" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.032006245" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32643312" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info id="Image Layers" order="6" />
       <window_info id="Designer" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3290735" />
       <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
-      <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39808917" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info id="Capture Tool" order="2" />
@@ -1093,8 +1115,32 @@
           <properties />
           <option name="timeStamp" value="198" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/shilko/ru/Client.java</url>
+          <line>1079</line>
+          <properties />
+          <option name="timeStamp" value="223" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/shilko/ru/ThreadServer.java</url>
+          <line>23</line>
+          <properties />
+          <option name="timeStamp" value="224" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/shilko/ru/ThreadServer.java</url>
+          <line>22</line>
+          <properties />
+          <option name="timeStamp" value="225" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/shilko/ru/ThreadServer.java</url>
+          <line>21</line>
+          <properties />
+          <option name="timeStamp" value="226" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="223" />
+      <option name="time" value="227" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1103,45 +1149,133 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/resources/data_ru.properties">
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+        <state relative-caret-position="697">
+          <caret line="41" column="50" selection-start-line="41" selection-start-column="50" selection-end-line="41" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#ServerGUI#0;class#Server#0" />
+            <element signature="class#IntegerTextField#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="class#Login#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="e#5302#5493#0" expanded="true" />
+            <element signature="e#5492#5493#0" expanded="true" />
+            <element signature="e#7898#8409#0" expanded="true" />
+            <element signature="e#8408#8409#0" expanded="true" />
+            <element signature="method#ServerGUI#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="method#addMyTable#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="method#init#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="e#26437#26628#0" expanded="true" />
+            <element signature="e#26627#26628#0" expanded="true" />
+            <element signature="method#checkValues#0;class#ServerGUI#0;class#Server#0" />
+          </folding>
         </state>
       </provider>
-      <provider editor-type-id="ResourceBundle" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/data.properties">
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="10" column="31" lean-forward="true" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+        <state relative-caret-position="2601">
+          <caret line="332" selection-start-line="332" selection-end-line="332" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#ServerGUI#0;class#Server#0" />
+            <element signature="class#IntegerTextField#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="class#Login#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="e#5302#5493#0" expanded="true" />
+            <element signature="e#5492#5493#0" expanded="true" />
+            <element signature="e#7898#8409#0" expanded="true" />
+            <element signature="e#8408#8409#0" expanded="true" />
+            <element signature="method#ServerGUI#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="method#addMyTable#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="method#init#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="e#26437#26628#0" expanded="true" />
+            <element signature="e#26627#26628#0" expanded="true" />
+            <element signature="method#checkValues#0;class#ServerGUI#0;class#Server#0" />
+          </folding>
         </state>
       </provider>
-      <provider editor-type-id="ResourceBundle" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/data_no.properties">
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+        <state relative-caret-position="374">
+          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#AnimalCollection#0" />
+            <element signature="initializer##0;class#AnimalCollection#0" />
+            <element signature="docComment;method#work#0;class#AnimalCollection#0" />
+            <element signature="docComment;method#parseAnimal#0;class#AnimalCollection#0" />
+            <element signature="docComment;method#putAnimal#0;class#AnimalCollection#0" />
+            <element signature="docComment;method#read#0;class#AnimalCollection#0" />
+            <element signature="method#read#0;class#AnimalCollection#0" />
+            <element signature="docComment;method#removeAll#0;class#AnimalCollection#0" />
+            <element signature="docComment;method#insert#0;class#AnimalCollection#0" />
+            <element signature="docComment;method#remove#0;class#AnimalCollection#0" />
+            <element signature="method#list#1;class#AnimalCollection#0" />
+            <element signature="docComment;method#input#0;class#AnimalCollection#0" />
+          </folding>
         </state>
       </provider>
-      <provider editor-type-id="ResourceBundle" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/data_en.properties">
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ManagerORM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="81" selection-start-line="4" selection-start-column="81" selection-end-line="4" selection-end-column="81" />
+        <state relative-caret-position="663">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#create#0;class#ManagerORM#0" />
+            <element signature="docComment;method#update#0;class#ManagerORM#0" />
+            <element signature="method#removeTable#0;class#ManagerORM#0" />
+            <element signature="method#getName#0;class#ManagerORM#0" />
+            <element signature="method#getType#0;class#ManagerORM#0" />
+          </folding>
         </state>
       </provider>
-      <provider editor-type-id="ResourceBundle" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/data_sq.properties">
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="26" column="26" lean-forward="true" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+        <state relative-caret-position="135">
+          <caret line="956" column="40" selection-start-line="956" selection-start-column="37" selection-end-line="956" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4685#6546#0" />
+            <element signature="e#6556#10145#0" />
+            <element signature="e#7517#9018#0" />
+            <element signature="e#10155#10898#0" />
+            <element signature="e#10908#12502#0" />
+            <element signature="e#12512#14492#0" />
+            <element signature="e#17142#17951#0" />
+            <element signature="e#20552#21357#0" />
+            <element signature="e#21733#24812#0" />
+            <element signature="e#24822#25104#0" />
+            <element signature="e#25114#25432#0" />
+            <element signature="e#25442#29025#0" />
+            <element signature="e#29035#33433#0" />
+            <element signature="e#36135#37880#0" />
+          </folding>
         </state>
       </provider>
-      <provider editor-type-id="ResourceBundle" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ManagerMoving.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ManagerRunningMoving.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+          <folding>
+            <element signature="e#1240#1241#0" expanded="true" />
+            <element signature="e#1269#1270#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Data.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -1161,7 +1295,7 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="68.0" y="230.5" />
+          <settings layout="Hierarchic Group" zoom="1.0" x="68.0" y="231.0" />
           <SelectedNodes />
           <Categories>
             <Category>Methods</Category>
@@ -1171,13 +1305,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ResetRandom.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ResetRandom.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/Class.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="123">
@@ -1243,7 +1371,7 @@
           </nodes>
           <notes />
           <edges />
-          <settings layout="Hierarchic Group" zoom="0.8029411764705883" x="360.77340683203875" y="167.96703296703296" />
+          <settings layout="Hierarchic Group" zoom="0.8029411764705883" x="361.0" y="168.0" />
           <SelectedNodes />
           <Categories />
           <SCOPE>All</SCOPE>
@@ -1251,24 +1379,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ClientGUITest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ClientTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ClientGUITest.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ClientTest.java" />
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ManagerRunningMoving.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="46" selection-end-column="1" />
+        <state relative-caret-position="527">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
           <folding>
             <element signature="e#1240#1241#0" expanded="true" />
             <element signature="e#1269#1270#0" expanded="true" />
@@ -1290,20 +1406,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ThreadServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Resource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-16">
           <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1311,16 +1417,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-221">
           <caret line="13" column="58" lean-forward="true" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ManagerUnknownMoving.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="23" lean-forward="true" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+        <state relative-caret-position="408">
+          <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -1328,30 +1431,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="20" column="34" lean-forward="true" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4685#6546#0" />
-            <element signature="e#6556#10145#0" />
-            <element signature="e#7517#9018#0" />
-            <element signature="e#10155#10898#0" />
-            <element signature="e#10908#12502#0" />
-            <element signature="e#12512#14492#0" />
-            <element signature="e#17142#17951#0" />
-            <element signature="e#20552#21357#0" />
-            <element signature="e#21733#24812#0" />
-            <element signature="e#24822#25104#0" />
-            <element signature="e#25114#25432#0" />
-            <element signature="e#25442#29025#0" />
-            <element signature="e#29035#33433#0" />
-            <element signature="e#36135#37880#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1389,8 +1468,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ManagerMoving.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+        <state relative-caret-position="187">
+          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1415,9 +1494,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1439,9 +1515,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-776">
           <caret line="52" column="13" lean-forward="true" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1503,8 +1576,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+        <state relative-caret-position="221">
+          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1512,94 +1585,81 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#Tongue#0;class#Tiger#0" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Animal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#821#822#0" expanded="true" />
-            <element signature="e#861#862#0" expanded="true" />
-            <element signature="e#899#900#0" expanded="true" />
-            <element signature="e#939#940#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Kangaroo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="28" column="46" lean-forward="true" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
+        <state relative-caret-position="408">
+          <caret line="28" column="46" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Client.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="1086" selection-start-line="1086" selection-end-line="1086" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4685#6546#0" />
+            <element signature="e#6556#10145#0" />
+            <element signature="e#7517#9018#0" />
+            <element signature="e#10155#10898#0" />
+            <element signature="e#10908#12502#0" />
+            <element signature="e#12512#14492#0" />
+            <element signature="e#17142#17951#0" />
+            <element signature="e#20552#21357#0" />
+            <element signature="e#21733#24812#0" />
+            <element signature="e#24822#25104#0" />
+            <element signature="e#25114#25432#0" />
+            <element signature="e#25442#29025#0" />
+            <element signature="e#29035#33433#0" />
+            <element signature="e#36135#37880#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ThreadServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="332" selection-start-line="332" selection-end-line="332" />
+        <state relative-caret-position="101">
+          <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#ServerGUI#0;class#Server#0" />
             <element signature="class#IntegerTextField#0;class#ServerGUI#0;class#Server#0" />
             <element signature="class#Login#0;class#ServerGUI#0;class#Server#0" />
-            <element signature="class#MyTable#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="e#5302#5493#0" expanded="true" />
+            <element signature="e#5492#5493#0" expanded="true" />
+            <element signature="e#7898#8409#0" expanded="true" />
+            <element signature="e#8408#8409#0" expanded="true" />
             <element signature="method#ServerGUI#0;class#ServerGUI#0;class#Server#0" />
             <element signature="method#addMyTable#0;class#ServerGUI#0;class#Server#0" />
             <element signature="method#init#0;class#ServerGUI#0;class#Server#0" />
+            <element signature="e#26437#26628#0" expanded="true" />
+            <element signature="e#26627#26628#0" expanded="true" />
             <element signature="method#checkValues#0;class#ServerGUI#0;class#Server#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-756">
-          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#AnimalCollection#0" />
-            <element signature="e#3058#3059#0" expanded="true" />
-            <element signature="e#3098#3099#0" expanded="true" />
-            <element signature="docComment;method#work#0;class#AnimalCollection#0" />
-            <element signature="e#6301#6302#0" expanded="true" />
-            <element signature="e#6370#6371#0" expanded="true" />
-            <element signature="docComment;method#parseAnimal#0;class#AnimalCollection#0" />
-            <element signature="docComment;method#putAnimal#0;class#AnimalCollection#0" />
-            <element signature="docComment;method#read#0;class#AnimalCollection#0" />
-            <element signature="method#read#0;class#AnimalCollection#0" />
-            <element signature="docComment;method#removeAll#0;class#AnimalCollection#0" />
-            <element signature="docComment;method#insert#0;class#AnimalCollection#0" />
-            <element signature="docComment;method#remove#0;class#AnimalCollection#0" />
-            <element signature="e#19058#19059#0" expanded="true" />
-            <element signature="e#19116#19117#0" expanded="true" />
-            <element signature="e#19172#19173#0" expanded="true" />
-            <element signature="e#19216#19217#0" expanded="true" />
-            <element signature="e#19257#19258#0" expanded="true" />
-            <element signature="e#19309#19310#0" expanded="true" />
-            <element signature="method#list#1;class#AnimalCollection#0" />
-            <element signature="docComment;method#input#0;class#AnimalCollection#0" />
-            <element signature="e#24866#24867#0" expanded="true" />
-            <element signature="e#24899#24900#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pom.xml.tld">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/ManagerORM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="10" lean-forward="true" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+        <state relative-caret-position="150">
+          <caret line="37" column="63" selection-start-line="37" selection-start-column="63" selection-end-line="37" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#create#0;class#ManagerORM#0" />
@@ -1607,6 +1667,28 @@
             <element signature="method#removeTable#0;class#ManagerORM#0" />
             <element signature="method#getName#0;class#ManagerORM#0" />
             <element signature="method#getType#0;class#ManagerORM#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/shilko/ru/AnimalCollection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="20" column="53" lean-forward="true" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#AnimalCollection#0" />
+            <element signature="initializer##0;class#AnimalCollection#0" />
+            <element signature="docComment;method#work#0;class#AnimalCollection#0" />
+            <element signature="docComment;method#parseAnimal#0;class#AnimalCollection#0" />
+            <element signature="docComment;method#putAnimal#0;class#AnimalCollection#0" />
+            <element signature="docComment;method#read#0;class#AnimalCollection#0" />
+            <element signature="method#read#0;class#AnimalCollection#0" />
+            <element signature="docComment;method#removeAll#0;class#AnimalCollection#0" />
+            <element signature="docComment;method#insert#0;class#AnimalCollection#0" />
+            <element signature="docComment;method#remove#0;class#AnimalCollection#0" />
+            <element signature="method#list#1;class#AnimalCollection#0" />
+            <element signature="docComment;method#input#0;class#AnimalCollection#0" />
           </folding>
         </state>
       </provider>
