@@ -459,6 +459,7 @@ public class Client {
                     });
                     collection = newCollection;
                     logger.info("Collection has been updated");
+                    JOptionPane.showMessageDialog(null,resources.getString("collection.success"), resources.getString("collection.success.title"),JOptionPane.INFORMATION_MESSAGE);
                     break;
                 } catch (Exception e) {
                     logger.severe("Updating of collection hasn't been done");
